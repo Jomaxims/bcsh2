@@ -1,0 +1,74 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="FDCE47DC-90A9-A5FB-FCBF-8A910786645A" name="POKOJ">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 17:40:51 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="pokoj_id" id="BE30379D-0BC6-8C2E-952E-F8C47D8FB049">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 17:40:51 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<importedID>D87992D6-B9E9-6545-1E61-5C174B3146A0</importedID>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="pocet_mist" id="C906A2B4-A496-8143-9360-74762C988CD5">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 17:40:51 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<importedID>5B05AA02-06A7-0B55-CA4C-21C2851E4A91</importedID>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nazev" id="96AAF5C3-A776-D99A-FD55-2ADD1E00AF9E">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 17:40:51 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<importedID>C37B1E38-5635-76C9-6CCF-B8CBFC45B402</importedID>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="D5EE26E2-E9FD-E68A-2374-D8F94DEF34DA" name="POKOJ PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 17:40:51 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>BE30379D-0BC6-8C2E-952E-F8C47D8FB049</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

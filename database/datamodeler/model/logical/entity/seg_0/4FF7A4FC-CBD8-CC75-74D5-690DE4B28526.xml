@@ -1,0 +1,71 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="4FF7A4FC-CBD8-CC75-74D5-690DE4B28526" name="STAT">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 16:43:36 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="stat_id" id="B054FF6C-7010-737E-0D29-A9826193EEAF">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 16:43:41 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="zkratka" id="DF370DCE-0C50-2EBB-F7D2-C415B1E4D5D5">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 16:43:52 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>3</dataTypeSize>
+<ownDataTypeParameters>3,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nazev" id="7BEF528A-A199-216B-E59F-FDFB7E591A37">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 16:44:09 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="E09F3B3F-17BB-E608-2E1D-0C13E18BF9F8" name="STAT PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 16:43:50 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>B054FF6C-7010-737E-0D29-A9826193EEAF</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

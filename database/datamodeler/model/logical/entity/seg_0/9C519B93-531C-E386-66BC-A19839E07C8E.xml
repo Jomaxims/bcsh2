@@ -1,0 +1,145 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="9C519B93-531C-E386-66BC-A19839E07C8E" name="UBYTOVANI">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 17:40:51 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="ubytovani_id" id="6C1D4A59-FB85-17B3-FC58-98B2649ACC6E">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 17:40:51 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<importedID>06A558B5-79A2-0707-C2DA-67BC2819733E</importedID>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nazev" id="C060D552-6D9D-D595-D98F-D9309452D119">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 17:40:51 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<importedID>D76F6FF6-6580-63F7-72D4-91BB6CD8CC87</importedID>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="popis" id="7551CACA-B689-CDFD-4551-47025FB32870">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 17:40:51 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<importedID>0A2F320D-9C53-4C4A-8668-9C29059E47FA</importedID>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000</dataTypeSize>
+<ownDataTypeParameters>1000,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="kapacita" id="4988D816-C75E-FFD2-1DFA-78C028815425">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 17:40:51 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<importedID>5A878D2F-D464-C91A-0A67-D501571472D7</importedID>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="obsazenost" id="DB94D876-5DF9-9E81-ACCF-B840CED71B9A">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 17:40:51 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<importedID>0BFE6597-185B-19C0-637C-9C932B599591</importedID>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="typ_ubytovani_id" id="603FB3C6-A983-109F-4C87-5D06DD4A20C6">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 17:40:51 UTC</createdTime>
+<generatorID>8867D73D-0880-43D0-81F5-4F999D5DD205</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<importedID>FE38D3E6-77F4-D7C9-0F7A-43C04C9D48EE</importedID>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<referedAttribute>F251F144-EEE9-8225-F53B-928A130F9CFE</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="pocet_hvezd" id="68AA1012-0261-8935-6F11-D5B76B66A94A">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 17:40:51 UTC</createdTime>
+<generatorID>BC0D61EE-677C-C142-EB4D-7413673DAE33</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<importedID>1718627C-7EF2-6D09-C5BB-CAB79A0A93AA</importedID>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<referedAttribute>3D76002E-F78E-097A-C0ED-DF61287D7BA4</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypeScale>5</dataTypeScale>
+<ownDataTypeParameters>,,5</ownDataTypeParameters>
+</Attribute>
+<Attribute name="adresa_id" id="4D337F77-416C-5680-F9B2-D89088413029">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 18:19:32 UTC</createdTime>
+<generatorID>58FE62D3-0273-3942-EBD1-233BA7BBFD67</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<referedAttribute>D121D0D8-2323-DF97-4896-DDF5EB043433</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="3DF4C3D6-DC07-A372-0DBD-CAC27A572054" name="HOTEL PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 17:40:51 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>6C1D4A59-FB85-17B3-FC58-98B2649ACC6E</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

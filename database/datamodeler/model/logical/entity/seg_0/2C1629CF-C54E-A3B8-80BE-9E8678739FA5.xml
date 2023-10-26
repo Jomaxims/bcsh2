@@ -1,0 +1,60 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="2C1629CF-C54E-A3B8-80BE-9E8678739FA5" name="STRAVA">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 17:40:51 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="strava_id" id="86A13FB6-CA70-942D-D450-D4F768A2D757">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 17:40:51 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<importedID>A532C2F8-FEC9-793B-3D28-1D01301DA096</importedID>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nazev" id="75BD199C-9147-0DEC-114F-B82964614F71">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 17:40:51 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<importedID>07CBD8B6-4554-465C-ECA4-58BE4BF52040</importedID>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="CC578FED-980D-6BD6-143B-E3F7EF684E11" name="STRAVA PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 17:40:51 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>86A13FB6-CA70-942D-D450-D4F768A2D757</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

@@ -1,0 +1,73 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="AFD94BCA-DE9B-9E2C-3D9E-4142D4033782" name="Osoba">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 16:11:25 UTC</createdTime>
+<generatorID>E103592E-02A9-B253-DD92-F1F5DFD9A88E</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<abbreviation>osoba</abbreviation>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="5FE77C4E-4F30-A2A7-83AF-D46899AF20C9">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 16:11:25 UTC</createdTime>
+<generatorID>1037DCC5-D778-D73E-1FC0-635FC64A344B</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="jmeno" id="77033856-F07D-BAB1-1CF6-5C0BEC7630E1">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 16:11:25 UTC</createdTime>
+<generatorID>AF9627AF-B623-1CAC-FCA7-EE5A5D5EDA63</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="prijmeni" id="B5E7CDB0-AE9F-9C15-D3DB-F66C93551296">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 16:11:25 UTC</createdTime>
+<generatorID>C259C7A2-19B0-68E2-122A-E0C753D68EA9</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="vek" id="9FAE1CB4-19B1-1467-BD86-AD1E88ED4E2D">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 16:11:25 UTC</createdTime>
+<generatorID>A0399AE1-2A4A-E2FF-3949-A4FDE4161745</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="8AAFA6D1-FA36-35F2-73D7-6D1854EF222C" name="Osoba_PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 16:11:25 UTC</createdTime>
+<generatorID>86B2DA9F-7752-F3AB-70E5-3C1228986344</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="5FE77C4E-4F30-A2A7-83AF-D46899AF20C9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

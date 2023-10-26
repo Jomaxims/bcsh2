@@ -1,0 +1,73 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="78033D26-C583-6C07-F1F4-B07BFF7D5E57" name="ZAKAZNIK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 16:31:53 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="zakaznik_id" id="FCA4F660-2BA7-CD21-4020-8E00CD4847FA">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 16:32:05 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="prihlasovaci_udaje_id" id="E311C058-01B1-2AC5-D484-07D7A7D2D0EC">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 16:51:43 UTC</createdTime>
+<generatorID>E24AA717-86FC-E5CC-575D-C9E1037E94F6</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<referedAttribute>DEAD10F0-B125-7712-0C08-2EBB043404CB</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="osoba_id" id="B9FDF6FC-7AFD-0FE2-FE71-8202053DA943">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 16:55:17 UTC</createdTime>
+<generatorID>6E42FCE7-DD21-FC3E-2723-89AB3682D0B6</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<referedAttribute>1037DCC5-D778-D73E-1FC0-635FC64A344B</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="282302FE-22AB-FFA8-4E3D-6291E52B2EE8" name="ZAKAZNIK PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 16:32:22 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>FCA4F660-2BA7-CD21-4020-8E00CD4847FA</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

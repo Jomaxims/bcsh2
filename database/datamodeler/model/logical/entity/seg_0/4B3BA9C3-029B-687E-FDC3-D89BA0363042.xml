@@ -1,0 +1,85 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="4B3BA9C3-029B-687E-FDC3-D89BA0363042" name="KONTAKT">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 16:39:11 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="kontaktni_udaje_id" id="E32D45D8-1F2C-28A6-CFD9-891421106515">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 16:39:19 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="email" id="35230AB8-36D6-9A46-E58B-5F8B3B8611B9">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 16:39:37 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="telefon" id="F716A5FC-687A-5664-1DD4-062A4C25B0DF">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 16:39:49 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="osoba_id" id="0A92CA13-5BF0-29E5-B044-8383A555AE90">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 16:51:00 UTC</createdTime>
+<generatorID>DFCA4A1B-0015-C75C-A7DC-EEAD356E7CAB</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<referedAttribute>1037DCC5-D778-D73E-1FC0-635FC64A344B</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="B6043BDA-FE9C-0FD4-FD4E-3CED8C33470D" name="KONTAKTNI_UDAJE PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 16:39:34 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>E32D45D8-1F2C-28A6-CFD9-891421106515</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

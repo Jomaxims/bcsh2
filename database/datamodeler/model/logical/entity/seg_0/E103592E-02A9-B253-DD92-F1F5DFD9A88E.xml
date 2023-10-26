@@ -1,0 +1,126 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="E103592E-02A9-B253-DD92-F1F5DFD9A88E" name="OSOBA">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 14:05:47 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<shortName>osoba</shortName>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="osoba_id" id="1037DCC5-D778-D73E-1FC0-635FC64A344B">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 14:05:55 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="jmeno" id="AF9627AF-B623-1CAC-FCA7-EE5A5D5EDA63">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 14:06:08 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="prijmeni" id="C259C7A2-19B0-68E2-122A-E0C753D68EA9">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 14:06:53 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="vek" id="A0399AE1-2A4A-E2FF-3949-A4FDE4161745">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 14:07:13 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="pohlavi_id" id="5757F823-9A5E-B6A2-ABC3-BDC90C82887C">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 16:52:22 UTC</createdTime>
+<generatorID>335F01B9-A465-DE48-273D-EB974DE19B7B</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<referedAttribute>0ACA3EE5-9266-5C3A-4A03-07CCB04E6650</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="kontaktni_udaje_id" id="749007E6-3A3D-B0F2-EC58-EE9DB9918DA4">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 18:11:39 UTC</createdTime>
+<generatorID>DFCA4A1B-0015-C75C-A7DC-EEAD356E7CAB</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<referedAttribute>E32D45D8-1F2C-28A6-CFD9-891421106515</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="adresa_id" id="73AB5B3E-DF96-30D2-3554-C6B1226CC550">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 18:34:36 UTC</createdTime>
+<generatorID>18E84BC5-9FBF-F8A8-7C6E-F003BEE39A0E</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<referedAttribute>D121D0D8-2323-DF97-4896-DDF5EB043433</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="86B2DA9F-7752-F3AB-70E5-3C1228986344" name="Osoba PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-26 14:06:04 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>1037DCC5-D778-D73E-1FC0-635FC64A344B</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

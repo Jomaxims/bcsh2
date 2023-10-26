@@ -1,0 +1,4 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oracle.dbtools.crest.model.design.relational.RelationalDesign>
+   <object objectType="Table" objectID="AFD94BCA-DE9B-9E2C-3D9E-4142D4033782" name="Osoba" seqName="seg_0" propertyClassName="oracle.dbtools.crest.model.design.relational.Table" propertyParentId="48B0DB78-BCC8-6982-484C-5CD881EFF55A" propertySourceId="" propertyTargetId=""/>
+</oracle.dbtools.crest.model.design.relational.RelationalDesign>
