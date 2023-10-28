@@ -7,8 +7,9 @@
 <item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
 </engineerTo>
 <sourcePk>E1D9BC52-D949-8E38-2CCB-DF83A82B56FE</sourcePk>
-<targetPk>3DF4C3D6-DC07-A372-0DBD-CAC27A572054</targetPk>
 <identifying>false</identifying>
+<nameOnSource>využívána</nameOnSource>
+<nameOnTarget>je na</nameOnTarget>
 <optionalSource>true</optionalSource>
 <optionalTarget>false</optionalTarget>
 <sourceCardinality>1</sourceCardinality>

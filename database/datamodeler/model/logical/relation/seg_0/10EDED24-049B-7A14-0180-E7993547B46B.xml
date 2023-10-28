@@ -9,6 +9,8 @@
 <sourcePk>6C99D048-D194-0DBE-A0B2-CAADDAAAE136</sourcePk>
 <targetPk>F6BE1091-662D-EDE1-A11F-01704C020E73</targetPk>
 <identifying>false</identifying>
+<nameOnSource>probíhá v</nameOnSource>
+<nameOnTarget>má</nameOnTarget>
 <optionalSource>false</optionalSource>
 <optionalTarget>true</optionalTarget>
 <sourceCardinality>*</sourceCardinality>

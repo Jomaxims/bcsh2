@@ -8,6 +8,8 @@
 </engineerTo>
 <targetPk>CB18397D-8189-4F79-84D7-20FC919ACAE4</targetPk>
 <identifying>false</identifying>
+<nameOnSource>je pojištěna</nameOnSource>
+<nameOnTarget>pojišťuje</nameOnTarget>
 <optionalSource>true</optionalSource>
 <optionalTarget>true</optionalTarget>
 <sourceCardinality>*</sourceCardinality>

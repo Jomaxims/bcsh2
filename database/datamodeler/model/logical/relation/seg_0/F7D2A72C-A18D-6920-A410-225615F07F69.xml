@@ -8,6 +8,8 @@
 </engineerTo>
 <sourcePk>9BD87B4D-18FF-009A-43DC-EAE86E29B445</sourcePk>
 <identifying>false</identifying>
+<nameOnSource>zarezervovává</nameOnSource>
+<nameOnTarget>má</nameOnTarget>
 <optionalSource>false</optionalSource>
 <optionalTarget>false</optionalTarget>
 <sourceCardinality>*</sourceCardinality>

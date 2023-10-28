@@ -8,8 +8,8 @@
 </engineerTo>
 <sourcePk>FCA64AC7-FDC0-83BE-0955-261FCEE0CA5B</sourcePk>
 <identifying>false</identifying>
-<nameOnSource>má</nameOnSource>
-<nameOnTarget>má</nameOnTarget>
+<nameOnSource>hodnotí</nameOnSource>
+<nameOnTarget>hodnoceno</nameOnTarget>
 <optionalSource>true</optionalSource>
 <optionalTarget>false</optionalTarget>
 <sourceCardinality>1</sourceCardinality>

@@ -66,20 +66,6 @@
 <logicalDatatype>LOGDT019</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="pohlavi_id" id="5757F823-9A5E-B6A2-ABC3-BDC90C82887C">
-<createdBy>tomas</createdBy>
-<createdTime>2023-10-26 16:52:22 UTC</createdTime>
-<generatorID>335F01B9-A465-DE48-273D-EB974DE19B7B</generatorID>
-<ownerDesignName>model</ownerDesignName>
-<engineerTo>
-<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
-</engineerTo>
-<referedAttribute>0ACA3EE5-9266-5C3A-4A03-07CCB04E6650</referedAttribute>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
 <Attribute name="kontaktni_udaje_id" id="749007E6-3A3D-B0F2-EC58-EE9DB9918DA4">
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 18:11:39 UTC</createdTime>

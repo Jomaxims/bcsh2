@@ -7,6 +7,8 @@
 <item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
 </engineerTo>
 <identifying>false</identifying>
+<nameOnSource>má</nameOnSource>
+<nameOnTarget>zarezervován</nameOnTarget>
 <optionalSource>false</optionalSource>
 <optionalTarget>true</optionalTarget>
 <sourceCardinality>*</sourceCardinality>

@@ -8,6 +8,8 @@
 </engineerTo>
 <targetPk>D5EE26E2-E9FD-E68A-2374-D8F94DEF34DA</targetPk>
 <identifying>false</identifying>
+<nameOnSource>má</nameOnSource>
+<nameOnTarget>zarezervován</nameOnTarget>
 <optionalSource>false</optionalSource>
 <optionalTarget>true</optionalTarget>
 <sourceCardinality>*</sourceCardinality>

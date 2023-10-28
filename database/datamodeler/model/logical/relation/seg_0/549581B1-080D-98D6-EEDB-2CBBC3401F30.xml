@@ -8,6 +8,8 @@
 </engineerTo>
 <sourcePk>3DF4C3D6-DC07-A372-0DBD-CAC27A572054</sourcePk>
 <identifying>false</identifying>
+<nameOnSource>vyobrazován</nameOnSource>
+<nameOnTarget>vyobrazuje</nameOnTarget>
 <optionalSource>true</optionalSource>
 <optionalTarget>false</optionalTarget>
 <sourceCardinality>1</sourceCardinality>

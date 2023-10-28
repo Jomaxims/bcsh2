@@ -9,6 +9,8 @@
 <sourcePk>6C99D048-D194-0DBE-A0B2-CAADDAAAE136</sourcePk>
 <targetPk>9BD87B4D-18FF-009A-43DC-EAE86E29B445</targetPk>
 <identifying>false</identifying>
+<nameOnSource>objednán v</nameOnSource>
+<nameOnTarget>má</nameOnTarget>
 <optionalSource>false</optionalSource>
 <optionalTarget>true</optionalTarget>
 <sourceCardinality>*</sourceCardinality>
