@@ -9,6 +9,8 @@
 <sourcePk>501C8092-0031-9E7E-B239-636379F080F1</sourcePk>
 <targetPk>9415BFCC-D6CD-AB08-2B1C-2AC5B83E1024</targetPk>
 <identifying>false</identifying>
+<nameOnSource>přihlašuje pomocí</nameOnSource>
+<nameOnTarget>jsou vlastněny</nameOnTarget>
 <optionalSource>false</optionalSource>
 <optionalTarget>true</optionalTarget>
 <sourceCardinality>1</sourceCardinality>

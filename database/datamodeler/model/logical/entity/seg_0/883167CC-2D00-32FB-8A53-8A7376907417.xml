@@ -1,7 +1,7 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="E0105913-D6ED-DF7A-C5C5-2E838BE42075" name="ZAMESTNANEC">
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="883167CC-2D00-32FB-8A53-8A7376907417" name="OBRAZKY_UBYTOVANI">
 <createdBy>tomas</createdBy>
-<createdTime>2023-10-26 16:32:30 UTC</createdTime>
+<createdTime>2023-10-28 11:51:21 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
 <item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
@@ -15,9 +15,9 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="zamestnanec_id" id="749291CD-D285-EBB8-9279-A5C2B27DEDC4">
+<Attribute name="obrazky_ubytovani_id" id="F5F896E3-2739-35D6-593B-987703FEF520">
 <createdBy>tomas</createdBy>
-<createdTime>2023-10-26 16:32:37 UTC</createdTime>
+<createdTime>2023-10-28 11:51:38 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
 <item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
@@ -27,74 +27,56 @@
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="id_role" id="09701F91-A340-779F-7025-71A77A635554">
+<Attribute name="obrazek" id="E3ACC728-30C8-25DB-1DD8-0A5C1DB9119E">
 <createdBy>tomas</createdBy>
-<createdTime>2023-10-26 16:45:14 UTC</createdTime>
-<generatorID>1E070432-E782-745C-D5DD-FEE40CFD9302</generatorID>
+<createdTime>2023-10-28 11:51:54 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
 <item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
 </engineerTo>
-<referedAttribute>FBD192A8-9A65-E869-803D-2942F48A81DC</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT029</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="poradi" id="275D9257-E5B5-A018-957E-5AB3B7EDD241">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-28 12:22:55 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="prihlasovaci_udaje_id" id="392C8A0B-BFD8-243C-44C0-5B4355447386">
+<Attribute name="ubytovani_id" id="BC79BFE0-2F14-0A80-47B9-097D2F739F3A">
 <createdBy>tomas</createdBy>
-<createdTime>2023-10-26 16:51:31 UTC</createdTime>
-<generatorID>E6C7E32F-2CE9-5429-FD84-CC4EFDA3365B</generatorID>
+<createdTime>2023-10-28 12:28:59 UTC</createdTime>
+<generatorID>549581B1-080D-98D6-EEDB-2CBBC3401F30</generatorID>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
 <item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
 </engineerTo>
-<referedAttribute>DEAD10F0-B125-7712-0C08-2EBB043404CB</referedAttribute>
+<referedAttribute>6C1D4A59-FB85-17B3-FC58-98B2649ACC6E</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="osoba_id" id="2BB7A753-C462-CC25-82F7-16EE787BFF45">
-<createdBy>tomas</createdBy>
-<createdTime>2023-10-26 16:55:27 UTC</createdTime>
-<generatorID>2699E4C4-92D1-CBF0-9C4D-1CBD5C6F843C</generatorID>
-<ownerDesignName>model</ownerDesignName>
-<engineerTo>
-<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
-</engineerTo>
-<referedAttribute>1037DCC5-D778-D73E-1FC0-635FC64A344B</referedAttribute>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="zamestnanec_id1" id="DA7241C4-D08F-D7C9-D882-3A4D48A375AE">
-<createdBy>tomas</createdBy>
-<createdTime>2023-10-26 16:56:45 UTC</createdTime>
-<generatorID>525AA96B-9591-1668-5EFD-C62EFA722282</generatorID>
-<ownerDesignName>model</ownerDesignName>
-<engineerTo>
-<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
-</engineerTo>
-<nullsAllowed>true</nullsAllowed>
-<referedAttribute>749291CD-D285-EBB8-9279-A5C2B27DEDC4</referedAttribute>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
+<logicalDatatype>LOGDT019</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
-<identifier id="501C8092-0031-9E7E-B239-636379F080F1" name="ZAMESTNANEC PK">
+<identifier id="D0FEAE3B-4885-EC0A-6259-6409DF16798B" name="OBRAZKY_UBYTOVANI PK">
 <createdBy>tomas</createdBy>
-<createdTime>2023-10-26 16:34:42 UTC</createdTime>
+<createdTime>2023-10-28 11:51:52 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
 <item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>
-<attributeRef>749291CD-D285-EBB8-9279-A5C2B27DEDC4</attributeRef>
+<attributeRef>F5F896E3-2739-35D6-593B-987703FEF520</attributeRef>
 </usedAttributes>
 </identifier>
 </identifiers>

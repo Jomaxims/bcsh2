@@ -1,7 +1,7 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="E0105913-D6ED-DF7A-C5C5-2E838BE42075" name="ZAMESTNANEC">
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="FF324AAC-7B45-384B-77B7-A3A52F652F10" name="PLATBA">
 <createdBy>tomas</createdBy>
-<createdTime>2023-10-26 16:32:30 UTC</createdTime>
+<createdTime>2023-10-28 12:41:33 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
 <item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
@@ -15,10 +15,11 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="zamestnanec_id" id="749291CD-D285-EBB8-9279-A5C2B27DEDC4">
+<Attribute name="platba_id" id="4D3E7FF2-1909-DAF2-B18B-61DED4C43261">
 <createdBy>tomas</createdBy>
-<createdTime>2023-10-26 16:32:37 UTC</createdTime>
+<createdTime>2023-10-28 12:41:33 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
+<importedID>7912344E-C62E-09B3-93FD-ED5715ED4168</importedID>
 <engineerTo>
 <item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
 </engineerTo>
@@ -27,74 +28,85 @@
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="id_role" id="09701F91-A340-779F-7025-71A77A635554">
+<Attribute name="castka" id="662E793A-2C58-7414-E4B5-F411FB191692">
 <createdBy>tomas</createdBy>
-<createdTime>2023-10-26 16:45:14 UTC</createdTime>
-<generatorID>1E070432-E782-745C-D5DD-FEE40CFD9302</generatorID>
+<createdTime>2023-10-28 12:41:33 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
+<importedID>E7F6E414-FCC5-704A-D310-742B316A37F0</importedID>
 <engineerTo>
 <item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
 </engineerTo>
-<referedAttribute>FBD192A8-9A65-E869-803D-2942F48A81DC</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
+<logicalDatatype>LOGDT019</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="prihlasovaci_udaje_id" id="392C8A0B-BFD8-243C-44C0-5B4355447386">
+<Attribute name="datum_splatnosti" id="7E93A7B1-82F1-50F4-9A35-D99269C29D1C">
 <createdBy>tomas</createdBy>
-<createdTime>2023-10-26 16:51:31 UTC</createdTime>
-<generatorID>E6C7E32F-2CE9-5429-FD84-CC4EFDA3365B</generatorID>
+<createdTime>2023-10-28 12:41:33 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
+<importedID>CB9BD300-2ED7-E538-1A92-87CE28334798</importedID>
 <engineerTo>
 <item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
 </engineerTo>
-<referedAttribute>DEAD10F0-B125-7712-0C08-2EBB043404CB</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
+<logicalDatatype>LOGDT007</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="osoba_id" id="2BB7A753-C462-CC25-82F7-16EE787BFF45">
+<Attribute name="zaplacena" id="40A64C96-4346-0715-71B5-84312A94D5D0">
 <createdBy>tomas</createdBy>
-<createdTime>2023-10-26 16:55:27 UTC</createdTime>
-<generatorID>2699E4C4-92D1-CBF0-9C4D-1CBD5C6F843C</generatorID>
+<createdTime>2023-10-28 12:41:33 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
+<importedID>0E65D626-33F4-999B-0526-C7AF4E7BEB7D</importedID>
 <engineerTo>
 <item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
 </engineerTo>
-<referedAttribute>1037DCC5-D778-D73E-1FC0-635FC64A344B</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="zamestnanec_id1" id="DA7241C4-D08F-D7C9-D882-3A4D48A375AE">
+<Attribute name="cislo_uctu" id="D0766A16-433B-76F6-F0A4-6D54722E935F">
 <createdBy>tomas</createdBy>
-<createdTime>2023-10-26 16:56:45 UTC</createdTime>
-<generatorID>525AA96B-9591-1668-5EFD-C62EFA722282</generatorID>
+<createdTime>2023-10-28 12:43:09 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
 <item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
 </engineerTo>
-<nullsAllowed>true</nullsAllowed>
-<referedAttribute>749291CD-D285-EBB8-9279-A5C2B27DEDC4</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>30,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="objednavka_id" id="65F7A01D-6B2F-8646-87DC-60A4A6CAC8AC">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-28 12:45:09 UTC</createdTime>
+<generatorID>B62C1F8C-74DD-E2F7-431C-74FA02AB01B1</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+</engineerTo>
+<referedAttribute>B81F7FD3-CEC9-C13F-EF97-F5D4DD7AEAD3</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
-<identifier id="501C8092-0031-9E7E-B239-636379F080F1" name="ZAMESTNANEC PK">
+<identifier id="3E06FBF7-94A6-5C15-1BBA-1F99909105AC" name="PLATBA PK">
 <createdBy>tomas</createdBy>
-<createdTime>2023-10-26 16:34:42 UTC</createdTime>
+<createdTime>2023-10-28 12:41:33 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
 <item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>
-<attributeRef>749291CD-D285-EBB8-9279-A5C2B27DEDC4</attributeRef>
+<attributeRef>4D3E7FF2-1909-DAF2-B18B-61DED4C43261</attributeRef>
 </usedAttributes>
 </identifier>
 </identifiers>
