@@ -1,0 +1,16 @@
+﻿@model IndexViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+    var user = new SignUpViewModel
+    {
+        FirstName = "Pepa",
+        LastName = "Zdepa"
+    };
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome @Model.Name</h1>
+    <vc:user model="@user"></vc:user>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>

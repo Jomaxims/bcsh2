@@ -1,0 +1,11 @@
+﻿@using System.Security.Claims
+@{
+    ViewData["Title"] = "Profil";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Profil</p>
+
+<span class="marker marker--secondary">User.Identity.IsAuthenticated:</span> @User.Identity!.IsAuthenticated
+<span class="marker marker--secondary">User.HasClaim(ClaimTypes.Role, "admin"):</span> @User.HasClaim(ClaimTypes.Role, "admin")
+<span class="marker marker--secondary">User.HasClaim(ClaimTypes.Name, "admin"):</span> @User.HasClaim(ClaimTypes.Name, "admin")
