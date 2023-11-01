@@ -1,0 +1,95 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="807D9454-FFAD-A710-0732-CF2F9D80AC4F" name="POKOJE_ZAJEZDU">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 19:51:50 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="celkovy_pocet_pokoji" id="D75A8CA1-12AB-3A0B-11EC-2466FB62536B">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 19:51:50 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<importedID>836834FD-B314-7925-D545-22FCB13BC86C</importedID>
+<engineerTo>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="pocet_obsazenych_pokoju" id="284D509C-B645-0148-2A6F-8E0DF5502FAA">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 19:51:50 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<importedID>064BFB44-0F68-2E10-AB85-6AFB23E453C6</importedID>
+<engineerTo>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="terminy_id" id="FAF359DF-E177-8784-4318-18C5B705AAF3">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-01 14:35:04 UTC</createdTime>
+<generatorID>86D5E9DC-BBA5-8C48-2774-F108BE13FB43</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+</engineerTo>
+<referedAttribute>E0B478C7-B26D-8A7F-9E8D-3E7C5FB50CAC</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="pokoj_id" id="2806D58C-4EF5-C43D-3676-31A00A57F231">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-01 14:35:38 UTC</createdTime>
+<generatorID>BB910BF1-6D9E-03E3-5E20-17F452857483</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+</engineerTo>
+<referedAttribute>BE30379D-0BC6-8C2E-952E-F8C47D8FB049</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="32DB7B48-11F5-63D2-D821-3928C11B7A70" name="POKOJE_TERMINU_PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-01 14:31:56 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<newElementsIDs>FAF359DF-E177-8784-4318-18C5B705AAF3,2806D58C-4EF5-C43D-3676-31A00A57F231</newElementsIDs>
+<usedAttributes>
+<attributeRef>FAF359DF-E177-8784-4318-18C5B705AAF3</attributeRef>
+<attributeRef>2806D58C-4EF5-C43D-3676-31A00A57F231</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

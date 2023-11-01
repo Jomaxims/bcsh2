@@ -1,10 +1,11 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="3EBD9FC8-C0EC-5AC5-9CE5-1B7795116C05" name="LOG">
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="3EBD9FC8-C0EC-5AC5-9CE5-1B7795116C05" name="LOG_ZAMESTNANCI">
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-28 12:31:13 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
-<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
@@ -20,23 +21,9 @@
 <createdTime>2023-10-28 12:32:13 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
-<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="zakaznik_id" id="A0D92520-A393-80CC-278B-5A15288D6252">
-<createdBy>tomas</createdBy>
-<createdTime>2023-10-28 12:34:44 UTC</createdTime>
-<generatorID>D2D0DE8D-42C7-750B-40F1-D85C89C65F49</generatorID>
-<ownerDesignName>model</ownerDesignName>
-<engineerTo>
-<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
-</engineerTo>
-<nullsAllowed>true</nullsAllowed>
-<referedAttribute>FCA4F660-2BA7-CD21-4020-8E00CD4847FA</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT011</logicalDatatype>
@@ -48,7 +35,8 @@
 <generatorID>62299A2E-8C07-610C-6343-E8F1ADD826A1</generatorID>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
-<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
 <referedAttribute>749291CD-D285-EBB8-9279-A5C2B27DEDC4</referedAttribute>
@@ -62,7 +50,8 @@
 <createdTime>2023-10-28 12:35:37 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
-<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -75,7 +64,8 @@
 <createdTime>2023-10-28 12:36:10 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
-<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -87,7 +77,8 @@
 <createdTime>2023-10-28 12:38:04 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
-<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -101,7 +92,8 @@
 <createdTime>2023-10-28 12:32:21 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
-<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>

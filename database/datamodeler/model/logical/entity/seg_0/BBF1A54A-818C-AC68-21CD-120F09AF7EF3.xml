@@ -4,7 +4,8 @@
 <createdTime>2023-10-26 17:40:51 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
-<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
@@ -21,11 +22,12 @@
 <ownerDesignName>model</ownerDesignName>
 <importedID>64E570B7-0A60-8F8F-BE12-498FAEF6DBC1</importedID>
 <engineerTo>
-<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT019</logicalDatatype>
+<logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="nazev" id="8BD4DC0A-5991-4DC9-67EB-B8EE8A3AEA70">
@@ -34,7 +36,8 @@
 <ownerDesignName>model</ownerDesignName>
 <importedID>2C8FD37E-38ED-23DE-F3A9-97905C431B27</importedID>
 <engineerTo>
-<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -49,7 +52,8 @@
 <createdTime>2023-10-26 17:40:51 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
-<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>

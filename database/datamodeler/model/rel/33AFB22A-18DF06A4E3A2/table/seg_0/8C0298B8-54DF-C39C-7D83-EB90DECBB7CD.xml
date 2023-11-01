@@ -1,0 +1,85 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="8C0298B8-54DF-C39C-7D83-EB90DECBB7CD" name="TERMIN">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>B0079734-12BC-C05F-2804-B75CA8F510EA</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="terminy_id" id="F67654DB-4929-EB58-60D8-3BEDF5947ECC">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>E0B478C7-B26D-8A7F-9E8D-3E7C5FB50CAC</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="od" id="C04D2E6E-E196-E021-400A-F838071F341F">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>F40F99B1-791C-4072-6FA3-A71FEE48A458</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="do" id="10FB280F-BA5A-1518-A626-79C634259F26">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>369972F5-E0B6-F8B3-6011-EC180F737024</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ZAJEZD_zajezd_id" id="DFCEC1FB-00D7-3DC5-D3F4-0A0C882E9CE3">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>398207C0-DA95-E64C-2035-A1A37F7DE855</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="8B2EC909-3D9D-9323-9613-A3585553CCF0" referredColumn="0C8FEDFD-C865-97A8-CA71-45BE3FB9C8EA"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="CBD641D6-9C02-1B70-0A9E-F56DD7443BE4" name="TERMIN_PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>F6BE1091-662D-EDE1-A11F-01704C020E73</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F67654DB-4929-EB58-60D8-3BEDF5947ECC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="638F315A-4423-D877-BB1E-4CFB382893FD" name="TERMIN_ZAJEZD_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>6758F6D6-FA2B-BF98-B1B2-87F9CC29B9E8</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="DFCEC1FB-00D7-3DC5-D3F4-0A0C882E9CE3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

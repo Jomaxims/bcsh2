@@ -1,0 +1,75 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="EB83F3EB-B9C1-1683-BBF3-6151F8ABCA4A" name="Relation_13">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="STRAVA_strava_id" id="E6493C98-18C5-DCC4-2DDA-AD2ECC849377">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="D8779012-7D0B-7557-A3CD-33C3CF49AD98" referredColumn="283EBE68-E592-2856-6A91-719A93F77920"/>
+</associations>
+</Column>
+<Column name="ZAJEZD_zajezd_id" id="68CFC845-70E5-2552-99B1-E225311B761D">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="B60DCEDE-E0AC-9AAC-26FE-E764E14674CE" referredColumn="0C8FEDFD-C865-97A8-CA71-45BE3FB9C8EA"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="B981AEA5-9E3B-8EDA-B6C8-B778C900BCD2" name="Relation_13_PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E6493C98-18C5-DCC4-2DDA-AD2ECC849377"/>
+<colUsage columnID="68CFC845-70E5-2552-99B1-E225311B761D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="41484BC3-25E7-7062-0500-BB1BCECE058F" name="Relation_13_STRAVA_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>2AB38C3D-7845-B59E-7D19-FCB4BBB1DD0D</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E6493C98-18C5-DCC4-2DDA-AD2ECC849377"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="27C9752A-F935-33FB-95A0-2360D13AD88D" name="Relation_13_ZAJEZD_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>2AB38C3D-7845-B59E-7D19-FCB4BBB1DD0D</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="68CFC845-70E5-2552-99B1-E225311B761D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

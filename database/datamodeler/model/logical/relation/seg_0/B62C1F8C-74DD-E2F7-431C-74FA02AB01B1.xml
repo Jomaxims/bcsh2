@@ -4,14 +4,14 @@
 <createdTime>2023-10-28 12:44:23 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
-<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+<item key="BDB6511B-F7EB-518C-27C6-09DB5857BD8D" value="true"/>
 </engineerTo>
 <sourcePk>6C99D048-D194-0DBE-A0B2-CAADDAAAE136</sourcePk>
 <targetPk>3E06FBF7-94A6-5C15-1BBA-1F99909105AC</targetPk>
 <identifying>false</identifying>
 <nameOnSource>placena</nameOnSource>
 <nameOnTarget>platí</nameOnTarget>
-<optionalSource>false</optionalSource>
+<optionalSource>true</optionalSource>
 <optionalTarget>false</optionalTarget>
 <sourceCardinality>1</sourceCardinality>
 <sourceEntity>45954F1C-03FD-E572-130E-6C958DBD2DD9</sourceEntity>

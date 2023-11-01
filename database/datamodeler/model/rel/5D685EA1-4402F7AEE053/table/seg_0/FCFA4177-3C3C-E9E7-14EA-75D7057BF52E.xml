@@ -1,0 +1,100 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="FCFA4177-3C3C-E9E7-14EA-75D7057BF52E" name="LOG_ZAMESTNANCI">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-01 15:42:59 UTC</createdTime>
+<generatorID>3EBD9FC8-C0EC-5AC5-9CE5-1B7795116C05</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="log_id" id="187CCFE1-54D5-A543-F633-28998B26F302">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-01 15:42:59 UTC</createdTime>
+<generatorID>540FF28A-F9EA-FB79-371E-6FC33FF0AC84</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementColumn>true</autoIncrementColumn>
+<identityColumn>true</identityColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="zamestnanec_id" id="5CCC4FDB-9C31-2F57-5C17-3FF5444F85F0">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-01 15:42:59 UTC</createdTime>
+<generatorID>FFE95430-6F79-A5B4-75FF-41F62A1D1352</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="B40440F3-9E82-86C5-5E63-6AB3862528B1" referredColumn="CBE13B01-238B-3871-5990-B7BD5F9EEBB4"/>
+</associations>
+</Column>
+<Column name="nazev_tabulky" id="07913B6E-AEB3-FBDC-A5C4-BC52680F5C17">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-01 15:42:59 UTC</createdTime>
+<generatorID>130AB40F-1DD0-2C95-2583-7BF5B3AF9B89</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>30,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="cas_zmeny" id="949F3C12-53B3-28A9-6ABF-8CF5B51312CD">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-01 15:42:59 UTC</createdTime>
+<generatorID>AABE38C7-B620-0086-C401-D6B9C154693E</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id_instance" id="5CA043CD-EF86-D1EE-AC17-C00BBEEC2CC7">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-01 15:42:59 UTC</createdTime>
+<generatorID>774ED282-1296-EB85-3C6F-ED3271D546AD</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="B4B5AE7B-D437-839E-AAAE-8B081003A43F" name="LOG_ZAMESTNANCI_PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-01 15:42:59 UTC</createdTime>
+<generatorID>67917078-1876-D97F-0167-DEE3F4C102A8</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="187CCFE1-54D5-A543-F633-28998B26F302"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="E0367EDD-85C3-2F42-CA19-EEC229BA491D" name="LOG_ZAMESTNANCI_ZAMESTNANEC_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-01 15:42:59 UTC</createdTime>
+<generatorID>62299A2E-8C07-610C-6343-E8F1ADD826A1</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="5CCC4FDB-9C31-2F57-5C17-3FF5444F85F0"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

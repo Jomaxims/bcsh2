@@ -5,7 +5,7 @@
 	<automatic_uk_generation value="false" />
 	<automatic_fk_generation value="false" />
 	<preserve_ddl_generation_options value="false" />
-	<use_global_design_level_settings value="false" />
+	<use_global_design_level_settings value="true" />
 	<use_preferred_classification_types value="false" />
 	<substitution_patterns>
 	</substitution_patterns>
@@ -366,7 +366,7 @@
 			<property name="Notes" selected="true"/>
 		</relation_fk>
 		<relation_table>
-			<property name="Name" selected="true"/>
+			<property name="Name" selected="false"/>
 			<property name="Comment" selected="true"/>
 			<property name="Comment in RDBMS" selected="true"/>
 			<property name="Notes" selected="true"/>
@@ -391,18 +391,18 @@
 	<model_compare_storage_props_filter>
 	</model_compare_storage_props_filter>
 	<naming_options>
-		<model_options objectid="48B0DB78-BCC8-6982-484C-5CD881EFF55A">
-			<naming_option class_name="oracle.dbtools.crest.model.design.relational.Table" max_name_length="30" case_type="2" valid_characters="" all_valid="true" />
-			<naming_option class_name="oracle.dbtools.crest.model.design.relational.Column" max_name_length="30" case_type="2" valid_characters="" all_valid="true" />
-			<naming_option class_name="oracle.dbtools.crest.model.design.relational.TableView" max_name_length="30" case_type="2" valid_characters="" all_valid="true" />
-			<naming_option class_name="oracle.dbtools.crest.model.design.constraint.TableLevelConstraint" max_name_length="30" case_type="2" valid_characters="" all_valid="true" />
-			<naming_option class_name="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" max_name_length="30" case_type="2" valid_characters="" all_valid="true" />
-			<naming_option class_name="oracle.dbtools.crest.model.design.relational.Index" max_name_length="30" case_type="2" valid_characters="" all_valid="true" />
+		<model_options objectid="5D685EA1-90CB-8E47-D7F1-4402F7AEE053">
+			<naming_option class_name="oracle.dbtools.crest.model.design.relational.Table" max_name_length="128" case_type="2" valid_characters="" all_valid="true" />
+			<naming_option class_name="oracle.dbtools.crest.model.design.relational.Column" max_name_length="128" case_type="2" valid_characters="" all_valid="true" />
+			<naming_option class_name="oracle.dbtools.crest.model.design.relational.TableView" max_name_length="128" case_type="2" valid_characters="" all_valid="true" />
+			<naming_option class_name="oracle.dbtools.crest.model.design.constraint.TableLevelConstraint" max_name_length="128" case_type="2" valid_characters="" all_valid="true" />
+			<naming_option class_name="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" max_name_length="128" case_type="2" valid_characters="" all_valid="true" />
+			<naming_option class_name="oracle.dbtools.crest.model.design.relational.Index" max_name_length="128" case_type="2" valid_characters="" all_valid="true" />
 		</model_options>
 		<model_options objectid="7AF38917-C800-63D9-CF84-B1405965B5BC">
-			<naming_option class_name="oracle.dbtools.crest.model.design.logical.Entity" max_name_length="254" case_type="2" valid_characters="" all_valid="true" />
-			<naming_option class_name="oracle.dbtools.crest.model.design.logical.Attribute" max_name_length="254" case_type="2" valid_characters="" all_valid="true" />
-			<naming_option class_name="oracle.dbtools.crest.model.design.logical.EntityView" max_name_length="254" case_type="2" valid_characters="" all_valid="true" />
+			<naming_option class_name="oracle.dbtools.crest.model.design.logical.Entity" max_name_length="254" case_type="2" valid_characters="null" all_valid="true" />
+			<naming_option class_name="oracle.dbtools.crest.model.design.logical.Attribute" max_name_length="254" case_type="2" valid_characters="null" all_valid="true" />
+			<naming_option class_name="oracle.dbtools.crest.model.design.logical.EntityView" max_name_length="254" case_type="2" valid_characters="null" all_valid="true" />
 		</model_options>
 	</naming_options>
 	<deleted_files>
@@ -423,7 +423,7 @@
 		</data_types_model_estimates>
 		<relational_model_estimates>
 			<relational_model_0_estimates>
-				<relational_model_name value="Relational_1"/>
+				<relational_model_name value="Relational_2"/>
 				<tables value="70"/>
 				<views value="70"/>
 				<foreign_keys value="70"/>

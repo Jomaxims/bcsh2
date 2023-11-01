@@ -1,0 +1,57 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="909A2D1A-3E96-FD0E-64CB-A981FAEC4B0D" name="Relation_26">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ZAJEZD_zajezd_id" id="A607DD1B-461F-56C9-46CA-EA49FA79507D">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="EAEE44CB-B08D-72C4-B150-C13D9A3E6F63" referredColumn="0C8FEDFD-C865-97A8-CA71-45BE3FB9C8EA"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="4E4FE488-460C-5448-4CE0-F1AF6A3414A4" name="Relation_26_PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A607DD1B-461F-56C9-46CA-EA49FA79507D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="FA17CF53-0D90-8637-D723-656E9CEAF7DC" name="Relation_26_ZAJEZD_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>F7D2A72C-A18D-6920-A410-225615F07F69</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A607DD1B-461F-56C9-46CA-EA49FA79507D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="7D96A5F6-4573-ADAC-48A7-EE082CDF4AE6" name="Relation_26_POKOJE_ZAJEZDU_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>F7D2A72C-A18D-6920-A410-225615F07F69</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+</ind_PK_UK>
+</indexes>
+</Table>

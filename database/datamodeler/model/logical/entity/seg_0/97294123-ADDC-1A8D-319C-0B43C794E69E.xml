@@ -1,0 +1,104 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="97294123-ADDC-1A8D-319C-0B43C794E69E" name="LOG_ZAKAZNICI">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-01 14:43:03 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="log_id" id="1E60BC26-F006-D2D5-365D-9929FFD57D91">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-01 14:43:03 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nazev_tabulky" id="FCB954A9-4B6E-0A7F-B85E-C8E7E79197B2">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-01 14:43:03 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>30,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="cas_zmeny" id="713EE095-0231-409C-0A1A-E1897F71BDFB">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-01 14:43:03 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_instance" id="242BC3FC-1F96-8C61-F45B-DBC8EEC13065">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-01 14:43:03 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="zakaznik_id" id="2BF0C2E8-4D42-2F69-F06F-E90863AF3BEF">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-01 14:44:01 UTC</createdTime>
+<generatorID>0B3FCFE8-B7FC-1DE6-FB5B-2BF4A21ECE83</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>FCA4F660-2BA7-CD21-4020-8E00CD4847FA</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="D9895CD9-F385-3108-8960-46672195BB00" name="LOG PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-01 14:43:03 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>1E60BC26-F006-D2D5-365D-9929FFD57D91</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

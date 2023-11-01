@@ -1,10 +1,11 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Relation_44" directorySegmentName="seg_0" id="8BFF9DC5-C655-7B98-E0C4-AD8FB5BDA7CA">
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="OSOBA_OBJEDNAVKA" directorySegmentName="seg_0" id="8BFF9DC5-C655-7B98-E0C4-AD8FB5BDA7CA">
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-28 12:26:17 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
-<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
 <identifying>false</identifying>
 <nameOnSource>jede na</nameOnSource>

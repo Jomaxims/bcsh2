@@ -1,0 +1,173 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="D2B2338A-1D2C-868D-09BC-D12A6DC64E4D" name="OSOBA">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>E103592E-02A9-B253-DD92-F1F5DFD9A88E</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<abbreviation>osoba</abbreviation>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="osoba_id" id="67EFBB44-CD77-BF6A-2E35-2B2E3CB1AB38">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>1037DCC5-D778-D73E-1FC0-635FC64A344B</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="jmeno" id="DADC381D-0EB3-E548-B5D3-51B7572623DD">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>AF9627AF-B623-1CAC-FCA7-EE5A5D5EDA63</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="prijmeni" id="0F1BC431-C3C8-7D4C-FDEB-615AE72A6964">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>C259C7A2-19B0-68E2-122A-E0C753D68EA9</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="vek" id="C3E6AA8E-FC9D-49C2-1EFB-E5F2422257D6">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>A0399AE1-2A4A-E2FF-3949-A4FDE4161745</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="POHLAVI_pohlavi_id" id="96189AD8-6D47-29DF-B914-34DA7A91C410">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>5757F823-9A5E-B6A2-ABC3-BDC90C82887C</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="FCE53C5F-5E11-4EB4-C558-EA08C7EADB69" referredColumn="4479B6E1-F4F6-4C48-27A6-21AD40F65334"/>
+</associations>
+</Column>
+<Column name="KONTAKT_kontakt_id" id="6CC763FA-866A-5D80-7E2D-6EC13820AEA3">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>749007E6-3A3D-B0F2-EC58-EE9DB9918DA4</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="A4A702ED-B151-52E5-FD50-B8FE01F5B2A8" referredColumn="9D28DED1-0EF6-858B-2FDF-6325038F8E8E"/>
+</associations>
+</Column>
+<Column name="ADRESA_adresa_id" id="7ADF0ADE-2F19-5C8D-195C-7C3CC8B3BC63">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>73AB5B3E-DF96-30D2-3554-C6B1226CC550</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="4BEA9605-D2C2-F82A-B3E9-82342EC0359D" referredColumn="4B224C11-BE0B-CD2B-2EFC-3319D6D98568"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="57761AC9-2A38-C21F-C7D1-C27EB996EC18" name="OSOBA_PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>86B2DA9F-7752-F3AB-70E5-3C1228986344</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="67EFBB44-CD77-BF6A-2E35-2B2E3CB1AB38"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="0FAD4480-418A-359C-C30C-EFFE22E7D71E" name="OSOBA__IDX">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<relationGeneratorID>18E84BC5-9FBF-F8A8-7C6E-F003BEE39A0E</relationGeneratorID>
+<indexColumnUsage>
+<colUsage columnID="7ADF0ADE-2F19-5C8D-195C-7C3CC8B3BC63"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="FB2062FF-F191-C00A-A1A5-094735206F0F" name="OSOBA__IDXv1">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<relationGeneratorID>DFCA4A1B-0015-C75C-A7DC-EEAD356E7CAB</relationGeneratorID>
+<indexColumnUsage>
+<colUsage columnID="6CC763FA-866A-5D80-7E2D-6EC13820AEA3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="7B8B01DA-BEFA-0ADA-8936-F89E7EE85244" name="OSOBA_ADRESA_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>18E84BC5-9FBF-F8A8-7C6E-F003BEE39A0E</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7ADF0ADE-2F19-5C8D-195C-7C3CC8B3BC63"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="62D5C553-301D-8BF4-FB58-CB06F004B6AF" name="OSOBA_KONTAKT_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>DFCA4A1B-0015-C75C-A7DC-EEAD356E7CAB</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6CC763FA-866A-5D80-7E2D-6EC13820AEA3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="215BF022-773D-F695-098B-5D82EB1DBF98" name="OSOBA_POHLAVI_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>335F01B9-A465-DE48-273D-EB974DE19B7B</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="96189AD8-6D47-29DF-B914-34DA7A91C410"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

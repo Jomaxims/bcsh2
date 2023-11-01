@@ -4,7 +4,7 @@
 <createdTime>2023-10-26 16:50:40 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
-<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+<item key="BDB6511B-F7EB-518C-27C6-09DB5857BD8D" value="true"/>
 </engineerTo>
 <sourcePk>B6043BDA-FE9C-0FD4-FD4E-3CED8C33470D</sourcePk>
 <targetPk>86B2DA9F-7752-F3AB-70E5-3C1228986344</targetPk>
@@ -12,7 +12,7 @@
 <nameOnSource>kontaktována</nameOnSource>
 <nameOnTarget>má</nameOnTarget>
 <optionalSource>false</optionalSource>
-<optionalTarget>false</optionalTarget>
+<optionalTarget>true</optionalTarget>
 <sourceCardinality>1</sourceCardinality>
 <sourceEntity>4B3BA9C3-029B-687E-FDC3-D89BA0363042</sourceEntity>
 <targetCardinalityString>1</targetCardinalityString>

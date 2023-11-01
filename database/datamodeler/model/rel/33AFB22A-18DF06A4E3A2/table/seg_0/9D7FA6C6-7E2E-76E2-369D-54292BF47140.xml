@@ -1,0 +1,114 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="9D7FA6C6-7E2E-76E2-369D-54292BF47140" name="HODNOCENI">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>51FC2472-E24F-7041-FD49-30A000DBA6C2</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="hodnoceni_id" id="0C940DE5-6FF1-65A2-5BDD-32845D5DCB23">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>AB19965F-79BC-9209-FA03-4A9F1FB51520</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="hodnoceni" id="6038EEF5-7F48-68F7-F0FA-382458ED7934">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>20D5542C-1910-ECC9-764B-FE04DE3028E3</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypeScale>10</dataTypeScale>
+<ownDataTypeParameters>,,10</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="popis" id="87A23604-CDAD-B704-9AF3-590C7CD4FE05">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>713FBEC6-47C3-0AA3-E5B1-0A49EEEACCC3</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>500</dataTypeSize>
+<ownDataTypeParameters>500,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="UBYTOVANI_ubytovani_id" id="40289A49-C8E0-0C59-0437-35DCE1DFD55A">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>1C0F2670-965D-7543-B429-358B9849FAF6</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="F300A763-1777-956B-2496-AC1778A1AE2D" referredColumn="33333AA4-58A4-5906-903F-14DAAAB573D2"/>
+</associations>
+</Column>
+<Column name="ZAKAZNIK_zakaznik_id" id="8B26E0EE-BBA5-4DD8-2801-4089EDC6141C">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>23DE46A3-8AE3-29AD-4FAA-5A2E9AE1E32B</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="E1A0DAA9-7077-0A20-1651-CE0CDEA8098E" referredColumn="687B7EA1-6E26-725C-1645-75967A81F9D9"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="914A7624-F923-1E8A-E511-260F49991FE4" name="HODNOCENI_PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>ABDE7294-1B33-DD7E-E0E0-583B96927778</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0C940DE5-6FF1-65A2-5BDD-32845D5DCB23"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="73B11F74-2ADB-333E-A092-7197999A971B" name="HODNOCENI_ZAKAZNIK_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>49B71D4F-A68A-2703-0132-C6A246836ABE</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="8B26E0EE-BBA5-4DD8-2801-4089EDC6141C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="8909DBD6-E377-7A85-0BA8-97B4D26ADBCE" name="HODNOCENI_UBYTOVANI_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>584EBFE7-661A-1611-3B7C-55A0911B403B</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="40289A49-C8E0-0C59-0437-35DCE1DFD55A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

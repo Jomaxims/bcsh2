@@ -4,7 +4,8 @@
 <createdTime>2023-10-26 16:31:53 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
-<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
@@ -20,20 +21,22 @@
 <createdTime>2023-10-26 16:32:05 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
-<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="prihlasovaci_udaje_id" id="E311C058-01B1-2AC5-D484-07D7A7D2D0EC">
+<Attribute name="udaje_id" id="E311C058-01B1-2AC5-D484-07D7A7D2D0EC">
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 16:51:43 UTC</createdTime>
 <generatorID>E24AA717-86FC-E5CC-575D-C9E1037E94F6</generatorID>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
-<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
 <referedAttribute>DEAD10F0-B125-7712-0C08-2EBB043404CB</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
@@ -47,7 +50,8 @@
 <generatorID>6E42FCE7-DD21-FC3E-2723-89AB3682D0B6</generatorID>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
-<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
 <referedAttribute>1037DCC5-D778-D73E-1FC0-635FC64A344B</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
@@ -62,7 +66,8 @@
 <createdTime>2023-10-26 16:32:22 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
-<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>

@@ -4,14 +4,14 @@
 <createdTime>2023-10-26 18:27:48 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
-<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+<item key="BDB6511B-F7EB-518C-27C6-09DB5857BD8D" value="true"/>
 </engineerTo>
 <sourcePk>9BD87B4D-18FF-009A-43DC-EAE86E29B445</sourcePk>
 <identifying>false</identifying>
 <nameOnSource>probíhá v</nameOnSource>
 <nameOnTarget>má</nameOnTarget>
 <optionalSource>false</optionalSource>
-<optionalTarget>false</optionalTarget>
+<optionalTarget>true</optionalTarget>
 <sourceCardinality>1</sourceCardinality>
 <sourceEntity>0DA4ED1A-06F4-FDE9-3FC2-6278435E0987</sourceEntity>
 <targetCardinalityString>*</targetCardinalityString>

@@ -1,0 +1,101 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="FBD4D608-A6C1-A8A7-9BC4-5114FB11FCBA" name="POKOJE_ZAJEZDU">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-01 15:42:59 UTC</createdTime>
+<generatorID>807D9454-FFAD-A710-0732-CF2F9D80AC4F</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="celkovy_pocet_pokoji" id="EED913F3-072D-F9D2-AF7A-9C1F32A705FE">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-01 15:42:59 UTC</createdTime>
+<generatorID>D75A8CA1-12AB-3A0B-11EC-2466FB62536B</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="pocet_obsazenych_pokoju" id="EDEFEB63-DD45-CEED-6EDE-3932C9069F63">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-01 15:42:59 UTC</createdTime>
+<generatorID>284D509C-B645-0148-2A6F-8E0DF5502FAA</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="terminy_id" id="CA63EAFA-276B-527B-A523-8509C828F82D">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-01 15:42:59 UTC</createdTime>
+<generatorID>FAF359DF-E177-8784-4318-18C5B705AAF3</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="78AC086E-00F9-C0B8-2418-91D00BA40A7E" referredColumn="C6E9A5A8-F256-FB86-3512-BB4D35FD1C0A"/>
+</associations>
+</Column>
+<Column name="pokoj_id" id="5BB28328-F183-E778-238E-C71D9C33089C">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-01 15:42:59 UTC</createdTime>
+<generatorID>2806D58C-4EF5-C43D-3676-31A00A57F231</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="332894A8-64F2-EF29-5E69-A518128AB11B" referredColumn="3792C23A-0BA0-2865-14ED-899647B599A5"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="26A9BBFC-EA90-7493-128F-899B7BDEAAEB" name="POKOJE_ZAJEZDU_PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-01 15:42:59 UTC</createdTime>
+<generatorID>32DB7B48-11F5-63D2-D821-3928C11B7A70</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="CA63EAFA-276B-527B-A523-8509C828F82D"/>
+<colUsage columnID="5BB28328-F183-E778-238E-C71D9C33089C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="3818FBC8-DFAB-C80D-9868-FCA4B4113E98" name="POKOJE_ZAJEZDU_TERMIN_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-01 15:42:59 UTC</createdTime>
+<generatorID>86D5E9DC-BBA5-8C48-2774-F108BE13FB43</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="CA63EAFA-276B-527B-A523-8509C828F82D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="BB2E160E-39A7-E4A2-3143-2A6578B61EFF" name="POKOJE_ZAJEZDU_POKOJ_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-01 15:42:59 UTC</createdTime>
+<generatorID>BB910BF1-6D9E-03E3-5E20-17F452857483</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="5BB28328-F183-E778-238E-C71D9C33089C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

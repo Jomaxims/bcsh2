@@ -1,0 +1,57 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="BBCAB189-C2B5-2582-3AB5-FAE937EC3172" name="Relation_27">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="POKOJ_pokoj_id" id="0FC92C2C-C2D3-5C0B-7C1F-E540F1FEB1FE">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="67A236BA-B9B2-D167-E169-70DCD829E81E" referredColumn="FD80605C-394F-CC08-C4D2-A6945096BC43"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="704F18D1-A9EA-8212-DC06-798441246D75" name="Relation_27_PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0FC92C2C-C2D3-5C0B-7C1F-E540F1FEB1FE"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="0264D639-614A-14E3-9697-A8C264B5FC1C" name="Relation_27_POKOJE_ZAJEZDU_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>DCD7EBDA-F1FA-13FF-FE35-C4BEA0F67AB8</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+</ind_PK_UK>
+<ind_PK_UK id="2220D2AC-03CA-D3D3-7D1D-3851B7E80294" name="Relation_27_POKOJ_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>DCD7EBDA-F1FA-13FF-FE35-C4BEA0F67AB8</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0FC92C2C-C2D3-5C0B-7C1F-E540F1FEB1FE"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

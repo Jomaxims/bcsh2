@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="B40440F3-9E82-86C5-5E63-6AB3862528B1" containerWithKeyObject="FCFA4177-3C3C-E9E7-14EA-75D7057BF52E" localFKIndex="E0367EDD-85C3-2F42-CA19-EEC229BA491D" name="LOG_ZAMESTNANCI_ZAMESTNANEC_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-01 15:42:59 UTC</createdTime>
+<generatorID>62299A2E-8C07-610C-6343-E8F1ADD826A1</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<referredTableLongName>ZAMESTNANEC</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>7162EB21-A120-A4F4-871C-F77F682C2F19</referredTableID>
+<keyObject>3F7E5EBC-F6A4-D200-9877-1182943B4F41</keyObject>
+<referredKeyID>3F7E5EBC-F6A4-D200-9877-1182943B4F41</referredKeyID>
+<mandatory>false</mandatory>
+<refColNames>zamestnanec_id</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

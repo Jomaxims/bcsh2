@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="C38423DC-DEAA-07BE-52D8-713952D84BC7" containerWithKeyObject="908977FE-5C41-6A1E-CFB4-D0168BE84E3D" localFKIndex="53ECF513-6BD0-0251-7DA4-6BE182FFCF0E" name="STRAVA_ZAJEZDU_STRAVA_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-01 15:42:59 UTC</createdTime>
+<generatorID>2AB38C3D-7845-B59E-7D19-FCB4BBB1DD0D</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<referredTableLongName>STRAVA</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>1D0F06FF-82BF-DE13-B5FB-6CBD7B8E2EDE</referredTableID>
+<keyObject>839327F6-50BF-0FB7-EF42-FE33A08F7520</keyObject>
+<referredKeyID>839327F6-50BF-0FB7-EF42-FE33A08F7520</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>strava_id</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

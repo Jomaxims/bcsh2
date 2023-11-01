@@ -1,10 +1,11 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Relation_13" directorySegmentName="seg_0" id="2AB38C3D-7845-B59E-7D19-FCB4BBB1DD0D">
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="STRAVA_ZAJEZDU" directorySegmentName="seg_0" id="2AB38C3D-7845-B59E-7D19-FCB4BBB1DD0D">
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 17:40:51 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
-<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
+<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
 <sourcePk>CC578FED-980D-6BD6-143B-E3F7EF684E11</sourcePk>
 <identifying>false</identifying>

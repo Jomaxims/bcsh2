@@ -1,0 +1,98 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="86ECBDF2-D1CA-9387-C1CD-40F720CF4544" name="KONTAKT">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>4B3BA9C3-029B-687E-FDC3-D89BA0363042</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="kontakt_id" id="9D28DED1-0EF6-858B-2FDF-6325038F8E8E">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>E32D45D8-1F2C-28A6-CFD9-891421106515</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="email" id="BF723B63-4FFB-B667-F739-F75CFDD7BF66">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>35230AB8-36D6-9A46-E58B-5F8B3B8611B9</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="telefon" id="52EF9EFE-A0C6-8764-B59C-DD250DDDF96E">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>F716A5FC-687A-5664-1DD4-062A4C25B0DF</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="OSOBA_osoba_id" id="FDB810FF-E116-3D81-11D0-E69A678F43EC">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>0A92CA13-5BF0-29E5-B044-8383A555AE90</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="95097962-587E-65E2-1041-F08994930D9A" referredColumn="67EFBB44-CD77-BF6A-2E35-2B2E3CB1AB38"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="7E492573-737B-5082-7A17-3BB556A7F460" name="KONTAKT_PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>B6043BDA-FE9C-0FD4-FD4E-3CED8C33470D</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="9D28DED1-0EF6-858B-2FDF-6325038F8E8E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="28CDFD4C-467E-6D92-9E37-74F4D6E26EEE" name="KONTAKT__IDX">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<relationGeneratorID>DFCA4A1B-0015-C75C-A7DC-EEAD356E7CAB</relationGeneratorID>
+<indexColumnUsage>
+<colUsage columnID="FDB810FF-E116-3D81-11D0-E69A678F43EC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="4F717873-EF57-260D-7AC4-FDCB84623239" name="KONTAKT_OSOBA_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-10-31 10:56:31 UTC</createdTime>
+<generatorID>DFCA4A1B-0015-C75C-A7DC-EEAD356E7CAB</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="FDB810FF-E116-3D81-11D0-E69A678F43EC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
