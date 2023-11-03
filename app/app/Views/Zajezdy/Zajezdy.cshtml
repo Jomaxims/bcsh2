@@ -1,0 +1,19 @@
+﻿@using Sqids
+@inject SqidsEncoder<int> _encoder
+
+@{
+    ViewData["Title"] = "Zajezdy";
+}
+<h1>@ViewData["Title"]</h1>
+
+<ul class="navbar-nav flex-grow-1">
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-controller="Zajezdy" asp-action="ById" asp-route-id="@_encoder.Encode(1)">Zajezd 1</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-controller="Zajezdy" asp-action="ById" asp-route-id="@_encoder.Encode(2)">Zajezd 2</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-controller="Zajezdy" asp-action="ById" asp-route-id="@_encoder.Encode(3)">Zajezd 3</a>
+    </li>
+</ul>
