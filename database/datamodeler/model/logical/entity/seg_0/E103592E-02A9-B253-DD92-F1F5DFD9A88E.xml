@@ -71,7 +71,6 @@
 <logicalDatatype>LOGDT019</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<<<<<<< Updated upstream
 <Attribute name="kontaktni_udaje_id" id="749007E6-3A3D-B0F2-EC58-EE9DB9918DA4">
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 18:11:39 UTC</createdTime>
@@ -86,8 +85,6 @@
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-=======
->>>>>>> Stashed changes
 <Attribute name="adresa_id" id="73AB5B3E-DF96-30D2-3554-C6B1226CC550">
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 18:34:36 UTC</createdTime>
