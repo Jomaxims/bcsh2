@@ -3,14 +3,14 @@ SET SERVEROUTPUT ON;
 CREATE OR REPLACE PACKAGE stat_package AS
 
     PROCEDURE manage_stat(
-        i_stat_id   IN NUMBER,
-        i_zkratka   VARCHAR2,
-        i_nazev     VARCHAR2,
-        o_result    OUT VARCHAR2
+        io_stat_id      IN OUT stat.stat_id %TYPE,
+        i_zkratka       stat.zkratka %TYPE,
+        i_nazev         stat.nazev %TYPE,
+        o_result        OUT VARCHAR2
     );
     
     PROCEDURE delete_stat(
-        i_stat_id   NUMBER,
+        i_stat_id   IN stat.stat_id %TYPE,
         o_result    OUT VARCHAR2
     );
 
@@ -23,15 +23,16 @@ CREATE OR REPLACE PACKAGE BODY stat_package AS
     no_rows_found EXCEPTION;
 
     PROCEDURE manage_stat(
-    i_stat_id   IN NUMBER,
-    i_zkratka   VARCHAR2,
-    i_nazev     VARCHAR2,
-    o_result    OUT VARCHAR2
+        io_stat_id      IN OUT stat.stat_id %TYPE,
+        i_zkratka       stat.zkratka %TYPE,
+        i_nazev         stat.nazev %TYPE,
+        o_result        OUT VARCHAR2
 ) IS
 BEGIN
     IF i_stat_id IS NULL THEN
         INSERT INTO STAT(ZKRATKA, NAZEV)
-        VALUES(i_zkratka, i_nazev);
+        VALUES(i_zkratka, i_nazev)
+        returning stat_id into io_stat_id;
         o_result := '{ "status": "OK", "message": "Stát p?idán úsp?šn?." }';
     ELSE
         UPDATE STAT
@@ -52,7 +53,7 @@ EXCEPTION
 END manage_stat;
     
    PROCEDURE delete_stat(
-    i_stat_id   IN NUMBER,
+    i_stat_id   IN %TYPE,
     o_result    OUT VARCHAR2
 ) IS
 BEGIN
