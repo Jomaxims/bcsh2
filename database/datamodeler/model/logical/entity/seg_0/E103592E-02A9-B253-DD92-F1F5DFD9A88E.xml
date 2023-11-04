@@ -3,9 +3,9 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 14:05:47 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
 </engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
@@ -21,9 +21,9 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 14:05:55 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -34,9 +34,9 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 14:06:08 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -48,9 +48,9 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 14:06:53 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -62,27 +62,13 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 14:07:13 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="kontaktni_udaje_id" id="749007E6-3A3D-B0F2-EC58-EE9DB9918DA4">
-<createdBy>tomas</createdBy>
-<createdTime>2023-10-26 18:11:39 UTC</createdTime>
-<generatorID>DFCA4A1B-0015-C75C-A7DC-EEAD356E7CAB</generatorID>
-<ownerDesignName>model</ownerDesignName>
-<engineerTo>
-<item key="48B0DB78-BCC8-6982-484C-5CD881EFF55A" value="true"/>
-</engineerTo>
-<referedAttribute>E32D45D8-1F2C-28A6-CFD9-891421106515</referedAttribute>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="adresa_id" id="73AB5B3E-DF96-30D2-3554-C6B1226CC550">
@@ -91,7 +77,6 @@
 <generatorID>18E84BC5-9FBF-F8A8-7C6E-F003BEE39A0E</generatorID>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
-<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
 <item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
 <referedAttribute>D121D0D8-2323-DF97-4896-DDF5EB043433</referedAttribute>
@@ -106,9 +91,9 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 14:06:04 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>

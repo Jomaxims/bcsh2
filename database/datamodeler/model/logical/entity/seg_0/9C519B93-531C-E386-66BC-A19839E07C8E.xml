@@ -3,9 +3,9 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 17:40:51 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
 </engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
@@ -20,10 +20,10 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 17:40:51 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
 <importedID>06A558B5-79A2-0707-C2DA-67BC2819733E</importedID>
 <engineerTo>
-<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -34,10 +34,10 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 17:40:51 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
 <importedID>D76F6FF6-6580-63F7-72D4-91BB6CD8CC87</importedID>
 <engineerTo>
-<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -49,10 +49,10 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 17:40:51 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
 <importedID>0A2F320D-9C53-4C4A-8668-9C29059E47FA</importedID>
 <engineerTo>
-<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -64,10 +64,10 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 17:40:51 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
 <importedID>5A878D2F-D464-C91A-0A67-D501571472D7</importedID>
 <engineerTo>
-<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -78,10 +78,10 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 17:40:51 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
 <importedID>0BFE6597-185B-19C0-637C-9C932B599591</importedID>
 <engineerTo>
-<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -94,7 +94,6 @@
 <generatorID>58FE62D3-0273-3942-EBD1-233BA7BBFD67</generatorID>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
-<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
 <item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
 <referedAttribute>D121D0D8-2323-DF97-4896-DDF5EB043433</referedAttribute>
@@ -103,36 +102,18 @@
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="typ_ubytovani_id" id="C2D4F639-863D-2AF1-58AC-4D9DDE005323">
+<Attribute name="pocet_hvezd" id="9A1FF23A-B51C-915F-F99D-C42DD1964645">
 <createdBy>tomas</createdBy>
-<createdTime>2023-10-30 19:40:33 UTC</createdTime>
-<generatorID>8867D73D-0880-43D0-81F5-4F999D5DD205</generatorID>
+<createdTime>2023-11-04 16:35:44 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
-<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
 <item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
-<referedAttribute>F251F144-EEE9-8225-F53B-928A130F9CFE</referedAttribute>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="pocet_hvezd" id="72530BB5-5FC9-7636-EDF2-A970DDDD99E8">
-<createdBy>tomas</createdBy>
-<createdTime>2023-10-31 19:59:15 UTC</createdTime>
-<generatorID>BC0D61EE-677C-C142-EB4D-7413673DAE33</generatorID>
-<ownerDesignName>model</ownerDesignName>
-<engineerTo>
-<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
-</engineerTo>
-<referedAttribute>3D76002E-F78E-097A-C0ED-DF61287D7BA4</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<dataTypeScale>1</dataTypeScale>
-<ownDataTypeParameters>,,1</ownDataTypeParameters>
+<dataTypePrecision>1</dataTypePrecision>
+<ownDataTypeParameters>,1,</ownDataTypeParameters>
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
@@ -140,9 +121,9 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 17:40:51 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>
