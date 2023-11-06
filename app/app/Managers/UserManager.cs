@@ -7,9 +7,9 @@ namespace app.Managers;
 
 public class Role
 {
-    public static string Zakaznik = "zakaznik";
-    public static string Zamestnanec = "zamestnanec";
-    public static string Admin = "admin";
+    public static string Zakaznik = "Zakaznik";
+    public static string Zamestnanec = "Zamestnanec";
+    public static string Admin = "Admin";
 }
 
 public class User
@@ -21,7 +21,7 @@ public class User
 
 public interface IUserManager
 {
-    void SignUp(SignUpViewModel user);
+    void SignUp(RegisterModel user);
     bool Login(HttpContext context, string name, string password);
     void Logout(HttpContext context);
     int? GetCurrentUserId(HttpContext context);
@@ -30,7 +30,7 @@ public interface IUserManager
 
 public class UserManager
 {
-    public void SignUp(SignUpViewModel user)
+    public void SignUp(RegisterModel user)
     {
         
     }
@@ -44,12 +44,13 @@ public class UserManager
         claims.Add(new Claim(ClaimTypes.NameIdentifier, "1"));
         claims.Add(new Claim(ClaimTypes.Name, name));
         claims.Add(new Claim(ClaimTypes.Role, Role.Admin));
+        claims.Add(new Claim(ClaimTypes.Role, Role.Zamestnanec));
         
         var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
         var principal = new ClaimsPrincipal(identity);
 
         context.SignInAsync(
-            CookieAuthenticationDefaults.AuthenticationScheme, principal, new AuthenticationProperties() { IsPersistent = true }
+            CookieAuthenticationDefaults.AuthenticationScheme, principal, new AuthenticationProperties { IsPersistent = true }
         );
 
         return true;
