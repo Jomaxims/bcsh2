@@ -23,13 +23,30 @@ public class HomeController : Controller
     [Route("")]
     public IActionResult Index()
     {
-        return View(new IndexViewModel { Name = "pepa"});
+        return View(new { Name = "pepa"});
     }
 
     [Route("kontakt")]
     public IActionResult Kontakt()
     {
+        return BadRequest();
+    }
+    
+    [HttpGet]
+    [Route("register")]
+    public IActionResult Register()
+    {
         return View();
+    }
+    
+    [HttpPost]
+    [Route("register")]
+    public IActionResult RegisterPost(RegisterModel? model)
+    {
+        if (!(ModelState.IsValid && model != null))
+            return BadRequest();
+        
+        return View(model);
     }
     
     [HttpGet]
@@ -41,9 +58,12 @@ public class HomeController : Controller
     
     [HttpPost]
     [Route("login")]
-    public IActionResult LoginPost()
+    public IActionResult LoginPost(LoginModel? model)
     {
-        var res = _userManager.Login(HttpContext, "admin", "admin");
+        if (!(ModelState.IsValid && model != null))
+            return BadRequest();
+        
+        var res = _userManager.Login(HttpContext, model.Jmeno, model.Heslo);
         
         return res ? RedirectToAction("Index") : RedirectToAction("Login");
     }

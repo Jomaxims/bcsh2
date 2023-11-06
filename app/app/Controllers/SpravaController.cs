@@ -1,18 +1,28 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using app.Managers;
+using app.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Sqids;
 
 namespace app.Controllers;
 
-[Authorize(Policy = "Zamestnanec")]
-[Route("zamestnanec/sprava")]
+[Authorize(Roles = "Zamestnanec, Admin")]
+[Route("sprava")]
 public class SpravaController : Controller
 {
-    private readonly SqidsEncoder<int> _encoder;
+    private readonly IIdConverter _converter;
 
-    public SpravaController(SqidsEncoder<int> encoder)
+    public SpravaController(IIdConverter converter)
     {
-        _encoder = encoder;
+        _converter = converter;
+    }
+    
+    [Route("")]
+    public IActionResult Polozky()
+    {
+        var defaultTyp = "a";
+        
+        return RedirectToAction("Polozky", routeValues: new { typPolozky = defaultTyp });
     }
     
     [Route("{typPolozky}")]
@@ -28,16 +38,16 @@ public class SpravaController : Controller
     public IActionResult PolozkyEdit(string typPolozky, string id)
     {
         ViewData["typPolozky"] = typPolozky;
-        ViewData["id"] = _encoder.Decode(id)[0];
+        ViewData["id"] = _converter.Decode(id);
         
         return View();
     }
     
     [HttpPost]
     [Route("{typPolozky}/{id}")]
-    public IActionResult EditEntity(string typPolozky, string id)
+    public IActionResult PolozkyEditPost(string typPolozky, string id)
     {
-        var idDecoded = _encoder.Decode(id)[0];
+        var idDecoded = _converter.Decode(id);
         // TODO edit/add entity
 
         return Ok();
@@ -45,9 +55,9 @@ public class SpravaController : Controller
     
     [HttpDelete]
     [Route("{typPolozky}/{id}")]
-    public IActionResult DeleteEntity(string typPolozky, string id)
+    public IActionResult PolozkyDelete(string typPolozky, string id)
     {
-        var idDecoded = _encoder.Decode(id)[0];
+        var idDecoded = _converter.Decode(id);
         // TODO remove entity
         
         return Ok();

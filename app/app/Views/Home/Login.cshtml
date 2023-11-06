@@ -1,8 +1,26 @@
-﻿@{
-    ViewData["Title"] = "Login";
-}
-<h1>@ViewData["Title"]</h1>
+﻿@model app.Models.LoginModel
 
-<form action="login" method="post">
-    <input type="submit" value="Login"/>
+@{
+    ViewBag.Title = "Login";
+}
+
+<form asp-action="LoginPost" method="post" enctype="application/x-www-form-urlencoded">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Jmeno" class="control-label"></label>
+        <input asp-for="Jmeno" class="form-control" />
+        <span asp-validation-for="Jmeno" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Heslo" class="control-label"></label>
+        <input asp-for="Heslo" class="form-control" />
+        <span asp-validation-for="Heslo" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Přihlásit" class="btn btn-primary" />
+    </div>
 </form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,86 @@
+﻿@model app.Models.RegisterModel
+
+@{
+    ViewBag.Title = "RegisterPost";
+}
+
+<h1>RegisterPost</h1>
+
+<div>
+    <h4>RegisterModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PrihlasovaciJmeno)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PrihlasovaciJmeno)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Heslo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Heslo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Jmeno)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Jmeno)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Prijmeni)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Prijmeni)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Vek)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Vek)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Kontakt.Email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Kontakt.Email)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Kontakt.Telefon)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Kontakt.Telefon)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Adresa.Ulice)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Adresa.Ulice)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Adresa.CisloPopisne)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Adresa.CisloPopisne)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Adresa.Mesto)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Adresa.Mesto)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Adresa.PSC)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Adresa.PSC)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Adresa.Poznamka)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Adresa.Poznamka)
+        </dd>
+    </dl>
+</div>

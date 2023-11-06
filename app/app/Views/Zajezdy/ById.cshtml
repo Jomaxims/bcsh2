@@ -1,8 +1,11 @@
-﻿@{
-    ViewData["Title"] = "Zajezdy";
+﻿@model ZajezdModel
+
+@{
+    ViewBag.Title = "Zajezdy";
+    ViewBag.Terminy = Model.Terminy;
+    ViewBag.Pojisteni = Model.Pojisteni;
 }
-<h1>@ViewData["Title"] @ViewData["id"]</h1>
 
 <p>Zajezd ID: @ViewData["id"]</p>
 
-<a class="nav-link text-dark" asp-controller="Zajezdy" asp-action="Nakup" asp-route-id="@ViewContext.RouteData.Values["id"]">Nakup</a>
+<vc:nakup />

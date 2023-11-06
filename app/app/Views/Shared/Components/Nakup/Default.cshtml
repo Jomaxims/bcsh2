@@ -1,0 +1,57 @@
+﻿@model NakupModel
+
+<form asp-controller="Zajezdy" asp-action="NakupPost" method="post" asp-route-id="@ViewContext.RouteData.Values["id"]" enctype="application/x-www-form-urlencoded">
+    <div class="form-group">
+        <div class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Termin" class="control-label"></label>
+            <select onchange="changePokoje(this.value)" asp-for="Termin" asp-items="new SelectList(ViewBag.Terminy, nameof(TerminModel.Id), nameof(TerminModel.OdDo))"></select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Pokoj" class="control-label"></label>
+            <select id="Pokoj" onchange="changePocetOsob()" asp-for="Pokoj"></select>
+        </div>
+        <div class="form-group">
+            <label asp-for="PocetOsob" class="control-label"></label>
+            <input id="PocetOsob" min="1" max="1" value="1" asp-for="PocetOsob" class="form-control" type="number" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Pojisteni" class="control-label"></label>
+            <select asp-for="Pojisteni" asp-items="new SelectList(ViewBag.Pojisteni, nameof(PojisteniModel.Id), nameof(PojisteniModel.Nazev))"></select>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Koupit" class="btn btn-primary" />
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    const terminy = @Html.Raw(Json.Serialize(ViewBag.Terminy))
+    const pokojSelect = document.querySelector("#Pokoj")
+    const pocetOsobInput = document.querySelector("#PocetOsob")
+    
+    function changePokoje(value) {
+        for (const el in pokojSelect.options) { pokojSelect.options.remove(0) }
+        
+        terminy.find((el) => el.id === value).pokoje.forEach((el) => {
+            const option = '<option pocetMist=' + el.pocetMist + ' value="' + el.id + '">' + el.nazev + ' - ' + el.pocetMist + ' osoby</option>'
+            pokojSelect.innerHTML += option
+        });
+        
+        changePocetOsob()
+    }
+    
+    function changePocetOsob() {
+        const pocetMist = pokojSelect.options[pokojSelect.selectedIndex].getAttribute("pocetMist")
+        pocetOsobInput.setAttribute("max", pocetMist)
+        
+        if (pocetOsobInput.value > pocetMist)
+            pocetOsobInput.value = pocetMist
+    }
+    
+    window.onload = changePokoje(terminy[0].id)
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

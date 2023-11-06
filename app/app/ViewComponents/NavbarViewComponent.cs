@@ -5,10 +5,8 @@ namespace app.ViewComponents;
 
 public class NavbarViewComponent : ViewComponent
 {
-    public async Task<IViewComponentResult> InvokeAsync(string role)
+    public IViewComponentResult Invoke()
     {
-        ViewData["Role"] = role;
-        
         return View();
     }
 }

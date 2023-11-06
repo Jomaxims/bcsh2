@@ -1,19 +1,45 @@
-﻿@using Sqids
-@inject SqidsEncoder<int> _encoder
+﻿@model IEnumerable<app.Models.ZajezdNahledModel>
 
 @{
-    ViewData["Title"] = "Zajezdy";
+    ViewBag.Title = "Zajezdy";
 }
-<h1>@ViewData["Title"]</h1>
 
-<ul class="navbar-nav flex-grow-1">
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-controller="Zajezdy" asp-action="ById" asp-route-id="@_encoder.Encode(1)">Zajezd 1</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-controller="Zajezdy" asp-action="ById" asp-route-id="@_encoder.Encode(2)">Zajezd 2</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-controller="Zajezdy" asp-action="ById" asp-route-id="@_encoder.Encode(3)">Zajezd 3</a>
-    </li>
-</ul>
+<table class="table">
+<thead>
+<tr>
+    <th>
+        @Html.DisplayNameFor(model => model.Nazev)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.PocetHvezd)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Lokalita)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.ZkracenyPopis)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Doprava)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Strava)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.CenaZaOsobu)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.CenaPredSlevou)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.FotoId)
+    </th>
+    <th></th>
+</tr>
+</thead>
+<tbody>
+@foreach (var item in Model) {
+    <vc:zajezd-nahled model="@item" />
+}
+</tbody>
+</table>

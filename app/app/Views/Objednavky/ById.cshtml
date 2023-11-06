@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Objednávka";
+}
+
+<p>Zajezd ID: @ViewBag.ZajezdId</p>
+<p>Termin ID: @ViewBag.TerminId</p>
+<p>Pojisteni ID: @ViewBag.PojisteniId</p>
+<p>Pokoj ID: @ViewBag.PokojId</p>
+
+<form asp-controller="Objednavky" asp-action="PlatbaPost" method="post" enctype="application/x-www-form-urlencoded">
+    <div class="form-group">
+        <input type="submit" value="Zaplatit" class="btn btn-primary" />
+    </div>
+</form>

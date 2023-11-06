@@ -1,6 +1,14 @@
 ﻿@{
-    ViewData["Title"] = "Nakup";
+    ViewBag.Title = "Nákup";
 }
-<h1>@ViewData["Title"] @ViewData["id"]</h1>
 
-<p>Zajezd ID: @ViewData["id"]</p>
+<p>Zajezd ID: @ViewBag.ZajezdId</p>
+<p>Termin ID: @ViewBag.TerminId</p>
+<p>Pojisteni ID: @ViewBag.PojisteniId</p>
+<p>Pokoj ID: @ViewBag.PokojId</p>
+
+<form asp-controller="Objednavky" asp-action="ObjednavkaPost" method="post" enctype="application/x-www-form-urlencoded">
+    <div class="form-group">
+        <input type="submit" value="Koupit" class="btn btn-primary" />
+    </div>
+</form>

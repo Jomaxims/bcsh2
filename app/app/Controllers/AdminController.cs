@@ -1,7 +1,6 @@
-﻿using app.Managers;
+﻿using app.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Sqids;
 
 namespace app.Controllers;
 
@@ -9,11 +8,17 @@ namespace app.Controllers;
 [Route("admin")]
 public class AdminController : Controller
 {
-    private readonly SqidsEncoder<int> _encoder;
+    private readonly IIdConverter _converter;
 
-    public AdminController(SqidsEncoder<int> encoder)
+    public AdminController(IIdConverter converter)
     {
-        _encoder = encoder;
+        _converter = converter;
+    }
+    
+    [Route("panel")]
+    public IActionResult Panel()
+    {
+        return View();
     }
     
     [Route("logy/{typLogu}")]
@@ -21,12 +26,6 @@ public class AdminController : Controller
     {
         ViewData["typLogu"] = typLogu;
         
-        return View();
-    }
-    
-    [Route("prepnout")]
-    public IActionResult Prepnout()
-    {
         return View();
     }
     
@@ -38,27 +37,27 @@ public class AdminController : Controller
     
     [HttpGet]
     [Route("uzivatele/{id}")]
-    public IActionResult UzivateleEdit(string id)
+    public IActionResult UzivatelEdit(string id)
     {
-        ViewData["id"] = _encoder.Decode(id)[0];
+        ViewData["id"] = _converter.Decode(id);
         
         return View();
     }
     
     [HttpPost]
     [Route("uzivatele/{id}")]
-    public IActionResult EditEntity(string id)
+    public IActionResult UzivatelEditPost(string id)
     {
-        ViewData["id"] = _encoder.Decode(id)[0];
+        ViewData["id"] = _converter.Decode(id);
         
         return Ok();
     }
     
     [HttpDelete]
     [Route("uzivatele/{id}")]
-    public IActionResult DeleteEntity(string id)
+    public IActionResult UzivatelDelete(string id)
     {
-        ViewData["id"] = _encoder.Decode(id)[0];
+        ViewData["id"] = _converter.Decode(id);
         
         return Ok();
     }
