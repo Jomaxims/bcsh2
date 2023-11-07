@@ -4,8 +4,7 @@
 <createdTime>2023-10-26 16:34:46 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
-<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+<item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
 </engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
@@ -16,13 +15,12 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="id_role" id="FBD192A8-9A65-E869-803D-2942F48A81DC">
+<Attribute name="role_id" id="FBD192A8-9A65-E869-803D-2942F48A81DC">
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 16:34:59 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
-<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+<item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -34,8 +32,7 @@
 <createdTime>2023-10-26 16:35:28 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
-<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+<item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -49,9 +46,9 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 16:35:13 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="DB0D3B7D-2BF4-D174-2C0C-B96623503087" value="true"/>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+<item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="false"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>

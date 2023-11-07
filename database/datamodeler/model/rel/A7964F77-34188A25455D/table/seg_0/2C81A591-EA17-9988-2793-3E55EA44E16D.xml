@@ -19,7 +19,7 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="id_role" id="0BEC178F-15F5-EA54-5D83-D38DA5C0FE3A">
+<Column name="role_id" id="0BEC178F-15F5-EA54-5D83-D38DA5C0FE3A">
 <createdBy>tomas</createdBy>
 <createdTime>2023-11-07 19:53:12 UTC</createdTime>
 <generatorID>09701F91-A340-779F-7025-71A77A635554</generatorID>
