@@ -3,9 +3,8 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 16:32:30 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
-<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
@@ -20,9 +19,8 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 16:32:37 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
-<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -43,7 +41,7 @@
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="PRIHLASOVACI_UDAJE_id" id="392C8A0B-BFD8-243C-44C0-5B4355447386">
+<Attribute name="prihlasovaci_udaje_id" id="392C8A0B-BFD8-243C-44C0-5B4355447386">
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 16:51:31 UTC</createdTime>
 <generatorID>E6C7E32F-2CE9-5429-FD84-CC4EFDA3365B</generatorID>
@@ -52,20 +50,6 @@
 <item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
 <referedAttribute>DEAD10F0-B125-7712-0C08-2EBB043404CB</referedAttribute>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="osoba_id" id="2BB7A753-C462-CC25-82F7-16EE787BFF45">
-<createdBy>tomas</createdBy>
-<createdTime>2023-10-26 16:55:27 UTC</createdTime>
-<generatorID>2699E4C4-92D1-CBF0-9C4D-1CBD5C6F843C</generatorID>
-<ownerDesignName>model</ownerDesignName>
-<engineerTo>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
-</engineerTo>
-<referedAttribute>1037DCC5-D778-D73E-1FC0-635FC64A344B</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT011</logicalDatatype>
@@ -85,6 +69,32 @@
 <use>1</use>
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="jmeno" id="C74F9D4F-8CC8-1C8B-9389-E325529820EB">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-06 15:01:04 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="prijmeni" id="7A56838B-77BD-6DB9-4A4F-B0F5B8CA2275">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-06 15:01:04 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">

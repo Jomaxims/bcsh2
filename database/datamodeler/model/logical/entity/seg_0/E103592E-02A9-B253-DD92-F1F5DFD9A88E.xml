@@ -3,9 +3,8 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 14:05:47 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
-<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
@@ -21,9 +20,8 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 14:05:55 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
-<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -34,9 +32,8 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 14:06:08 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
-<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -48,9 +45,8 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 14:06:53 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
-<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -62,14 +58,14 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 14:07:13 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
-<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,3,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="adresa_id" id="73AB5B3E-DF96-30D2-3554-C6B1226CC550">
 <createdBy>tomas</createdBy>

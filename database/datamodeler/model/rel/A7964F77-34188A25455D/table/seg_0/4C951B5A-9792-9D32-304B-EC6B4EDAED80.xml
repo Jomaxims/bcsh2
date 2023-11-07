@@ -1,0 +1,132 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="4C951B5A-9792-9D32-304B-EC6B4EDAED80" name="UBYTOVANI">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-07 19:53:12 UTC</createdTime>
+<generatorID>9C519B93-531C-E386-66BC-A19839E07C8E</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ubytovani_id" id="1EEFABCF-2DDF-0D9A-CD29-F2E733FF4D2C">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-07 19:53:12 UTC</createdTime>
+<generatorID>6C1D4A59-FB85-17B3-FC58-98B2649ACC6E</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nazev" id="01F6C818-E7AD-8BE4-D78E-EFFB902D5526">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-07 19:53:12 UTC</createdTime>
+<generatorID>C060D552-6D9D-D595-D98F-D9309452D119</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="popis" id="271782F7-0713-D5ED-CEE4-3004D0048BED">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-07 19:53:12 UTC</createdTime>
+<generatorID>7551CACA-B689-CDFD-4551-47025FB32870</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000</dataTypeSize>
+<ownDataTypeParameters>1000,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="kapacita" id="7E454780-4663-F987-B396-1DBC13E1DB2E">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-07 19:53:12 UTC</createdTime>
+<generatorID>4988D816-C75E-FFD2-1DFA-78C028815425</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="obsazenost" id="D8C217B1-638A-FD9C-2541-38A1931154F9">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-07 19:53:12 UTC</createdTime>
+<generatorID>DB94D876-5DF9-9E81-ACCF-B840CED71B9A</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="adresa_id" id="04B56DC1-BCA1-940D-707D-D6D87DFADB43">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-07 19:53:12 UTC</createdTime>
+<generatorID>4D337F77-416C-5680-F9B2-D89088413029</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="AFBA72D2-BA40-D3E2-BB07-99A8E2A6487C" referredColumn="FB49EE13-07EF-3730-A38E-348F6E6CB09A"/>
+</associations>
+</Column>
+<Column name="pocet_hvezd" id="13110C10-E46C-0F8C-CF71-C2EC8A68A299">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-07 19:53:12 UTC</createdTime>
+<generatorID>9A1FF23A-B51C-915F-F99D-C42DD1964645</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypeScale>1</dataTypeScale>
+<ownDataTypeParameters>,,1</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="A96EAFE0-0C09-8B84-F907-72A536E922D4" name="UBYTOVANI_PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-07 19:53:12 UTC</createdTime>
+<generatorID>3DF4C3D6-DC07-A372-0DBD-CAC27A572054</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1EEFABCF-2DDF-0D9A-CD29-F2E733FF4D2C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A4C6F186-BB1D-A655-F37E-098023671CCE" name="UBYTOVANI__IDX">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-07 19:53:12 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<relationGeneratorID>58FE62D3-0273-3942-EBD1-233BA7BBFD67</relationGeneratorID>
+<indexColumnUsage>
+<colUsage columnID="04B56DC1-BCA1-940D-707D-D6D87DFADB43"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="6A236713-DD1B-7E3E-F3BE-C68DFFFD2400" name="UBYTOVANI_ADRESA_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-07 19:53:12 UTC</createdTime>
+<generatorID>58FE62D3-0273-3942-EBD1-233BA7BBFD67</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="04B56DC1-BCA1-940D-707D-D6D87DFADB43"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

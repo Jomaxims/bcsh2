@@ -1,5 +1,5 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="97294123-ADDC-1A8D-319C-0B43C794E69E" name="LOG_ZAKAZNICI">
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="97294123-ADDC-1A8D-319C-0B43C794E69E" name="LOG">
 <createdBy>tomas</createdBy>
 <createdTime>2023-11-01 14:43:03 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
@@ -29,7 +29,7 @@
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="nazev_tabulky" id="FCB954A9-4B6E-0A7F-B85E-C8E7E79197B2">
+<Attribute name="tabulka" id="FCB954A9-4B6E-0A7F-B85E-C8E7E79197B2">
 <createdBy>tomas</createdBy>
 <createdTime>2023-11-01 14:43:03 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
@@ -40,8 +40,21 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>30</dataTypeSize>
-<ownDataTypeParameters>30,,</ownDataTypeParameters>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>32,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="operace" id="5C6786B4-3070-0042-A2F5-EC136CDC1B50">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-07 19:40:54 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15</dataTypeSize>
+<ownDataTypeParameters>15,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="cas_zmeny" id="713EE095-0231-409C-0A1A-E1897F71BDFB">
 <createdBy>tomas</createdBy>
@@ -53,35 +66,46 @@
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT008</logicalDatatype>
+<logicalDatatype>LOGDT015</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="id_instance" id="242BC3FC-1F96-8C61-F45B-DBC8EEC13065">
+<Attribute name="uzivatel" id="A361CBF5-B79E-22FA-81FA-B2D1DD97FF4A">
 <createdBy>tomas</createdBy>
-<createdTime>2023-11-01 14:43:03 UTC</createdTime>
+<createdTime>2023-11-07 19:42:00 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
-<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="zakaznik_id" id="2BF0C2E8-4D42-2F69-F06F-E90863AF3BEF">
+<Attribute name="pred" id="E6543785-2BAD-2BAE-99BB-82D384DB3594">
 <createdBy>tomas</createdBy>
-<createdTime>2023-11-01 14:44:01 UTC</createdTime>
-<generatorID>0B3FCFE8-B7FC-1DE6-FB5B-2BF4A21ECE83</generatorID>
+<createdTime>2023-11-07 19:42:29 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
 <item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
-<referedAttribute>FCA4F660-2BA7-CD21-4020-8E00CD4847FA</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
+<logicalDatatype>LOGDT028</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="po" id="EC698F1A-7631-77C4-C503-6DF9B80699AC">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-07 19:42:46 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT028</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
 </attributes>
