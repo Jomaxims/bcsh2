@@ -2,7 +2,7 @@ CREATE OR REPLACE PACKAGE pck_zakaznik AS
 
     PROCEDURE manage_zakaznik(
     p_zakaznik_id IN OUT zakaznik.zakaznik_id%TYPE,
-    p_udaje_id    IN zakaznik.udaje_id%TYPE,
+    p_prihlasovaci_udaje_id    IN zakaznik.PRIHLASOVACI_UDAJE_ID%TYPE,
     p_osoba_id    IN zakaznik.osoba_id%TYPE,
     o_result      OUT CLOB
     );
@@ -19,7 +19,7 @@ CREATE OR REPLACE PACKAGE BODY pck_zakaznik AS
 
     PROCEDURE manage_zakaznik(
     p_zakaznik_id IN OUT zakaznik.zakaznik_id%TYPE,
-    p_udaje_id    IN zakaznik.udaje_id%TYPE,
+    p_prihlasovaci_udaje_id    IN zakaznik.PRIHLASOVACI_UDAJE_ID%TYPE,
     p_osoba_id    IN zakaznik.osoba_id%TYPE,
     o_result      OUT CLOB
     ) IS
@@ -27,16 +27,16 @@ CREATE OR REPLACE PACKAGE BODY pck_zakaznik AS
         IF p_zakaznik_id IS NULL THEN
             
             INSERT INTO zakaznik
-                  (udaje_id,
+                  (PRIHLASOVACI_UDAJE_ID,
                    osoba_id)
             VALUES
-                  (p_udaje_id,
+                  (p_prihlasovaci_udaje_id,
                    p_osoba_id);
                    
             o_result := '{ "status": "OK", "message": "Zakaznik byl uspesne vytvoren." }';
         ELSE
              UPDATE zakaznik
-             SET    udaje_id = p_udaje_id,
+             SET    PRIHLASOVACI_UDAJE_ID = p_prihlasovaci_udaje_id,
                     osoba_id = p_osoba_id
              WHERE  zakaznik_id = p_zakaznik_id;
                 
