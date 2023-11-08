@@ -1,0 +1,108 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="75BCC080-92C9-D6F3-4440-6D1C5C32E22F" name="LOG">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 16:46:37 UTC</createdTime>
+<generatorID>97294123-ADDC-1A8D-319C-0B43C794E69E</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="log_id" id="CCB8DAA0-6CE1-7CC1-55A1-756ECB7AC001">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 16:46:37 UTC</createdTime>
+<generatorID>1E60BC26-F006-D2D5-365D-9929FFD57D91</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="tabulka" id="43930626-6946-8C5D-932C-00559E9F8F60">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 16:46:37 UTC</createdTime>
+<generatorID>FCB954A9-4B6E-0A7F-B85E-C8E7E79197B2</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>32,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="operace" id="B92444F6-D7F7-BFA3-FF57-44CE3D2CB8DE">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 16:46:37 UTC</createdTime>
+<generatorID>5C6786B4-3070-0042-A2F5-EC136CDC1B50</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15</dataTypeSize>
+<ownDataTypeParameters>15,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="cas_zmeny" id="E20226B0-F10D-BF42-94FE-ADDE7876D56D">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 16:46:37 UTC</createdTime>
+<generatorID>713EE095-0231-409C-0A1A-E1897F71BDFB</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT015</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="uzivatel" id="3A480E47-E39D-A84A-D71E-B623FC4A7E40">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 16:46:37 UTC</createdTime>
+<generatorID>A361CBF5-B79E-22FA-81FA-B2D1DD97FF4A</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="pred" id="2DFA00B7-B612-E8D0-EF11-0EDE6C638C2A">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 16:46:37 UTC</createdTime>
+<generatorID>E6543785-2BAD-2BAE-99BB-82D384DB3594</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT028</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="po" id="5A3ED157-3152-EFD2-97D9-78543A2E38E5">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 16:46:37 UTC</createdTime>
+<generatorID>EC698F1A-7631-77C4-C503-6DF9B80699AC</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT028</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="10126334-7651-11E2-02B3-A291690A2315" name="LOG_PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 16:46:37 UTC</createdTime>
+<generatorID>D9895CD9-F385-3108-8960-46672195BB00</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="CCB8DAA0-6CE1-7CC1-55A1-756ECB7AC001"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

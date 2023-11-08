@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="71315E5C-C6A7-5217-9A1C-844DD4E76B19" containerWithKeyObject="4DD24194-8679-80A7-1A1A-4CABBC3F27B3" localFKIndex="50C346C9-CEDD-5502-0964-E09699395036" name="OBJEDNAVKA_POJISTENI_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 16:46:37 UTC</createdTime>
+<generatorID>7D8385FF-2C4A-0D12-DC2F-D09975B2854B</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<referredTableLongName>POJISTENI</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>CD2CFFCD-F350-FDBB-752B-F4D1604FAB1B</referredTableID>
+<keyObject>B0FCBAE5-DBAA-EEFC-D01E-919DC53C4278</keyObject>
+<referredKeyID>B0FCBAE5-DBAA-EEFC-D01E-919DC53C4278</referredKeyID>
+<mandatory>false</mandatory>
+<refColNames>pojisteni_id</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

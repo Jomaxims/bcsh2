@@ -1,0 +1,111 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="0BF9F616-8D8E-C7DF-F716-4593AB448BEC" name="OSOBA">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 16:46:37 UTC</createdTime>
+<generatorID>E103592E-02A9-B253-DD92-F1F5DFD9A88E</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<abbreviation>osoba</abbreviation>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="osoba_id" id="4C09BAA9-6860-0EBE-5313-8222788577D3">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 16:46:37 UTC</createdTime>
+<generatorID>1037DCC5-D778-D73E-1FC0-635FC64A344B</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="jmeno" id="81655114-0754-24A0-54AF-AB1471C00083">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 16:46:37 UTC</createdTime>
+<generatorID>AF9627AF-B623-1CAC-FCA7-EE5A5D5EDA63</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="prijmeni" id="FCDF0889-17F0-09FB-39C7-44FE265C02A5">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 16:46:37 UTC</createdTime>
+<generatorID>C259C7A2-19B0-68E2-122A-E0C753D68EA9</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="vek" id="9425164A-D3E1-8E56-9584-CABD0ADC0AD7">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 16:46:37 UTC</createdTime>
+<generatorID>A0399AE1-2A4A-E2FF-3949-A4FDE4161745</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,3,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="adresa_id" id="C1E6A1A7-3AA4-6C8B-687D-99D70B1135C1">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 16:46:37 UTC</createdTime>
+<generatorID>73AB5B3E-DF96-30D2-3554-C6B1226CC550</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="10589BFE-2E5A-040A-8BCE-C37F51B30342" referredColumn="8B33370E-91EA-021F-091A-D4103B40D8FB"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="E46C175F-3B05-AAE2-8B67-6E2BC7C5B941" name="OSOBA_PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 16:46:37 UTC</createdTime>
+<generatorID>86B2DA9F-7752-F3AB-70E5-3C1228986344</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4C09BAA9-6860-0EBE-5313-8222788577D3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="7250287C-C7A0-D641-0B3E-A607B6C1891B" name="OSOBA__IDX">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 16:46:37 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<relationGeneratorID>18E84BC5-9FBF-F8A8-7C6E-F003BEE39A0E</relationGeneratorID>
+<indexColumnUsage>
+<colUsage columnID="C1E6A1A7-3AA4-6C8B-687D-99D70B1135C1"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="66C77BB9-8628-AED4-FA29-4BD577888721" name="OSOBA_ADRESA_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 16:46:37 UTC</createdTime>
+<generatorID>18E84BC5-9FBF-F8A8-7C6E-F003BEE39A0E</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C1E6A1A7-3AA4-6C8B-687D-99D70B1135C1"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
