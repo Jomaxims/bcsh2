@@ -1,0 +1,85 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="A0CD2BD0-53D5-76FD-E738-60C5199E16E0" name="OBRAZKY_UBYTOVANI">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>883167CC-2D00-32FB-8A53-8A7376907417</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="obrazky_ubytovani_id" id="0D38D8BD-F1A0-D2CA-0930-E78DF84F3989">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>F5F896E3-2739-35D6-593B-987703FEF520</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="obrazek" id="2FFFC7AD-55C9-37D4-376C-EF3E873AFF49">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>E3ACC728-30C8-25DB-1DD8-0A5C1DB9119E</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT029</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="poradi" id="3826C16C-237C-3BFE-415B-83E38A645F2C">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>275D9257-E5B5-A018-957E-5AB3B7EDD241</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ubytovani_id" id="2C1CF07A-8CA6-E2AC-8103-6E8ACA5962BA">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>BC79BFE0-2F14-0A80-47B9-097D2F739F3A</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="1800FB3E-B0BE-61E4-D327-667D257F8E89" referredColumn="45D71B8F-C262-AC0B-9463-BDD0C651AE91"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="F15DCE17-F719-608C-98F6-9FB07ADD5497" name="OBRAZKY_UBYTOVANI_PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>D0FEAE3B-4885-EC0A-6259-6409DF16798B</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0D38D8BD-F1A0-D2CA-0930-E78DF84F3989"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="98A454EA-A03E-5BED-A67C-67E10451B0E3" name="OBRAZKY_UBYTOVANI_UBYTOVANI_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>549581B1-080D-98D6-EEDB-2CBBC3401F30</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2C1CF07A-8CA6-E2AC-8103-6E8ACA5962BA"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

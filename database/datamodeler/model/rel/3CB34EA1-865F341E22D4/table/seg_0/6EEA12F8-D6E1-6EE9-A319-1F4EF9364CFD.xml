@@ -1,0 +1,49 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="6EEA12F8-D6E1-6EE9-A319-1F4EF9364CFD" name="DOPRAVA">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>BBF1A54A-818C-AC68-21CD-120F09AF7EF3</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="doprava_id" id="CF643675-25E4-B1E4-7C5A-9E1DCBB40EB6">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>59B4B81E-E93B-3D0F-91C3-062DEF5701A1</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nazev" id="9E2F2EE7-FB9C-E1E5-78BF-F6C5B4ECEA0B">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>8BD4DC0A-5991-4DC9-67EB-B8EE8A3AEA70</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="3A01EB0A-DA2E-2009-110E-F392B54D16CB" name="DOPRAVA_PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>AD0BC777-8797-0E91-B8DB-91BE45F4B104</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="CF643675-25E4-B1E4-7C5A-9E1DCBB40EB6"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

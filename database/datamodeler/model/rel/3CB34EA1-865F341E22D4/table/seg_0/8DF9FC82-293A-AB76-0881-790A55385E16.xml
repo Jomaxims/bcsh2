@@ -1,0 +1,111 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="8DF9FC82-293A-AB76-0881-790A55385E16" name="ZAKAZNIK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>78033D26-C583-6C07-F1F4-B07BFF7D5E57</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="zakaznik_id" id="E3814091-B451-18E6-4ED2-F74622266DC9">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>FCA4F660-2BA7-CD21-4020-8E00CD4847FA</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="prihlasovaci_udaje_id" id="34685ED2-2493-6C49-B3C5-DBDC9049FCBC">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>E311C058-01B1-2AC5-D484-07D7A7D2D0EC</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="3610268C-5C83-96A9-37C6-68F6FCFC6D0A" referredColumn="7DCD1A43-72D6-E60C-97BC-9A3220CA3446"/>
+</associations>
+</Column>
+<Column name="osoba_id" id="66F44530-25BE-FA63-4885-2ED8EA853A42">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>B9FDF6FC-7AFD-0FE2-FE71-8202053DA943</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="4E2915E0-6364-78BF-22B2-283CE48443A2" referredColumn="3849A321-64FF-A4E8-521B-83597CB85B75"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="FF766AF9-2993-A45D-E86D-A0E6FA73F36A" name="ZAKAZNIK_PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>282302FE-22AB-FFA8-4E3D-6291E52B2EE8</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E3814091-B451-18E6-4ED2-F74622266DC9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="17FAB4DD-F0F9-BB8E-6CE6-9599B95D5283" name="ZAKAZNIK__IDX">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<relationGeneratorID>E24AA717-86FC-E5CC-575D-C9E1037E94F6</relationGeneratorID>
+<indexColumnUsage>
+<colUsage columnID="34685ED2-2493-6C49-B3C5-DBDC9049FCBC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="9B2F4776-1BE6-0CCA-F9E2-20D5B6AB6F1D" name="ZAKAZNIK__IDXv1">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<relationGeneratorID>6E42FCE7-DD21-FC3E-2723-89AB3682D0B6</relationGeneratorID>
+<indexColumnUsage>
+<colUsage columnID="66F44530-25BE-FA63-4885-2ED8EA853A42"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A1787B6A-7D02-F170-E260-19FC63CB1F93" name="ZAKAZNIK_PRIHLASOVACI_UDAJE_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>E24AA717-86FC-E5CC-575D-C9E1037E94F6</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="34685ED2-2493-6C49-B3C5-DBDC9049FCBC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D1A07CE0-15FA-1032-093F-5314F08757C3" name="ZAKAZNIK_OSOBA_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>6E42FCE7-DD21-FC3E-2723-89AB3682D0B6</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="66F44530-25BE-FA63-4885-2ED8EA853A42"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

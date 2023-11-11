@@ -1,0 +1,163 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="FBFFCC64-BBFD-6CE2-395F-E9E4C33A6B12" name="ZAJEZD">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>0DA4ED1A-06F4-FDE9-3FC2-6278435E0987</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="zajezd_id" id="EFC0189E-F357-F737-8DBB-774E5732A067">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>41FD54E5-B629-4A0B-2494-AF2AC1220DC7</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="popis" id="78EA2475-E055-0F17-84D0-E649A885593F">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>95F2E4DE-54A1-3AAD-DF72-C44EFAC82F39</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>500</dataTypeSize>
+<ownDataTypeParameters>500,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="cena_za_osobu" id="9FC7C0CB-1520-A9DD-6648-AEC46FD22CBD">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>B5E1CE1C-3A38-C7DA-8367-B630B6FC8FA5</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="doprava_id" id="1A8CDB20-537D-A822-090D-3EB6532384C3">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>0726D8FB-6A30-CF8E-1ABF-78E6FCD3609D</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="9D97733B-A1FE-EB73-5DEE-0956E9241600" referredColumn="CF643675-25E4-B1E4-7C5A-9E1DCBB40EB6"/>
+</associations>
+</Column>
+<Column name="ubytovani_id" id="DCE85068-9989-DB94-4AF0-E7E26CEB8740">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>2F4D3E25-C150-0FEB-5CEC-6D14CBDB14E5</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="8725A43F-61CB-302B-714D-9F0750847435" referredColumn="45D71B8F-C262-AC0B-9463-BDD0C651AE91"/>
+</associations>
+</Column>
+<Column name="sleva_procent" id="47A69AA4-AE87-999A-2F1B-9A421657988A">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>636F976D-7002-0817-720D-06566EF28BBA</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>0</dataTypePrecision>
+<ownDataTypeParameters>,0,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="zobrazit" id="7EEB65CF-6ACA-4A69-49CF-A7640FBE871D">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>C34188E2-0A76-0595-8745-DA0F909E93BA</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="strava_id" id="6A2E9CEE-5D8D-32AF-E2DD-21774CBD9134">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>7856EB04-CDCA-CAF2-190B-10D7A9316293</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="E22E8F69-7CBF-9173-006C-075CB6D54353" referredColumn="C3FAF940-1B60-54D9-965D-EA296366A6C7"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="47752AD4-9A37-B50F-6DB6-70F6C56E95A8" name="ZAJEZD_PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>9BD87B4D-18FF-009A-43DC-EAE86E29B445</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="EFC0189E-F357-F737-8DBB-774E5732A067"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="8B085F2C-127C-1172-F790-1AB5A30954B1" name="ZAJEZD_DOPRAVA_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>E5461EF8-58A0-9D1D-076D-88939F6872BB</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1A8CDB20-537D-A822-090D-3EB6532384C3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="98446250-E544-691B-A436-20259CB4AD29" name="ZAJEZD_UBYTOVANI_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>949265C0-6900-B6C6-F679-2918F51D6C2A</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="DCE85068-9989-DB94-4AF0-E7E26CEB8740"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="775FD673-B27D-A324-9499-3EBFED8CB2C4" name="ZAJEZD_STRAVA_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>2AB38C3D-7845-B59E-7D19-FCB4BBB1DD0D</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6A2E9CEE-5D8D-32AF-E2DD-21774CBD9134"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

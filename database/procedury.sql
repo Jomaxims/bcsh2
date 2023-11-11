@@ -52,6 +52,19 @@ END;
 /
 
 DECLARE
+    v_result CLOB;
+    v_adresa_id INTEGER;
+BEGIN
+    pck_adresa.delete_adresa(
+        p_adresa_id =>  1,
+        o_result => v_result
+    );
+    DBMS_OUTPUT.PUT_LINE('ID: ' || v_adresa_id);
+    DBMS_OUTPUT.PUT_LINE(v_result);
+END;
+/
+
+DECLARE
   v_result CLOB;
   v_osoba_id INTEGER;
 BEGIN

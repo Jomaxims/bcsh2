@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="E37DF164-016B-B49D-CD3C-91CA96049046" containerWithKeyObject="E0370457-D8BC-289F-A6A3-C304C3C4721C" localFKIndex="A8CA31B8-04D2-2EE9-F842-260B0B817001" name="OBJEDNAVKA_TERMIN_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>10EDED24-049B-7A14-0180-E7993547B46B</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<referredTableLongName>TERMIN</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>B098F211-5275-9185-D420-472128DC83C6</referredTableID>
+<keyObject>8F42E54C-A8F6-7E60-7909-1051909ADC25</keyObject>
+<referredKeyID>8F42E54C-A8F6-7E60-7909-1051909ADC25</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>termin_id</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

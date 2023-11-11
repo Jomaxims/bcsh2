@@ -1,0 +1,75 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="725893C4-945E-6684-2B41-06F28CAC78E7" name="Relation_26">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ZAJEZD_zajezd_id" id="8E55BDA2-195D-FFD0-EC49-D96E42E4266E">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="5E0B6D85-5CC3-1F09-828A-BA338EE57626" referredColumn="EFC0189E-F357-F737-8DBB-774E5732A067"/>
+</associations>
+</Column>
+<Column name="POKOJE_ZAJEZDU_POKOJE_ZAJEZDU_ID" id="C5DC95EC-D341-0B39-B750-F5DE667CB594">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="05C7416F-D1C2-04B7-57E4-ECD075E4BBA1" referredColumn="94119F9B-636F-117A-450D-18C63A052727"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="48604BEA-077F-7EDF-C9A8-AF5A2F11AA76" name="Relation_26_PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="8E55BDA2-195D-FFD0-EC49-D96E42E4266E"/>
+<colUsage columnID="C5DC95EC-D341-0B39-B750-F5DE667CB594"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="40D10E3C-F093-18BB-9F92-8D53F755B976" name="Relation_26_ZAJEZD_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>F7D2A72C-A18D-6920-A410-225615F07F69</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="8E55BDA2-195D-FFD0-EC49-D96E42E4266E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="4A866C8F-E157-2917-F492-90B83166323F" name="Relation_26_POKOJE_ZAJEZDU_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>F7D2A72C-A18D-6920-A410-225615F07F69</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C5DC95EC-D341-0B39-B750-F5DE667CB594"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

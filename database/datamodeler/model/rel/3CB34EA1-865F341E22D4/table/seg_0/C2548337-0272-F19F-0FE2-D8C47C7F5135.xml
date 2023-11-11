@@ -1,0 +1,101 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="C2548337-0272-F19F-0FE2-D8C47C7F5135" name="POKOJE_TERMINU">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>807D9454-FFAD-A710-0732-CF2F9D80AC4F</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="celkovy_pocet_pokoju" id="C8E1626E-82A3-B7E0-37DD-5C09EBEB2988">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>D75A8CA1-12AB-3A0B-11EC-2466FB62536B</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="pocet_obsazenych_pokoju" id="064187FD-B7CD-A92A-A1E3-287475B77385">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>284D509C-B645-0148-2A6F-8E0DF5502FAA</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="termin_id" id="8F9EEC81-74BD-3EED-ADEF-964E07D00AF3">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>FAF359DF-E177-8784-4318-18C5B705AAF3</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="57F95A99-3C63-4F96-DA72-202B2AAFDA6E" referredColumn="743A1227-76A7-455E-EEEC-3069963240A0"/>
+</associations>
+</Column>
+<Column name="pokoj_id" id="7C000CE5-2468-E78D-699D-9CDDFBC170FF">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>2806D58C-4EF5-C43D-3676-31A00A57F231</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="D54933E9-4A6E-0991-7099-14E96FA4D038" referredColumn="029715DD-DF08-406D-270C-1F6CF688B0C1"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="6D09B7E5-B4A9-E95F-3D03-66DFB7080FAA" name="POKOJE_TERMINU_PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>32DB7B48-11F5-63D2-D821-3928C11B7A70</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="8F9EEC81-74BD-3EED-ADEF-964E07D00AF3"/>
+<colUsage columnID="7C000CE5-2468-E78D-699D-9CDDFBC170FF"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="AAA7CE19-9693-9A3E-7BC2-92415A79A422" name="POKOJE_TERMINU_TERMIN_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>86D5E9DC-BBA5-8C48-2774-F108BE13FB43</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="8F9EEC81-74BD-3EED-ADEF-964E07D00AF3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A31E74F1-E3FE-E072-8D7C-27D843B8E94B" name="POKOJE_TERMINU_POKOJ_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>BB910BF1-6D9E-03E3-5E20-17F452857483</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7C000CE5-2468-E78D-699D-9CDDFBC170FF"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

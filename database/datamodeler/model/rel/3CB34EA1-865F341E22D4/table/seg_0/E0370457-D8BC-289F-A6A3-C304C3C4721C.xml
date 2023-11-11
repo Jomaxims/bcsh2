@@ -1,0 +1,153 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="E0370457-D8BC-289F-A6A3-C304C3C4721C" name="OBJEDNAVKA">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>45954F1C-03FD-E572-130E-6C958DBD2DD9</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="objednavka_id" id="091EE141-4B00-EC0D-B366-6B35D023FDD0">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>B81F7FD3-CEC9-C13F-EF97-F5D4DD7AEAD3</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="pocet_osob" id="6365232C-BE7F-F703-702A-320195921928">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>B0C18A54-98E6-294C-616C-AA9D381C7EF8</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="termin_id" id="9EF8610D-B811-B0CA-B5B6-2C987A5776E6">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>758D9A35-8BF3-DDEE-BA0D-5743BFF7153B</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="E37DF164-016B-B49D-CD3C-91CA96049046" referredColumn="743A1227-76A7-455E-EEEC-3069963240A0"/>
+</associations>
+</Column>
+<Column name="pojisteni_id" id="7857B9CE-8292-E258-6856-5F588221E6A3">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>DA8178BB-944F-0216-1BF4-84D73EBDF46A</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="85A20C84-CB4D-B8F9-BBD4-3A3A78979A66" referredColumn="7C6299D4-07C2-98D8-49AD-88DF8694A03A"/>
+</associations>
+</Column>
+<Column name="pokoj_id" id="60EDE2DF-B7AD-6621-EB19-4C572ED64C92">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>B78CE39A-3EF7-3B6C-0F4D-265BA4F9A482</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="66465341-503F-7C1B-5426-0EC6A5694811" referredColumn="029715DD-DF08-406D-270C-1F6CF688B0C1"/>
+</associations>
+</Column>
+<Column name="zakaznik_id" id="046B1E51-5351-1E34-5E63-BB5D0049A007">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>F64DBCF3-883B-9B5F-97C8-4EC73155840B</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="25F18825-6FDA-8039-038A-2012D5C7267C" referredColumn="E3814091-B451-18E6-4ED2-F74622266DC9"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="CFBC2EEF-997C-CCC4-5D72-2E90C4B5A838" name="OBJEDNAVKA_PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>6C99D048-D194-0DBE-A0B2-CAADDAAAE136</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="091EE141-4B00-EC0D-B366-6B35D023FDD0"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A8CA31B8-04D2-2EE9-F842-260B0B817001" name="OBJEDNAVKA_TERMIN_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>10EDED24-049B-7A14-0180-E7993547B46B</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="9EF8610D-B811-B0CA-B5B6-2C987A5776E6"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D82E8E0F-19BA-D3ED-41BF-618B9D374539" name="OBJEDNAVKA_POJISTENI_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>7D8385FF-2C4A-0D12-DC2F-D09975B2854B</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7857B9CE-8292-E258-6856-5F588221E6A3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="2F71AF2A-0A77-22A6-3A78-4937DCCF55AC" name="OBJEDNAVKA_POKOJ_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>71F2B4E9-45DF-DA4E-FACA-9B6DC97CFAFB</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="60EDE2DF-B7AD-6621-EB19-4C572ED64C92"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D6A6C73B-402F-1C44-8614-94FFDD5C9CE6" name="OBJEDNAVKA_ZAKAZNIK_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>93A8FE05-566F-7770-DA9D-13166C83BE3B</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="046B1E51-5351-1E34-5E63-BB5D0049A007"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -1,0 +1,151 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="48AE1DAE-75BA-68FB-3001-C42E7ABC3AE7" name="ZAMESTNANEC">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>E0105913-D6ED-DF7A-C5C5-2E838BE42075</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="zamestnanec_id" id="E821F158-AF11-2B15-7084-4647F85818F9">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>749291CD-D285-EBB8-9279-A5C2B27DEDC4</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="role_id" id="04F3DAF6-14F3-BF79-68A2-129AFB6FA889">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>09701F91-A340-779F-7025-71A77A635554</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="2E2DBE30-CAFE-2B66-4042-A0BBD351354D" referredColumn="9AE860C7-D200-6058-8EE4-F95A7E594089"/>
+</associations>
+</Column>
+<Column name="prihlasovaci_udaje_id" id="CD248364-39BB-F798-16E3-F573749FA9F5">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>392C8A0B-BFD8-243C-44C0-5B4355447386</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="54EFF7B7-BF86-A723-D4A6-202EE391F75E" referredColumn="7DCD1A43-72D6-E60C-97BC-9A3220CA3446"/>
+</associations>
+</Column>
+<Column name="nadrizeny_id" id="9CC04744-A627-96A9-205E-66A4995438A9">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>DA7241C4-D08F-D7C9-D882-3A4D48A375AE</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="2969861F-F83B-19F3-5C5B-34336C858605" referredColumn="E821F158-AF11-2B15-7084-4647F85818F9"/>
+</associations>
+</Column>
+<Column name="jmeno" id="EF6CF812-7F36-C605-5669-0FFFBA49B0D5">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>C74F9D4F-8CC8-1C8B-9389-E325529820EB</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="prijmeni" id="CD9155EC-9D5C-4D95-34F0-3373A2B28F80">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>7A56838B-77BD-6DB9-4A4F-B0F5B8CA2275</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="4F6BA2CA-1C52-3FAF-9AE2-3C575A324B40" name="ZAMESTNANEC_PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>501C8092-0031-9E7E-B239-636379F080F1</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E821F158-AF11-2B15-7084-4647F85818F9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="91EA78B6-C15D-2530-2D03-C95FE76FECC5" name="ZAMESTNANEC__IDX">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<relationGeneratorID>E6C7E32F-2CE9-5429-FD84-CC4EFDA3365B</relationGeneratorID>
+<indexColumnUsage>
+<colUsage columnID="CD248364-39BB-F798-16E3-F573749FA9F5"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="B98A9616-A50C-333E-2B73-CBBF188384B0" name="ZAMESTNANEC_ROLE_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>1E070432-E782-745C-D5DD-FEE40CFD9302</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="04F3DAF6-14F3-BF79-68A2-129AFB6FA889"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="75E9AB26-91C4-6CB7-B86C-CE93AD29441D" name="ZAMESTNANEC_ZAMESTNANEC_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>525AA96B-9591-1668-5EFD-C62EFA722282</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="9CC04744-A627-96A9-205E-66A4995438A9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="B2C0D82D-162D-B048-1835-966BA2278160" name="ZAMESTNANEC_PRIHLASOVACI_UDAJE_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-08 17:54:04 UTC</createdTime>
+<generatorID>E6C7E32F-2CE9-5429-FD84-CC4EFDA3365B</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="CD248364-39BB-F798-16E3-F573749FA9F5"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
