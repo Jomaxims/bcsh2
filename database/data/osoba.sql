@@ -1,0 +1,9 @@
+insert into osoba (jmeno, prijmeni, vek, adresa_id) values ('Ferguson', 'Grigolon', 95, 1);
+insert into osoba (jmeno, prijmeni, vek, adresa_id) values ('Adi', 'Yoxall', 59, 2);
+insert into osoba (jmeno, prijmeni, vek, adresa_id) values ('Bevan', 'Cartmael', 21, 3);
+insert into osoba (jmeno, prijmeni, vek, adresa_id) values ('Margie', 'Beatson', 78, 4);
+insert into osoba (jmeno, prijmeni, vek, adresa_id) values ('Corby', 'Wadesworth', 63, 5);
+insert into osoba (jmeno, prijmeni, vek, adresa_id) values ('Selig', 'Mustarde', 8, 6);
+insert into osoba (jmeno, prijmeni, vek, adresa_id) values ('August', 'Brookwood', 42, 7);
+insert into osoba (jmeno, prijmeni, vek, adresa_id) values ('Lonnard', 'Lorman', 92, 8);
+insert into osoba (jmeno, prijmeni, vek, adresa_id) values ('Aubrie', 'Dillway', 2, 9);

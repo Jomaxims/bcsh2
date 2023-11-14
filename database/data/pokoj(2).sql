@@ -1,0 +1,10 @@
+insert into pokoj (pocet_mist, nazev) values (1, 'justo sit amet sapien dignissim');
+insert into pokoj (pocet_mist, nazev) values (8, 'magna vestibulum aliquet ultrices');
+insert into pokoj (pocet_mist, nazev) values (16, 'suscipit ligula in');
+insert into pokoj (pocet_mist, nazev) values (14, 'nec nisi volutpat');
+insert into pokoj (pocet_mist, nazev) values (19, 'in congue etiam justo etiam');
+insert into pokoj (pocet_mist, nazev) values (1, 'erat vestibulum sed magna at');
+insert into pokoj (pocet_mist, nazev) values (4, 'in magna bibendum imperdiet nullam');
+insert into pokoj (pocet_mist, nazev) values (10, 'semper est quam pharetra');
+insert into pokoj (pocet_mist, nazev) values (20, 'pede ac diam cras pellentesque');
+insert into pokoj (pocet_mist, nazev) values (4, 'integer ac neque duis bibendum');

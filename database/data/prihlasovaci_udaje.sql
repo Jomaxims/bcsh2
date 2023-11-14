@@ -1,0 +1,10 @@
+insert into prihlasovaci_udaje (jmeno, heslo) values ('Valentina', 'fY9=M?{?`');
+insert into prihlasovaci_udaje (jmeno, heslo) values ('Drona', 'aW8&(Yinm0');
+insert into prihlasovaci_udaje (jmeno, heslo) values ('Merci', 'gN5+g+3`)M{aR');
+insert into prihlasovaci_udaje (jmeno, heslo) values ('Wendye', 'zK3#O>W`4PeJEk');
+insert into prihlasovaci_udaje (jmeno, heslo) values ('Everard', 'kC9$fE6Jys58Q!');
+insert into prihlasovaci_udaje (jmeno, heslo) values ('Paolo', 'vT9''0V{$');
+insert into prihlasovaci_udaje (jmeno, heslo) values ('Sebastien', 'tR7,N''iTCT');
+insert into prihlasovaci_udaje (jmeno, heslo) values ('Petrina', 'nE5!A+#W?@8');
+insert into prihlasovaci_udaje (jmeno, heslo) values ('Charmine', 'gX6<{s0j`');
+insert into prihlasovaci_udaje (jmeno, heslo) values ('Emelita', 'zH8*yn@=Qtk!aGg');
