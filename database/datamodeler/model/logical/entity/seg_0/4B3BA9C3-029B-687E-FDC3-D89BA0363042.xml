@@ -3,9 +3,10 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 16:39:11 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
-<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
+<item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
+<item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
+<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
 </engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
@@ -20,9 +21,10 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 16:39:19 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
-<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
+<item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
+<item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
+<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -33,9 +35,10 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 16:39:37 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
-<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
+<item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
+<item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
+<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -47,9 +50,10 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 16:39:49 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
-<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
+<item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
+<item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
+<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -57,15 +61,17 @@
 <dataTypeSize>20</dataTypeSize>
 <ownDataTypeParameters>20,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="osoba_id" id="D0B6377D-ABFA-41CC-8940-1FFA5098B268">
+<Attribute name="zakaznik_id" id="1A25356F-67EC-0D2C-7FB4-393EAEAD1E42">
 <createdBy>tomas</createdBy>
-<createdTime>2023-10-31 12:51:43 UTC</createdTime>
-<generatorID>DFCA4A1B-0015-C75C-A7DC-EEAD356E7CAB</generatorID>
+<createdTime>2023-11-16 10:44:20 UTC</createdTime>
+<generatorID>088FBBFE-596C-76EF-519E-9D373B0A5475</generatorID>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+<item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
+<item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
+<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
 </engineerTo>
-<referedAttribute>1037DCC5-D778-D73E-1FC0-635FC64A344B</referedAttribute>
+<referedAttribute>FCA4F660-2BA7-CD21-4020-8E00CD4847FA</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT011</logicalDatatype>
@@ -77,9 +83,10 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 16:39:34 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
-<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
+<item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
+<item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
+<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>

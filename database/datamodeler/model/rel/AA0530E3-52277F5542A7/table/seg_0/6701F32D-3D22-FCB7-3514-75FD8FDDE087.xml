@@ -46,7 +46,6 @@
 <createdTime>2023-11-08 16:46:37 UTC</createdTime>
 <generatorID>398207C0-DA95-E64C-2035-A1A37F7DE855</generatorID>
 <ownerDesignName>model</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT011</logicalDatatype>

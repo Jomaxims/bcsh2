@@ -43,10 +43,10 @@
 <ownDataTypeParameters>20,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="osoba_id" id="3DCA15C7-C209-3FE8-0B1A-4193C683C26B">
+<Column name="zakaznik_id" id="32EC5206-6BA8-89C1-7232-D98ECE158155">
 <createdBy>tomas</createdBy>
-<createdTime>2023-11-08 16:46:37 UTC</createdTime>
-<generatorID>D0B6377D-ABFA-41CC-8940-1FFA5098B268</generatorID>
+<createdTime>2023-11-16 20:04:16 UTC</createdTime>
+<generatorID>1A25356F-67EC-0D2C-7FB4-393EAEAD1E42</generatorID>
 <ownerDesignName>model</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -55,7 +55,7 @@
 <previousColumn>false</previousColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
-<colAssociation fkAssociation="8D7BC6BE-40A7-1A57-EF71-FA375F20088B" referredColumn="4C09BAA9-6860-0EBE-5313-8222788577D3"/>
+<colAssociation fkAssociation="4542BAEA-614B-E318-E206-9CFF3E5AAB45" referredColumn="B730B99C-2FB6-6473-E9F5-41EF60B472E5"/>
 </associations>
 </Column>
 </columns>
@@ -79,19 +79,27 @@
 <indexState>Unique Plain Index</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <relationGeneratorID>DFCA4A1B-0015-C75C-A7DC-EEAD356E7CAB</relationGeneratorID>
+</ind_PK_UK>
+<ind_PK_UK id="BDB4163C-EE81-655B-BEF3-353A46AA418E" name="KONTAKT__IDX">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-16 20:04:16 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<relationGeneratorID>088FBBFE-596C-76EF-519E-9D373B0A5475</relationGeneratorID>
 <indexColumnUsage>
-<colUsage columnID="3DCA15C7-C209-3FE8-0B1A-4193C683C26B"/>
+<colUsage columnID="32EC5206-6BA8-89C1-7232-D98ECE158155"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="D789CA3C-02FA-8DB4-E1EA-BC77B131BE7D" name="KONTAKT_OSOBA_FK">
+<ind_PK_UK id="F50C1526-8286-EFB7-3ADF-3AECFD175505" name="KONTAKT_ZAKAZNIK_FK">
 <createdBy>tomas</createdBy>
-<createdTime>2023-11-08 16:46:37 UTC</createdTime>
-<generatorID>DFCA4A1B-0015-C75C-A7DC-EEAD356E7CAB</generatorID>
+<createdTime>2023-11-16 20:04:16 UTC</createdTime>
+<generatorID>088FBBFE-596C-76EF-519E-9D373B0A5475</generatorID>
 <ownerDesignName>model</ownerDesignName>
 <indexState>Foreign Key</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="3DCA15C7-C209-3FE8-0B1A-4193C683C26B"/>
+<colUsage columnID="32EC5206-6BA8-89C1-7232-D98ECE158155"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

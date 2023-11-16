@@ -1,23 +1,23 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Relation_33" directorySegmentName="seg_0" id="6758F6D6-FA2B-BF98-B1B2-87F9CC29B9E8">
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Relation_31" directorySegmentName="seg_0" id="088FBBFE-596C-76EF-519E-9D373B0A5475">
 <createdBy>tomas</createdBy>
-<createdTime>2023-10-26 18:27:48 UTC</createdTime>
+<createdTime>2023-11-16 10:44:20 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
 <item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
 <item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
 <item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
 </engineerTo>
-<sourcePk>9BD87B4D-18FF-009A-43DC-EAE86E29B445</sourcePk>
+<sourcePk>282302FE-22AB-FFA8-4E3D-6291E52B2EE8</sourcePk>
 <identifying>false</identifying>
-<nameOnSource>probíhá v</nameOnSource>
-<nameOnTarget>má</nameOnTarget>
+<nameOnSource>má</nameOnSource>
+<nameOnTarget>kontaktovaná</nameOnTarget>
 <optionalSource>true</optionalSource>
 <optionalTarget>false</optionalTarget>
 <sourceCardinality>1</sourceCardinality>
-<sourceEntity>0DA4ED1A-06F4-FDE9-3FC2-6278435E0987</sourceEntity>
-<targetCardinalityString>*</targetCardinalityString>
-<targetEntity>B0079734-12BC-C05F-2804-B75CA8F510EA</targetEntity>
+<sourceEntity>78033D26-C583-6C07-F1F4-B07BFF7D5E57</sourceEntity>
+<targetCardinalityString>1</targetCardinalityString>
+<targetEntity>4B3BA9C3-029B-687E-FDC3-D89BA0363042</targetEntity>
 <transferable>true</transferable>
 <deleteRule>NO ACTION</deleteRule>
 </Relation>

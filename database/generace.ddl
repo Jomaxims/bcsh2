@@ -38,12 +38,12 @@ CREATE TABLE kontakt (
     NOT NULL,
     email      VARCHAR2(50) NOT NULL,
     telefon    VARCHAR2(20) NOT NULL,
-    osoba_id   INTEGER NOT NULL
+    zakaznik_id INTEGER NOT NULL
 );
 
 CREATE UNIQUE INDEX kontakt__idx ON
     kontakt (
-        osoba_id
+        zakaznik_id
     ASC );
 
 ALTER TABLE kontakt ADD CONSTRAINT kontakt_pk PRIMARY KEY ( kontakt_id );
@@ -285,8 +285,8 @@ ALTER TABLE adresa
         REFERENCES stat ( stat_id );
 
 ALTER TABLE kontakt
-    ADD CONSTRAINT kontakt_osoba_fk FOREIGN KEY ( osoba_id )
-        REFERENCES osoba ( osoba_id );
+    ADD CONSTRAINT kontakt_zakaznik_fk FOREIGN KEY ( zakaznik_id )
+        REFERENCES zakaznik ( zakaznik_id );
 
 ALTER TABLE objednavka
     ADD CONSTRAINT objednavka_pojisteni_fk FOREIGN KEY ( pojisteni_id )

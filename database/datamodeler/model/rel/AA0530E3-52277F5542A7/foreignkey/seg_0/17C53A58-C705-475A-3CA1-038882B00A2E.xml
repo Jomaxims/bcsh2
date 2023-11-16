@@ -9,7 +9,7 @@
 <referredTableID>C5194A5D-FCAF-1AE9-93FB-F04EA99D2EC4</referredTableID>
 <keyObject>D1BCF72E-4FA4-AC71-9ABB-5EEC78B2307C</keyObject>
 <referredKeyID>D1BCF72E-4FA4-AC71-9ABB-5EEC78B2307C</referredKeyID>
-<mandatory>false</mandatory>
+<mandatory>true</mandatory>
 <refColNames>zajezd_id</refColNames>
 <transferable>true</transferable>
 <rely>false</rely>
