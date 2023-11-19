@@ -1,59 +1,69 @@
 ﻿using System.Data;
 using Dapper;
-using System.Text.Json;
 using app.DAL.Models;
 using app.Utils;
+using Humanizer;
 
 namespace app.DAL.Repositories;
 
-public class GenericRepository : RepositoryBase
+public class GenericRepository<T> : RepositoryBase where T : IDbModel
 {
-    public GenericRepository(IDbUnitOfWork unitOfWork) : base(unitOfWork)
-    {
-    }
+    private static readonly string TableName = typeof(T).Name.Underscore().ToLower();
+    
+    public GenericRepository(IDbUnitOfWork unitOfWork) : base(unitOfWork) {}
 
-    public DbResult Delete(string tableName, int id)
+    public DbResult Delete(int id)
     {
         var parameters = new DynamicParameters();
-        parameters.AddId(tableName, id);
+        parameters.Add($"{Constants.DbProcedureParamPrefix}{TableName}_id", id);
         parameters.AddResult();
 
-        UnitOfWork.Connection.Query($"pck_{tableName}.delete_{tableName}", parameters, commandType: CommandType.StoredProcedure);
+        UnitOfWork.Connection.Query($"pck_{TableName}.delete_{TableName}", parameters, commandType: CommandType.StoredProcedure);
 
         return parameters.GetResult();
     }
     
-    public DbResult Edit(DbModel dbModel)
+    public DbResult Edit(T model)
     {
-        var tableName = dbModel.GetType().Name.ToLower();
-        var parameters = MapModelToParams(dbModel);
+        var parameters = MapModelToParams(model);
         
-        UnitOfWork.Connection.Query($"pck_{tableName}.manage_{tableName}", parameters, commandType: CommandType.StoredProcedure);
+        var res = UnitOfWork.Connection.Execute($"pck_{TableName}.manage_{TableName}", parameters, commandType: CommandType.StoredProcedure);
+        // res.Read();
+        // res.Close();
+        // res.Dispose();
+        // UnitOfWork.Reset();
         
         return parameters.GetResult();
     }
 
-    public IEnumerable<T> Get<T>(int id) where T : DbModel
+    public T Get(int id)
     {
-        var tableName = typeof(T).Name;
-        var sql = $"SELECT * FROM {tableName} WHERE {tableName}_id = :id";
+        var sql = $"SELECT * FROM {TableName} WHERE {TableName}_id = :id";
 
-        return UnitOfWork.Connection.Query<T>(sql, new { id });
+        return UnitOfWork.Connection.QuerySingle<T>(sql, new { id });
+    }
+    
+    public IEnumerable<T> GetAll()
+    {
+        var sql = $"SELECT * FROM {TableName}";
+
+        return UnitOfWork.Connection.Query<T>(sql);
     }
 
-    private static DynamicParameters MapModelToParams(DbModel model, string prefix = "p_")
+    private static DynamicParameters MapModelToParams(T model)
     {
-        var ignored = new[] { "id" };
         var parameters = new DynamicParameters();
-        var tableName = model.GetType().Name.ToLower();
-        var properties = model.GetType().GetProperties().Where(prop => !ignored.Contains(prop.Name.ToLower()));
-
-        parameters.Add($"{prefix}{tableName}_id", model.Id);
-        parameters.AddResult();
-        foreach (var property in properties)
+        
+        foreach (var property in typeof(T).GetProperties())
         {
-            parameters.Add($"p_{property.Name.ToLower()}", property.GetValue(model));
+            var propName = $"{Constants.DbProcedureParamPrefix}{property.Name.Underscore().ToLower()}";
+            
+            if (propName.EndsWith("_id"))
+                parameters.Add(propName, property.GetValue(model), dbType: DbType.Int32, direction: ParameterDirection.InputOutput);
+            else
+                parameters.Add(propName, property.GetValue(model));
         }
+        parameters.AddResult();
 
         return parameters;
     }

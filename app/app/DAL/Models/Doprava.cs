@@ -1,7 +1,7 @@
 ﻿namespace app.DAL.Models;
 
-public class Strava : IDbModel
+public class Doprava : IDbModel
 {
-    public int? StravaId { get; set; }
+    public int? DopravaId { get; set; }
     public required string Nazev { get; set; }
 }

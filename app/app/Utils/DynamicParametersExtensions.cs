@@ -7,13 +7,6 @@ namespace app.Utils;
 
 public static class DynamicParametersExtensions
 {
-    public static DynamicParameters AddId(this DynamicParameters parameters, string tableName, int? id)
-    {
-        parameters.Add($"p_{tableName}_id", id, dbType: DbType.Int32, direction: ParameterDirection.InputOutput);
-
-        return parameters;
-    }
-    
     public static DynamicParameters AddResult(this DynamicParameters parameters)
     {
         parameters.Add("o_result", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
@@ -23,11 +16,13 @@ public static class DynamicParametersExtensions
     
     public static DbResult GetResult(this DynamicParameters parameters)
     {
-        return JsonSerializer.Deserialize<DbResult>(parameters.Get<string>("o_result"))!.AddId(GetId(parameters));
+        var json = parameters.Get<string>("o_result");
+        var id = GetId(parameters);
+        return JsonSerializer.Deserialize<DbResult>(json)!.AddId(id);
     }
 
-    private static int GetId(DynamicParameters parameters)
+    private static int? GetId(DynamicParameters parameters)
     {
-        return parameters.Get<int>(parameters.ParameterNames.First(p => p.EndsWith("_id")));
+        return parameters.Get<int?>(parameters.ParameterNames.First(p => p.EndsWith("_id")));
     }
 }

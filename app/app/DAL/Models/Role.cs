@@ -1,7 +1,7 @@
 ﻿namespace app.DAL.Models;
 
-public class Strava : IDbModel
+public class Role : IDbModel
 {
-    public int? StravaId { get; set; }
+    public int? RoleId { get; set; }
     public required string Nazev { get; set; }
 }

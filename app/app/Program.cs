@@ -1,12 +1,15 @@
+using System.Globalization;
 using System.Net.Mime;
 using app.DAL;
 using app.DAL.Models;
 using app.DAL.Repositories;
 using app.Managers;
 using app.Utils;
+using Dapper;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Diagnostics;
 using Sqids;
+using Role = app.Managers.Role;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,8 +49,7 @@ if (builder.Environment.IsDevelopment())
 
 var app = builder.Build();
 
-// app.Services.GetService<DatabaseManager>()?.CreateTables();
-// app.Services.GetService<DatabaseManager>()?.TestProcedure();
+DefaultTypeMap.MatchNamesWithUnderscores = true;
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
