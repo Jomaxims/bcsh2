@@ -1,4 +1,4 @@
-/.idea
-/app/bin
-/app/obj
-/app/app.db
+.idea
+app/bin
+app/obj
+app/appsettings.Development.json
