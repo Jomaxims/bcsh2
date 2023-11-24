@@ -1,18 +1,17 @@
 CREATE OR REPLACE PACKAGE pck_platba AS
 
     PROCEDURE manage_platba(
-        p_platba_id IN OUT PLATBA.PLATBA_ID%TYPE,
-        p_castka IN PLATBA.CASTKA%TYPE,
-        p_datum_splatnosti IN PLATBA.DATUM_SPLATNOSTI%TYPE,
-        p_zaplacena IN PLATBA.ZAPLACENA%TYPE,
-        p_cislo_uctu IN PLATBA.CISLO_UCTU%TYPE,
-        p_objednavka_id IN PLATBA.OBJEDNAVKA_ID%TYPE,
-        o_result OUT CLOB
+        p_platba_id        IN OUT platba.platba_id%TYPE,
+        p_castka           IN platba.castka%TYPE,
+        p_cislo_uctu       IN platba.cislo_uctu%TYPE,
+        p_objednavka_id    IN platba.objednavka_id%TYPE,
+        p_zaplacena        IN platba.zaplacena%TYPE,
+        o_result           OUT CLOB
     );
 
     PROCEDURE delete_platba(
-        p_platba_id IN PLATBA.PLATBA_ID%TYPE,
-        o_result OUT CLOB
+        p_platba_id        IN platba.platba_id%TYPE,
+        o_result           OUT CLOB
     );
 
 END pck_platba;
@@ -21,61 +20,60 @@ END pck_platba;
 CREATE OR REPLACE PACKAGE BODY pck_platba AS
 
     PROCEDURE manage_platba(
-        p_platba_id IN OUT PLATBA.PLATBA_ID%TYPE,
-        p_castka IN PLATBA.CASTKA%TYPE,
-        p_datum_splatnosti IN PLATBA.DATUM_SPLATNOSTI%TYPE,
-        p_zaplacena IN PLATBA.ZAPLACENA%TYPE,
-        p_cislo_uctu IN PLATBA.CISLO_UCTU%TYPE,
-        p_objednavka_id IN PLATBA.OBJEDNAVKA_ID%TYPE,
-        o_result OUT CLOB
+        p_platba_id        IN OUT platba.platba_id%TYPE,
+        p_castka           IN platba.castka%TYPE,
+        p_cislo_uctu       IN platba.cislo_uctu%TYPE,
+        p_objednavka_id    IN platba.objednavka_id%TYPE,
+        p_zaplacena        IN platba.zaplacena%TYPE,
+        o_result           OUT CLOB
     ) IS
     BEGIN
         IF p_platba_id IS NULL THEN
-            INSERT INTO PLATBA
-                (CASTKA, DATUM_SPLATNOSTI, ZAPLACENA, CISLO_UCTU, OBJEDNAVKA_ID)
+            INSERT INTO platba
+                (castka, cislo_uctu, objednavka_id, zaplacena)
             VALUES
-                (p_castka, p_datum_splatnosti, p_zaplacena, p_cislo_uctu, p_objednavka_id)
-            RETURNING PLATBA_ID INTO p_platba_id;
+                (p_castka, p_cislo_uctu, p_objednavka_id, p_zaplacena)
+            RETURNING platba_id INTO p_platba_id;
 
-            o_result := '{ "status": "OK", "message": "Nová platba byla úsp?šn? vytvo?ena." }';
+            o_result := '{"status": "OK", "message": "NovÃ¡ platba byla ÃºspÄ›nÄ› vytvoÅ™ena."}';
         ELSE
-            UPDATE PLATBA
+            UPDATE platba
             SET
-                CASTKA = p_castka,
-                DATUM_SPLATNOSTI = p_datum_splatnosti,
-                ZAPLACENA = p_zaplacena,
-                CISLO_UCTU = p_cislo_uctu,
-                OBJEDNAVKA_ID = p_objednavka_id
+                castka = p_castka,
+                cislo_uctu = p_cislo_uctu,
+                objednavka_id = p_objednavka_id,
+                zaplacena = p_zaplacena
             WHERE
-                PLATBA_ID = p_platba_id;
+                platba_id = p_platba_id;
 
             IF SQL%ROWCOUNT = 0 THEN
-                o_result := '{ "status": "error", "message": "Chyba: Platba s daným ID nebyla nalezena." }';
+                o_result := '{"status": "error", "message": "Chyba: Platba s danÃ½m ID nebyla nalezena."}';
             ELSE
-                o_result := '{ "status": "OK", "message": "Platba byla úsp?šn? aktualizována." }';
+                o_result := '{"status": "OK", "message": "Platba byla ÃºspÄ›nÄ› aktualizovÃ¡na."}';
             END IF;
         END IF;
     EXCEPTION
         WHEN OTHERS THEN
-            o_result := '{ "status": "error", "message": "Došlo k chyb? p?i zpracování: ' || SQLERRM || '" }';
+            o_result := '{"status": "error", "message": "DoÅ¡lo k chybÄ› pÅ™i zpracovÃ¡nÃ­: ' || SQLERRM || '"}';
     END manage_platba;
 
     PROCEDURE delete_platba(
-        p_platba_id IN PLATBA.PLATBA_ID%TYPE,
-        o_result OUT CLOB
+        p_platba_id        IN platba.platba_id%TYPE,
+        o_result           OUT CLOB
     ) IS
     BEGIN
-        DELETE FROM PLATBA WHERE PLATBA_ID = p_platba_id;
+        DELETE FROM platba WHERE platba_id = p_platba_id;
 
         IF SQL%ROWCOUNT = 0 THEN
-            o_result := '{ "status": "error", "message": "Chyba: Platba s daným ID nebyla nalezena." }';
+            o_result := '{"status": "error", "message": "Chyba: Platba s danÃ½m ID nebyla nalezena."}';
         ELSE
-            o_result := '{ "status": "OK", "message": "Platba byla úsp?šn? smazána." }';
+            o_result := '{"status": "OK", "message": "Platba byla ÃºspÄ›nÄ› smazÃ¡na."}';
         END IF;
     EXCEPTION
         WHEN OTHERS THEN
-            o_result := '{ "status": "error", "message": "Došlo k chyb? p?i zpracování: ' || SQLERRM || '" }';
+            o_result := '{"status": "error", "message": "DoÅ¡lo k chybÄ› pÅ™i zpracovÃ¡nÃ­: ' || SQLERRM || '"}';
     END delete_platba;
 
 END pck_platba;
 /
+

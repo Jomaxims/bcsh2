@@ -1,0 +1,24 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Relation_30" directorySegmentName="seg_0" id="C64DEEAE-FEBD-36BF-4C54-D19F0EEB9D00">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-19 09:08:06 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<engineerTo>
+<item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
+<item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
+<item key="CDE62A77-1BB9-05A7-19CF-91063EA21384" value="true"/>
+</engineerTo>
+<sourcePk>282302FE-22AB-FFA8-4E3D-6291E52B2EE8</sourcePk>
+<targetPk>E1D9BC52-D949-8E38-2CCB-DF83A82B56FE</targetPk>
+<identifying>false</identifying>
+<nameOnSource>bydlí</nameOnSource>
+<nameOnTarget>je obydlena</nameOnTarget>
+<optionalSource>false</optionalSource>
+<optionalTarget>true</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>78033D26-C583-6C07-F1F4-B07BFF7D5E57</sourceEntity>
+<targetCardinalityString>1</targetCardinalityString>
+<targetEntity>8732798C-EA76-0EEC-C6AD-00A36CCC85CA</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

@@ -1,15 +1,15 @@
 CREATE OR REPLACE PACKAGE pck_pojisteni AS
 
     PROCEDURE manage_pojisteni(
-        p_pojisteni_id IN OUT POJISTENI.POJISTENI_ID%TYPE,
-        p_cena_za_den IN POJISTENI.CENA_ZA_DEN%TYPE,
-        p_popis IN POJISTENI.POPIs%TYPE,
-        o_result OUT CLOB
+        p_pojisteni_id IN OUT pojisteni.pojisteni_id%TYPE,
+        p_cena_za_den IN pojisteni.cena_za_den%TYPE,
+        p_popis       IN pojisteni.nazev%TYPE,
+        o_result      OUT CLOB
     );
 
     PROCEDURE delete_pojisteni(
-        p_pojisteni_id IN POJISTENI.POJISTENI_ID%TYPE,
-        o_result OUT CLOB
+        p_pojisteni_id IN pojisteni.pojisteni_id%TYPE,
+        o_result      OUT CLOB
     );
 
 END pck_pojisteni;
@@ -18,55 +18,56 @@ END pck_pojisteni;
 CREATE OR REPLACE PACKAGE BODY pck_pojisteni AS
 
     PROCEDURE manage_pojisteni(
-        p_pojisteni_id IN OUT POJISTENI.POJISTENI_ID%TYPE,
-        p_cena_za_den IN POJISTENI.CENA_ZA_DEN%TYPE,
-        p_popis IN POJISTENI.POPIs%TYPE,
-        o_result OUT CLOB
+        p_pojisteni_id IN OUT pojisteni.pojisteni_id%TYPE,
+        p_cena_za_den IN pojisteni.cena_za_den%TYPE,
+        p_popis       IN pojisteni.nazev%TYPE,
+        o_result      OUT CLOB
     ) IS
     BEGIN
         IF p_pojisteni_id IS NULL THEN
-            INSERT INTO POJISTENI
-                (CENA_ZA_DEN, POPIs)
+            INSERT INTO pojisteni
+                (cena_za_den, nazev)
             VALUES
                 (p_cena_za_den, p_popis)
-            RETURNING POJISTENI_ID INTO p_pojisteni_id;
+            RETURNING pojisteni_id INTO p_pojisteni_id;
 
-            o_result := '{ "status": "OK", "message": "Nové pojist?ní bylo úsp?šn? vytvo?eno." }';
+            o_result := '{"status": "OK", "message": "NovÃ© pojistÄ›nÃ­ bylo ÃºspÄ›nÄ› vytvoÅ™eno."}';
         ELSE
-            UPDATE POJISTENI
+            UPDATE pojisteni
             SET
-                CENA_ZA_DEN = p_cena_za_den,
-                POPIs = p_popis
+                cena_za_den = p_cena_za_den,
+                nazev = p_popis
             WHERE
-                POJISTENI_ID = p_pojisteni_id;
+                pojisteni_id = p_pojisteni_id;
 
             IF SQL%ROWCOUNT = 0 THEN
-                o_result := '{ "status": "error", "message": "Chyba: Pojist?ní s daným ID nebylo nalezeno." }';
+                o_result := '{"status": "error", "message": "Chyba: PojistÄ›nÃ­ s danÃ½m ID nebylo nalezeno."}';
             ELSE
-                o_result := '{ "status": "OK", "message": "Pojist?ní bylo úsp?šn? aktualizováno." }';
+                o_result := '{"status": "OK", "message": "PojistÄ›nÃ­ bylo ÃºspÄ›nÄ› aktualizovÃ¡no."}';
             END IF;
         END IF;
     EXCEPTION
         WHEN OTHERS THEN
-            o_result := '{ "status": "error", "message": "Došlo k chyb? p?i zpracování: ' || SQLERRM || '" }';
+            o_result := '{"status": "error", "message": "DoÅ¡lo k chybÄ› pÅ™i zpracovÃ¡nÃ­: ' || SQLERRM || '"}';
     END manage_pojisteni;
 
     PROCEDURE delete_pojisteni(
-        p_pojisteni_id IN POJISTENI.POJISTENI_ID%TYPE,
-        o_result OUT CLOB
+        p_pojisteni_id IN pojisteni.pojisteni_id%TYPE,
+        o_result      OUT CLOB
     ) IS
     BEGIN
-        DELETE FROM POJISTENI WHERE POJISTENI_ID = p_pojisteni_id;
+        DELETE FROM pojisteni WHERE pojisteni_id = p_pojisteni_id;
 
         IF SQL%ROWCOUNT = 0 THEN
-            o_result := '{ "status": "error", "message": "Chyba: Pojist?ní s daným ID nebylo nalezeno." }';
+            o_result := '{"status": "error", "message": "Chyba: PojistÄ›nÃ­ s danÃ½m ID nebylo nalezeno."}';
         ELSE
-            o_result := '{ "status": "OK", "message": "Pojist?ní bylo úsp?šn? smazáno." }';
+            o_result := '{"status": "OK", "message": "PojistÄ›nÃ­ bylo ÃºspÄ›nÄ› smazÃ¡no."}';
         END IF;
     EXCEPTION
         WHEN OTHERS THEN
-            o_result := '{ "status": "error", "message": "Došlo k chyb? p?i zpracování: ' || SQLERRM || '" }';
+            o_result := '{"status": "error", "message": "DoÅ¡lo k chybÄ› pÅ™i zpracovÃ¡nÃ­: ' || SQLERRM || '"}';
     END delete_pojisteni;
 
 END pck_pojisteni;
 /
+

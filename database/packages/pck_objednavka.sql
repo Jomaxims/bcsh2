@@ -37,7 +37,7 @@ CREATE OR REPLACE PACKAGE BODY pck_objednavka AS
                 (p_pocet_osob, p_termin_id, p_pojisteni_id, p_pokoj_id, p_zakaznik_id)
             RETURNING OBJEDNAVKA_ID INTO p_objednavka_id;
 
-            o_result := '{ "status": "OK", "message": "Nová objednávka byla úsp?šn? vytvo?ena." }';
+            o_result := '{ "status": "OK", "message": "NovÃ¡ objednÃ¡vka byla ÃºspÄ›Å¡nÄ› vytvoÅ™ena." }';
         ELSE
             UPDATE OBJEDNAVKA
             SET
@@ -50,14 +50,14 @@ CREATE OR REPLACE PACKAGE BODY pck_objednavka AS
                 OBJEDNAVKA_ID = p_objednavka_id;
 
             IF SQL%ROWCOUNT = 0 THEN
-                o_result := '{ "status": "error", "message": "Chyba: Objednávka s daným ID nebyla nalezena." }';
+                o_result := '{ "status": "error", "message": "Chyba: ObjednÃ¡vka s danÃ½m ID nebyla nalezena." }';
             ELSE
-                o_result := '{ "status": "OK", "message": "Objednávka byla úsp?šn? aktualizována." }';
+                o_result := '{ "status": "OK", "message": "ObjednÃ¡vka byla ÃºspÄ›Å¡nÄ› aktualizovÃ¡na." }';
             END IF;
         END IF;
     EXCEPTION
         WHEN OTHERS THEN
-            o_result := '{ "status": "error", "message": "Došlo k chyb? p?i zpracování: ' || SQLERRM || '" }';
+            o_result := '{ "status": "error", "message": "DoÅ¡lo k chybÄ› pÅ™i zpracovÃ¡nÃ­: ' || SQLERRM || '" }';
     END manage_objednavka;
 
     PROCEDURE delete_objednavka(
@@ -68,13 +68,13 @@ CREATE OR REPLACE PACKAGE BODY pck_objednavka AS
         DELETE FROM OBJEDNAVKA WHERE OBJEDNAVKA_ID = p_objednavka_id;
 
         IF SQL%ROWCOUNT = 0 THEN
-            o_result := '{ "status": "error", "message": "Chyba: Objednávka s daným ID nebyla nalezena." }';
+            o_result := '{ "status": "error", "message": "Chyba: ObjednÃ¡vka s danÃ½m ID nebyla nalezena." }';
         ELSE
-            o_result := '{ "status": "OK", "message": "Objednávka byla úsp?šn? smazána." }';
+            o_result := '{ "status": "OK", "message": "ObjednÃ¡vka byla ÃºspÄ›Å¡nÄ› smazÃ¡na." }';
         END IF;
     EXCEPTION
         WHEN OTHERS THEN
-            o_result := '{ "status": "error", "message": "Došlo k chyb? p?i zpracování: ' || SQLERRM || '" }';
+            o_result := '{ "status": "error", "message": "DoÅ¡lo k chybÄ› pÅ™i zpracovÃ¡nÃ­: ' || SQLERRM || '" }';
     END delete_objednavka;
 
 END pck_objednavka;

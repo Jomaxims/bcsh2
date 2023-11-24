@@ -3,9 +3,10 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-28 11:51:21 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
-<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
+<item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
+<item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
+<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
 </engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
@@ -20,9 +21,10 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-28 11:51:38 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
-<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
+<item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
+<item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
+<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -33,27 +35,30 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-28 11:51:54 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
-<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
+<item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
+<item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
+<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT029</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="poradi" id="275D9257-E5B5-A018-957E-5AB3B7EDD241">
+<Attribute name="nazev" id="275D9257-E5B5-A018-957E-5AB3B7EDD241">
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-28 12:22:55 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
-<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
+<item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
+<item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
+<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="ubytovani_id" id="BC79BFE0-2F14-0A80-47B9-097D2F739F3A">
 <createdBy>tomas</createdBy>
@@ -61,7 +66,9 @@
 <generatorID>549581B1-080D-98D6-EEDB-2CBBC3401F30</generatorID>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="true"/>
+<item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
+<item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
+<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
 </engineerTo>
 <referedAttribute>6C1D4A59-FB85-17B3-FC58-98B2649ACC6E</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
@@ -75,9 +82,10 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-28 11:51:52 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
-<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="5D685EA1-90CB-8E47-D7F1-4402F7AEE053" value="false"/>
+<item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
+<item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
+<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>

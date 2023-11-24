@@ -1,15 +1,15 @@
 CREATE OR REPLACE PACKAGE pck_pokoj AS
 
     PROCEDURE manage_pokoj(
-        p_pokoj_id IN OUT POKOJ.POKOJ_ID%TYPE,
-        p_pocet_mist IN POKOJ.POCET_MIST%TYPE,
-        p_nazev IN POKOJ.NAZEV%TYPE,
-        o_result OUT CLOB
+        p_pokoj_id   IN OUT pokoj.pokoj_id%TYPE,
+        p_pocet_mist IN pokoj.pocet_mist%TYPE,
+        p_nazev      IN pokoj.nazev%TYPE,
+        o_result     OUT CLOB
     );
 
     PROCEDURE delete_pokoj(
-        p_pokoj_id IN POKOJ.POKOJ_ID%TYPE,
-        o_result OUT CLOB
+        p_pokoj_id   IN pokoj.pokoj_id%TYPE,
+        o_result     OUT CLOB
     );
 
 END pck_pokoj;
@@ -18,48 +18,49 @@ END pck_pokoj;
 CREATE OR REPLACE PACKAGE BODY pck_pokoj AS
 
     PROCEDURE manage_pokoj(
-        p_pokoj_id IN OUT POKOJ.POKOJ_ID%TYPE,
-        p_pocet_mist IN POKOJ.POCET_MIST%TYPE,
-        p_nazev IN POKOJ.NAZEV%TYPE,
-        o_result OUT CLOB
+        p_pokoj_id   IN OUT pokoj.pokoj_id%TYPE,
+        p_pocet_mist IN pokoj.pocet_mist%TYPE,
+        p_nazev      IN pokoj.nazev%TYPE,
+        o_result     OUT CLOB
     ) IS
     BEGIN
         IF p_pokoj_id IS NULL THEN
-            INSERT INTO POKOJ (POCET_MIST, NAZEV)
+            INSERT INTO pokoj (pocet_mist, nazev)
             VALUES (p_pocet_mist, p_nazev)
-            RETURNING POKOJ_ID INTO p_pokoj_id;
-            o_result := '{ "status": "OK", "message": "Nový pokoj byl úsp?šn? vytvo?en." }';
+            RETURNING pokoj_id INTO p_pokoj_id;
+            o_result := '{"status": "OK", "message": "NovÃ½ pokoj byl ÃºspÄ›nÄ› vytvoÅ™en."}';
         ELSE
-            UPDATE POKOJ
-            SET POCET_MIST = p_pocet_mist,
-                NAZEV = p_nazev
-            WHERE POKOJ_ID = p_pokoj_id;
+            UPDATE pokoj
+            SET pocet_mist = p_pocet_mist,
+                nazev = p_nazev
+            WHERE pokoj_id = p_pokoj_id;
             IF SQL%ROWCOUNT = 0 THEN
-                o_result := '{ "status": "error", "message": "Chyba: Pokoj s daným ID nebyl nalezen." }';
+                o_result := '{"status": "error", "message": "Chyba: Pokoj s danÃ½m ID nebyl nalezen."}';
             ELSE
-                o_result := '{ "status": "OK", "message": "Pokoj byl úsp?šn? aktualizován." }';
+                o_result := '{"status": "OK", "message": "Pokoj byl ÃºspÄ›nÄ› aktualizovÃ¡n."}';
             END IF;
         END IF;
     EXCEPTION
         WHEN OTHERS THEN
-            o_result := '{ "status": "error", "message": "Došlo k chyb? p?i zpracování: ' || SQLERRM || '" }';
+            o_result := '{"status": "error", "message": "DoÅ¡lo k chybÄ› pÅ™i zpracovÃ¡nÃ­: ' || SQLERRM || '"}';
     END manage_pokoj;
 
     PROCEDURE delete_pokoj(
-        p_pokoj_id IN POKOJ.POKOJ_ID%TYPE,
-        o_result OUT CLOB
+        p_pokoj_id   IN pokoj.pokoj_id%TYPE,
+        o_result     OUT CLOB
     ) IS
     BEGIN
-        DELETE FROM POKOJ WHERE POKOJ_ID = p_pokoj_id;
+        DELETE FROM pokoj WHERE pokoj_id = p_pokoj_id;
         IF SQL%ROWCOUNT = 0 THEN
-            o_result := '{ "status": "error", "message": "Chyba: Pokoj s daným ID nebyl nalezen." }';
+            o_result := '{"status": "error", "message": "Chyba: Pokoj s danÃ½m ID nebyl nalezen."}';
         ELSE
-            o_result := '{ "status": "OK", "message": "Pokoj byl úsp?šn? smazán." }';
+            o_result := '{"status": "OK", "message": "Pokoj byl ÃºspÄ›nÄ› smazÃ¡n."}';
         END IF;
     EXCEPTION
         WHEN OTHERS THEN
-            o_result := '{ "status": "error", "message": "Došlo k chyb? p?i zpracování: ' || SQLERRM || '" }';
+            o_result := '{"status": "error", "message": "DoÅ¡lo k chybÄ› pÅ™i zpracovÃ¡nÃ­: ' || SQLERRM || '"}';
     END delete_pokoj;
 
 END pck_pokoj;
 /
+

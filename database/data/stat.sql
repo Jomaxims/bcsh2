@@ -1,200 +1,251 @@
-INSERT INTO stat (zkratka, nazev) VALUES ('AFG','Afghanistan');
-INSERT INTO stat (zkratka, nazev) VALUES ('ALB','Albania');
-INSERT INTO stat (zkratka, nazev) VALUES ('DZA','Algeria');
-INSERT INTO stat (zkratka, nazev) VALUES ('AND','Andorra');
-INSERT INTO stat (zkratka, nazev) VALUES ('AGO','Angola');
-INSERT INTO stat (zkratka, nazev) VALUES ('ATG','Antigua a Barbuda');
-INSERT INTO stat (zkratka, nazev) VALUES ('ARG','Argentina');
-INSERT INTO stat (zkratka, nazev) VALUES ('ARM','Armenia');
-INSERT INTO stat (zkratka, nazev) VALUES ('AUS','Australia');
-INSERT INTO stat (zkratka, nazev) VALUES ('AUT','Austria');
-INSERT INTO stat (zkratka, nazev) VALUES ('AZE','Azerbaijan');
-INSERT INTO stat (zkratka, nazev) VALUES ('BHS','Bahamas');
-INSERT INTO stat (zkratka, nazev) VALUES ('BHR','Bahrain');
-INSERT INTO stat (zkratka, nazev) VALUES ('BGD','Bangladesh');
-INSERT INTO stat (zkratka, nazev) VALUES ('BRB','Barbados');
-INSERT INTO stat (zkratka, nazev) VALUES ('BLR','Belarus');
-INSERT INTO stat (zkratka, nazev) VALUES ('BEL','Belgium');
-INSERT INTO stat (zkratka, nazev) VALUES ('BLZ','Belize');
-INSERT INTO stat (zkratka, nazev) VALUES ('BEN','Benin');
-INSERT INTO stat (zkratka, nazev) VALUES ('BTN','Bhutan');
-INSERT INTO stat (zkratka, nazev) VALUES ('BOL','Bolivia');
-INSERT INTO stat (zkratka, nazev) VALUES ('BIH','Bosnia a Herzegovina');
-INSERT INTO stat (zkratka, nazev) VALUES ('BWA','Botswana');
-INSERT INTO stat (zkratka, nazev) VALUES ('BRA','Brazil');
-INSERT INTO stat (zkratka, nazev) VALUES ('BRN','Brunei');
-INSERT INTO stat (zkratka, nazev) VALUES ('BGR','Bulgaria');
-INSERT INTO stat (zkratka, nazev) VALUES ('BFA','Burkina Faso');
-INSERT INTO stat (zkratka, nazev) VALUES ('BDI','Burundi');
-INSERT INTO stat (zkratka, nazev) VALUES ('CPV','Cabo Verde');
-INSERT INTO stat (zkratka, nazev) VALUES ('KHM','Cambodia');
-INSERT INTO stat (zkratka, nazev) VALUES ('CMR','Cameroon');
-INSERT INTO stat (zkratka, nazev) VALUES ('CAN','Canada');
-INSERT INTO stat (zkratka, nazev) VALUES ('CAF','Central African Republic');
-INSERT INTO stat (zkratka, nazev) VALUES ('TCD','Chad');
-INSERT INTO stat (zkratka, nazev) VALUES ('CHL','Chile');
-INSERT INTO stat (zkratka, nazev) VALUES ('CHN','China');
-INSERT INTO stat (zkratka, nazev) VALUES ('COL','Colombia');
-INSERT INTO stat (zkratka, nazev) VALUES ('COM','Comoros');
-INSERT INTO stat (zkratka, nazev) VALUES ('COG','Congo');
-INSERT INTO stat (zkratka, nazev) VALUES ('CRI','Costa Rica');
-INSERT INTO stat (zkratka, nazev) VALUES ('CIV','C�te d�Ivoire');
-INSERT INTO stat (zkratka, nazev) VALUES ('HRV','Croatia');
-INSERT INTO stat (zkratka, nazev) VALUES ('CUB','Cuba');
-INSERT INTO stat (zkratka, nazev) VALUES ('CYP','Cyprus');
-INSERT INTO stat (zkratka, nazev) VALUES ('CZE','Czech Republic');
-INSERT INTO stat (zkratka, nazev) VALUES ('DNK','Denmark');
-INSERT INTO stat (zkratka, nazev) VALUES ('DJI','Djibouti');
-INSERT INTO stat (zkratka, nazev) VALUES ('DMA','Dominica');
-INSERT INTO stat (zkratka, nazev) VALUES ('DOM','Dominican Republic');
-INSERT INTO stat (zkratka, nazev) VALUES ('COD','DR Congo');
-INSERT INTO stat (zkratka, nazev) VALUES ('ECU','Ecuador');
-INSERT INTO stat (zkratka, nazev) VALUES ('EGY','Egypt');
-INSERT INTO stat (zkratka, nazev) VALUES ('SLV','El Salvador');
-INSERT INTO stat (zkratka, nazev) VALUES ('GNQ','Equatorial Guinea');
-INSERT INTO stat (zkratka, nazev) VALUES ('ERI','Eritrea');
-INSERT INTO stat (zkratka, nazev) VALUES ('EST','Estonia');
-INSERT INTO stat (zkratka, nazev) VALUES ('SWZ','Eswatini');
-INSERT INTO stat (zkratka, nazev) VALUES ('ETH','Ethiopia');
-INSERT INTO stat (zkratka, nazev) VALUES ('FJI','Fiji');
-INSERT INTO stat (zkratka, nazev) VALUES ('FIN','Finland');
-INSERT INTO stat (zkratka, nazev) VALUES ('FRA','France');
-INSERT INTO stat (zkratka, nazev) VALUES ('GAB','Gabon');
-INSERT INTO stat (zkratka, nazev) VALUES ('GMB','Gambia');
-INSERT INTO stat (zkratka, nazev) VALUES ('GEO','Georgia');
-INSERT INTO stat (zkratka, nazev) VALUES ('DEU','Germany');
-INSERT INTO stat (zkratka, nazev) VALUES ('GHA','Ghana');
-INSERT INTO stat (zkratka, nazev) VALUES ('GRC','Greece');
-INSERT INTO stat (zkratka, nazev) VALUES ('GRD','Grenada');
-INSERT INTO stat (zkratka, nazev) VALUES ('GTM','Guatemala');
-INSERT INTO stat (zkratka, nazev) VALUES ('GIN','Guinea');
-INSERT INTO stat (zkratka, nazev) VALUES ('GNB','Guinea-Bissau');
-INSERT INTO stat (zkratka, nazev) VALUES ('GUY','Guyana');
-INSERT INTO stat (zkratka, nazev) VALUES ('HTI','Haiti');
-INSERT INTO stat (zkratka, nazev) VALUES ('VAT','Holy See');
-INSERT INTO stat (zkratka, nazev) VALUES ('HND','Honduras');
-INSERT INTO stat (zkratka, nazev) VALUES ('HUN','Hungary');
-INSERT INTO stat (zkratka, nazev) VALUES ('ISL','Iceland');
-INSERT INTO stat (zkratka, nazev) VALUES ('IND','India');
-INSERT INTO stat (zkratka, nazev) VALUES ('IDN','Indonesia');
-INSERT INTO stat (zkratka, nazev) VALUES ('IRN','Iran');
-INSERT INTO stat (zkratka, nazev) VALUES ('IRQ','Iraq');
-INSERT INTO stat (zkratka, nazev) VALUES ('IRL','Ireland');
-INSERT INTO stat (zkratka, nazev) VALUES ('ISR','Israel');
-INSERT INTO stat (zkratka, nazev) VALUES ('ITA','Italy');
-INSERT INTO stat (zkratka, nazev) VALUES ('JAM','Jamaica');
-INSERT INTO stat (zkratka, nazev) VALUES ('JPN','Japan');
-INSERT INTO stat (zkratka, nazev) VALUES ('JOR','Jordan');
-INSERT INTO stat (zkratka, nazev) VALUES ('KAZ','Kazakhstan');
-INSERT INTO stat (zkratka, nazev) VALUES ('KEN','Kenya');
-INSERT INTO stat (zkratka, nazev) VALUES ('KIR','Kiribati');
-INSERT INTO stat (zkratka, nazev) VALUES ('KWT','Kuwait');
-INSERT INTO stat (zkratka, nazev) VALUES ('KGZ','Kyrgyzstan');
-INSERT INTO stat (zkratka, nazev) VALUES ('LAO','Laos');
-INSERT INTO stat (zkratka, nazev) VALUES ('LVA','Latvia');
-INSERT INTO stat (zkratka, nazev) VALUES ('LBN','Lebanon');
-INSERT INTO stat (zkratka, nazev) VALUES ('LSO','Lesotho');
-INSERT INTO stat (zkratka, nazev) VALUES ('LBR','Liberia');
-INSERT INTO stat (zkratka, nazev) VALUES ('LBY','Libya');
-INSERT INTO stat (zkratka, nazev) VALUES ('LIE','Liechtenstein');
-INSERT INTO stat (zkratka, nazev) VALUES ('LTU','Lithuania');
-INSERT INTO stat (zkratka, nazev) VALUES ('LUX','Luxembourg');
-INSERT INTO stat (zkratka, nazev) VALUES ('MDG','Madagascar');
-INSERT INTO stat (zkratka, nazev) VALUES ('MWI','Malawi');
-INSERT INTO stat (zkratka, nazev) VALUES ('MYS','Malaysia');
-INSERT INTO stat (zkratka, nazev) VALUES ('MDV','Maldives');
-INSERT INTO stat (zkratka, nazev) VALUES ('MLI','Mali');
-INSERT INTO stat (zkratka, nazev) VALUES ('MLT','Malta');
-INSERT INTO stat (zkratka, nazev) VALUES ('MHL','Marshall Islands');
-INSERT INTO stat (zkratka, nazev) VALUES ('MRT','Mauritania');
-INSERT INTO stat (zkratka, nazev) VALUES ('MUS','Mauritius');
-INSERT INTO stat (zkratka, nazev) VALUES ('MEX','Mexico');
-INSERT INTO stat (zkratka, nazev) VALUES ('FSM','Micronesia');
-INSERT INTO stat (zkratka, nazev) VALUES ('MDA','Moldova');
-INSERT INTO stat (zkratka, nazev) VALUES ('MCO','Monaco');
-INSERT INTO stat (zkratka, nazev) VALUES ('MNG','Mongolia');
-INSERT INTO stat (zkratka, nazev) VALUES ('MNE','Montenegro');
-INSERT INTO stat (zkratka, nazev) VALUES ('MAR','Morocco');
-INSERT INTO stat (zkratka, nazev) VALUES ('MOZ','Mozambique');
-INSERT INTO stat (zkratka, nazev) VALUES ('MMR','Myanmar');
-INSERT INTO stat (zkratka, nazev) VALUES ('NAM','Namibia');
-INSERT INTO stat (zkratka, nazev) VALUES ('NRU','Nauru');
-INSERT INTO stat (zkratka, nazev) VALUES ('NPL','Nepal');
-INSERT INTO stat (zkratka, nazev) VALUES ('NLD','Netherlands');
-INSERT INTO stat (zkratka, nazev) VALUES ('NZL','New Zealand');
-INSERT INTO stat (zkratka, nazev) VALUES ('NIC','Nicaragua');
-INSERT INTO stat (zkratka, nazev) VALUES ('NER','Niger');
-INSERT INTO stat (zkratka, nazev) VALUES ('NGA','Nigeria');
-INSERT INTO stat (zkratka, nazev) VALUES ('PRK','North Korea');
-INSERT INTO stat (zkratka, nazev) VALUES ('MKD','North Macedonia');
-INSERT INTO stat (zkratka, nazev) VALUES ('NOR','Norway');
-INSERT INTO stat (zkratka, nazev) VALUES ('OMN','Oman');
-INSERT INTO stat (zkratka, nazev) VALUES ('PAK','Pakistan');
-INSERT INTO stat (zkratka, nazev) VALUES ('PLW','Palau');
-INSERT INTO stat (zkratka, nazev) VALUES ('PAN','Panama');
-INSERT INTO stat (zkratka, nazev) VALUES ('PNG','Papua New Guinea');
-INSERT INTO stat (zkratka, nazev) VALUES ('PRY','Paraguay');
-INSERT INTO stat (zkratka, nazev) VALUES ('PER','Peru');
-INSERT INTO stat (zkratka, nazev) VALUES ('PHL','Philippines');
-INSERT INTO stat (zkratka, nazev) VALUES ('POL','Poland');
-INSERT INTO stat (zkratka, nazev) VALUES ('PRT','Portugal');
-INSERT INTO stat (zkratka, nazev) VALUES ('QAT','Qatar');
-INSERT INTO stat (zkratka, nazev) VALUES ('ROM','Romania');
-INSERT INTO stat (zkratka, nazev) VALUES ('RUS','Russia');
-INSERT INTO stat (zkratka, nazev) VALUES ('RWA','Rwanda');
-INSERT INTO stat (zkratka, nazev) VALUES ('KNA','Saint Kitts a Nevis');
-INSERT INTO stat (zkratka, nazev) VALUES ('LCA','Saint Lucia');
-INSERT INTO stat (zkratka, nazev) VALUES ('WSM','Samoa');
-INSERT INTO stat (zkratka, nazev) VALUES ('SMR','San Marino');
-INSERT INTO stat (zkratka, nazev) VALUES ('STP','Sao Tome a Principe');
-INSERT INTO stat (zkratka, nazev) VALUES ('SAU','Saudi Arabia');
-INSERT INTO stat (zkratka, nazev) VALUES ('SEN','Senegal');
-INSERT INTO stat (zkratka, nazev) VALUES ('SRB','Serbia');
-INSERT INTO stat (zkratka, nazev) VALUES ('SYC','Seychelles');
-INSERT INTO stat (zkratka, nazev) VALUES ('SLE','Sierra Leone');
-INSERT INTO stat (zkratka, nazev) VALUES ('SGP','Singapore');
-INSERT INTO stat (zkratka, nazev) VALUES ('SVK','Slovakia');
-INSERT INTO stat (zkratka, nazev) VALUES ('SVN','Slovenia');
-INSERT INTO stat (zkratka, nazev) VALUES ('SLB','Solomon Islands');
-INSERT INTO stat (zkratka, nazev) VALUES ('SOM','Somalia');
-INSERT INTO stat (zkratka, nazev) VALUES ('ZAF','South Africa');
-INSERT INTO stat (zkratka, nazev) VALUES ('KOR','South Korea');
-INSERT INTO stat (zkratka, nazev) VALUES ('SSD','South Sudan');
-INSERT INTO stat (zkratka, nazev) VALUES ('ESP','Spain');
-INSERT INTO stat (zkratka, nazev) VALUES ('LKA','Sri Lanka');
-INSERT INTO stat (zkratka, nazev) VALUES ('VCT','St. Vincent a Grenadines');
-INSERT INTO stat (zkratka, nazev) VALUES ('PSE','State of Palestine');
-INSERT INTO stat (zkratka, nazev) VALUES ('SDN','Sudan');
-INSERT INTO stat (zkratka, nazev) VALUES ('SUR','Suriname');
-INSERT INTO stat (zkratka, nazev) VALUES ('SWE','Sweden');
-INSERT INTO stat (zkratka, nazev) VALUES ('CHE','Switzerland');
-INSERT INTO stat (zkratka, nazev) VALUES ('SYR','Syria');
-INSERT INTO stat (zkratka, nazev) VALUES ('TJK','Tajikistan');
-INSERT INTO stat (zkratka, nazev) VALUES ('TZA','Tanzania');
-INSERT INTO stat (zkratka, nazev) VALUES ('THA','Thailand');
-INSERT INTO stat (zkratka, nazev) VALUES ('TLS','Timor-Leste');
-INSERT INTO stat (zkratka, nazev) VALUES ('TGO','Togo');
-INSERT INTO stat (zkratka, nazev) VALUES ('TON','Tonga');
-INSERT INTO stat (zkratka, nazev) VALUES ('TTO','Trinidad a Tobago');
-INSERT INTO stat (zkratka, nazev) VALUES ('TUN','Tunisia');
-INSERT INTO stat (zkratka, nazev) VALUES ('TUR','Turkey');
-INSERT INTO stat (zkratka, nazev) VALUES ('TKM','Turkmenistan');
-INSERT INTO stat (zkratka, nazev) VALUES ('TUV','Tuvalu');
-INSERT INTO stat (zkratka, nazev) VALUES ('UGA','Uganda');
-INSERT INTO stat (zkratka, nazev) VALUES ('UKR','Ukraine');
-INSERT INTO stat (zkratka, nazev) VALUES ('ARE','United Arab Emirates');
-INSERT INTO stat (zkratka, nazev) VALUES ('GBR','United Kingdom');
-INSERT INTO stat (zkratka, nazev) VALUES ('USA','United States');
-INSERT INTO stat (zkratka, nazev) VALUES ('URY','Uruguay');
-INSERT INTO stat (zkratka, nazev) VALUES ('UZB','Uzbekistan');
-INSERT INTO stat (zkratka, nazev) VALUES ('VUT','Vanuatu');
-INSERT INTO stat (zkratka, nazev) VALUES ('VEN','Venezuela');
-INSERT INTO stat (zkratka, nazev) VALUES ('VNM','Vietnam');
-INSERT INTO stat (zkratka, nazev) VALUES ('YEM','Yemen');
-INSERT INTO stat (zkratka, nazev) VALUES ('ZMB','Zambia');
-INSERT INTO stat (zkratka, nazev) VALUES ('ZWE','Zimbabwe');
-
-
-
-
-
+INSERT INTO stat (zkratka, nazev) VALUES
+	('AFG', 'Afghánistán'),
+	('ALA', 'Alandy'),
+	('ALB', 'Albánie'),
+	('DZA', 'Alžírsko'),
+	('ASM', 'Americká Samoa'),
+	('VIR', 'Americké Panenské ostrovy'),
+	('AND', 'Andorra'),
+	('AGO', 'Angola'),
+	('AIA', 'Anguilla'),
+	('ATA', 'Antarktida'),
+	('ATG', 'Antigua a Barbuda'),
+	('ARG', 'Argentina'),
+	('ARM', 'Arménie'),
+	('ABW', 'Aruba'),
+	('AUS', 'Austrálie'),
+	('AZE', 'Ázerbájdžán'),
+	('BHS', 'Bahamy'),
+	('BHR', 'Bahrajn'),
+	('BGD', 'Bangladéš'),
+	('BRB', 'Barbados'),
+	('BEL', 'Belgie'),
+	('BLZ', 'Belize'),
+	('BLR', 'Bělorusko'),
+	('BEN', 'Benin'),
+	('BMU', 'Bermudy'),
+	('BTN', 'Bhútán'),
+	('BOL', 'Bolívie'),
+	('BES', 'Bonaire, Svatý Eustach a Saba'),
+	('BIH', 'Bosna a Hercegovina'),
+	('BWA', 'Botswana'),
+	('BVT', 'Bouvetův ostrov'),
+	('BRA', 'Brazílie'),
+	('IOT', 'Britské indickooceánské území'),
+	('VGB', 'Britské Panenské ostrovy'),
+	('BRN', 'Brunej'),
+	('BGR', 'Bulharsko'),
+	('BFA', 'Burkina Faso'),
+	('BDI', 'Burundi'),
+	('COK', 'Cookovy ostrovy'),
+	('CUW', 'Curaçao'),
+	('TCD', 'Čad'),
+	('MNE', 'Černá Hora'),
+	('CZE', 'Česko'),
+	('CHN', 'Čína'),
+	('DNK', 'Dánsko'),
+	('DMA', 'Dominika'),
+	('DOM', 'Dominikánská republika'),
+	('DJI', 'Džibutsko'),
+	('EGY', 'Egypt'),
+	('ECU', 'Ekvádor'),
+	('ERI', 'Eritrea'),
+	('EST', 'Estonsko'),
+	('ETH', 'Etiopie'),
+	('FRO', 'Faerské ostrovy'),
+	('FLK', 'Falklandy (Malvíny)'),
+	('FJI', 'Fidži'),
+	('PHL', 'Filipíny'),
+	('FIN', 'Finsko'),
+	('FRA', 'Francie'),
+	('GUF', 'Francouzská Guyana'),
+	('ATF', 'Francouzská jižní a antarktická území'),
+	('PYF', 'Francouzská Polynésie'),
+	('GAB', 'Gabon'),
+	('GMB', 'Gambie'),
+	('GHA', 'Ghana'),
+	('GIB', 'Gibraltar'),
+	('GRD', 'Grenada'),
+	('GRL', 'Grónsko'),
+	('GEO', 'Gruzie'),
+	('GLP', 'Guadeloupe'),
+	('GUM', 'Guam'),
+	('GTM', 'Guatemala'),
+	('GGY', 'Guernsey'),
+	('GIN', 'Guinea'),
+	('GNB', 'Guinea-Bissau'),
+	('GUY', 'Guyana'),
+	('HTI', 'Haiti'),
+	('HMD', 'Heardův ostrov a MacDonaldovy ostrovy'),
+	('HND', 'Honduras'),
+	('HKG', 'Hongkong'),
+	('CHL', 'Chile'),
+	('HRV', 'Chorvatsko'),
+	('IND', 'Indie'),
+	('IDN', 'Indonésie'),
+	('IRQ', 'Irák'),
+	('IRN', 'Írán'),
+	('IRL', 'Irsko'),
+	('ISL', 'Island'),
+	('ITA', 'Itálie'),
+	('ISR', 'Izrael'),
+	('JAM', 'Jamajka'),
+	('JPN', 'Japonsko'),
+	('YEM', 'Jemen'),
+	('JEY', 'Jersey'),
+	('ZAF', 'Jižní Afrika'),
+	('SGS', 'Jižní Georgie a Jižní Sandwichovy ostrovy'),
+	('SSD', 'Jižní Súdán'),
+	('JOR', 'Jordánsko'),
+	('CYM', 'Kajmanské ostrovy'),
+	('KHM', 'Kambodža'),
+	('CMR', 'Kamerun'),
+	('CAN', 'Kanada'),
+	('CPV', 'Kapverdy'),
+	('QAT', 'Katar'),
+	('KAZ', 'Kazachstán'),
+	('KEN', 'Keňa'),
+	('KIR', 'Kiribati'),
+	('CCK', 'Kokosové (Keelingovy) ostrovy'),
+	('COL', 'Kolumbie'),
+	('COM', 'Komory'),
+	('COD', 'Konžská demokratická republika'),
+	('COG', 'Konžská republika'),
+	('PRK', 'Korejská lidově demokratická republika'),
+	('KOR', 'Korejská republika'),
+	('XXK', 'Kosovo'),
+	('CRI', 'Kostarika'),
+	('CUB', 'Kuba'),
+	('KWT', 'Kuvajt'),
+	('CYP', 'Kypr'),
+	('KGZ', 'Kyrgyzstán'),
+	('LAO', 'Laos'),
+	('LSO', 'Lesotho'),
+	('LBN', 'Libanon'),
+	('LBR', 'Libérie'),
+	('LBY', 'Libye'),
+	('LIE', 'Lichtenštejnsko'),
+	('LTU', 'Litva'),
+	('LVA', 'Lotyšsko'),
+	('LUX', 'Lucembursko'),
+	('MAC', 'Macao'),
+	('MDG', 'Madagaskar'),
+	('HUN', 'Maďarsko'),
+	('MYS', 'Malajsie'),
+	('MWI', 'Malawi'),
+	('MDV', 'Maledivy'),
+	('MLI', 'Mali'),
+	('MLT', 'Malta'),
+	('IMN', 'Man'),
+	('MAR', 'Maroko'),
+	('MHL', 'Marshallovy ostrovy'),
+	('MTQ', 'Martinik'),
+	('MUS', 'Mauricius'),
+	('MRT', 'Mauritánie'),
+	('MYT', 'Mayotte'),
+	('UMI', 'Menší odlehlé ostrovy USA'),
+	('MEX', 'Mexiko'),
+	('FSM', 'Mikronésie'),
+	('MDA', 'Moldavsko'),
+	('MCO', 'Monako'),
+	('MNG', 'Mongolsko'),
+	('MSR', 'Montserrat'),
+	('MOZ', 'Mosambik'),
+	('MMR', 'Myanmar'),
+	('NAM', 'Namibie'),
+	('NRU', 'Nauru'),
+	('DEU', 'Německo'),
+	('NPL', 'Nepál'),
+	('NER', 'Niger'),
+	('NGA', 'Nigérie'),
+	('NIC', 'Nikaragua'),
+	('NIU', 'Niue'),
+	('NLD', 'Nizozemsko'),
+	('NFK', 'Norfolk'),
+	('NOR', 'Norsko'),
+	('NCL', 'Nová Kaledonie'),
+	('NZL', 'Nový Zéland'),
+	('OMN', 'Omán'),
+	('PAK', 'Pákistán'),
+	('PLW', 'Palau'),
+	('PSE', 'Palestina'),
+	('PAN', 'Panama'),
+	('PNG', 'Papua Nová Guinea'),
+	('PRY', 'Paraguay'),
+	('PER', 'Peru'),
+	('PCN', 'Pitcairn'),
+	('CIV', 'Pobřeží slonoviny'),
+	('POL', 'Polsko'),
+	('PRI', 'Portoriko'),
+	('PRT', 'Portugalsko'),
+	('AUT', 'Rakousko'),
+	('REU', 'Réunion'),
+	('GNQ', 'Rovníková Guinea'),
+	('ROU', 'Rumunsko'),
+	('RUS', 'Rusko'),
+	('RWA', 'Rwanda'),
+	('GRC', 'Řecko'),
+	('SPM', 'Saint Pierre a Miquelon'),
+	('SLV', 'Salvador'),
+	('WSM', 'Samoa'),
+	('SMR', 'San Marino'),
+	('SAU', 'Saúdská Arábie'),
+	('SEN', 'Senegal'),
+	('MKD', 'Severní Makedonie'),
+	('MNP', 'Severní Mariany'),
+	('SYC', 'Seychely'),
+	('SLE', 'Sierra Leone'),
+	('SGP', 'Singapur'),
+	('SVK', 'Slovensko'),
+	('SVN', 'Slovinsko'),
+	('SOM', 'Somálsko'),
+	('ARE', 'Spojené arabské emiráty'),
+	('USA', 'Spojené státy'),
+	('SRB', 'Srbsko'),
+	('CAF', 'Středoafrická republika'),
+	('SDN', 'Súdán'),
+	('SUR', 'Surinam'),
+	('SHN', 'Svatá Helena'),
+	('LCA', 'Svatá Lucie'),
+	('BLM', 'Svatý Bartoloměj'),
+	('KNA', 'Svatý Kryštof a Nevis'),
+	('MAF', 'Svatý Martin (FR)'),
+	('SXM', 'Svatý Martin (NL)'),
+	('STP', 'Svatý Tomáš a Princův ostrov'),
+	('VCT', 'Svatý Vincenc a Grenadiny'),
+	('SWZ', 'Svazijsko'),
+	('SYR', 'Sýrie'),
+	('SLB', 'Šalomounovy ostrovy'),
+	('ESP', 'Španělsko'),
+	('SJM', 'Špicberky a Jan Mayen'),
+	('LKA', 'Šrí Lanka'),
+	('SWE', 'Švédsko'),
+	('CHE', 'Švýcarsko'),
+	('TJK', 'Tádžikistán'),
+	('TZA', 'Tanzanie'),
+	('THA', 'Thajsko'),
+	('TWN', 'Tchaj-wan'),
+	('TGO', 'Togo'),
+	('TKL', 'Tokelau'),
+	('TON', 'Tonga'),
+	('TTO', 'Trinidad a Tobago'),
+	('TUN', 'Tunisko'),
+	('TUR', 'Turecko'),
+	('TKM', 'Turkmenistán'),
+	('TCA', 'Turks a Caicos'),
+	('TUV', 'Tuvalu'),
+	('UGA', 'Uganda'),
+	('UKR', 'Ukrajina'),
+	('URY', 'Uruguay'),
+	('UZB', 'Uzbekistán'),
+	('CXR', 'Vánoční ostrov'),
+	('VUT', 'Vanuatu'),
+	('VAT', 'Vatikán'),
+	('GBR', 'Velká Británie a Severní Irsko'),
+	('VEN', 'Venezuela'),
+	('VNM', 'Vietnam'),
+	('TLS', 'Východní Timor'),
+	('WLF', 'Wallis a Futuna'),
+	('ZMB', 'Zambie'),
+	('ESH', 'Západní Sahara'),
+	('ZWE', 'Zimbabwe');

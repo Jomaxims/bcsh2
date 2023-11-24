@@ -33,10 +33,10 @@ CREATE OR REPLACE PACKAGE BODY pck_osoba_objednavka AS
         INSERT INTO OSOBA_OBJEDNAVKA (OSOBA_OSOBA_ID, OBJEDNAVKA_OBJEDNAVKA_ID)
         VALUES (p_osoba_id, p_objednavka_id);
 
-        o_result := '{ "status": "OK", "message": "Záznam byl úsp?šn? vytvo?en." }';
+        o_result := '{"status": "OK", "message": "ZÃ¡znam byl ÃºspÄ›nÄ› vytvoÅ™en."}';
     EXCEPTION
         WHEN OTHERS THEN
-            o_result := '{ "status": "error", "message": "Chyba p?i operaci: ' || SQLERRM || '" }';
+            o_result := '{"status": "error", "message": "Chyba pÅ™i operaci: ' || SQLERRM || '"}';
     END insert_osoba_objednavka;
 
     PROCEDURE update_osoba_objednavka(
@@ -52,13 +52,13 @@ CREATE OR REPLACE PACKAGE BODY pck_osoba_objednavka AS
         AND OBJEDNAVKA_OBJEDNAVKA_ID = p_old_objednavka_id;
 
         IF SQL%ROWCOUNT = 0 THEN
-            o_result := '{ "status": "error", "message": "Chyba: Záznam nebyl nalezen." }';
+            o_result := '{"status": "error", "message": "Chyba: ZÃ¡znam nebyl nalezen."}';
         ELSE
-            o_result := '{ "status": "OK", "message": "Záznam byl úsp?šn? aktualizován." }';
+            o_result := '{"status": "OK", "message": "ZÃ¡znam byl ÃºspÄ›nÄ› aktualizovÃ¡n."}';
         END IF;
     EXCEPTION
         WHEN OTHERS THEN
-            o_result := '{ "status": "error", "message": "Chyba p?i operaci: ' || SQLERRM || '" }';
+            o_result := '{"status": "error", "message": "Chyba pÅ™i operaci: ' || SQLERRM || '"}';
     END update_osoba_objednavka;
 
     PROCEDURE delete_osoba_objednavka(
@@ -70,14 +70,15 @@ CREATE OR REPLACE PACKAGE BODY pck_osoba_objednavka AS
         DELETE FROM OSOBA_OBJEDNAVKA WHERE OSOBA_OSOBA_ID = p_osoba_id AND OBJEDNAVKA_OBJEDNAVKA_ID = p_objednavka_id;
         
         IF SQL%ROWCOUNT = 0 THEN
-            o_result := '{ "status": "error", "message": "Chyba: Záznam nebyl nalezen." }';
+            o_result := '{"status": "error", "message": "Chyba: ZÃ¡znam nebyl nalezen."}';
         ELSE
-            o_result := '{ "status": "OK", "message": "Záznam byl úsp?šn? smazán." }';
+            o_result := '{"status": "OK", "message": "ZÃ¡znam byl ÃºspÄ›nÄ› smazÃ¡n."}';
         END IF;
     EXCEPTION
         WHEN OTHERS THEN
-            o_result := '{ "status": "error", "message": "Chyba p?i operaci: ' || SQLERRM || '" }';
+            o_result := '{"status": "error", "message": "Chyba pÅ™i operaci: ' || SQLERRM || '"}';
     END delete_osoba_objednavka;
 
 END pck_osoba_objednavka;
 /
+

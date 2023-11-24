@@ -30,21 +30,21 @@ CREATE OR REPLACE PACKAGE BODY pck_pokoje_terminu AS
             INSERT INTO POKOJE_TERMINU (CELKOVY_POCET_POKOJU, POCET_OBSAZENYCH_POKOJU, POKOJ_ID)
             VALUES (p_celkovy_pocet_pokoj, p_pocet_obsazenych_pokoj, p_pokoj_id)
             RETURNING TERMIN_ID INTO p_termin_id;
-            o_result := '{ "status": "OK", "message": "Nový záznam byl úsp?šn? vytvo?en." }';
+            o_result := '{ "status": "OK", "message": "NovÃ½ zÃ¡znam byl ÃºspÄ›nÄ› vytvoÅ™en." }';
         ELSE
             UPDATE POKOJE_TERMINU
             SET CELKOVY_POCET_POKOJU = p_celkovy_pocet_pokoj,
                 POCET_OBSAZENYCH_POKOJU = p_pocet_obsazenych_pokoj
             WHERE TERMIN_ID = p_termin_id;
             IF SQL%ROWCOUNT = 0 THEN
-                o_result := '{ "status": "error", "message": "Chyba: Záznam s daným ID nebyl nalezen." }';
+                o_result := '{ "status": "error", "message": "Chyba: ZÃ¡znam s danÃ½m ID nebyl nalezen." }';
             ELSE
-                o_result := '{ "status": "OK", "message": "Záznam byl úsp?šn? aktualizován." }';
+                o_result := '{ "status": "OK", "message": "ZÃ¡znam byl ÃºspÄ›nÄ› aktualizovÃ¡n." }';
             END IF;
         END IF;
     EXCEPTION
         WHEN OTHERS THEN
-            o_result := '{ "status": "error", "message": "Došlo k chyb? p?i zpracování: ' || REPLACE(SQLERRM, '"', '\"') || '" }';
+            o_result := '{ "status": "error", "message": "DoÅ¡lo k chybÄ› pÅ™i zpracovÃ¡nÃ­: ' || REPLACE(SQLERRM, '"', '\"') || '" }';
     END manage_pokoje_terminu;
 
     PROCEDURE delete_pokoje_terminu(
@@ -54,14 +54,15 @@ CREATE OR REPLACE PACKAGE BODY pck_pokoje_terminu AS
     BEGIN
         DELETE FROM POKOJE_TERMINU WHERE TERMIN_ID = p_termin_id;
         IF SQL%ROWCOUNT = 0 THEN
-            o_result := '{ "status": "error", "message": "Chyba: Záznam s daným ID nebyl nalezen." }';
+            o_result := '{ "status": "error", "message": "Chyba: ZÃ¡znam s danÃ½m ID nebyl nalezen." }';
         ELSE
-            o_result := '{ "status": "OK", "message": "Záznam byl úsp?šn? smazán." }';
+            o_result := '{ "status": "OK", "message": "ZÃ¡znam byl ÃºspÄ›nÄ› smazÃ¡n." }';
         END IF;
     EXCEPTION
         WHEN OTHERS THEN
-            o_result := '{ "status": "error", "message": "Došlo k chyb? p?i zpracování: ' || REPLACE(SQLERRM, '"', '\"') || '" }';
+            o_result := '{ "status": "error", "message": "DoÅ¡lo k chybÄ› pÅ™i zpracovÃ¡nÃ­: ' || REPLACE(SQLERRM, '"', '\"') || '" }';
     END delete_pokoje_terminu;
 
 END pck_pokoje_terminu;
 /
+

@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="A1F60F72-ABCF-1B37-0591-1875934F479F" containerWithKeyObject="269D9681-3EF6-488D-6B80-949EC7E3CCF8" localFKIndex="5D5D9DA4-7205-8ED7-661F-F54FECE9FDE9" name="ZAMESTNANEC_PRIHLASOVACI_UDAJE_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-22 15:50:10 UTC</createdTime>
+<generatorID>E6C7E32F-2CE9-5429-FD84-CC4EFDA3365B</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<referredTableLongName>PRIHLASOVACI_UDAJE</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>730FFE46-EE93-E426-9C4F-F00F65A3A52C</referredTableID>
+<keyObject>56EC2663-ADCE-4D9E-7060-88ABB3D32478</keyObject>
+<referredKeyID>56EC2663-ADCE-4D9E-7060-88ABB3D32478</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>prihlasovaci_udaje_id</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

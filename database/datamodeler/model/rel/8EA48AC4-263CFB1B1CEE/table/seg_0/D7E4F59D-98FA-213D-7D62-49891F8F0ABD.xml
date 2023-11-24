@@ -1,0 +1,110 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="D7E4F59D-98FA-213D-7D62-49891F8F0ABD" name="PLATBA">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-22 15:50:10 UTC</createdTime>
+<generatorID>FF324AAC-7B45-384B-77B7-A3A52F652F10</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="platba_id" id="D9086083-2311-C55A-787A-C66C5951D118">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-22 15:50:10 UTC</createdTime>
+<generatorID>4D3E7FF2-1909-DAF2-B18B-61DED4C43261</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="castka" id="5122490A-5FF6-C40D-AB25-DE229068E628">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-22 15:50:10 UTC</createdTime>
+<generatorID>662E793A-2C58-7414-E4B5-F411FB191692</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="cislo_uctu" id="F696F735-8E6C-70B2-7C88-E28D2F91A389">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-22 15:50:10 UTC</createdTime>
+<generatorID>D0766A16-433B-76F6-F0A4-6D54722E935F</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>30,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="objednavka_id" id="EACB1584-6B82-CCB3-A8B6-D2FD9AC8F08C">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-22 15:50:10 UTC</createdTime>
+<generatorID>65F7A01D-6B2F-8646-87DC-60A4A6CAC8AC</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="8C6EFFEF-6AD9-6E26-499B-F595DA11A8B4" referredColumn="1ED27502-0F6A-61DA-25FC-9293B13AB892"/>
+</associations>
+</Column>
+<Column name="zaplacena" id="670800A9-B6C0-8850-87E0-C6E3B8FEEE4F">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-22 15:50:10 UTC</createdTime>
+<generatorID>5479B834-764A-CA60-FD97-8B815C7BC0D1</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypePrecision>1</dataTypePrecision>
+<ownDataTypeParameters>,1,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="F130DCF1-44EA-982B-2CA7-F3E4B210232F" name="PLATBA_PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-22 15:50:10 UTC</createdTime>
+<generatorID>3E06FBF7-94A6-5C15-1BBA-1F99909105AC</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D9086083-2311-C55A-787A-C66C5951D118"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="B53FDF33-CD4E-9102-3BF3-98264F195CAB" name="PLATBA__IDX">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-22 15:50:10 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<relationGeneratorID>B62C1F8C-74DD-E2F7-431C-74FA02AB01B1</relationGeneratorID>
+<indexColumnUsage>
+<colUsage columnID="EACB1584-6B82-CCB3-A8B6-D2FD9AC8F08C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="661363E4-5BDF-45D2-6B9D-9CC199B99F6C" name="PLATBA_OBJEDNAVKA_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-22 15:50:10 UTC</createdTime>
+<generatorID>B62C1F8C-74DD-E2F7-431C-74FA02AB01B1</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="EACB1584-6B82-CCB3-A8B6-D2FD9AC8F08C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
