@@ -42,7 +42,6 @@ internal sealed class DbUnitOfWork : IDbUnitOfWork
 
     public void BeginTransaction()
     {
-        // Connection.Open();
         Transaction = Connection.BeginTransaction();
     }
 

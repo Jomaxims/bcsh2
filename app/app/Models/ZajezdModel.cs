@@ -2,6 +2,7 @@
 
 public class ZajezdModel
 {
+    public string? Popis { get; set; }
     public required int CenaZaOsobu { get; set; }
     public required string Doprava { get; set; }
     public int? CenaPredSlevou { get; set; }
@@ -30,7 +31,7 @@ public class PokojModel
 
 public class UbytovaniModel
 {
-    public required IEnumerable<string> ObrazkyIds { get; set; }
+    public required IEnumerable<string> FotoIds { get; set; }
     public required string Nazev { get; set; }
     public required int PocetHvezd { get; set; }
     public required string Lokalita { get; set; }

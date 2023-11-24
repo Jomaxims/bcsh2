@@ -1,8 +1,5 @@
-using System.Globalization;
 using System.Net.Mime;
 using app.DAL;
-using app.DAL.Models;
-using app.DAL.Repositories;
 using app.Managers;
 using app.Utils;
 using Dapper;
@@ -10,6 +7,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Diagnostics;
 using Sqids;
 using Role = app.Managers.Role;
+
+DefaultTypeMap.MatchNamesWithUnderscores = true;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +23,7 @@ builder.Services.AddSingleton<IIdConverter>(new IdConverter(
     )));
 builder.Services.AddSingleton<IDbConnectionFactory, DbConnectionFactory>();
 builder.Services.AddSingleton<DatabaseManager, DatabaseManager>();
+builder.Services.AddScoped(typeof(GenericDao<>), typeof(GenericDao<>));
 
 builder.Services.AddScoped<IDbUnitOfWork, DbUnitOfWork>();
 builder.Services.AddScoped<UserManager, UserManager>();
@@ -48,8 +48,6 @@ if (builder.Environment.IsDevelopment())
 }
 
 var app = builder.Build();
-
-DefaultTypeMap.MatchNamesWithUnderscores = true;
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

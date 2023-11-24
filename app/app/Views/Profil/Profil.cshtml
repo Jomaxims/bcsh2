@@ -1,10 +1,62 @@
-﻿@using System.Security.Claims
+﻿@model ProfilModel
+
 @{
     ViewBag.Title = "Profil";
+
+    const string star = "*";
 }
+<div class="container-md mt-3">
+    <div class="d-flex flex-column">
+        <h2 class="mb-0">@Model.Udaje.Jmeno @Model.Udaje.Prijmeni</h2>
+        <p>@Model.PrihlasovaciJmeno</p>
+        <form asp-controller="Profil" asp-action="HesloPost" method="post" enctype="application/x-www-form-urlencoded" class="w-100 mb-3">
+            <div class="d-flex gap-3">
+                <div class="form-group">
+                    <label name="heslo" class="control-label">Nové heslo</label>
+                    <input class="form-control" type="password" data-val="true" data-val-required="Zadejte heslo" data-rule-minlength="5" id="heslo" name="heslo">
+                    <span class="text-danger field-validation-valid" data-valmsg-for="heslo" data-valmsg-replace="true"></span>
+                </div>
+                <div class="form-group mt-4">
+                    <input type="submit" value="Změnit heslo" class="btn btn-primary d-block mx-auto"/>
+                </div>
+            </div>
+        </form>
+        <vc:uzivatel-udaje udaje="@Model.Udaje"/>
+        <div>
+            <h3>Zájezdy</h3>
+            <div class="d-flex flex-wrap justify-content-center">
+                @foreach (var item in Model.Zajezdy)
+                {
+                    <div class="d-flex flex-column p-4 m-2 rounded-5 bg-body-tertiary">
+                        <h4 class="fw-bold mb-0">
+                            @item.Nazev
+                            @for (var i = 0; i < item.PocetHvezd; i++)
+                            {
+                                @star
+                            }
+                        </h4>
+                        <p>
+                            @item.Od.ToShortDateString() - @item.Do.ToShortDateString() <br>
+                        </p>
+                        <p class="lh-1">
+                            <span class="fs-5 fw-bold">@item.Cena Kč</span> <br>
+                            @if (item.Zaplaceno)
+                            {
+                                <span class="text-success">Zaplaceno</span>
+                            }
+                            else
+                            {
+                                <span class="text-danger">Nezaplaceno</span>
+                            }
+                        </p>
+                        <a class="nav-link text-primary fw-bold fs-5" asp-controller="Objednavky" asp-action="ById" asp-route-id="@item.Id">OBJEDNÁVKA</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
 
-<p>Profil</p>
-
-<span class="marker marker--secondary">User.Identity.IsAuthenticated:</span> @User.Identity!.IsAuthenticated
-<span class="marker marker--secondary">User.HasClaim(ClaimTypes.Role, "admin"):</span> @User.HasClaim(ClaimTypes.Role, "admin")
-<span class="marker marker--secondary">User.HasClaim(ClaimTypes.Name, "admin"):</span> @User.HasClaim(ClaimTypes.Name, "admin")
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

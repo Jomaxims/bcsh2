@@ -1,16 +1,20 @@
 ﻿using System.Data;
-using Dapper;
 using app.DAL.Models;
 using app.Utils;
+using Dapper;
 using Humanizer;
 
-namespace app.DAL.Repositories;
+namespace app.DAL;
 
-public class GenericRepository<T> : RepositoryBase where T : IDbModel
+public class GenericDao<T> where T : IDbModel
 {
+    private readonly IDbUnitOfWork _unitOfWork;
     private static readonly string TableName = typeof(T).Name.Underscore().ToLower();
     
-    public GenericRepository(IDbUnitOfWork unitOfWork) : base(unitOfWork) {}
+    public GenericDao(IDbUnitOfWork unitOfWork)
+    {
+        _unitOfWork = unitOfWork;
+    }
 
     public DbResult Delete(int id)
     {
@@ -18,16 +22,16 @@ public class GenericRepository<T> : RepositoryBase where T : IDbModel
         parameters.Add($"{Constants.DbProcedureParamPrefix}{TableName}_id", id);
         parameters.AddResult();
 
-        UnitOfWork.Connection.Query($"pck_{TableName}.delete_{TableName}", parameters, commandType: CommandType.StoredProcedure);
+        _unitOfWork.Connection.Query($"pck_{TableName}.delete_{TableName}", parameters, commandType: CommandType.StoredProcedure);
 
         return parameters.GetResult();
     }
     
-    public DbResult Edit(T model)
+    public DbResult AddOrEdit(T model)
     {
         var parameters = MapModelToParams(model);
         
-        var res = UnitOfWork.Connection.Execute($"pck_{TableName}.manage_{TableName}", parameters, commandType: CommandType.StoredProcedure);
+        var res = _unitOfWork.Connection.Execute($"pck_{TableName}.manage_{TableName}", parameters, commandType: CommandType.StoredProcedure);
         // res.Read();
         // res.Close();
         // res.Dispose();
@@ -40,14 +44,14 @@ public class GenericRepository<T> : RepositoryBase where T : IDbModel
     {
         var sql = $"SELECT * FROM {TableName} WHERE {TableName}_id = :id";
 
-        return UnitOfWork.Connection.QuerySingle<T>(sql, new { id });
+        return _unitOfWork.Connection.QuerySingle<T>(sql, new { id });
     }
     
     public IEnumerable<T> GetAll()
     {
         var sql = $"SELECT * FROM {TableName}";
 
-        return UnitOfWork.Connection.Query<T>(sql);
+        return _unitOfWork.Connection.Query<T>(sql);
     }
 
     private static DynamicParameters MapModelToParams(T model)

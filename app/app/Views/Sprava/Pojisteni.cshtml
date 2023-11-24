@@ -1,0 +1,29 @@
+﻿@model IEnumerable<app.Models.Sprava.PojisteniModel>
+
+@{
+    ViewBag.Title = "Pojištění";
+}
+
+<div class="container-md mt-3">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Název</th>
+            <th scope="col">Cena za den</th>
+            <th scope="col"><a class="btn btn-primary" asp-action="PojisteniEdit" asp-route-id="0">Přidat</a></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Nazev</td>
+                <td>@item.CenaZaDen Kč</td>
+                <td>
+                    <a asp-action="PojisteniEdit" asp-route-id="@item.PojisteniId">Upravit</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

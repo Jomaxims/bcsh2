@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using app.DAL;
-using app.DAL.Repositories;
+using app.DAL.Models;
 using app.Managers;
 using Microsoft.AspNetCore.Mvc;
 using app.Models;
@@ -12,18 +12,26 @@ public class HomeController : Controller
     private readonly ILogger<HomeController> _logger;
     private readonly UserManager _userManager;
     private readonly IDbUnitOfWork _unitOfWork;
+    private readonly GenericDao<Adresa> _adresaDao;
 
-    public HomeController(ILogger<HomeController> logger, UserManager userManager, IDbUnitOfWork unitOfWork)
+    public HomeController(ILogger<HomeController> logger, UserManager userManager, IDbUnitOfWork unitOfWork, GenericDao<Adresa> adresaDao)
     {
         _logger = logger;
         _userManager = userManager;
         _unitOfWork = unitOfWork;
+        _adresaDao = adresaDao;
     }
 
     [Route("")]
     public IActionResult Index()
     {
-        return View(new { Name = "pepa"});
+        var specilaniNabidky = new List<SpecialniNabidkaModel>();
+        for (var i = 0; i < 5; i++)
+        {
+            specilaniNabidky.Add(new SpecialniNabidkaModel {FotoId = "1", Nazev = $"Nabídka {i}", Id = "jkMvT"});
+        }
+        
+        return View(specilaniNabidky);
     }
 
     [Route("kontakt")]
@@ -41,7 +49,7 @@ public class HomeController : Controller
     
     [HttpPost]
     [Route("register")]
-    public IActionResult RegisterPost(RegisterModel? model)
+    public IActionResult RegisterPost(RegistraceModel? model)
     {
         if (!(ModelState.IsValid && model != null))
             return BadRequest();

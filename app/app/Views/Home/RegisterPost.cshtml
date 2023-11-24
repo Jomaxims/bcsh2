@@ -1,4 +1,4 @@
-﻿@model app.Models.RegisterModel
+﻿@model app.Models.RegistraceModel
 
 @{
     ViewBag.Title = "RegisterPost";
@@ -35,10 +35,10 @@
             @Html.DisplayFor(model => model.Prijmeni)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Vek)
+            @Html.DisplayNameFor(model => model.DatumNarozeni)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Vek)
+            @Html.DisplayFor(model => model.DatumNarozeni)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Kontakt.Email)

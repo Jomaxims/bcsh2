@@ -12,4 +12,6 @@ public class ZajezdNahledModel
     public required string Strava { get; set; }
     public required int CenaZaOsobu { get; set; }
     public int? CenaPredSlevou { get; set; }
+    public required string Od { get; set; }
+    public required string Do { get; set; }
 }

@@ -1,14 +1,67 @@
-﻿@{
+﻿@model ObjednavkaModel
+
+@{
     ViewBag.Title = "Objednávka";
 }
 
-<p>Zajezd ID: @ViewBag.ZajezdId</p>
-<p>Termin ID: @ViewBag.TerminId</p>
-<p>Pojisteni ID: @ViewBag.PojisteniId</p>
-<p>Pokoj ID: @ViewBag.PokojId</p>
-
-<form asp-controller="Objednavky" asp-action="PlatbaPost" method="post" enctype="application/x-www-form-urlencoded">
-    <div class="form-group">
-        <input type="submit" value="Zaplatit" class="btn btn-primary" />
+<div class="container-md pt-5">
+    <div class="d-flex justify-content-center">
+        <div class="d-flex flex-column" style="min-width: 20em;">
+            <h4>Shrnutí</h4>
+            <p>
+                <span class="fw-bold">Termín:</span> @Model.Zajezd.Termin <br>
+                <span class="fw-bold">Pojištění:</span> @Model.Zajezd.Pojisteni <br>
+                <span class="fw-bold">Pokoj:</span> @Model.Zajezd.Pokoj <br>
+                <span class="fw-bold">Celková cena:</span> <br>
+                <span class="fw-bold fs-4">@ViewBag.CelkovaCena Kč</span> <br>
+                <a class="nav-link text-primary fw-bold fs-4" asp-controller="Zajezdy" asp-action="ById" asp-route-id="@ViewBag.ZajezdId">ZÁJEZD</a>
+            </p>
+        </div>
+        <div>
+            @if (!Model.Zaplacena)
+            {
+                <vc:objednavka-platba/>
+            }
+            else
+            {
+                <p class="text-success fw-bold fs-4">ZAPLACENA</p>
+            }
+        </div>
     </div>
-</form>
+    <div class="d-flex flex-column mt-5">
+        <h4 class="d-flex justify-content-center">Údaje dalších účastníků</h4>
+        @if (Model.Osoby.Length == 0)
+        {
+            <p>Zájezd je pouze pro 1 osobu</p>
+        }
+        <div class="d-flex gap-5 justify-content-center">
+            @foreach (var item in Model.Osoby)
+            {
+                <p>
+                    <span class="fw-bold">Jméno:</span> @item.Jmeno <br>
+                    <span class="fw-bold">Příjmení:</span> @item.Prijmeni <br>
+                    <span class="fw-bold">Datum narození:</span> @item.DatumNarozeni
+                </p>
+            }
+        </div>
+    </div>
+    <div class="d-flex flex-column justify-content-center">
+        @if (!Model.Zaplacena)
+        {
+            <form id="delete-form" asp-action="ObjednavkaDelete" asp-route-id="@Model.ObjednavkaId" method="post" enctype="application/x-www-form-urlencoded" class="w-100">
+                <div class="form-group mt-3">
+                    <input type="submit" value="Zrušit objednávku" class="btn btn-danger d-block mx-auto"/>
+                </div>
+            </form>
+        }
+        else
+        {
+            <p class="text-center">Objednávka je již zaplacena, pro <span class="text-danger">zrušení</span> nás kontaktujte.</p>
+        }
+    </div>
+
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

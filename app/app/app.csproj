@@ -22,6 +22,11 @@
       <None Include="wwwroot\js\bootstrap.bundle.js.map" />
       <None Include="wwwroot\js\bootstrap.bundle.min.js" />
       <None Include="wwwroot\js\bootstrap.bundle.min.js.map" />
+      <None Remove="Views\Shared\Components\Navbar\Default.cshtml.css" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Models\SignUpViewModel.cs" />
     </ItemGroup>
     
 </Project>

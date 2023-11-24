@@ -1,8 +1,21 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿namespace app.Models;
 
-namespace app.Models;
+public class Over18Attribute : ValidationAttribute
+{
+    public override bool IsValid(object? value)
+    {
+        if (value == null)
+            return false;
 
-public class RegisterModel
+        var date = (DateOnly)value;
+        var today = DateTime.Today;
+        var maxDate = new DateOnly(today.Year - 18, today.Month, today.Day);
+
+        return maxDate.CompareTo(date) > 0;
+    }
+}
+
+public class RegistraceModel
 {
     [Required(ErrorMessage = "Zadejte přihlašovací jméno")]
     [Display(Name = "Přihlašovací jméno")]
@@ -12,6 +25,7 @@ public class RegisterModel
     [Required(ErrorMessage = "Zadejte heslo")]
     [Display(Name = "Heslo")]
     [DataType(DataType.Password)]
+    [MinLength(5, ErrorMessage = "Heslo musí mít minimálně 5 znaků")]
     public required string Heslo { get; set; }
     
     [Required(ErrorMessage = "Zadejte jméno")]
@@ -24,10 +38,12 @@ public class RegisterModel
     [DataType(DataType.Text)]
     public required string Prijmeni { get; set; }
     
-    [Required(ErrorMessage = "Zadejte věk")]
-    [Display(Name = "Věk")]
-    [Range(15, 999, ErrorMessage = "Nejnižší povolený věk je 15 let")]
-    public required int Vek { get; set; }
+    [Required(ErrorMessage = "Zadejte datum narození")]
+    [Display(Name = "Datum narození")]
+    [DataType(DataType.Date)]
+    // [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
+    [Over18(ErrorMessage = "Zákazník musí být starší 18 let")]
+    public required DateOnly DatumNarozeni { get; set; }
     
     [Required(ErrorMessage = "Zadejte kontakt")]
     [Display(Name = "Kontakt")]
@@ -62,14 +78,14 @@ public class AdresaModel
     
     [Display(Name = "Poznámka")]
     [DataType(DataType.Text)]
-    public required string Poznamka { get; set; }
+    public string? Poznamka { get; set; }
 }
 
 public class KontaktModel
 {
     [Required(ErrorMessage = "Zadejte email")]
     [Display(Name = "Email")]
-    [DataType(DataType.EmailAddress)]
+    [DataType(DataType.EmailAddress, ErrorMessage = "Zadejte platný email")]
     public required string Email { get; set; }
     
     [Required(ErrorMessage = "Zadejte telefon")]

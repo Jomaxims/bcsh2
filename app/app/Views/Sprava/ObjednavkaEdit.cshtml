@@ -1,0 +1,65 @@
+﻿@model app.Models.Sprava.ObjednavkaModel
+
+@{
+    ViewBag.Title = "Objednávka";
+}
+
+<div class="container d-flex flex-column justify-content-center pt-5">
+    <form id="form" asp-action="ObjednavkaPost" method="post" enctype="application/x-www-form-urlencoded" class="w-100">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="ObjednavkaId" type="hidden"/>
+        <div class="d-flex justify-content-center gap-5">
+            <div class="d-flex flex-column">
+                <h4>@ViewBag.Title</h4>
+                <p>
+                    <a class="nav-link text-primary fw-bold" target="_blank" asp-controller="Zajezdy" asp-action="ById" asp-route-id="@Model.Zajezd.ZajezdId">Zobrazit zájezd</a>
+                    <a class="nav-link text-primary fw-bold" target="_blank" asp-controller="Sprava" asp-action="ZakaznikEdit" asp-route-id="@Model.Zakaznik.ZakaznikId">Zobrazit zákazníka</a>
+                    <span class="fw-bold">Zákazník:</span> @Model.Zakaznik.Osoba.Jmeno @Model.Zakaznik.Osoba.Prijmeni <br>
+                    <span class="fw-bold">Ubytování:</span> @Model.Zajezd.Ubytovani.Nazev <br>
+                    <span class="fw-bold">Termín:</span> @Model.Termin.Od - @Model.Termin.Do <br>
+                    <span class="fw-bold">Počet osob:</span> @Model.PocetOsob <br>
+                    <span class="fw-bold">Pojištění:</span> @Model.Pojisteni.Nazev (@Model.Pojisteni.CenaZaDen Kč/den) <br>
+                    <span class="fw-bold">Počet osob:</span> @Model.PocetOsob <br>
+                    <span class="fw-bold">Pokoj:</span> @Model.Pokoj.Nazev - @Model.Pokoj.PocetMist <br>
+                    <span class="fw-bold">Částka:</span> @Model.Platba.Castka Kč<br>
+                    <span class="fw-bold">Číslo účtu:</span> @(Model.Platba.CisloUctu ?? "Účet nezadán")<br>
+                </p>
+                <div class="form-group">
+                    <label asp-for="Platba.Zaplacena" class="control-label"></label>
+                    <input type="checkbox" asp-for="Platba.Zaplacena" checked="@Model.Platba.Zaplacena" class="form-check-input"/>
+                    <span asp-validation-for="Platba.Zaplacena" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="d-flex flex-column">
+                <h4>Další účastníci</h4>
+                @if (!Model.Osoby.Any())
+                {
+                    <p>
+                        Na zájezd jede pouze zákazník 😊
+                    </p>
+                }
+                @foreach (var item in Model.Osoby)
+                {
+                    <p>
+                        <span class="fw-bold">Jméno:</span> @item.Jmeno @item.Prijmeni <br>
+                        <span class="fw-bold">Datum narození:</span> @item.DatumNarozeni <br>
+                    </p>
+                }
+            </div>
+        </div>
+        <div class="form-group mt-3">
+            <input type="submit" value="Potvrdit" class="btn btn-primary d-block mx-auto"/>
+        </div>
+    </form>
+    <form id="delete-form" asp-action="PolozkyDelete" asp-route-typPolozky="objednavka" asp-route-id="@Model.ObjednavkaId" method="post" enctype="application/x-www-form-urlencoded" class="w-100">
+        <div class="form-group mt-3">
+            <input type="submit" value="Smazat" class="btn btn-danger d-block mx-auto"/>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

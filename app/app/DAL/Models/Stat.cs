@@ -1,6 +1,4 @@
-﻿using app.DAL.Models;
-
-namespace app.DAL;
+﻿namespace app.DAL.Models;
 
 public class Stat : IDbModel
 {

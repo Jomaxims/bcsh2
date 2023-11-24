@@ -1,45 +1,90 @@
-﻿@model IEnumerable<app.Models.ZajezdNahledModel>
+﻿@using app.ViewComponents
+@model IEnumerable<app.Models.ZajezdNahledModel>
 
 @{
     ViewBag.Title = "Zajezdy";
+    var today = DateOnly.FromDateTime(DateTime.Now);
+    
+    int strana = ViewBag.Strana;
+    int maxStrana = ViewBag.MaxStrana;
+    var zeme = Context.Request.Query["zeme"].ToString();
+    var doprava = Context.Request.Query["doprava"].ToString();
+    var strava = Context.Request.Query["strava"].ToString();
+    var datumOd = Context.Request.Query["datumOd"].FirstOrDefault() ?? today.ToString("o");
+    var datumDo = Context.Request.Query["datumDo"].ToString();
 }
 
-<table class="table">
-<thead>
-<tr>
-    <th>
-        @Html.DisplayNameFor(model => model.Nazev)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.PocetHvezd)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.Lokalita)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.ZkracenyPopis)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.Doprava)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.Strava)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.CenaZaOsobu)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.CenaPredSlevou)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.FotoId)
-    </th>
-    <th></th>
-</tr>
-</thead>
-<tbody>
-@foreach (var item in Model) {
-    <vc:zajezd-nahled model="@item" />
-}
-</tbody>
-</table>
+<div class="d-flex flex-column gap-3 container-md mt-3">
+    <form asp-action="Zajezdy" method="get" enctype="application/x-www-form-urlencoded" class="w-100">
+        <div class="d-flex justify-content-center gap-3">
+            <div class="form-group">
+                <label for="datumOd" class="control-label">Od</label>
+                <input type="date" min="@today.ToString("o")" value="@datumOd" id="datumOd" name="datumOd" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="datumDo" class="control-label">Do</label>
+                <input type="date" min="@today.ToString("o")" value="@datumDo" id="datumDo" name="datumDo" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="zeme" class="control-label">Země</label>
+                <select id="zeme" name="zeme" class="form-select">
+                    @foreach (var item in ViewBag.Staty)
+                    {
+                        if (item.StatId == zeme)
+                        {
+                            <option value="@item.StatId" selected>@item.Nazev</option>
+                        }
+                        else
+                        {
+                            <option value="@item.StatId">@item.Nazev</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="doprava" class="control-label">Doprava</label>
+                <select id="doprava" name="doprava" class="form-select">
+                    @foreach (var item in ViewBag.Dopravy)
+                    {
+                        if (item.DopravaId == doprava)
+                        {
+                            <option value="@item.DopravaId" selected>@item.Nazev</option>
+                        }
+                        else
+                        {
+                            <option value="@item.DopravaId">@item.Nazev</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="strava" class="control-label">Strava</label>
+                <select id="strava" name="strava" class="form-select">
+                    @foreach (var item in ViewBag.Stravy)
+                    {
+                        if (item.StravaId == strava)
+                        {
+                            <option value="@item.StravaId" selected>@item.Nazev</option>
+                        }
+                        else
+                        {
+                            <option value="@item.StravaId">@item.Nazev</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group mt-auto">
+                <input type="submit" value="Hledat" class="btn btn-primary d-block mx-auto"/>
+            </div>
+        </div>
+    </form>
+
+    @foreach (var item in Model)
+    {
+        <vc:zajezd-nahled model="@item"/>
+    }
+</div>
+
+<nav class="mt-3">
+    <vc:pagination strana="@strana" max-strana="@maxStrana"/>
+</nav>

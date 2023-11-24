@@ -1,0 +1,90 @@
+﻿@model IEnumerable<app.Models.Sprava.ObjednavkaModel>
+
+@{
+    ViewBag.Title = "Objednávky";
+    var today = DateOnly.FromDateTime(DateTime.Now);
+
+    int strana = ViewBag.Strana;
+    int maxStrana = ViewBag.MaxStrana;
+    var zakaznik = Context.Request.Query["zakaznik"].ToString();
+    var ubytovani = Context.Request.Query["ubytovani"].ToString();
+    var zaplaceno = Context.Request.Query["zaplaceno"].ToString();
+    var datumOd = Context.Request.Query["datumOd"].FirstOrDefault() ?? today.ToString("o");
+    var datumDo = Context.Request.Query["datumDo"].ToString();
+    var castkaOd = Context.Request.Query["castkaOd"].ToString();
+    var castkaDo = Context.Request.Query["castkaDo"].ToString();
+}
+
+<div class="container-md mt-3">
+    <form asp-action="Objednavka" method="get" enctype="application/x-www-form-urlencoded" class="w-100">
+        <div class="d-flex justify-content-center gap-3">
+            <div class="form-group">
+                <label for="datumOd" class="control-label">Od</label>
+                <input type="date" min="@today.ToString("o")" value="@datumOd" id="datumOd" name="datumOd" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="datumDo" class="control-label">Do</label>
+                <input type="date" min="@today.ToString("o")" value="@datumDo" id="datumDo" name="datumDo" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="zakaznik" class="control-label">Zákazník</label>
+                <input id="zakaznik" name="zakaznik" type="text" value="@zakaznik" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="ubytovani" class="control-label">Ubytování</label>
+                <input id="ubytovani" name="ubytovani" type="text" value="@ubytovani" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="castkaOd" class="control-label">Částka od</label>
+                <input id="castkaOd" name="castkaOd" type="number" value="@castkaOd" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="castkaDo" class="control-label">Částka do</label>
+                <input id="castkaDo" name="castkaDo" type="number" value="@castkaDo" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="zaplaceno" class="control-label">Zaplaceno</label>
+                <select id="zaplaceno" name="zaplaceno" type="text" value="@castkaDo" class="form-select">
+                    <!option value="vse" @(zaplaceno == "vse" ? "selected" : "")>Vše</!option>
+                    <!option value="ano" @(zaplaceno == "ano" ? "selected" : "")>Ano</!option>
+                    <!option value="ne" @(zaplaceno == "ne" ? "selected" : "")>Ne</!option>
+                </select>
+            </div>
+            <div class="form-group mt-auto">
+                <input type="submit" value="Hledat" class="btn btn-primary d-block mx-auto"/>
+            </div>
+        </div>
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Zákazník</th>
+            <th scope="col">Ubytování</th>
+            <th scope="col">Termín</th>
+            <th scope="col">Pokoj</th>
+            <th scope="col">Částka</th>
+            <th scope="col">Zaplaceno</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Zakaznik.Osoba.Jmeno @item.Zakaznik.Osoba.Prijmeni</td>
+                <td>@item.Zajezd.Ubytovani.Nazev</td>
+                <td>@item.Termin.Od - @item.Termin.Do</td>
+                <td>@item.Pokoj.Nazev - @item.Pokoj.PocetMist</td>
+                <td>@item.Platba.Castka Kč</td>
+                <td>@(item.Platba.Zaplacena ? "Ano" : "Ne")</td>
+                <td>
+                    <a asp-action="ObjednavkaEdit" asp-route-id="@item.ObjednavkaId">Upravit</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    
+    <vc:pagination strana="@strana" max-strana="@maxStrana"/>
+</div>

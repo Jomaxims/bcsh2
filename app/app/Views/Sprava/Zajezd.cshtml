@@ -1,0 +1,102 @@
+﻿@model IEnumerable<app.Models.Sprava.ZajezdModel>
+
+@{
+    ViewBag.Title = "Zájezdy";
+
+    int strana = ViewBag.Strana;
+    int maxStrana = ViewBag.MaxStrana;
+    var ubytovani = Context.Request.Query["ubytovani"].ToString();
+    var adresa = Context.Request.Query["adresa"].ToString();
+    var cenaOd = Context.Request.Query["cenaOd"].ToString();
+    var cenaDo = Context.Request.Query["cenaDo"].ToString();
+    var slevaOd = Context.Request.Query["slevaOd"].ToString();
+    var slevaDo = Context.Request.Query["slevaDo"].ToString();
+    var doprava = Context.Request.Query["doprava"].ToString();
+    var strava = Context.Request.Query["strava"].ToString();
+}
+
+<div class="container-md mt-3">
+    <form asp-action="Zajezd" method="get" enctype="application/x-www-form-urlencoded" class="w-100">
+        <div class="d-flex justify-content-center gap-3">
+            <div class="form-group">
+                <label for="ubytovani" class="control-label">Ubytování</label>
+                <input id="ubytovani" name="ubytovani" type="text" value="@ubytovani" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="adresa" class="control-label">Adresa</label>
+                <input id="adresa" name="adresa" type="text" value="@adresa" class="form-control">
+            </div>
+            <div class="form-group" style="width: 8em;">
+                <label for="cenaOd" class="control-label">Cena od</label>
+                <input id="cenaOd" name="cenaOd" type="number" value="@cenaOd" class="form-control">
+            </div>
+            <div class="form-group" style="width: 8em;">
+                <label for="cenaDo" class="control-label">Cena do</label>
+                <input id="cenaDo" name="cenaDo" type="number" value="@cenaDo" class="form-control">
+            </div>
+            <div class="form-group" style="width: 5em;">
+                <label for="slevaOd" class="control-label">Sleva od</label>
+                <input id="slevaOd" name="slevaOd" type="number" value="@slevaOd" class="form-control">
+            </div>
+            <div class="form-group" style="width: 5em;">
+                <label for="slevaDo" class="control-label">Sleva do</label>
+                <input id="slevaDo" name="slevaDo" type="number" value="@slevaDo" class="form-control">
+            </div>
+            <div class="form-group" style="width: 10em;">
+                <label for="doprava" class="control-label">Doprava</label>
+                <select id="doprava" name="doprava" class="form-select">
+                    @foreach (var item in ViewBag.Dopravy)
+                    {
+                        <!option value="@item.DopravaId" @(item.DopravaId == doprava ? "selected" : "")>@item.Nazev</!option>
+                    }
+                </select>
+            </div>
+            <div class="form-group" style="width: 10em;">
+                <label for="strava" class="control-label">Strava</label>
+                <select id="strava" name="strava" class="form-select">
+                    @foreach (var item in ViewBag.Stravy)
+                    {
+                        <!option value="@item.StravaId" @(item.StravaId == strava ? "selected" : "")>@item.Nazev</!option>
+                    }
+                </select>
+            </div>
+            <div class="form-group mt-auto">
+                <input type="submit" value="Hledat" class="btn btn-primary d-block mx-auto"/>
+            </div>
+        </div>
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Ubytování</th>
+            <th scope="col">Adresa</th>
+            <th scope="col">Cena za osobu</th>
+            <th scope="col">Sleva</th>
+            <th scope="col">Doprava</th>
+            <th scope="col">Strava</th>
+            <th scope="col">
+                <a class="btn btn-primary" asp-action="ZajezdEdit" asp-route-id="0">Přidat</a>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Ubytovani.Nazev</td>
+                <td>@item.Ubytovani.Adresa.ToString()</td>
+                <td>@item.CenaZaOsobu Kč</td>
+                <td> @(item.SlevaProcent != null ? $"{item.SlevaProcent}%" : "")</td>
+                <td>@item.Doprava.Nazev</td>
+                <td>@item.Strava.Nazev</td>
+                <td>
+                    <a asp-action="ZajezdEdit" asp-route-id="@item.ZajezdId">Upravit</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <vc:pagination strana="@strana" max-strana="@maxStrana"/>
+</div>

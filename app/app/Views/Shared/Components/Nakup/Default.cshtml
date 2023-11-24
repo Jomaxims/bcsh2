@@ -1,29 +1,47 @@
-﻿@model NakupModel
+﻿@using app.Managers
+@model ZajezdNakupModel
 
-<form asp-controller="Zajezdy" asp-action="NakupPost" method="post" asp-route-id="@ViewContext.RouteData.Values["id"]" enctype="application/x-www-form-urlencoded">
-    <div class="form-group">
-        <div class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="Termin" class="control-label"></label>
-            <select onchange="changePokoje(this.value)" asp-for="Termin" asp-items="new SelectList(ViewBag.Terminy, nameof(TerminModel.Id), nameof(TerminModel.OdDo))"></select>
+<div class="zajezd-nakup-container">
+    <form asp-controller="Zajezdy" asp-action="NakupPost" method="post" asp-route-id="@ViewContext.RouteData.Values["id"]" enctype="application/x-www-form-urlencoded">
+        <div class="d-flex flex-column gap-2">
+            <div class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Termin" class="control-label"></label>
+                <select class="form-select" onchange="changePokoje(this.value)" asp-for="Termin" asp-items="new SelectList(ViewBag.Terminy, nameof(TerminModel.Id), nameof(TerminModel.OdDo))"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pokoj" class="control-label"></label>
+                <select class="form-select" id="Pokoj" onchange="changePocetOsob()" asp-for="Pokoj"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PocetOsob" class="control-label"></label>
+                <input id="PocetOsob" min="1" max="1" value="1" asp-for="PocetOsob" class="form-control" type="number"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pojisteni" class="control-label"></label><span> (osoba/den)</span>
+                <select class="form-select" asp-for="Pojisteni" asp-items="new SelectList(ViewBag.Pojisteni, nameof(PojisteniModel.Id), nameof(PojisteniModel.Nazev))"></select>
+            </div>
+            <div class="form-group text-end mt-3">
+                <p class="lh-1 mb-2">
+                    @if (ViewBag.CenaPredSlevou != null)
+                    {
+                        <span class="text-decoration-line-through text">@ViewBag.CenaPredSlevou Kč</span> <br>
+                    }
+                    <span class="fs-3 fw-bold">@ViewBag.CenaZaOsobu Kč</span> <br>
+                    <span>za osobu</span>
+                </p>
+                @if (User.IsInRole(Role.Zakaznik))
+                {
+                    <input type="submit" value="Koupit" class="btn btn-primary w-100 fs-6"/>
+                }
+                else
+                {
+                    <p class="text-primary text-center">Nákup zájezdu pouze pro registrované zákazníky</p>
+                }
+            </div>
         </div>
-        <div class="form-group">
-            <label asp-for="Pokoj" class="control-label"></label>
-            <select id="Pokoj" onchange="changePocetOsob()" asp-for="Pokoj"></select>
-        </div>
-        <div class="form-group">
-            <label asp-for="PocetOsob" class="control-label"></label>
-            <input id="PocetOsob" min="1" max="1" value="1" asp-for="PocetOsob" class="form-control" type="number" />
-        </div>
-        <div class="form-group">
-            <label asp-for="Pojisteni" class="control-label"></label>
-            <select asp-for="Pojisteni" asp-items="new SelectList(ViewBag.Pojisteni, nameof(PojisteniModel.Id), nameof(PojisteniModel.Nazev))"></select>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Koupit" class="btn btn-primary" />
-        </div>
-    </div>
-</form>
+    </form>
+</div>
 
 <script type="text/javascript">
     const terminy = @Html.Raw(Json.Serialize(ViewBag.Terminy))
@@ -53,5 +71,5 @@
 </script>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

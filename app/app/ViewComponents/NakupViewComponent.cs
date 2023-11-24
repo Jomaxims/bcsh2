@@ -7,7 +7,7 @@ public class NakupViewComponent : ViewComponent
 {
     public IViewComponentResult Invoke()
     {
-        return View(new NakupModel
+        return View(new ZajezdNakupModel
         {
             Termin = null,
             PocetOsob = 1,

@@ -1,11 +1,82 @@
 ﻿@model ZajezdModel
 
 @{
-    ViewBag.Title = "Zajezdy";
+    ViewBag.Title = $"{Model.Ubytovani.Nazev} - {Model.Ubytovani.Lokalita}";
     ViewBag.Terminy = Model.Terminy;
     ViewBag.Pojisteni = Model.Pojisteni;
+    ViewBag.CenaZaOsobu = Model.CenaZaOsobu;
+    ViewBag.CenaPredSlevou = Model.CenaPredSlevou!;
+
+    var length = Model.Ubytovani.FotoIds.ToArray().Length;
+    var first = true;
+
+    const string star = "*";
 }
 
-<p>Zajezd ID: @ViewData["id"]</p>
+<div class="d-flex container-md mt-3 gap-3">
+    <div class="d-flex flex-column">
+        <div id="fotoCarousel" class="carousel slide">
+            <div class="carousel-indicators">
+                @for (var i = 0; i < length; i++)
+                {
+                    if (i == 0)
+                    {
+                        <button type="button" data-bs-target="#fotoCarousel" data-bs-slide-to="@i" aria-label="Slide @i" class="active" aria-current="true"></button>
+                    }
+                    else
+                    {
+                        <button type="button" data-bs-target="#fotoCarousel" data-bs-slide-to="@i" aria-label="Slide @i"></button>
+                    }
+                }
+            </div>
+            <div class="carousel-inner">
+                @foreach (var item in Model.Ubytovani.FotoIds)
+                {
+                    if (first)
+                    {
+                        <div class="carousel-item active">
+                            <a asp-controller="Image" asp-action="Index" asp-route-id="@item">
+                                <img src="/images/@item" alt="Obrázek zájezdu">
+                            </a>
+                        </div>
+                        first = false;
+                    }
+                    else
+                    {
+                        <div class="carousel-item">
+                            <a asp-controller="Image" asp-action="Index" asp-route-id="@item">
+                                <img src="/images/@item" alt="Obrázek zájezdu">
+                            </a>
+                        </div>
+                    }
+                }
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#fotoCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#fotoCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <div class="mt-4 mx-3">
+            <h3 class="fw-bold mb-0">
+                @Model.Ubytovani.Nazev
+                @for (var i = 0; i < Model.Ubytovani.PocetHvezd; i++)
+                {
+                    @star
+                }
+            </h3>
+            <p class="fw-bold">@Model.Ubytovani.Lokalita</p>
+            <p>@Model.Ubytovani.Popis</p>
+            @if (Model.Popis != null)
+            {
+                <h5 class="fw-bold">Detaily zájezdu</h5>
+                <p>@Model.Popis</p>
+            }
+        </div>
+    </div>
 
-<vc:nakup />
+    <vc:nakup/>
+</div>

@@ -1,0 +1,111 @@
+﻿@model app.Models.Sprava.ZakaznikModel?
+
+@{
+    ViewBag.Title = "Zákazník";
+    var today = DateTime.Today;
+    var maxDate = $"{today.Year - 18}-{today.Month}-{today.Day}";
+}
+
+<div class="container d-flex flex-column justify-content-center pt-5">
+    <form asp-action="ZakaznikPost" method="post" enctype="application/x-www-form-urlencoded" class="w-100">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="ZakaznikId" type="hidden"/>
+        <div class="d-flex justify-content-center gap-5">
+            <div class="d-flex flex-column justify-content-center gap-3 flex-fill">
+                <h4>Přihlašovací ůdaje</h4>
+                <div class="form-group">
+                    <label asp-for="PrihlasovaciUdaje.Jmeno" class="control-label"></label>
+                    <input asp-for="PrihlasovaciUdaje.Jmeno" class="form-control"/>
+                    <span asp-validation-for="PrihlasovaciUdaje.Jmeno" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    @if (Model != null)
+                    {
+                        <label asp-for="PrihlasovaciUdaje.Heslo" class="control-label">Nové heslo</label>
+                        <input asp-for="PrihlasovaciUdaje.Heslo" class="form-control" data-val="false"/>
+                    }
+                    else
+                    {
+                        <label asp-for="PrihlasovaciUdaje.Heslo" class="control-label"></label>
+                        <input asp-for="PrihlasovaciUdaje.Heslo" class="form-control"/>
+                    }
+                    <span asp-validation-for="PrihlasovaciUdaje.Heslo" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="d-flex flex-column justify-content-center gap-3 flex-fill">
+                <h4>Kontaktní údaje</h4>
+                <input asp-for="Osoba.OsobaId" type="hidden"/>
+                <div class="form-group">
+                    <label asp-for="Osoba.Jmeno" class="control-label"></label>
+                    <input asp-for="Osoba.Jmeno" class="form-control"/>
+                    <span asp-validation-for="Osoba.Jmeno" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Osoba.Prijmeni" class="control-label"></label>
+                    <input asp-for="Osoba.Prijmeni" class="form-control"/>
+                    <span asp-validation-for="Osoba.Prijmeni" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Osoba.DatumNarozeni" class="control-label"></label>
+                    <input asp-for="Osoba.DatumNarozeni" max="@maxDate" value="@Model?.Osoba.DatumNarozeni.ToString("o")" class="form-control"/>
+                    <span asp-validation-for="Osoba.DatumNarozeni" class="text-danger"></span>
+                </div>
+                <input asp-for="Kontakt.KontaktId" type="hidden"/>
+                <div class="form-group">
+                    <label asp-for="Kontakt.Email" class="control-label"></label>
+                    <input asp-for="Kontakt.Email" class="form-control"/>
+                    <span asp-validation-for="Kontakt.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Kontakt.Telefon" class="control-label"></label>
+                    <input asp-for="Kontakt.Telefon" class="form-control"/>
+                    <span asp-validation-for="Kontakt.Telefon" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="d-flex flex-column justify-content-center gap-3 flex-fill">
+                <h4>Adresa</h4>
+                <input asp-for="Adresa.AdresaId" type="hidden"/>
+                <div class="form-group">
+                    <label asp-for="Adresa.Ulice" class="control-label"></label>
+                    <input asp-for="Adresa.Ulice" class="form-control"/>
+                    <span asp-validation-for="Adresa.Ulice" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Adresa.CisloPopisne" class="control-label"></label>
+                    <input asp-for="Adresa.CisloPopisne" class="form-control"/>
+                    <span asp-validation-for="Adresa.CisloPopisne" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Adresa.Mesto" class="control-label"></label>
+                    <input asp-for="Adresa.Mesto" class="form-control"/>
+                    <span asp-validation-for="Adresa.Mesto" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Adresa.Psc" class="control-label"></label>
+                    <input asp-for="Adresa.Psc" class="form-control"/>
+                    <span asp-validation-for="Adresa.Psc" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Adresa.Poznamka" class="control-label"></label>
+                    <input asp-for="Adresa.Poznamka" class="form-control"/>
+                    <span asp-validation-for="Adresa.Poznamka" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group mt-3">
+            <input type="submit" value="Potvrdit" class="btn btn-primary d-block mx-auto"/>
+        </div>
+    </form>
+    @if (Model != null)
+    {
+        <form id="delete-form" asp-action="PolozkyDelete" asp-route-typPolozky="zakaznik" asp-route-id="@Model.ZakaznikId" method="post" enctype="application/x-www-form-urlencoded" class="w-100">
+            <div class="form-group mt-3">
+                <input type="submit" value="Smazat" class="btn btn-danger d-block mx-auto"/>
+            </div>
+        </form>
+    }
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

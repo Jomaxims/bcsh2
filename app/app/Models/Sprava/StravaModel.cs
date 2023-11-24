@@ -1,0 +1,11 @@
+﻿namespace app.Models.Sprava;
+
+public class StravaModel
+{
+    public string StravaId { get; set; }
+    
+    [Required(ErrorMessage = "Zadejte název")]
+    [Display(Name = "Název")]
+    [DataType(DataType.Text)]
+    public string Nazev { get; set; }
+}

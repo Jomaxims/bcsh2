@@ -1,0 +1,82 @@
+﻿@model IEnumerable<app.Models.Sprava.ZamestnanecModel>
+
+@{
+    ViewBag.Title = "Zaměstnanci";
+
+    int strana = ViewBag.Strana;
+    int maxStrana = ViewBag.MaxStrana;
+    var celeJmeno = Context.Request.Query["celeJmeno"].ToString();
+    var prihlasovaciJmeno = Context.Request.Query["prihlasovaciJmeno"].ToString();
+    var role = Context.Request.Query["role"].ToString();
+    var nadrizeny = Context.Request.Query["nadrizeny"].ToString();
+}
+
+<div class="container-md mt-3">
+    <form asp-action="Zamestnanec" method="get" enctype="application/x-www-form-urlencoded" class="w-100">
+        <div class="d-flex justify-content-center gap-3">
+            <div class="form-group">
+                <label for="celeJmeno" class="control-label">Celé jméno</label>
+                <input id="celeJmeno" name="celeJmeno" type="text" value="@celeJmeno" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="prihlasovaciJmeno" class="control-label">Přihlašovací jméno</label>
+                <input id="prihlasovaciJmeno" name="prihlasovaciJmeno" type="text" value="@prihlasovaciJmeno" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="role" class="control-label">Role</label>
+                <select id="role" name="role" class="form-select">
+                    @foreach (var item in ViewBag.Role)
+                    {
+                        if (item.RoleId == role)
+                        {
+                            <option value="@item.RoleId" selected>@item.Nazev</option>
+                        }
+                        else
+                        {
+                            <option value="@item.RoleId">@item.Nazev</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="nadrizeny" class="control-label">Nadřízený</label>
+                <input id="nadrizeny" name="nadrizeny" type="text" value="@nadrizeny" class="form-control">
+            </div>
+            <div class="form-group mt-auto">
+                <input type="submit" value="Hledat" class="btn btn-primary d-block mx-auto"/>
+            </div>
+        </div>
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Jméno</th>
+            <th scope="col">Příjmení</th>
+            <th scope="col">Přihlašovací jméno</th>
+            <th scope="col">Role</th>
+            <th scope="col">Nadřízený</th>
+            <th scope="col">
+                <a class="btn btn-primary" asp-action="ZamestnanecEdit" asp-route-id="0">Přidat</a>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Jmeno</td>
+                <td>@item.Prijmeni</td>
+                <td>@item.PrihlasovaciUdaje.Jmeno</td>
+                <td>@item.Role.Nazev</td>
+                <td>@(item.Nadrizeny != null ? $"{item.Nadrizeny.Jmeno} {item.Nadrizeny.Prijmeni}" : "")</td>
+                <td>
+                    <a asp-action="ZamestnanecEdit" asp-route-id="@item.ZamestnanecId">Upravit</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <vc:pagination strana="@strana" max-strana="@maxStrana"/>
+</div>

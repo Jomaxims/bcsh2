@@ -1,0 +1,44 @@
+﻿@model app.Models.Sprava.PojisteniModel?
+
+@{
+    ViewBag.Title = "Pojištění";
+}
+
+<div class="container d-flex flex-column justify-content-center pt-5">
+    <form asp-action="PojisteniPost" method="post" enctype="application/x-www-form-urlencoded" class="w-100">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="PojisteniId" type="hidden"/>
+        <div class="d-flex justify-content-center gap-5">
+            <div class="d-flex flex-column justify-content-center gap-3 flex-fill">
+                <h4>@ViewBag.Title</h4>
+                <div class="form-group">
+                    <label asp-for="Nazev" class="control-label"></label>
+                    <input asp-for="Nazev" class="form-control"/>
+                    <span asp-validation-for="Nazev" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CenaZaDen" class="control-label"></label>
+                    <input asp-for="CenaZaDen" class="form-control"/>
+                    <span asp-validation-for="CenaZaDen" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group mt-3">
+            <input type="submit" value="Potvrdit" class="btn btn-primary d-block mx-auto"/>
+        </div>
+    </form>
+    @if (Model != null)
+    {
+        <form id="delete-form" asp-action="PolozkyDelete" asp-route-typPolozky="pojisteni" asp-route-id="@Model.PojisteniId" method="post" enctype="application/x-www-form-urlencoded" class="w-100">
+            <div class="form-group mt-3">
+                <input type="submit" value="Smazat" class="btn btn-danger d-block mx-auto"/>
+            </div>
+        </form>
+    }
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

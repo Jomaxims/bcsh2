@@ -1,0 +1,24 @@
+﻿@model ObjednavkaPlatbaModel
+
+<form asp-controller="Objednavky" asp-action="PlatbaPost" asp-route-id="@ViewContext.RouteData.Values["id"]" method="post" enctype="application/x-www-form-urlencoded">
+    <div class="d-flex flex-column justify-content-center gap-3 flex-fill">
+        <div class="form-group">
+            <label asp-for="CisloKarty" class="control-label"></label>
+            <input asp-for="CisloKarty" class="form-control"/>
+            <span asp-validation-for="CisloKarty" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="DatumPlatnosti" class="control-label"></label>
+            <input asp-for="DatumPlatnosti" class="form-control"/>
+            <span asp-validation-for="DatumPlatnosti" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Cvv" class="control-label"></label>
+            <input asp-for="Cvv" class="form-control"/>
+            <span asp-validation-for="Cvv" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group mt-3">
+        <input type="submit" value="Zaplatit" class="btn btn-primary d-block mx-auto"/>
+    </div>
+</form>

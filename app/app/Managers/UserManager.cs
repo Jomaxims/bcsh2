@@ -21,16 +21,18 @@ public class User
 
 public interface IUserManager
 {
-    void SignUp(RegisterModel user);
+    void SignUp(RegistraceModel user);
     bool Login(HttpContext context, string name, string password);
     void Logout(HttpContext context);
     int? GetCurrentUserId(HttpContext context);
     User? GetCurrentUser(HttpContext context);
+
+    void ChangeToUser(HttpContext context, int userId);
 }
 
 public class UserManager
 {
-    public void SignUp(RegisterModel user)
+    public void SignUp(RegistraceModel user)
     {
         
     }
@@ -40,12 +42,15 @@ public class UserManager
         if (!(name == "admin" && password == "admin"))
             return false;
         
-        var claims = new List<Claim>();
-        claims.Add(new Claim(ClaimTypes.NameIdentifier, "1"));
-        claims.Add(new Claim(ClaimTypes.Name, name));
-        claims.Add(new Claim(ClaimTypes.Role, Role.Admin));
-        claims.Add(new Claim(ClaimTypes.Role, Role.Zamestnanec));
-        
+        var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.NameIdentifier, "1"),
+            new Claim(ClaimTypes.Name, name),
+            new Claim(ClaimTypes.Role, Role.Admin),
+            new Claim(ClaimTypes.Role, Role.Zamestnanec),
+            new Claim(ClaimTypes.Role, Role.Zakaznik)
+        };
+
         var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
         var principal = new ClaimsPrincipal(identity);
 
@@ -85,5 +90,45 @@ public class UserManager
             return null;
 
         return new User { Id = currentUserId.Value, Name = "pepa", Role = "pepa"};
+    }
+
+    public void ChangeToUser(HttpContext context, int userId)
+    {
+        var name = "arnošt";
+        var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
+            new Claim(ClaimTypes.Name, name),
+            new Claim(ClaimTypes.Role, Role.Zakaznik),
+            new Claim("OriginalUser", GetCurrentUserId(context).ToString() ?? "")
+        };
+
+        var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+        var principal = new ClaimsPrincipal(identity);
+
+        context.SignInAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme, principal, new AuthenticationProperties { IsPersistent = true }
+        );
+    }
+    
+    public void ChangeFromUser(HttpContext context)
+    {
+        var originalUser = context.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value ?? throw new ArgumentNullException();
+        var name = "pepa";
+        var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.NameIdentifier, originalUser),
+            new Claim(ClaimTypes.Name, name),
+            new Claim(ClaimTypes.Role, Role.Admin),
+            new Claim(ClaimTypes.Role, Role.Zamestnanec),
+            new Claim(ClaimTypes.Role, Role.Zakaznik),
+        };
+
+        var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+        var principal = new ClaimsPrincipal(identity);
+
+        context.SignInAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme, principal, new AuthenticationProperties { IsPersistent = true }
+        );
     }
 }

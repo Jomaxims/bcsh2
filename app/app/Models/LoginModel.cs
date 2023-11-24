@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace app.Models;
+﻿namespace app.Models;
 
 public class LoginModel
 {

@@ -1,0 +1,124 @@
+﻿@using app.Models.Sprava
+
+@model app.Models.Sprava.UbytovaniModel?
+
+@{
+    ViewBag.Title = "Ubytování";
+}
+
+<div class="container d-flex flex-column justify-content-center pt-5">
+    <form id="form" asp-action="UbytovaniPost" method="post" enctype="multipart/form-data" class="w-100">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="UbytovaniId" type="hidden"/>
+        <div class="d-flex justify-content-center flex-wrap gap-5">
+            <div class="d-flex flex-column justify-content-center gap-3 flex-fill">
+                <h4>Obrázky</h4>
+                <div class="form-group">
+                    <label class="control-label">Nahrané obrázky</label>
+                    @if (Model?.ObrazkyUbytovani != null)
+                    {
+                        for (var i = 0; i < Model.ObrazkyUbytovani.Length; i++)
+                        {
+                            var item = Model.ObrazkyUbytovani[i];
+                            <div id="obrazek_@item.ObrazkyUbytovaniId">
+                                <a target="_blank" class="fw-bold" asp-controller="Image" asp-action="Index" asp-route-id="@item.ObrazkyUbytovaniId">@item.Nazev</a>
+                                <span style="cursor: pointer" class="text-danger" onclick="removeImage('@item.ObrazkyUbytovaniId')">Smazat</span>
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="form-group">
+                    <label for="uploadObrazky" class="control-label">Nahrát obrázky <span class="fw-normal">(formát JPG)</span></label>
+                    <input type="file" multiple id="uploadObrazky" class="form-control"/>
+                </div>
+            </div>
+            <div class="d-flex flex-column justify-content-center gap-3 flex-fill">
+                <h4>@ViewBag.Title</h4>
+                <div class="form-group">
+                    <label asp-for="Nazev" class="control-label"></label>
+                    <input asp-for="Nazev" class="form-control"/>
+                    <span asp-validation-for="Nazev" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PocetHvezd" class="control-label"></label>
+                    <input asp-for="PocetHvezd" class="form-control"/>
+                    <span asp-validation-for="PocetHvezd" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Popis" class="control-label"></label>
+                    <textarea rows="20" asp-for="Popis" class="form-control"></textarea>
+                    <span asp-validation-for="Popis" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="d-flex flex-column justify-content-center gap-3 flex-fill">
+                <h4>Adresa</h4>
+                <input asp-for="Adresa.AdresaId" type="hidden"/>
+                <div class="form-group">
+                    <label asp-for="Adresa.Ulice" class="control-label"></label>
+                    <input asp-for="Adresa.Ulice" class="form-control"/>
+                    <span asp-validation-for="Adresa.Ulice" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Adresa.CisloPopisne" class="control-label"></label>
+                    <input asp-for="Adresa.CisloPopisne" class="form-control"/>
+                    <span asp-validation-for="Adresa.CisloPopisne" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Adresa.Mesto" class="control-label"></label>
+                    <input asp-for="Adresa.Mesto" class="form-control"/>
+                    <span asp-validation-for="Adresa.Mesto" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Adresa.Psc" class="control-label"></label>
+                    <input asp-for="Adresa.Psc" class="form-control"/>
+                    <span asp-validation-for="Adresa.Psc" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Adresa.Poznamka" class="control-label"></label>
+                    <input asp-for="Adresa.Poznamka" class="form-control"/>
+                    <span asp-validation-for="Adresa.Poznamka" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Adresa.Stat" class="control-label"></label>
+                    <select asp-for="Adresa.Stat.StatId" class="form-select" asp-items="new SelectList(ViewBag.Staty, nameof(StatModel.StatId), nameof(StatModel.Nazev))">
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group mt-3">
+            <input type="submit" value="Potvrdit" class="btn btn-primary d-block mx-auto"/>
+        </div>
+    </form>
+    @if (Model != null)
+    {
+        <form id="delete-form" asp-action="PolozkyDelete" asp-route-typPolozky="ubytovani" asp-route-id="@Model.UbytovaniId" method="post" enctype="application/x-www-form-urlencoded" class="w-100">
+            <div class="form-group mt-3">
+                <input type="submit" value="Smazat" class="btn btn-danger d-block mx-auto"/>
+            </div>
+        </form>
+    }
+</div>
+
+@section Scripts {
+    @{ Html.RenderPartial("_ValidationScriptsPartial"); }
+    <script src="~/lib/jquery.MultiFile.js"></script>
+    <script>
+        let i = 0
+        function removeImage(index) {
+            document.querySelector('#obrazek_' + index).remove()
+            document.querySelector('#form').innerHTML += '<input type="hidden" data-val="true" id="ObrazkyUbytovani_'+i+'__ObrazkyUbytovaniId" name="ObrazkyUbytovani['+i+'].ObrazkyUbytovaniId" value="'+index+'">'
+            
+            i++
+        }
+        
+        $(function(){
+            $('#uploadObrazky').MultiFile({
+                accept: 'jpg',
+                STRING: {
+                    denied:'Povolen pouze formát jpg.',
+                    file: '<span title="Click to remove" onclick="$(this).parent().prev().click()">$file</span>'
+                }
+            });
+        });
+    </script>
+}

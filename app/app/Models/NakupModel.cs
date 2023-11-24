@@ -1,22 +1,26 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace app.Models;
+﻿namespace app.Models;
 
 public class NakupModel
 {
-    [Required(ErrorMessage = "Zadejte termín")]
-    [Display(Name = "Termín")]
-    public required string Termin { get; set; }
+    public required ZajezdNakupModel Zajezd { get; set; }
+    public required OsobaModel[] Osoby { get; set; }
+}
+
+public class OsobaModel
+{
+    [Required(ErrorMessage = "Zadejte jméno")]
+    [Display(Name = "Jméno")]
+    [DataType(DataType.Text)]
+    public required string Jmeno { get; set; }
     
-    [Required(ErrorMessage = "Zadejte počet osob")]
-    [Display(Name = "Počet osob")]
-    public required int PocetOsob { get; set; }
+    [Required(ErrorMessage = "Zadejte příjmení")]
+    [Display(Name = "Příjmení")]
+    [DataType(DataType.Text)]
+    public required string Prijmeni { get; set; }
     
-    [Required(ErrorMessage = "Zadejte pojištění")]
-    [Display(Name = "Pojištění")]
-    public required string Pojisteni { get; set; }
-    
-    [Required(ErrorMessage = "Zadejte pokoj")]
-    [Display(Name = "Pokoj")]
-    public required string Pokoj { get; set; }
+    [Required(ErrorMessage = "Zadejte datum narození")]
+    [Display(Name = "Datum narození")]
+    [DataType(DataType.Date)]
+    [Over18(ErrorMessage = "Zákazník musí být starší 18 let")]
+    public required DateOnly DatumNarozeni { get; set; }
 }

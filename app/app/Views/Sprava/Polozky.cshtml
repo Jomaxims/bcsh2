@@ -1,5 +1,16 @@
-﻿@{
-    ViewBag.Title = "Polozky";
+﻿@model IDictionary<string, string>
+
+@{
+    ViewBag.Title = "Položky";
 }
 
-<p>Polozky typu @ViewData["typPolozky"]</p>
+<div class="container-md  mt-3">
+    <div class="d-flex flex-column align-content-center flex-wrap gap-3">
+        @foreach (var item in Model)
+        {
+            <div>
+                <a href="~/sprava/@item.Value" class="btn btn-primary d-block mx-auto">@item.Key</a>
+            </div>
+        }
+    </div>
+</div>
