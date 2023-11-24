@@ -1,6 +1,92 @@
-﻿@{
-    ViewData["Title"] = "Logy";
-}
-<h1>@ViewData["Title"]</h1>
+﻿@model IEnumerable<LogModel>
 
-<p>Typ ID: @ViewData["typLogu"]</p>
+@{
+    ViewBag.Title = "Logy";
+    
+    int strana = ViewBag.Strana;
+    int maxStrana = ViewBag.MaxStrana;
+    var today = DateOnly.FromDateTime(DateTime.Now);
+
+    var tabulka = Context.Request.Query["tabulka"].ToString();
+    var operace = Context.Request.Query["operace"].ToString();
+    var datumOd = Context.Request.Query["datumOd"].FirstOrDefault() ?? today.ToString("o");
+    var datumDo = Context.Request.Query["datumDo"].ToString();
+}
+
+<div class="container-md mt-3">
+    <form asp-action="Logy" method="get" enctype="application/x-www-form-urlencoded" class="w-100">
+        <div class="d-flex justify-content-center gap-3">
+            <div class="form-group">
+                <label for="datumOd" class="control-label">Od</label>
+                <input type="date" value="@datumOd" id="datumOd" name="datumOd" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="datumDo" class="control-label">Do</label>
+                <input type="date" value="@datumDo" id="datumDo" name="datumDo" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="tabulka" class="control-label">Tabulka</label>
+                <select id="tabulka" name="tabulka" class="form-select">
+                    @foreach (var item in ViewBag.Tabulky)
+                    {
+                        if (item == tabulka)
+                        {
+                            <option value="@item" selected>@item</option>
+                        }
+                        else
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="operace" class="control-label">Operace</label>
+                <select id="operace" name="operace" class="form-select">
+                    @foreach (var item in ViewBag.Operace)
+                    {
+                        if (item == operace)
+                        {
+                            <option value="@item" selected>@item</option>
+                        }
+                        else
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group mt-auto">
+                <input type="submit" value="Hledat" class="btn btn-primary d-block mx-auto"/>
+            </div>
+        </div>
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Tabulka</th>
+            <th scope="col">Operace</th>
+            <th scope="col">Čas změny</th>
+            <th scope="col">Uživatel</th>
+            <th scope="col">Před</th>
+            <th scope="col">Po</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Tabulka</td>
+                <td>@item.Operace</td>
+                <td>@item.CasZmeny</td>
+                <td>@item.Uzivatel</td>
+                <td>@item.Pred</td>
+                <td>@item.Po</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    
+    <vc:pagination strana="@strana" max-strana="@maxStrana" />
+</div>

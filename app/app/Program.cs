@@ -1,22 +1,31 @@
+using System.Net.Mime;
 using app.DAL;
-using app.DAL.Repositories;
 using app.Managers;
+using app.Utils;
+using Dapper;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Diagnostics;
 using Sqids;
+using Role = app.Managers.Role;
+
+DefaultTypeMap.MatchNamesWithUnderscores = true;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
-builder.Services.AddSingleton(new SqidsEncoder<int>(new SqidsOptions
-{
-    Alphabet = "shQpZVOxoN3nv1guIT8RHXwf0eqaWyjzBdkLScbPDMJUt24F7C9m5K6rlEGiYA",
-    MinLength = 5,
-}));
+builder.Services.AddSingleton<IIdConverter>(new IdConverter(
+    new SqidsEncoder<int>(
+        new SqidsOptions
+        {
+            Alphabet = "shQpZVOxoN3nv1guIT8RHXwf0eqaWyjzBdkLScbPDMJUt24F7C9m5K6rlEGiYA",
+            MinLength = 5,
+        }
+    )));
 builder.Services.AddSingleton<IDbConnectionFactory, DbConnectionFactory>();
 builder.Services.AddSingleton<DatabaseManager, DatabaseManager>();
+builder.Services.AddScoped(typeof(GenericDao<>), typeof(GenericDao<>));
 
 builder.Services.AddScoped<IDbUnitOfWork, DbUnitOfWork>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<UserManager, UserManager>();
 
 builder.Services.AddRazorPages();
@@ -33,11 +42,12 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("Zakaznik", policy => policy.RequireRole(Role.Zakaznik));
     options.AddPolicy("Vsichni", policy => policy.RequireRole(Role.Admin, Role.Zamestnanec, Role.Zakaznik));
 });
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddSassCompiler(); // TODO
+}
 
 var app = builder.Build();
-
-// app.Services.GetService<DatabaseManager>()?.CreateTables();
-// app.Services.GetService<DatabaseManager>()?.TestProcedure();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -46,14 +56,31 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-    app.UseExceptionHandler("/Home/Error");
+    // app.UseExceptionHandler("/Home/Error");
+    app.UseExceptionHandler(exemptionApp =>
+    {
+        exemptionApp.Run(async context =>
+        {
+            var exceptionHandler = context.Features.Get<IExceptionHandlerPathFeature>();
+
+            switch (exceptionHandler?.Error)
+            {
+                case InvalidIdException:
+                    context.Response.Redirect("");
+                    break;
+                default:
+                    context.Response.Redirect("/error");
+                    break;
+            }
+        });
+    });
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseStatusCodePages(MediaTypeNames.Text.Plain, "Status Code Page: {0}");
 app.UseRouting();
 
 app.UseAuthorization();

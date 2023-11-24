@@ -1,0 +1,77 @@
+﻿@model IEnumerable<app.Models.Sprava.ZakaznikModel>
+
+@{
+    ViewBag.Title = "Zákazníci";
+
+    int strana = ViewBag.Strana;
+    int maxStrana = ViewBag.MaxStrana;
+    var celeJmeno = Context.Request.Query["celeJmeno"].ToString();
+    var prihlasovaciJmeno = Context.Request.Query["prihlasovaciJmeno"].ToString();
+    var email = Context.Request.Query["email"].ToString();
+    var telefon = Context.Request.Query["telefon"].ToString();
+    var adresa = Context.Request.Query["adresa"].ToString();
+}
+
+<div class="container-md mt-3">
+    <form asp-action="Zakaznik" method="get" enctype="application/x-www-form-urlencoded" class="w-100">
+        <div class="d-flex justify-content-center gap-3">
+            <div class="form-group">
+                <label for="celeJmeno" class="control-label">Celé jméno</label>
+                <input id="celeJmeno" name="celeJmeno" type="text" value="@celeJmeno" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="prihlasovaciJmeno" class="control-label">Přihlašovací jméno</label>
+                <input id="prihlasovaciJmeno" name="prihlasovaciJmeno" type="text" value="@prihlasovaciJmeno" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="email" class="control-label">Email</label>
+                <input id="email" name="email" type="text" value="@email" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="telefon" class="control-label">Telefon</label>
+                <input id="telefon" name="telefon" type="text" value="@telefon" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="adresa" class="control-label">Adresa</label>
+                <input id="adresa" name="adresa" type="text" value="@adresa" class="form-control">
+            </div>
+            <div class="form-group mt-auto">
+                <input type="submit" value="Hledat" class="btn btn-primary d-block mx-auto"/>
+            </div>
+        </div>
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Jméno</th>
+            <th scope="col">Příjmení</th>
+            <th scope="col">Přihlašovací jméno</th>
+            <th scope="col">Email</th>
+            <th scope="col">Telefon</th>
+            <th scope="col">Adresa</th>
+            <th scope="col">
+                <a class="btn btn-primary" asp-action="ZakaznikEdit" asp-route-id="0">Přidat</a>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Osoba.Jmeno</td>
+                <td>@item.Osoba.Prijmeni</td>
+                <td>@item.PrihlasovaciUdaje.Jmeno</td>
+                <td>@item.Kontakt.Email</td>
+                <td>@item.Kontakt.Telefon</td>
+                <td>@item.Adresa.ToString()</td>
+                <td>
+                    <a asp-action="ZakaznikEdit" asp-route-id="@item.ZakaznikId">Upravit</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <vc:pagination strana="@strana" max-strana="@maxStrana"/>
+</div>

@@ -5,8 +5,8 @@ namespace app.ViewComponents;
 
 public class UserViewComponent : ViewComponent
 {
-    public async Task<IViewComponentResult> InvokeAsync(SignUpViewModel model)
+    public IViewComponentResult Invoke()
     {
-        return View(model);
+        return View();
     }
 }

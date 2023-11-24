@@ -1,15 +1,6 @@
-﻿using System.Data;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Dapper;
+﻿using Dapper;
 
 namespace app.DAL;
-
-public class DbResult
-{
-    [JsonPropertyName("message")]
-    public string? Message { get; set; }
-}
 
 public class DatabaseManager : IDisposable
 {
@@ -49,20 +40,6 @@ public class DatabaseManager : IDisposable
             _logger.LogTrace("{}", e.Message);
             throw;
         }
-    }
-
-    public void TestProcedure()
-    {
-        var parameters = new DynamicParameters();
-        parameters.Add("i_stat_id", 10);
-        parameters.Add("i_zkratka", "PL");
-        parameters.Add("i_nazev", "Polsko");
-        parameters.Add("o_result", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
-
-        _dbUnitOfWork.Connection.Query("stat_package.manage_stat", parameters, commandType: CommandType.StoredProcedure);
-
-        var res = JsonSerializer.Deserialize<DbResult>(parameters.Get<string>("o_result"));
-        Console.WriteLine(res);
     }
 
     public void Dispose()

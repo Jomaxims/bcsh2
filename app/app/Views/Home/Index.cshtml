@@ -1,16 +1,91 @@
-﻿@model IndexViewModel
+﻿@model IEnumerable<SpecialniNabidkaModel>
 
 @{
-    ViewData["Title"] = "Home Page";
-    var user = new SignUpViewModel
-    {
-        FirstName = "Pepa",
-        LastName = "Zdepa"
-    };
+    ViewBag.Title = "Domů";
+    var length = Model.ToArray().Length;
+    var first = true;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome @Model.Name</h1>
-    <vc:user model="@user"></vc:user>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container d-flex flex-column justify-content-center h-100">
+    <div class="d-flex justify-content-center">
+        <div class="pe-4 d-flex flex-column justify-content-center">
+            <p class="text-center">
+                CK Pepa
+            </p>
+            <a class="btn btn-primary fs-4" asp-controller="Zajezdy" asp-action="Zajezdy">Zájezdy</a>
+        </div>
+        <div id="specialOfferCarousel" class="carousel slide">
+            <div class="carousel-indicators">
+                @for (var i = 0; i < length; i++)
+                {
+                    if (i == 0)
+                    {
+                        <button type="button" data-bs-target="#specialOfferCarousel" data-bs-slide-to="@i" aria-label="Slide @i" class="active" aria-current="true"></button>
+                    }
+                    else
+                    {
+                        <button type="button" data-bs-target="#specialOfferCarousel" data-bs-slide-to="@i" aria-label="Slide @i"></button>
+                    }
+                }
+            </div>
+            <div class="carousel-inner">
+                @foreach (var item in Model)
+                {
+                    if (first)
+                    {
+                        <div class="carousel-item active">
+                            <a asp-controller="Zajezdy" asp-action="ById" asp-route-id="@item.Id">
+                                <img src="/images/@item.FotoId" alt="Obrázek zájezdu">
+                            </a>
+                            <div class="carousel-caption d-none d-md-block">
+                                <h3>@item.Nazev</h3>
+                            </div>
+                        </div>
+                        first = false;
+                    }
+                    else
+                    {
+                        <div class="carousel-item">
+                            <a asp-controller="Zajezdy" asp-action="ById" asp-route-id="@item.Id">
+                                <img src="/images/@item.FotoId" alt="Obrázek zájezdu">
+                            </a>
+                            <div class="carousel-caption d-none d-md-block">
+                                <h3>@item.Nazev</h3>
+                            </div>
+                        </div>
+                    }
+                    }
+                </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#specialOfferCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#specialOfferCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
 </div>
+
+<style>
+    body {
+        height: 100vh;
+    }
+    
+    main {
+        height: calc(100% - 4em);
+    }
+</style>
+
+@* @section Scripts *@
+@* { *@
+@*     <script> *@
+@*     const specialOfferCarousel = document.querySelector('#specialOfferCarousel') *@
+@*      *@
+@*     const carousel = new bootstrap.Carousel(specialOfferCarousel, { *@
+@*       interval: 2000, *@
+@*       touch: false *@
+@*     }) *@
+@*   </script> *@
+@* } *@

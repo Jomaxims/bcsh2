@@ -1,0 +1,75 @@
+﻿$primary: #bf377b;
+
+@import "../lib/bootstrap/scss/bootstrap";
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap');
+
+a {
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @extend .fw-bold
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.btn {
+  @extend .rounded-5
+}
+
+#specialOfferCarousel {
+  position: relative;
+  height: 35em;
+  width: 60em;
+}
+
+.carousel-inner {
+  height: 100%;
+  @extend .rounded-5;
+  
+  .carousel-item {
+	@extend .w-100;
+	@extend .h-100;
+
+	img {
+	  @extend .w-100;
+	  @extend .h-100;
+
+	  object-fit: cover;
+	}
+  }
+}
+
+.navbar a {
+  color: $black;
+}
+
+.navbar .btn-primary a {
+  color: $white;
+}
+
+input {
+  @extend .rounded-5;
+}
+
+.form-select {
+  @extend .rounded-5;
+}
+
+.control-label {
+  @extend .fw-bold
+}
+
+.zajezd-nakup-container {
+  min-width: 15em;
+}
+
+.MultiFile-list {
+  @extend .mt-3;
+  @extend .d-flex;
+  @extend .flex-column;
+  @extend .justify-content-center;
+}

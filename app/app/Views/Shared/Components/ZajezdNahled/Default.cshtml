@@ -1,0 +1,71 @@
+﻿@model ZajezdNahledModel
+
+@{
+    const string star = "*";
+}
+
+<div class="d-flex rounded-5 w-100 justify-content-between bg-body-tertiary">
+    <img src="/images/@Model.FotoId" alt="Fotka ubytování" width="450" height="300" class="rounded-5">
+    <div class="d-flex flex-column m-4 flex-grow-1">
+        <h4 class="fw-bold mb-0">
+            @Model.Nazev
+            @for (var i = 0; i < Model.PocetHvezd; i++)
+            {
+                @star
+            }
+        </h4>
+        <p class="fw-bold">@Model.Lokalita</p>
+        <p class="text-break text-wrap">@Model.ZkracenyPopis</p>
+    </div>
+    <div class="d-flex flex-column m-4 text-end justify-content-between" style="width: 40em;">
+        <p class="fw-bold">
+            <span class="fw-normal">Od:</span> @Model.Od <br>
+            <span class="fw-normal">Do:</span> @Model.Do <br>
+            @Model.Doprava <br>
+            @Model.Strava <br>
+        </p>
+        <div>
+            <p class="lh-1">
+                @if (Model.CenaPredSlevou != null)
+                {
+                    <span class="text-decoration-line-through text">@Model.CenaPredSlevou Kč</span>
+                    <br>
+                }
+                <span class="fs-5 fw-bold">@Model.CenaZaOsobu Kč</span> <br>
+                <span>za osobu</span>
+            </p>
+            <a class="nav-link text-primary fw-bold fs-5" asp-controller="Zajezdy" asp-action="ById" asp-route-id="@Model.Id">ZOBRAZIT</a>
+        </div>
+    </div>
+</div>
+@* <tr> *@
+@*     <td> *@
+@*         <a class="nav-link" asp-controller="Zajezdy" asp-action="ById" asp-route-id="@Model.Id"> *@
+@*             @Html.DisplayFor(model => model.Nazev) *@
+@*         </a> *@
+@*     </td> *@
+@*     <td> *@
+@*         @Html.DisplayFor(model => model.PocetHvezd) *@
+@*     </td> *@
+@*     <td> *@
+@*         @Html.DisplayFor(model => model.Lokalita) *@
+@*     </td> *@
+@*     <td> *@
+@*         @Html.DisplayFor(model => model.ZkracenyPopis) *@
+@*     </td> *@
+@*     <td> *@
+@*         @Html.DisplayFor(model => model.Doprava) *@
+@*     </td> *@
+@*     <td> *@
+@*         @Html.DisplayFor(model => model.Strava) *@
+@*     </td> *@
+@*     <td> *@
+@*         @Html.DisplayFor(model => model.CenaZaOsobu) *@
+@*     </td> *@
+@*     <td> *@
+@*         @Html.DisplayFor(model => model.CenaPredSlevou) *@
+@*     </td> *@
+@*     <td> *@
+@*         <img src="/images/@Model.FotoId" alt="Fotka ubytování" width="300" height="200"> *@
+@*     </td> *@
+@* </tr> *@

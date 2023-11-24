@@ -1,6 +1,78 @@
-﻿@{
-    ViewData["Title"] = "Nakup";
-}
-<h1>@ViewData["Title"] @ViewData["id"]</h1>
+﻿@using app.DAL.Models
+@model NakupModel
 
-<p>Zajezd ID: @ViewData["id"]</p>
+@{
+    ViewBag.Title = "Nákup";
+    var today = DateTime.Today;
+    var maxDate = $"{today.Year - 18}-{today.Month}-{today.Day}";
+    var i = 0;
+}
+
+<div class="container-md pt-5">
+    <form asp-controller="Objednavky" asp-action="ObjednavkaPost" method="post" enctype="application/x-www-form-urlencoded" class="d-flex justify-content-center">
+        <div class="d-flex">
+            <div class="d-flex flex-column" style="min-width: 20em;">
+                <h4>Shrnutí</h4>
+                <p>
+                    <span class="fw-bold">Termín:</span> @ViewBag.Termin <br>
+                    <span class="fw-bold">Pojištění:</span> @ViewBag.Pojisteni <br>
+                    <span class="fw-bold">Pokoj:</span> @ViewBag.Pokoj <br>
+                    <span class="fw-bold">Celková cena:</span> <br>
+                    <span class="fw-bold fs-4">@ViewBag.CelkovaCena Kč</span>
+                </p>
+                <div class="form-group mt-3">
+                    <input type="submit" value="Objednat" class="btn btn-primary d-block mx-auto"/>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center gap-5">
+                <div class="d-flex flex-column justify-content-center gap-3">
+                    <div class="form-group">
+                        <input asp-for="Zajezd.Pojisteni" type="hidden" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="Zajezd.Pokoj" type="hidden" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="Zajezd.Termin" type="hidden" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="Zajezd.PocetOsob" type="hidden" class="form-control"/>
+                    </div>
+                </div>
+                <div class="d-flex flex-column justify-content-center gap-3 flex-fill">
+                    <h4>Údaje dalších účastníků</h4>
+                    <div class="d-flex flex-wrap gap-5">
+                        @if (Model.Osoby.Length == 0)
+                        {
+                            <p>Zájezd je pouze pro 1 osobu</p>
+                        }
+                        @for (i = 0; i < Model.Osoby.Length; i++)
+                        {
+                            <div class="d-flex flex-column justify-content-center gap-3 flex-fill">
+                                <div class="form-group">
+                                    <label asp-for="Osoby[i].Jmeno" class="control-label"></label>
+                                    <input asp-for="Osoby[i].Jmeno" class="form-control"/>
+                                    <span asp-validation-for="Osoby[i].Jmeno" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Osoby[i].Prijmeni" class="control-label"></label>
+                                    <input asp-for="Osoby[i].Prijmeni" class="form-control"/>
+                                    <span asp-validation-for="Osoby[i].Prijmeni" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Osoby[i].DatumNarozeni" class="control-label"></label>
+                                    <input asp-for="Osoby[i].DatumNarozeni" max="@maxDate" class="form-control"/>
+                                    <span asp-validation-for="Osoby[i].DatumNarozeni" class="text-danger"></span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

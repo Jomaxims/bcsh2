@@ -42,7 +42,6 @@ internal sealed class DbUnitOfWork : IDbUnitOfWork
 
     public void BeginTransaction()
     {
-        // Connection.Open();
         Transaction = Connection.BeginTransaction();
     }
 
@@ -60,8 +59,8 @@ internal sealed class DbUnitOfWork : IDbUnitOfWork
 
     public void Reset()
     {
-        Connection.Close();
-        Connection.Dispose();
+        _connection?.Close();
+        _connection?.Dispose();
         Transaction?.Dispose();
 
         _connection = null;
@@ -70,8 +69,8 @@ internal sealed class DbUnitOfWork : IDbUnitOfWork
 
     public void Dispose()
     {
-        Connection.Close();
+        _connection?.Close();
+        _connection?.Dispose();
         Transaction?.Dispose();
-        Connection.Dispose();
     }
 }

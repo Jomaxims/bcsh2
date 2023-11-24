@@ -1,8 +1,42 @@
-﻿@{
-    ViewData["Title"] = "Login";
-}
-<h1>@ViewData["Title"]</h1>
+﻿@model app.Models.LoginModel
 
-<form action="login" method="post">
-    <input type="submit" value="Login"/>
-</form>
+@{
+    ViewBag.Title = "Login";
+}
+
+<div class="container d-flex flex-column justify-content-center h-100">
+    <div class="d-flex justify-content-center">
+        <form asp-action="LoginPost" method="post" enctype="application/x-www-form-urlencoded">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="d-flex flex-column justify-content-center gap-3">
+                <div class="form-group">
+                    <label asp-for="Jmeno" class="control-label"></label>
+                    <input asp-for="Jmeno" class="form-control" />
+                    <span asp-validation-for="Jmeno" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Heslo" class="control-label"></label>
+                    <input asp-for="Heslo" class="form-control" />
+                    <span asp-validation-for="Heslo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Přihlásit" class="btn btn-primary mx-auto d-block" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    body {
+        height: 100vh;
+    }
+    
+    main {
+        height: calc(100% - 4em);
+    }
+</style>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

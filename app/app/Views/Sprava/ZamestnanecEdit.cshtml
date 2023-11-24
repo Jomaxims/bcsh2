@@ -1,0 +1,78 @@
+﻿@using app.Models.Sprava
+@model app.Models.Sprava.ZamestnanecModel?
+
+@{
+    ViewBag.Title = "Zaměstnanec";
+}
+
+<div class="container d-flex flex-column justify-content-center pt-5">
+    <form asp-action="ZamestnanecPost" method="post" enctype="application/x-www-form-urlencoded" class="w-100">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="ZamestnanecId" type="hidden"/>
+        <div class="d-flex justify-content-center gap-5">
+            <div class="d-flex flex-column justify-content-center gap-3 flex-fill">
+                <h4>Přihlašovací ůdaje</h4>
+                <div class="form-group">
+                    <label asp-for="PrihlasovaciUdaje.Jmeno" class="control-label"></label>
+                    <input asp-for="PrihlasovaciUdaje.Jmeno" class="form-control"/>
+                    <span asp-validation-for="PrihlasovaciUdaje.Jmeno" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    @if (Model != null)
+                    {
+                        <label asp-for="PrihlasovaciUdaje.Heslo" class="control-label">Nové heslo</label>
+                        <input asp-for="PrihlasovaciUdaje.Heslo" class="form-control" data-val="false" />
+                    }
+                    else
+                    {
+                        <label asp-for="PrihlasovaciUdaje.Heslo" class="control-label"></label>
+                        <input asp-for="PrihlasovaciUdaje.Heslo" class="form-control" />
+                    }
+                    <span asp-validation-for="PrihlasovaciUdaje.Heslo" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="d-flex flex-column justify-content-center gap-3 flex-fill">
+                <h4>@ViewBag.Title</h4>
+                <div class="form-group">
+                    <label asp-for="Jmeno" class="control-label"></label>
+                    <input asp-for="Jmeno" class="form-control"/>
+                    <span asp-validation-for="Jmeno" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Prijmeni" class="control-label"></label>
+                    <input asp-for="Prijmeni" class="form-control"/>
+                    <span asp-validation-for="Prijmeni" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Role" class="control-label"></label>
+                    <select asp-for="Role.RoleId" class="form-select" asp-items="new SelectList(ViewBag.Role, nameof(RoleModel.RoleId), nameof(RoleModel.Nazev))">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Nadrizeny" class="control-label"></label>
+                    <select asp-for="Nadrizeny.ZamestnanecId" class="form-select" data-val="false">
+                        @foreach (var item in ViewBag.Zamestnanci)
+                        {
+                            <option value="@item.ZamestnanecId">@item.Jmeno @item.Prijmeni</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group mt-3">
+            <input type="submit" value="Potvrdit" class="btn btn-primary d-block mx-auto"/>
+        </div>
+    </form>
+    @if (Model != null)
+    {
+        <form id="delete-form" asp-action="PolozkyDelete" asp-route-typPolozky="zamestnanec" asp-route-id="@Model.ZamestnanecId" method="post" enctype="application/x-www-form-urlencoded" class="w-100">
+            <div class="form-group mt-3">
+                <input type="submit" value="Smazat" class="btn btn-danger d-block mx-auto"/>
+            </div>
+        </form>
+    }
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

@@ -1,0 +1,78 @@
+﻿@model UzivatelUdaje
+
+@{
+    var today = DateTime.Today;
+    var maxDate = $"{today.Year-18}-{today.Month}-{today.Day}";
+    var datumNarozeni = $"{Model.DatumNarozeni.Year-18}-{Model.DatumNarozeni.Month}-{Model.DatumNarozeni.Day}";
+}
+
+<div class="d-flex justify-content-center">
+    <form asp-controller="Profil" asp-action="UdajePost" method="post" enctype="application/x-www-form-urlencoded" class="w-100">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="d-flex justify-content-center gap-5">
+            <div class="d-flex flex-column justify-content-center gap-3 flex-fill">
+                <h4>Kontaktní údaje</h4>
+                <div class="form-group">
+                    <label asp-for="Jmeno" class="control-label"></label>
+                    <input asp-for="Jmeno" class="form-control"/>
+                    <span asp-validation-for="Jmeno" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Prijmeni" class="control-label"></label>
+                    <input asp-for="Prijmeni" class="form-control"/>
+                    <span asp-validation-for="Prijmeni" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DatumNarozeni" class="control-label"></label>
+                    <input asp-for="DatumNarozeni" value="@datumNarozeni" max="@maxDate" class="form-control"/>
+                    <span asp-validation-for="DatumNarozeni" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Kontakt.Email" class="control-label"></label>
+                    <input asp-for="Kontakt.Email" class="form-control"/>
+                    <span asp-validation-for="Kontakt.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Kontakt.Telefon" class="control-label"></label>
+                    <input asp-for="Kontakt.Telefon" class="form-control"/>
+                    <span asp-validation-for="Kontakt.Telefon" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="d-flex flex-column justify-content-center gap-3 flex-fill">
+                <h4>Adresa</h4>
+                <div class="form-group">
+                    <label asp-for="Adresa.Ulice" class="control-label"></label>
+                    <input asp-for="Adresa.Ulice" class="form-control"/>
+                    <span asp-validation-for="Adresa.Ulice" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Adresa.CisloPopisne" class="control-label"></label>
+                    <input asp-for="Adresa.CisloPopisne" class="form-control"/>
+                    <span asp-validation-for="Adresa.CisloPopisne" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Adresa.Mesto" class="control-label"></label>
+                    <input asp-for="Adresa.Mesto" class="form-control"/>
+                    <span asp-validation-for="Adresa.Mesto" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Adresa.PSC" class="control-label"></label>
+                    <input asp-for="Adresa.PSC" class="form-control"/>
+                    <span asp-validation-for="Adresa.PSC" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Adresa.Poznamka" class="control-label"></label>
+                    <input asp-for="Adresa.Poznamka" class="form-control"/>
+                    <span asp-validation-for="Adresa.Poznamka" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group mt-3">
+            <input type="submit" value="Změnit údaje" class="btn btn-primary d-block mx-auto"/>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

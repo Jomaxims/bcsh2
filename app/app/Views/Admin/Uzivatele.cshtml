@@ -1,6 +1,71 @@
-﻿@{
-    ViewData["Title"] = "Uživatelé";
-}
-<h1>@ViewData["Title"]</h1>
+﻿@model IEnumerable<UzivatelModel>
 
-<p>Uživatelé</p>
+@{
+    ViewBag.Title = "Uživatelé";
+    int strana = ViewBag.Strana;
+    int maxStrana = ViewBag.MaxStrana;
+
+    var jmeno = Context.Request.Query["jmeno"].ToString();
+    var uzivatelskeJmeno = Context.Request.Query["uzivatelskeJmeno"].ToString();
+    var role = Context.Request.Query["role"].ToString();
+}
+
+<div class="container-md mt-3">
+    <form asp-action="Uzivatele" method="get" enctype="application/x-www-form-urlencoded" class="w-100">
+        <div class="d-flex justify-content-center gap-3">
+            <div class="form-group">
+                <label for="jmeno" class="control-label">Jméno</label>
+                <input type="text" value="@jmeno" id="jmeno" name="jmeno" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="uzivatelskeJmeno" class="control-label">Přihlašovací jméno</label>
+                <input type="text" value="@uzivatelskeJmeno" id="uzivatelskeJmeno" name="uzivatelskeJmeno" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="role" class="control-label">Role</label>
+                <select id="role" name="role" class="form-select">
+                    @foreach (var item in ViewBag.Role)
+                    {
+                        if (item == role)
+                        {
+                            <option value="@item" selected>@item</option>
+                        }
+                        else
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group mt-auto">
+                <input type="submit" value="Hledat" class="btn btn-primary d-block mx-auto"/>
+            </div>
+        </div>
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Jméno</th>
+            <th scope="col">Přihlašovací jméno</th>
+            <th scope="col">Role</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Jmeno @item.Prijmeni</td>
+                <td>@item.PrihlasovaciJmeno</td>
+                <td>@item.Role</td>
+                <td>
+                    <a asp-controller="Admin" asp-action="PrepnoutUzivatele" asp-route-id="@item.Id">Přepnout</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    
+    <vc:pagination strana="@strana" max-strana="@maxStrana" />
+</div>
