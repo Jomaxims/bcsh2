@@ -1,7 +1,6 @@
 CREATE OR REPLACE PACKAGE pck_kontakt AS
 
     PROCEDURE manage_kontakt(
-        p_zakaznik_id   IN kontakt.zakaznik_id%TYPE,
         p_telefon       IN kontakt.telefon%TYPE,
         p_kontakt_id    IN OUT kontakt.kontakt_id%TYPE,
         p_email         IN kontakt.email%TYPE,
@@ -19,7 +18,6 @@ END pck_kontakt;
 CREATE OR REPLACE PACKAGE BODY pck_kontakt AS
 
     PROCEDURE manage_kontakt(
-        p_zakaznik_id   IN kontakt.zakaznik_id%TYPE,
         p_telefon       IN kontakt.telefon%TYPE,
         p_kontakt_id    IN OUT kontakt.kontakt_id%TYPE,
         p_email         IN kontakt.email%TYPE,
@@ -28,19 +26,16 @@ CREATE OR REPLACE PACKAGE BODY pck_kontakt AS
     BEGIN
         IF p_kontakt_id IS NULL THEN
             INSERT INTO kontakt
-                (zakaznik_id,
-                 telefon,
+                 (telefon,
                  email)
             VALUES
-                (p_zakaznik_id,
-                 p_telefon,
+                (p_telefon,
                  p_email)
             RETURNING kontakt_id INTO p_kontakt_id;
             o_result := '{ "status": "OK", "message": "Kontakt byl uspesne vytvoren." }';
         ELSE
             UPDATE kontakt
-            SET    zakaznik_id = p_zakaznik_id,
-                   telefon = p_telefon,
+            SET    telefon = p_telefon,
                    email = p_email
             WHERE  kontakt_id = p_kontakt_id;
 

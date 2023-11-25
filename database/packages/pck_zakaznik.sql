@@ -5,6 +5,7 @@ CREATE OR REPLACE PACKAGE pck_zakaznik AS
         p_prihlasovaci_udaje_id IN zakaznik.PRIHLASOVACI_UDAJE_ID%TYPE,
         p_osoba_id IN zakaznik.osoba_id%TYPE,
         p_adresa_id IN zakaznik.adresa_id%TYPE,
+        p_kontakt_id IN zakaznik.kontakt_id%TYPE,
         o_result OUT CLOB
     );
 
@@ -23,6 +24,7 @@ CREATE OR REPLACE PACKAGE BODY pck_zakaznik AS
         p_prihlasovaci_udaje_id IN zakaznik.PRIHLASOVACI_UDAJE_ID%TYPE,
         p_osoba_id IN zakaznik.osoba_id%TYPE,
         p_adresa_id IN zakaznik.adresa_id%TYPE,
+        p_kontakt_id IN zakaznik.kontakt_id%TYPE,
         o_result OUT CLOB
     ) IS
     BEGIN
@@ -30,11 +32,13 @@ CREATE OR REPLACE PACKAGE BODY pck_zakaznik AS
             INSERT INTO zakaznik (
                 prihlasovaci_udaje_id,
                 osoba_id,
-                adresa_id
+                adresa_id,
+                kontakt_id
             ) VALUES (
                 p_prihlasovaci_udaje_id,
                 p_osoba_id,
-                p_adresa_id
+                p_adresa_id,
+                p_kontakt_id
             ) RETURNING zakaznik_id INTO p_zakaznik_id;
 
             o_result := '{ "status": "OK", "message": "Zákazník byl úspěšně vytvořen." }';
@@ -43,7 +47,8 @@ CREATE OR REPLACE PACKAGE BODY pck_zakaznik AS
             SET
                 prihlasovaci_udaje_id = p_prihlasovaci_udaje_id,
                 osoba_id = p_osoba_id,
-                adresa_id = p_adresa_id
+                adresa_id = p_adresa_id,
+                kontakt_id = p_kontakt_id
             WHERE
                 zakaznik_id = p_zakaznik_id;
 

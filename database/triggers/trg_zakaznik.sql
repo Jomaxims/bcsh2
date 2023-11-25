@@ -14,20 +14,24 @@ BEGIN
         v_before := NULL;
         v_after := 'ZAKAZNIK_ID: ' || :NEW.ZAKAZNIK_ID || ', ' || 
                    'PRIHLASOVACI_UDAJE_ID: ' || :NEW.PRIHLASOVACI_UDAJE_ID || ', ' || 
-                   'OSOBA_ID: ' || :NEW.OSOBA_ID;
+                   'OSOBA_ID: ' || :NEW.OSOBA_ID || ', ' ||
+                   'KONTAKT_ID: ' || :NEW.KONTAKT_ID;
     ELSIF UPDATING THEN 
         v_operation := 'UPDATE';
         v_before := 'ZAKAZNIK_ID: ' || :OLD.ZAKAZNIK_ID || ', ' || 
                     'PRIHLASOVACI_UDAJE_ID: ' || :OLD.PRIHLASOVACI_UDAJE_ID || ', ' || 
-                    'OSOBA_ID: ' || :OLD.OSOBA_ID;
+                    'OSOBA_ID: ' || :OLD.OSOBA_ID || ', ' ||
+                   'KONTAKT_ID: ' || :OLD.KONTAKT_ID;
         v_after := 'ZAKAZNIK_ID: ' || :NEW.ZAKAZNIK_ID || ', ' || 
                    'PRIHLASOVACI_UDAJE_ID: ' || :NEW.PRIHLASOVACI_UDAJE_ID || ', ' || 
-                   'OSOBA_ID: ' || :NEW.OSOBA_ID;
+                   'OSOBA_ID: ' || :NEW.OSOBA_ID || ', ' ||
+                   'KONTAKT_ID: ' || :NEW.KONTAKT_ID;
     ELSIF DELETING THEN 
         v_operation := 'DELETE';
         v_before := 'ZAKAZNIK_ID: ' || :OLD.ZAKAZNIK_ID || ', ' || 
                     'PRIHLASOVACI_UDAJE_ID: ' || :OLD.PRIHLASOVACI_UDAJE_ID || ', ' || 
-                    'OSOBA_ID: ' || :OLD.OSOBA_ID;
+                    'OSOBA_ID: ' || :OLD.OSOBA_ID || ', ' ||
+                   'KONTAKT_ID: ' || :OLD.KONTAKT_ID;
         v_after := NULL;
     END IF;
 

@@ -125,3 +125,17 @@ BEGIN
 END;
 /
 
+DECLARE
+    v_id  NUMBER;--jenom NUMBER pro insert
+    v_result   VARCHAR2(100);
+BEGIN
+    pck_prihlasovaci_udaje.manage_prihlasovaci_udaje(
+        p_prihlasovaci_udaje_id   => v_id,
+        p_jmeno   => 'ADMIN',
+        p_heslo  =>  'pepa',
+        o_result    => v_result
+    );
+    DBMS_OUTPUT.PUT_LINE('ID: ' || v_id);
+    DBMS_OUTPUT.PUT_LINE(v_result);
+END;
+/

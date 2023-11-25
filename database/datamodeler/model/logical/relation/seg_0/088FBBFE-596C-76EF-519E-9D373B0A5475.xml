@@ -6,14 +6,15 @@
 <engineerTo>
 <item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
 <item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
-<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
+<item key="8EA48AC4-C9D1-A310-35D7-263CFB1B1CEE" value="true"/>
 </engineerTo>
 <sourcePk>282302FE-22AB-FFA8-4E3D-6291E52B2EE8</sourcePk>
+<targetPk>B6043BDA-FE9C-0FD4-FD4E-3CED8C33470D</targetPk>
 <identifying>false</identifying>
 <nameOnSource>má</nameOnSource>
 <nameOnTarget>kontaktovaná</nameOnTarget>
-<optionalSource>true</optionalSource>
-<optionalTarget>false</optionalTarget>
+<optionalSource>false</optionalSource>
+<optionalTarget>true</optionalTarget>
 <sourceCardinality>1</sourceCardinality>
 <sourceEntity>78033D26-C583-6C07-F1F4-B07BFF7D5E57</sourceEntity>
 <targetCardinalityString>1</targetCardinalityString>
