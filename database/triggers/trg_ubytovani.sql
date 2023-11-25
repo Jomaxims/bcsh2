@@ -15,8 +15,6 @@ BEGIN
         v_after := 'UBYTOVANI_ID: ' || :NEW.UBYTOVANI_ID || ', ' || 
                    'NAZEV: ' || :NEW.NAZEV || ', ' || 
                    'POPIS: ' || :NEW.POPIS || ', ' || 
-                   'KAPACITA: ' || :NEW.KAPACITA || ', ' || 
-                   'OBSAZENOST: ' || :NEW.OBSAZENOST || ', ' || 
                    'ADRESA_ID: ' || :NEW.ADRESA_ID || ', ' || 
                    'POCET_HVEZD: ' || :NEW.POCET_HVEZD;
     ELSIF UPDATING THEN 
@@ -24,15 +22,11 @@ BEGIN
         v_before := 'UBYTOVANI_ID: ' || :OLD.UBYTOVANI_ID || ', ' || 
                     'NAZEV: ' || :OLD.NAZEV || ', ' || 
                     'POPIS: ' || :OLD.POPIS || ', ' || 
-                    'KAPACITA: ' || :OLD.KAPACITA || ', ' || 
-                    'OBSAZENOST: ' || :OLD.OBSAZENOST || ', ' || 
                     'ADRESA_ID: ' || :OLD.ADRESA_ID || ', ' || 
                     'POCET_HVEZD: ' || :OLD.POCET_HVEZD;
         v_after := 'UBYTOVANI_ID: ' || :NEW.UBYTOVANI_ID || ', ' || 
                    'NAZEV: ' || :NEW.NAZEV || ', ' || 
                    'POPIS: ' || :NEW.POPIS || ', ' || 
-                   'KAPACITA: ' || :NEW.KAPACITA || ', ' || 
-                   'OBSAZENOST: ' || :NEW.OBSAZENOST || ', ' || 
                    'ADRESA_ID: ' || :NEW.ADRESA_ID || ', ' || 
                    'POCET_HVEZD: ' || :NEW.POCET_HVEZD;
     ELSIF DELETING THEN 
@@ -40,8 +34,6 @@ BEGIN
         v_before := 'UBYTOVANI_ID: ' || :OLD.UBYTOVANI_ID || ', ' || 
                     'NAZEV: ' || :OLD.NAZEV || ', ' || 
                     'POPIS: ' || :OLD.POPIS || ', ' || 
-                    'KAPACITA: ' || :OLD.KAPACITA || ', ' || 
-                    'OBSAZENOST: ' || :OLD.OBSAZENOST || ', ' || 
                     'ADRESA_ID: ' || :OLD.ADRESA_ID || ', ' || 
                     'POCET_HVEZD: ' || :OLD.POCET_HVEZD;
         v_after := NULL;

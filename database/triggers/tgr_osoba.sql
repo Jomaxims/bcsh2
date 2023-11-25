@@ -15,27 +15,23 @@ BEGIN
         v_after := 'OSOBA_ID: ' || :NEW.OSOBA_ID || ', ' || 
                    'JMENO: ' || :NEW.JMENO || ', ' || 
                    'PRIJMENI: ' || :NEW.PRIJMENI || ', ' || 
-                   'VEK: ' || :NEW.VEK || ', ' || 
-                   'ADRESA_ID: ' || :NEW.ADRESA_ID;
+                   'DATUM_NAROZENI: ' || :NEW.DATUM_NAROZENI;
     ELSIF UPDATING THEN 
         v_operation := 'UPDATE';
         v_before := 'OSOBA_ID: ' || :OLD.OSOBA_ID || ', ' || 
                     'JMENO: ' || :OLD.JMENO || ', ' || 
                     'PRIJMENI: ' || :OLD.PRIJMENI || ', ' || 
-                    'VEK: ' || :OLD.VEK || ', ' || 
-                    'ADRESA_ID: ' || :OLD.ADRESA_ID;
+                    'DATUM_NAROZENI: ' || :OLD.DATUM_NAROZENI;
         v_after := 'OSOBA_ID: ' || :NEW.OSOBA_ID || ', ' || 
                    'JMENO: ' || :NEW.JMENO || ', ' || 
                    'PRIJMENI: ' || :NEW.PRIJMENI || ', ' || 
-                   'VEK: ' || :NEW.VEK || ', ' || 
-                   'ADRESA_ID: ' || :NEW.ADRESA_ID;
+                   'DATUM_NAROZENI: ' || :NEW.DATUM_NAROZENI;
     ELSIF DELETING THEN 
         v_operation := 'DELETE';
         v_before := 'OSOBA_ID: ' || :OLD.OSOBA_ID || ', ' || 
                     'JMENO: ' || :OLD.JMENO || ', ' || 
                     'PRIJMENI: ' || :OLD.PRIJMENI || ', ' || 
-                    'VEK: ' || :OLD.VEK || ', ' || 
-                    'ADRESA_ID: ' || :OLD.ADRESA_ID;
+                    'DATUM_NAROZENI: ' || :OLD.DATUM_NAROZENI;
         v_after := NULL;
     END IF;
 

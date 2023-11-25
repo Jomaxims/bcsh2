@@ -14,20 +14,20 @@ BEGIN
         v_before := NULL;
         v_after := 'POJISTENI_ID: ' || :NEW.POJISTENI_ID || ', ' || 
                    'CENA_ZA_DEN: ' || :NEW.CENA_ZA_DEN || ', ' || 
-                   'POPIS: ' || :NEW.POPIS;
+                   'NAZEV: ' || :NEW.NAZEV;
     ELSIF UPDATING THEN 
         v_operation := 'UPDATE';
         v_before := 'POJISTENI_ID: ' || :OLD.POJISTENI_ID || ', ' || 
                     'CENA_ZA_DEN: ' || :OLD.CENA_ZA_DEN || ', ' || 
-                    'POPIS: ' || :OLD.POPIS;
+                    'NAZEV: ' || :OLD.NAZEV;
         v_after := 'POJISTENI_ID: ' || :NEW.POJISTENI_ID || ', ' || 
                    'CENA_ZA_DEN: ' || :NEW.CENA_ZA_DEN || ', ' || 
-                   'POPIS: ' || :NEW.POPIS;
+                   'NAZEV: ' || :NEW.NAZEV;
     ELSIF DELETING THEN 
         v_operation := 'DELETE';
         v_before := 'POJISTENI_ID: ' || :OLD.POJISTENI_ID || ', ' || 
                     'CENA_ZA_DEN: ' || :OLD.CENA_ZA_DEN || ', ' || 
-                    'POPIS: ' || :OLD.POPIS;
+                    'NAZEV: ' || :OLD.NAZEV;
         v_after := NULL;
     END IF;
 

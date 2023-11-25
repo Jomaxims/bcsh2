@@ -14,7 +14,6 @@ BEGIN
         v_before := NULL;
         v_after := 'PLATBA_ID: ' || :NEW.PLATBA_ID || ', ' || 
                    'CASTKA: ' || :NEW.CASTKA || ', ' || 
-                   'DATUM_SPLATNOSTI: ' || :NEW.DATUM_SPLATNOSTI || ', ' || 
                    'CISLO_UCTU: ' || :NEW.CISLO_UCTU || ', ' || 
                    'OBJEDNAVKA_ID: ' || :NEW.OBJEDNAVKA_ID || ', ' || 
                    'ZAPLACENA: ' || :NEW.ZAPLACENA;
@@ -22,13 +21,11 @@ BEGIN
         v_operation := 'UPDATE';
         v_before := 'PLATBA_ID: ' || :OLD.PLATBA_ID || ', ' || 
                     'CASTKA: ' || :OLD.CASTKA || ', ' || 
-                    'DATUM_SPLATNOSTI: ' || :OLD.DATUM_SPLATNOSTI || ', ' || 
                     'CISLO_UCTU: ' || :OLD.CISLO_UCTU || ', ' || 
                     'OBJEDNAVKA_ID: ' || :OLD.OBJEDNAVKA_ID || ', ' || 
                     'ZAPLACENA: ' || :OLD.ZAPLACENA;
         v_after := 'PLATBA_ID: ' || :NEW.PLATBA_ID || ', ' || 
                    'CASTKA: ' || :NEW.CASTKA || ', ' || 
-                   'DATUM_SPLATNOSTI: ' || :NEW.DATUM_SPLATNOSTI || ', ' || 
                    'CISLO_UCTU: ' || :NEW.CISLO_UCTU || ', ' || 
                    'OBJEDNAVKA_ID: ' || :NEW.OBJEDNAVKA_ID || ', ' || 
                    'ZAPLACENA: ' || :NEW.ZAPLACENA;
@@ -36,7 +33,6 @@ BEGIN
         v_operation := 'DELETE';
         v_before := 'PLATBA_ID: ' || :OLD.PLATBA_ID || ', ' || 
                     'CASTKA: ' || :OLD.CASTKA || ', ' || 
-                    'DATUM_SPLATNOSTI: ' || :OLD.DATUM_SPLATNOSTI || ', ' || 
                     'CISLO_UCTU: ' || :OLD.CISLO_UCTU || ', ' || 
                     'OBJEDNAVKA_ID: ' || :OLD.OBJEDNAVKA_ID || ', ' || 
                     'ZAPLACENA: ' || :OLD.ZAPLACENA;

@@ -14,23 +14,23 @@ BEGIN
         v_before := NULL;
         v_after := 'OBRAZKY_UBYTOVANI_ID: ' || :NEW.OBRAZKY_UBYTOVANI_ID || ', ' || 
                    'OBRAZEK: [BLOB DATA]' || ', ' || 
-                   'PORADI: ' || :NEW.PORADI || ', ' || 
+                   'NAZEV: ' || :NEW.NAZEV || ', ' || 
                    'UBYTOVANI_ID: ' || :NEW.UBYTOVANI_ID;
     ELSIF UPDATING THEN 
         v_operation := 'UPDATE';
         v_before := 'OBRAZKY_UBYTOVANI_ID: ' || :OLD.OBRAZKY_UBYTOVANI_ID || ', ' || 
                     'OBRAZEK: [BLOB DATA]' || ', ' || 
-                    'PORADI: ' || :OLD.PORADI || ', ' || 
+                    'NAZEV: ' || :OLD.NAZEV || ', ' || 
                     'UBYTOVANI_ID: ' || :OLD.UBYTOVANI_ID;
         v_after := 'OBRAZKY_UBYTOVANI_ID: ' || :NEW.OBRAZKY_UBYTOVANI_ID || ', ' || 
                    'OBRAZEK: [BLOB DATA]' || ', ' || 
-                   'PORADI: ' || :NEW.PORADI || ', ' || 
+                   'NAZEV: ' || :NEW.NAZEV || ', ' || 
                    'UBYTOVANI_ID: ' || :NEW.UBYTOVANI_ID;
     ELSIF DELETING THEN 
         v_operation := 'DELETE';
         v_before := 'OBRAZKY_UBYTOVANI_ID: ' || :OLD.OBRAZKY_UBYTOVANI_ID || ', ' || 
                     'OBRAZEK: [BLOB DATA]' || ', ' || 
-                    'PORADI: ' || :OLD.PORADI || ', ' || 
+                    'NAZEV: ' || :OLD.NAZEV || ', ' || 
                     'UBYTOVANI_ID: ' || :OLD.UBYTOVANI_ID;
         v_after := NULL;
     END IF;
