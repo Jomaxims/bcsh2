@@ -44,16 +44,15 @@
 <ownDataTypeParameters>50,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="vek" id="9425164A-D3E1-8E56-9584-CABD0ADC0AD7">
+<Column name="datum_narozeni" id="9425164A-D3E1-8E56-9584-CABD0ADC0AD7">
 <createdBy>tomas</createdBy>
 <createdTime>2023-11-08 16:46:37 UTC</createdTime>
 <generatorID>A0399AE1-2A4A-E2FF-3949-A4FDE4161745</generatorID>
 <ownerDesignName>model</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT019</logicalDatatype>
-<dataTypePrecision>3</dataTypePrecision>
-<ownDataTypeParameters>,3,</ownDataTypeParameters>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 <Column name="adresa_id" id="C1E6A1A7-3AA4-6C8B-687D-99D70B1135C1">

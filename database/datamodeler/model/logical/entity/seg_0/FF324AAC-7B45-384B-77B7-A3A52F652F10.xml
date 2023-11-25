@@ -6,7 +6,7 @@
 <engineerTo>
 <item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
 <item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
-<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
+<item key="8EA48AC4-C9D1-A310-35D7-263CFB1B1CEE" value="true"/>
 </engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
@@ -25,28 +25,28 @@
 <engineerTo>
 <item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
 <item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
-<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
+<item key="8EA48AC4-C9D1-A310-35D7-263CFB1B1CEE" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="castka" id="662E793A-2C58-7414-E4B5-F411FB191692">
+<Attribute name="castka" id="70E1A966-62A2-0F08-9CEF-C3E6DAE6BE29">
 <createdBy>tomas</createdBy>
-<createdTime>2023-10-28 12:41:33 UTC</createdTime>
+<createdTime>2023-11-24 10:25:43 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
-<importedID>E7F6E414-FCC5-704A-D310-742B316A37F0</importedID>
 <engineerTo>
-<item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
 <item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
-<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
+<item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
+<item key="8EA48AC4-C9D1-A310-35D7-263CFB1B1CEE" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<dataTypePrecision>2</dataTypePrecision>
-<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<dataTypePrecision>10</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,10,2</ownDataTypeParameters>
 </Attribute>
 <Attribute name="cislo_uctu" id="D0766A16-433B-76F6-F0A4-6D54722E935F">
 <createdBy>tomas</createdBy>
@@ -55,8 +55,9 @@
 <engineerTo>
 <item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
 <item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
-<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
+<item key="8EA48AC4-C9D1-A310-35D7-263CFB1B1CEE" value="true"/>
 </engineerTo>
+<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
@@ -71,7 +72,7 @@
 <engineerTo>
 <item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
 <item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
-<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
+<item key="8EA48AC4-C9D1-A310-35D7-263CFB1B1CEE" value="true"/>
 </engineerTo>
 <referedAttribute>B81F7FD3-CEC9-C13F-EF97-F5D4DD7AEAD3</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
@@ -86,7 +87,7 @@
 <engineerTo>
 <item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
 <item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
-<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
+<item key="8EA48AC4-C9D1-A310-35D7-263CFB1B1CEE" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -100,10 +101,11 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-28 12:41:33 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
+<item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="false"/>
 <item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
-<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
+<item key="8EA48AC4-C9D1-A310-35D7-263CFB1B1CEE" value="true"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>

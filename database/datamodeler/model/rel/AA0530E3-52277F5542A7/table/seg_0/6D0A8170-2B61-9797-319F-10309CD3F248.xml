@@ -49,6 +49,21 @@
 <colAssociation fkAssociation="97E4691C-1EE6-FE84-0C09-5E59B1B8A994" referredColumn="4C09BAA9-6860-0EBE-5313-8222788577D3"/>
 </associations>
 </Column>
+<Column name="adresa_id" id="27D5F07D-D107-167A-BC9D-434C7F9245AA">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-24 09:30:09 UTC</createdTime>
+<generatorID>FAFBA0BA-0268-21C2-7524-0C454BE4AC94</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="555537F5-B6C0-86BA-BB47-7F26D1FBF66F" referredColumn="8B33370E-91EA-021F-091A-D4103B40D8FB"/>
+</associations>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="B5F2CCFA-41B6-0C5C-0E5E-2170FC4F3970" name="ZAKAZNIK_PK">
@@ -85,6 +100,17 @@
 <colUsage columnID="D3E6A1A0-0D3E-737E-0811-B200359DD376"/>
 </indexColumnUsage>
 </ind_PK_UK>
+<ind_PK_UK id="FD24B5DF-670B-E894-6DAB-60604BD81D65" name="ZAKAZNIK__IDX">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-24 09:30:09 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<relationGeneratorID>C64DEEAE-FEBD-36BF-4C54-D19F0EEB9D00</relationGeneratorID>
+<indexColumnUsage>
+<colUsage columnID="27D5F07D-D107-167A-BC9D-434C7F9245AA"/>
+</indexColumnUsage>
+</ind_PK_UK>
 <ind_PK_UK id="128D348C-0110-D359-EF67-45E26D6B813B" name="ZAKAZNIK_PRIHLASOVACI_UDAJE_FK">
 <createdBy>tomas</createdBy>
 <createdTime>2023-11-08 16:46:37 UTC</createdTime>
@@ -105,6 +131,17 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="D3E6A1A0-0D3E-737E-0811-B200359DD376"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="21CCD5EF-CEDE-D5A8-6839-EA426AD69899" name="ZAKAZNIK_ADRESA_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-11-24 09:30:09 UTC</createdTime>
+<generatorID>C64DEEAE-FEBD-36BF-4C54-D19F0EEB9D00</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="27D5F07D-D107-167A-BC9D-434C7F9245AA"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

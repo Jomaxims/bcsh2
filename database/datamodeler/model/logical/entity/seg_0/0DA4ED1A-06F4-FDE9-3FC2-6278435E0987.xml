@@ -4,9 +4,9 @@
 <createdTime>2023-10-26 17:40:51 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
-<item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
 <item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
-<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
+<item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
+<item key="8EA48AC4-C9D1-A310-35D7-263CFB1B1CEE" value="true"/>
 </engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
@@ -25,7 +25,7 @@
 <engineerTo>
 <item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
 <item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
-<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
+<item key="8EA48AC4-C9D1-A310-35D7-263CFB1B1CEE" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -40,7 +40,7 @@
 <engineerTo>
 <item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
 <item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
-<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
+<item key="8EA48AC4-C9D1-A310-35D7-263CFB1B1CEE" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
@@ -57,12 +57,14 @@
 <engineerTo>
 <item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
 <item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
-<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
+<item key="8EA48AC4-C9D1-A310-35D7-263CFB1B1CEE" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<dataTypePrecision>10</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,10,2</ownDataTypeParameters>
 </Attribute>
 <Attribute name="doprava_id" id="0726D8FB-6A30-CF8E-1ABF-78E6FCD3609D">
 <createdBy>tomas</createdBy>
@@ -73,7 +75,7 @@
 <engineerTo>
 <item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
 <item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
-<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
+<item key="8EA48AC4-C9D1-A310-35D7-263CFB1B1CEE" value="true"/>
 </engineerTo>
 <referedAttribute>59B4B81E-E93B-3D0F-91C3-062DEF5701A1</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
@@ -90,7 +92,7 @@
 <engineerTo>
 <item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
 <item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
-<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
+<item key="8EA48AC4-C9D1-A310-35D7-263CFB1B1CEE" value="true"/>
 </engineerTo>
 <referedAttribute>6C1D4A59-FB85-17B3-FC58-98B2649ACC6E</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
@@ -105,7 +107,7 @@
 <engineerTo>
 <item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
 <item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
-<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
+<item key="8EA48AC4-C9D1-A310-35D7-263CFB1B1CEE" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
@@ -121,7 +123,7 @@
 <engineerTo>
 <item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
 <item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
-<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
+<item key="8EA48AC4-C9D1-A310-35D7-263CFB1B1CEE" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -136,7 +138,7 @@
 <engineerTo>
 <item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
 <item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
-<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
+<item key="8EA48AC4-C9D1-A310-35D7-263CFB1B1CEE" value="true"/>
 </engineerTo>
 <referedAttribute>86A13FB6-CA70-942D-D450-D4F768A2D757</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
@@ -154,7 +156,7 @@
 <engineerTo>
 <item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="false"/>
 <item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
-<item key="3CB34EA1-2435-7CE5-9A5C-865F341E22D4" value="true"/>
+<item key="8EA48AC4-C9D1-A310-35D7-263CFB1B1CEE" value="true"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>

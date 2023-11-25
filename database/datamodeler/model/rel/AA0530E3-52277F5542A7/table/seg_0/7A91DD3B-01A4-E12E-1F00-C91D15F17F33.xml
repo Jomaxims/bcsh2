@@ -71,8 +71,8 @@
 <indexState>Primary Constraint</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="D1091415-7E5F-5F2D-F985-1865F1A9698A"/>
-<colUsage columnID="F9D9868C-E73F-D4AF-4DA9-235CAB544E2C"/>
+<colUsage columnID="DE28EAAB-A8F1-9C21-E901-3B869D1EB732"/>
+<colUsage columnID="1CB5238F-7CA0-2A12-B093-EB9D4E293069"/>
 </indexColumnUsage>
 </ind_PK_UK>
 <ind_PK_UK id="F22F7B0C-DB2F-E29A-0914-32345D27906E" name="POKOJE_TERMINU_TERMIN_FK">

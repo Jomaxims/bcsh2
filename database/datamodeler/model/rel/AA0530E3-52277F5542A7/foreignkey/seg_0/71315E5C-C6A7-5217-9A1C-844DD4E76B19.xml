@@ -9,7 +9,7 @@
 <referredTableID>CD2CFFCD-F350-FDBB-752B-F4D1604FAB1B</referredTableID>
 <keyObject>B0FCBAE5-DBAA-EEFC-D01E-919DC53C4278</keyObject>
 <referredKeyID>B0FCBAE5-DBAA-EEFC-D01E-919DC53C4278</referredKeyID>
-<mandatory>false</mandatory>
+<mandatory>true</mandatory>
 <refColNames>pojisteni_id</refColNames>
 <transferable>true</transferable>
 <rely>false</rely>

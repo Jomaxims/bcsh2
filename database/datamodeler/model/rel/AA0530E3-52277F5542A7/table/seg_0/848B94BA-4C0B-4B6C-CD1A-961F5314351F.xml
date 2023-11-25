@@ -30,15 +30,16 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="poradi" id="CDEEEFA8-52B7-DA19-152F-585D679CBAFB">
+<Column name="nazev" id="CDEEEFA8-52B7-DA19-152F-585D679CBAFB">
 <createdBy>tomas</createdBy>
 <createdTime>2023-11-08 16:46:37 UTC</createdTime>
 <generatorID>275D9257-E5B5-A018-957E-5AB3B7EDD241</generatorID>
 <ownerDesignName>model</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 <Column name="ubytovani_id" id="29BE1F53-29EC-2383-9F85-CB5A5CF35CC6">
