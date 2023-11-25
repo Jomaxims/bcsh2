@@ -409,5 +409,5 @@ insert into zajezd (popis, cena_za_osobu, doprava_id, ubytovani_id, sleva_procen
 insert into zajezd (popis, cena_za_osobu, doprava_id, ubytovani_id, sleva_procent, zobrazit, strava_id) values ('Přelet horkovzdušným balónem v Kappadokii', 22646.48, 1, 397, 19.66, 0, 2);
 insert into zajezd (popis, cena_za_osobu, doprava_id, ubytovani_id, sleva_procent, zobrazit, strava_id) values ('Kulturní výlet do Paříže', 18192.12, 1, 398, null, 1, 5);
 insert into zajezd (popis, cena_za_osobu, doprava_id, ubytovani_id, sleva_procent, zobrazit, strava_id) values (null, 16804.5, 3, 399, 96.22, 0, 3);
-insert into zajezd (popis, cena_za_osobu, doprava_id, ubytovani_id, sleva_procent, zobrazit, strava_id) values ('Výlet na Velkou červenou poušť v Austrálii', 12863.79, 1, 400, 84.96, 0, 5);
+insert into zajezd (popis, cena_za_osobu, doprava_id, ubytovani_id, sleva_procent, zobrazit, strava_id) values ('Výlet na Velkou červenou poušť v Austrálii ', 12863.79, 1, 400, 84.96, 0, 5);
 insert into zajezd (popis, cena_za_osobu, doprava_id, ubytovani_id, sleva_procent, zobrazit, strava_id) values (null, 6232.38, 1, 401, 70.75, 0, 3);
