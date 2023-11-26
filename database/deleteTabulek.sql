@@ -41,15 +41,3 @@ EXCEPTION
     DBMS_OUTPUT.PUT_LINE('Failed to drop one or more objects: ' || SQLERRM);
 END DropAllObjects;
 /
-
--- To execute the procedure
-BEGIN
-  DropAllObjects;
-END;
-/
-
-
-BEGIN
-    DropAllTables;
-END;
-/
