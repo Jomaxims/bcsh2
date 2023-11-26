@@ -76,4 +76,3 @@ CREATE OR REPLACE PACKAGE BODY pck_platba AS
 
 END pck_platba;
 /
-

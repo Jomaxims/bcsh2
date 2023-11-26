@@ -81,4 +81,3 @@ CREATE OR REPLACE PACKAGE BODY pck_osoba_objednavka AS
 
 END pck_osoba_objednavka;
 /
-

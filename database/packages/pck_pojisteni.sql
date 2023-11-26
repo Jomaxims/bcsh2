@@ -70,4 +70,3 @@ CREATE OR REPLACE PACKAGE BODY pck_pojisteni AS
 
 END pck_pojisteni;
 /
-

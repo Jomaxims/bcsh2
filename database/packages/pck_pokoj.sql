@@ -63,4 +63,3 @@ CREATE OR REPLACE PACKAGE BODY pck_pokoj AS
 
 END pck_pokoj;
 /
-

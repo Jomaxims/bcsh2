@@ -15,7 +15,6 @@ CREATE OR REPLACE PACKAGE pck_stat AS
 END pck_stat;
 /
 
-
 CREATE OR REPLACE PACKAGE BODY pck_stat AS
 
     PROCEDURE manage_stat(

@@ -16,7 +16,6 @@ CREATE OR REPLACE PACKAGE pck_osoba AS
 END pck_osoba;
 /
 
-
 CREATE OR REPLACE PACKAGE BODY pck_osoba AS
 
     PROCEDURE manage_osoba(

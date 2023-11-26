@@ -7,7 +7,6 @@ CREATE OR REPLACE PACKAGE pck_utils AS
 END pck_utils;
 /
 
-
 CREATE OR REPLACE PACKAGE BODY pck_utils AS
 
   FUNCTION get_first_image_alphabetically(p_ubytovani_id UBYTOVANI.UBYTOVANI_ID%TYPE)
@@ -75,6 +74,3 @@ CREATE OR REPLACE PACKAGE BODY pck_utils AS
 
 END pck_utils;
 /
-
-
-
