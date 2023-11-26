@@ -28,7 +28,8 @@ WHERE z.zobrazit = 1;
 CREATE OR REPLACE VIEW stat_view AS
 SELECT
     s.zkratka,
-    s.nazev
+    s.nazev,
+    s.stat_id
 FROM STAT s
 JOIN ADRESA a ON a.stat_id = s.stat_id
 JOIN UBYTOVANI u ON u.adresa_id = a.adresa_id;
@@ -43,7 +44,8 @@ SELECT
     a.mesto,
     a.psc,
     s.nazev as Nazev_statu,
-    a.ulice || ', ' || a.cislo_popisne || ', ' || a.mesto || ', ' || a.psc || ', ' || s.nazev AS cela_adresa
+    a.ulice || ', ' || a.cislo_popisne || ', ' || a.mesto || ', ' || a.psc || ', ' || s.nazev AS cela_adresa,
+    u.ubytovani_id
     
 FROM UBYTOVANI u
 JOIN ADRESA a ON u.adresa_id = a.adresa_id
@@ -60,7 +62,8 @@ SELECT
     p.nazev as Nazev_pokoje,
     pl.castka,
     pl.zaplacena,
-    p.pocet_mist
+    p.pocet_mist,
+    o.objednavka_id
     
 FROM OBJEDNAVKA o
 JOIN ZAKAZNIK z ON o.zakaznik_id = z.zakaznik_id
@@ -85,7 +88,8 @@ SELECT
     d.nazev as Nazev_dopravy,
     st.nazev as Nazev_strava,
     d.doprava_id,
-    st.strava_id
+    st.strava_id,
+    z.zajezd_id
     
 FROM ZAJEZD z
 JOIN UBYTOVANI u ON u.ubytovani_id = z.ubytovani_id
@@ -107,7 +111,8 @@ SELECT
     a.mesto,
     a.psc,
     s.nazev,
-    a.ulice || ', ' || a.cislo_popisne || ', ' || a.mesto || ', ' || a.psc || ', ' || s.nazev AS cela_adresa 
+    a.ulice || ', ' || a.cislo_popisne || ', ' || a.mesto || ', ' || a.psc || ', ' || s.nazev AS cela_adresa,
+    z.zakaznik_id
     
 FROM ZAKAZNIK z
 JOIN PRIHLASOVACI_UDAJE pu ON pu.prihlasovaci_udaje_id = z.prihlasovaci_udaje_id
@@ -126,10 +131,11 @@ SELECT
     r.role_id,
     n.jmeno AS nadrizeny_jmeno,
     n.prijmeni AS nadrizeny_prijmeni,
-    n.jmeno || ' ' || n.prijmeni AS nadrizeny_cele_jmeno
+    n.jmeno || ' ' || n.prijmeni AS nadrizeny_cele_jmeno,
+    z.zamestnanec_id
     
 FROM ZAMESTNANEC z
 JOIN ROLE r ON r.role_id = z.role_id
 JOIN PRIHLASOVACI_UDAJE pu ON pu.prihlasovaci_udaje_id = z.prihlasovaci_udaje_id
-LEFT JOIN ZAMESTNANEC n ON n.zamestnanec_id = z.nadrizeny_id
-WHERE z.prihlasovaci_udaje_id IS NOT NULL;
+LEFT JOIN ZAMESTNANEC n ON n.zamestnanec_id = z.nadrizeny_id;
+
