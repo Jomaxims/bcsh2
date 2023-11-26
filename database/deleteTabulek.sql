@@ -41,3 +41,8 @@ EXCEPTION
     DBMS_OUTPUT.PUT_LINE('Failed to drop one or more objects: ' || SQLERRM);
 END DropAllObjects;
 /
+
+BEGIN
+  DropAllTables;
+END;
+/
