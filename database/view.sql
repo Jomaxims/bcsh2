@@ -15,7 +15,7 @@ SELECT
     ROUND(z.cena_za_osobu - (z.cena_za_osobu * (z.sleva_procent / 100))) AS Cena_za_osobu_sleva,
     z.zajezd_id,
     a.ulice || ', ' || a.cislo_popisne || ', ' || a.mesto || ', ' || a.psc || ', ' || s.nazev AS cela_adresa,
-    get_first_image_alphabetically(u.ubytovani_id) AS obrazek
+    pck_utils.prvni_img_zajezdy(u.ubytovani_id) AS obrazek
 FROM UBYTOVANI u
 JOIN ADRESA a ON u.adresa_id = a.adresa_id
 JOIN STAT s ON a.stat_id = s.stat_id

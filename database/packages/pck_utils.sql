@@ -1,6 +1,9 @@
 CREATE OR REPLACE PACKAGE pck_utils AS
-  FUNCTION get_first_image_alphabetically(p_ubytovani_id UBYTOVANI.UBYTOVANI_ID%TYPE)
+  FUNCTION prvni_img_zajezdy(p_ubytovani_id UBYTOVANI.UBYTOVANI_ID%TYPE)
     RETURN OBRAZKY_UBYTOVANI.OBRAZKY_UBYTOVANI_ID%TYPE;
+    
+  FUNCTION zamestnanci_podrizeny(p_zamestnanec_id IN zamestnanec.zamestnanec_id%TYPE)
+    RETURN VARCHAR2;  
   
   PROCEDURE DropAllTables;
   PROCEDURE DropAllObjects;
@@ -9,7 +12,7 @@ END pck_utils;
 
 CREATE OR REPLACE PACKAGE BODY pck_utils AS
 
-  FUNCTION get_first_image_alphabetically(p_ubytovani_id UBYTOVANI.UBYTOVANI_ID%TYPE)
+  FUNCTION prvni_img_zajezdy(p_ubytovani_id UBYTOVANI.UBYTOVANI_ID%TYPE)
     RETURN OBRAZKY_UBYTOVANI.OBRAZKY_UBYTOVANI_ID%TYPE IS
     v_image_id OBRAZKY_UBYTOVANI.OBRAZKY_UBYTOVANI_ID%TYPE;
   BEGIN
@@ -28,7 +31,31 @@ CREATE OR REPLACE PACKAGE BODY pck_utils AS
       RETURN NULL;
     WHEN OTHERS THEN
       RAISE;
-  END get_first_image_alphabetically;
+  END prvni_img_zajezdy;
+  
+  FUNCTION zamestnanci_podrizeny(p_zamestnanec_id IN zamestnanec.zamestnanec_id%TYPE)
+    RETURN VARCHAR2 IS
+    CURSOR podrizeny_cursor IS
+      SELECT z.jmeno, z.prijmeni
+      FROM zamestnanec z
+      WHERE z.zamestnanec_id != p_zamestnanec_id
+      START WITH z.nadrizeny_id = p_zamestnanec_id
+      CONNECT BY PRIOR z.zamestnanec_id = z.nadrizeny_id
+      ORDER SIBLINGS BY z.jmeno;
+
+    v_result VARCHAR2(250) := '';
+    v_jmeno zamestnanec.jmeno%TYPE;
+    v_prijmeni zamestnanec.prijmeni%TYPE;
+  BEGIN
+    OPEN podrizeny_cursor;
+    LOOP
+      FETCH podrizeny_cursor INTO v_jmeno, v_prijmeni;
+      EXIT WHEN podrizeny_cursor%NOTFOUND;
+      v_result := v_result || v_jmeno || ' ' || v_prijmeni || ', ';
+    END LOOP;
+    CLOSE podrizeny_cursor;
+    RETURN v_result;
+  END zamestnanci_podrizeny;
 
   PROCEDURE DropAllTables IS
   BEGIN
