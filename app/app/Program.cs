@@ -1,6 +1,7 @@
 using System.Net.Mime;
 using app.DAL;
 using app.Managers;
+using app.Repositories;
 using app.Utils;
 using Dapper;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -12,7 +13,6 @@ DefaultTypeMap.MatchNamesWithUnderscores = true;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container
 builder.Services.AddSingleton<IIdConverter>(new IdConverter(
     new SqidsEncoder<int>(
         new SqidsOptions
@@ -25,16 +25,19 @@ builder.Services.AddSingleton<IDbConnectionFactory, DbConnectionFactory>();
 builder.Services.AddSingleton<DatabaseManager, DatabaseManager>();
 builder.Services.AddScoped(typeof(GenericDao<>), typeof(GenericDao<>));
 
+var repos = typeof(BaseRepository).Assembly.GetTypes().Where(t => t.BaseType == typeof(BaseRepository));
+foreach (var repo in repos)
+{
+    builder.Services.AddScoped(repo, repo);
+}
+
 builder.Services.AddScoped<IDbUnitOfWork, DbUnitOfWork>();
 builder.Services.AddScoped<UserManager, UserManager>();
 
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
-        {
-            options.ExpireTimeSpan = TimeSpan.FromDays(7);
-        }
+    .AddCookie(options => { options.ExpireTimeSpan = TimeSpan.FromDays(7); }
     );
 builder.Services.AddAuthorization(options =>
 {

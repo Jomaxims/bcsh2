@@ -1,5 +1,7 @@
-﻿using app.DAL.Models;
+﻿using app.DAL;
+using app.DAL.Models;
 using app.Models.Sprava;
+using app.Repositories;
 using app.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,14 +13,35 @@ namespace app.Controllers;
 [Route("sprava")]
 public class SpravaController : Controller
 {
+    private const int PolozekNaStranku = Constants.ResultPerPage;
+
+    private readonly ILogger<HomeController> _logger;
     private readonly IIdConverter _converter;
+    private readonly ZamestnanecRepository _zamestnanecRepository;
+    private readonly StatRepository _statRepository;
+    private readonly PojisteniRepository _pojisteniRepository;
+    private readonly DopravaRepository _dopravaRepository;
+    private readonly PokojRepository _pokojRepository;
+    private readonly StravaRepository _stravaRepository;
+    private readonly RoleRepository _roleRepository;
 
     private readonly IDictionary<string, string> _typyPolozek = new SortedDictionary<string, string>();
 
-    public SpravaController(IIdConverter converter)
+    public SpravaController(ILogger<HomeController> logger, IIdConverter converter,
+        ZamestnanecRepository zamestnanecRepository,
+        StatRepository statRepository, PojisteniRepository pojisteniRepository, DopravaRepository dopravaRepository,
+        PokojRepository pokojRepository, StravaRepository stravaRepository, RoleRepository roleRepository)
     {
+        _logger = logger;
         _converter = converter;
-        
+        _zamestnanecRepository = zamestnanecRepository;
+        _statRepository = statRepository;
+        _pojisteniRepository = pojisteniRepository;
+        _dopravaRepository = dopravaRepository;
+        _pokojRepository = pokojRepository;
+        _stravaRepository = stravaRepository;
+        _roleRepository = roleRepository;
+
         _typyPolozek.Add("Zákazník", "zakaznik");
         _typyPolozek.Add("Stát", "stat");
         _typyPolozek.Add("Ubytování", "ubytovani");
@@ -29,7 +52,15 @@ public class SpravaController : Controller
         _typyPolozek.Add("Objednávka", "objednavka");
         _typyPolozek.Add("Zájezd", "zajezd");
     }
-    
+
+    private int PocetStran(int pocetRadku, int polozekNaStranku = 0)
+    {
+        if (polozekNaStranku == 0)
+            polozekNaStranku = PolozekNaStranku;
+
+        return (int)Math.Ceiling((double)pocetRadku / polozekNaStranku);
+    }
+
     [Route("")]
     public IActionResult Polozky()
     {
@@ -37,23 +68,46 @@ public class SpravaController : Controller
         {
             _typyPolozek.Add("Zaměstnanec", "zamestnanec");
         }
-        
+
         return View(_typyPolozek);
     }
-    
+
     [HttpPost]
     [Route("{typPolozky}/{id}/delete")]
     public IActionResult PolozkyDelete(string typPolozky, string id)
     {
         if (!_typyPolozek.Values.Contains(typPolozky))
             return new RedirectResult($"~/sprava/{typPolozky}");
-        
-        var idDecoded = _converter.Decode(id);
-        // TODO remove entity
+
+        var actualId = _converter.Decode(id);
+
+        switch (typPolozky)
+        {
+            case "stat":
+                _statRepository.Delete(actualId);
+                break;
+            case "pojisteni":
+                _pojisteniRepository.Delete(actualId);
+                break;
+            case "doprava":
+                _dopravaRepository.Delete(actualId);
+                break;
+            case "pokoj":
+                _pokojRepository.Delete(actualId);
+                break;
+            case "strava":
+                _stravaRepository.Delete(actualId);
+                break;
+            case "zamestnanec":
+                _zamestnanecRepository.Delete(actualId);
+                break;
+            default:
+                throw new DatabaseException("Typ položky neexistuje");
+        }
 
         return new RedirectResult($"~/sprava/{typPolozky}");
     }
-    
+
     // Zákazník
     [HttpGet]
     [Route("zakaznik")]
@@ -64,13 +118,13 @@ public class SpravaController : Controller
         string telefon = "",
         string adresa = "",
         int strana = 1
-        )
+    )
     {
         var maxStrana = 3;
-        
+
         if (strana < 1 || strana > maxStrana)
             strana = 1;
-        
+
         var model = new ZakaznikModel[20];
 
         for (var i = 0; i < model.Length; i++)
@@ -108,13 +162,13 @@ public class SpravaController : Controller
                 }
             };
         }
-        
+
         ViewBag.Strana = strana;
         ViewBag.MaxStrana = maxStrana;
-        
+
         return View(model);
     }
-    
+
     [HttpGet]
     [Route("zakaznik/{id}")]
     public IActionResult ZakaznikEdit(string id)
@@ -123,9 +177,9 @@ public class SpravaController : Controller
         {
             return View(null);
         }
-        
+
         ZakaznikModel? model = null;
-        
+
         if (_converter.Decode(id) > 0)
         {
             model = new ZakaznikModel
@@ -161,10 +215,10 @@ public class SpravaController : Controller
                 }
             };
         }
-        
+
         return View(model);
     }
-    
+
     [HttpPost]
     [Route("zakaznik")]
     public IActionResult ZakaznikPost([FromForm] ZakaznikModel model)
@@ -174,27 +228,24 @@ public class SpravaController : Controller
 
         return Ok();
     }
-    
+
     // Stát
     [HttpGet]
     [Route("stat")]
-    public IActionResult Stat(string zkratka = "", string nazev = "")
+    public IActionResult Stat(string zkratka = "", string nazev = "", int strana = 1)
     {
-        var model = new StatModel[20];
+        if (strana < 1)
+            strana = 1;
 
-        for (var i = 0; i < model.Length; i++)
-        {
-            model[i] = new StatModel
-            {
-                StatId = _converter.Encode(i),
-                Zkratka = "CZ",
-                Nazev = $"Česká republika {i}"
-            };
-        }
-        
+        var start = (strana - 1) * PolozekNaStranku;
+        var model = _statRepository.GetAll(out var celkovyPocetRadku, zkratka, nazev, start, PolozekNaStranku);
+
+        ViewBag.Strana = strana;
+        ViewBag.MaxStrana = PocetStran(celkovyPocetRadku);
+
         return View(model);
     }
-    
+
     [HttpGet]
     [Route("stat/{id}")]
     public IActionResult StatEdit(string id)
@@ -203,52 +254,34 @@ public class SpravaController : Controller
         {
             return View(null);
         }
-        
-        StatModel? model = null;
-        
-        if (_converter.Decode(id) > 0)
-        {
-            model = new StatModel
-            {
-                StatId = "yixuxtgcv",
-                Zkratka = "CZ",
-                Nazev = "Česká republika"
-            };
-        }
-        
+
+        var model = _statRepository.Get(_converter.Decode(id));
+
         return View(model);
     }
-    
+
     [HttpPost]
     [Route("stat")]
     public IActionResult StatPost([FromForm] StatModel model)
     {
-        // var idDecoded = _converter.Decode(id);
-        // TODO edit/add entity
+        var result = _statRepository.AddOrEdit(model);
 
-        return Ok();
+        if (result != 0)
+            return RedirectToAction("StatEdit", new { id = _converter.Encode(result) });
+
+        return RedirectToAction("StatEdit", new { id = model.StatId });
     }
-    
+
     // Pojištění
     [HttpGet]
     [Route("pojisteni")]
     public IActionResult Pojisteni()
     {
-        var model = new PojisteniModel[20];
+        var model = _pojisteniRepository.GetAll();
 
-        for (var i = 0; i < model.Length; i++)
-        {
-            model[i] = new PojisteniModel
-            {
-                PojisteniId = _converter.Encode(i),
-                CenaZaDen = 50,
-                Nazev = "oaishyq"
-            };
-        }
-        
         return View(model);
     }
-    
+
     [HttpGet]
     [Route("pojisteni/{id}")]
     public IActionResult PojisteniEdit(string id)
@@ -258,47 +291,33 @@ public class SpravaController : Controller
             return View(null);
         }
 
-        PojisteniModel? model = null;
-        
-        if (_converter.Decode(id) > 0)
-        {
-            model = new PojisteniModel
-            {
-                PojisteniId = "null",
-                CenaZaDen = 089,
-                Nazev = "null"
-            };
-        }
-        
+        var model = _pojisteniRepository.Get(_converter.Decode(id));
+
         return View(model);
     }
-    
+
     [HttpPost]
     [Route("pojisteni")]
     public IActionResult PojisteniPost([FromForm] PojisteniModel model)
     {
-        return Ok();
+        var result = _pojisteniRepository.AddOrEdit(model);
+
+        if (result != 0)
+            return RedirectToAction("PojisteniEdit", new { id = _converter.Encode(result) });
+
+        return RedirectToAction("PojisteniEdit", new { id = model.PojisteniId });
     }
-    
+
     // Doprava
     [HttpGet]
     [Route("doprava")]
     public IActionResult Doprava()
     {
-        var model = new DopravaModel[20];
-    
-        for (var i = 0; i < model.Length; i++)
-        {
-            model[i] = new DopravaModel
-            {
-                DopravaId = _converter.Encode(i),
-                Nazev = "yoxzc"
-            };
-        }
-        
+        var model = _dopravaRepository.GetAll();
+
         return View(model);
     }
-    
+
     [HttpGet]
     [Route("doprava/{id}")]
     public IActionResult DopravaEdit(string id)
@@ -308,47 +327,33 @@ public class SpravaController : Controller
             return View(null);
         }
 
-        DopravaModel? model = null;
-        
-        if (_converter.Decode(id) > 0)
-        {
-            model = new DopravaModel
-            {
-                DopravaId = "akshd",
-                Nazev = "aozhcoa"
-            };
-        }
-        
+        var model = _dopravaRepository.Get(_converter.Decode(id));
+
         return View(model);
     }
-    
+
     [HttpPost]
     [Route("doprava")]
     public IActionResult DopravaPost([FromForm] DopravaModel model)
     {
-        return Ok();
+        var result = _dopravaRepository.AddOrEdit(model);
+
+        if (result != 0)
+            return RedirectToAction("DopravaEdit", new { id = _converter.Encode(result) });
+
+        return RedirectToAction("DopravaEdit", new { id = model.DopravaId });
     }
-    
+
     // Pokoj
     [HttpGet]
     [Route("pokoj")]
     public IActionResult Pokoj()
     {
-        var model = new PokojModel[20];
-    
-        for (var i = 0; i < model.Length; i++)
-        {
-            model[i] = new PokojModel
-            {
-                PokojId = _converter.Encode(i),
-                PocetMist = 3,
-                Nazev = "akjgh"
-            };
-        }
-        
+        var model = _pokojRepository.GetAll();
+
         return View(model);
     }
-    
+
     [HttpGet]
     [Route("pokoj/{id}")]
     public IActionResult PokojEdit(string id)
@@ -358,47 +363,33 @@ public class SpravaController : Controller
             return View(null);
         }
 
-        PokojModel? model = null;
-        
-        if (_converter.Decode(id) > 0)
-        {
-            model = new PokojModel
-            {
-                PokojId = "asodhiy",
-                PocetMist = 0,
-                Nazev = "ioweqzr"
-            };
-        }
-        
+        var model = _pokojRepository.Get(_converter.Decode(id));
+
         return View(model);
     }
-    
+
     [HttpPost]
     [Route("pokoj")]
     public IActionResult PokojPost([FromForm] PokojModel model)
     {
-        return Ok();
+        var result = _pokojRepository.AddOrEdit(model);
+
+        if (result != 0)
+            return RedirectToAction("PokojEdit", new { id = _converter.Encode(result) });
+
+        return RedirectToAction("PokojEdit", new { id = model.PokojId });
     }
-    
+
     // Strava
     [HttpGet]
     [Route("strava")]
     public IActionResult Strava()
     {
-        var model = new StravaModel[20];
-    
-        for (var i = 0; i < model.Length; i++)
-        {
-            model[i] = new StravaModel
-            {
-                StravaId = _converter.Encode(i),
-                Nazev = "olgxhvia"
-            };
-        }
-        
+        var model = _stravaRepository.GetAll();
+
         return View(model);
     }
-    
+
     [HttpGet]
     [Route("strava/{id}")]
     public IActionResult StravaEdit(string id)
@@ -408,27 +399,23 @@ public class SpravaController : Controller
             return View(null);
         }
 
-        StravaModel? model = null;
-        
-        if (_converter.Decode(id) > 0)
-        {
-            model = new StravaModel
-            {
-                StravaId = "olgxhvia",
-                Nazev = "olgxhvia"
-            };
-        }
-        
+        var model = _stravaRepository.Get(_converter.Decode(id));
+
         return View(model);
     }
-    
+
     [HttpPost]
     [Route("strava")]
     public IActionResult StravaPost([FromForm] StravaModel model)
     {
-        return Ok();
+        var result = _stravaRepository.AddOrEdit(model);
+
+        if (result != 0)
+            return RedirectToAction("StravaEdit", new { id = _converter.Encode(result) });
+
+        return RedirectToAction("StravaEdit", new { id = model.StravaId });
     }
-    
+
     // Ubytování
     [HttpGet]
     [Route("ubytovani")]
@@ -437,22 +424,23 @@ public class SpravaController : Controller
         string pocetHvezd = "",
         string adresa = "",
         int strana = 1
-        )
+    )
     {
         var maxStrana = 3;
-        
+
         if (strana < 1 || strana > maxStrana)
             strana = 1;
-        
+
         var model = new UbytovaniModel[20];
-    
+
         for (var i = 0; i < model.Length; i++)
         {
             model[i] = new UbytovaniModel
             {
                 UbytovaniId = _converter.Encode(i),
                 Nazev = "aohisdnyv",
-                Popis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus finibus consequat diam at varius. Maecenas vitae tortor dolor. Ut at finibus velit. Aenean id fringilla eros. Nullam fermentum at turpis eget pellentesque. Duis ut eleifend magna, at interdum nisl. Pellentesque lectus justo, accumsan et rhoncus nec, vehicula tempus turpis. Quisque porttitor, mauris sit amet malesuada mollis, metus felis finibus nulla, at auctor nisl libero at nisl. Nullam efficitur ultrices velit, vitae vestibulum enim vulputate volutpat. Nam condimentum quam nulla, eu blandit leo pretium in. Phasellus iaculis fermentum aliquam. Suspendisse tincidunt molestie enim non sagittis.",
+                Popis =
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus finibus consequat diam at varius. Maecenas vitae tortor dolor. Ut at finibus velit. Aenean id fringilla eros. Nullam fermentum at turpis eget pellentesque. Duis ut eleifend magna, at interdum nisl. Pellentesque lectus justo, accumsan et rhoncus nec, vehicula tempus turpis. Quisque porttitor, mauris sit amet malesuada mollis, metus felis finibus nulla, at auctor nisl libero at nisl. Nullam efficitur ultrices velit, vitae vestibulum enim vulputate volutpat. Nam condimentum quam nulla, eu blandit leo pretium in. Phasellus iaculis fermentum aliquam. Suspendisse tincidunt molestie enim non sagittis.",
                 PocetHvezd = 5,
                 Adresa = new AdresaModel
                 {
@@ -465,13 +453,13 @@ public class SpravaController : Controller
                 ObrazkyUbytovani = Array.Empty<ObrazkyUbytovaniModel>()
             };
         }
-        
+
         ViewBag.Strana = strana;
         ViewBag.MaxStrana = maxStrana;
-        
+
         return View(model);
     }
-    
+
     [HttpGet]
     [Route("ubytovani/{id}")]
     public IActionResult UbytovaniEdit(string id)
@@ -505,19 +493,20 @@ public class SpravaController : Controller
                 Nazev = "Česká republika 3"
             },
         };
-        
+
         if (id == "0")
         {
             return View(null);
         }
-        
+
         if (_converter.Decode(id) > 0)
         {
             model = new UbytovaniModel
             {
                 UbytovaniId = "éíýhfgd",
                 Nazev = "aohisdnyv",
-                Popis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus finibus consequat diam at varius. Maecenas vitae tortor dolor. Ut at finibus velit. Aenean id fringilla eros. Nullam fermentum at turpis eget pellentesque. Duis ut eleifend magna, at interdum nisl. Pellentesque lectus justo, accumsan et rhoncus nec, vehicula tempus turpis. Quisque porttitor, mauris sit amet malesuada mollis, metus felis finibus nulla, at auctor nisl libero at nisl. Nullam efficitur ultrices velit, vitae vestibulum enim vulputate volutpat. Nam condimentum quam nulla, eu blandit leo pretium in. Phasellus iaculis fermentum aliquam. Suspendisse tincidunt molestie enim non sagittis.",
+                Popis =
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus finibus consequat diam at varius. Maecenas vitae tortor dolor. Ut at finibus velit. Aenean id fringilla eros. Nullam fermentum at turpis eget pellentesque. Duis ut eleifend magna, at interdum nisl. Pellentesque lectus justo, accumsan et rhoncus nec, vehicula tempus turpis. Quisque porttitor, mauris sit amet malesuada mollis, metus felis finibus nulla, at auctor nisl libero at nisl. Nullam efficitur ultrices velit, vitae vestibulum enim vulputate volutpat. Nam condimentum quam nulla, eu blandit leo pretium in. Phasellus iaculis fermentum aliquam. Suspendisse tincidunt molestie enim non sagittis.",
                 PocetHvezd = 5,
                 Adresa = new AdresaModel
                 {
@@ -533,7 +522,7 @@ public class SpravaController : Controller
                         Nazev = null
                     }
                 },
-                ObrazkyUbytovani = new []
+                ObrazkyUbytovani = new[]
                 {
                     new ObrazkyUbytovaniModel
                     {
@@ -550,10 +539,10 @@ public class SpravaController : Controller
                 }
             };
         }
-        
+
         return View(model);
     }
-    
+
     [HttpPost]
     [Route("ubytovani")]
     public IActionResult UbytovaniPost([FromForm] UbytovaniModel model)
@@ -570,10 +559,10 @@ public class SpravaController : Controller
                 Obrazek = ms.ToArray()
             });
         }
-        
+
         return Ok();
     }
-    
+
     // Zájezd
     [HttpGet]
     [Route("zajezd")]
@@ -587,15 +576,15 @@ public class SpravaController : Controller
         string doprava = "",
         string strava = "",
         int strana = 1
-        )
+    )
     {
         var maxStrana = 3;
-        
+
         if (strana < 1 || strana > maxStrana)
             strana = 1;
-        
+
         var model = new ZajezdModel[20];
-    
+
         for (var i = 0; i < model.Length; i++)
         {
             model[i] = new ZajezdModel
@@ -603,14 +592,14 @@ public class SpravaController : Controller
                 ZajezdId = _converter.Encode(i),
                 CenaZaOsobu = 6943,
                 Zobrazit = true,
-                Terminy = new []
+                Terminy = new[]
                 {
                     new TerminModel
                     {
                         TerminId = "pou",
                         Od = default,
                         Do = default,
-                        PokojeTerminu = new []
+                        PokojeTerminu = new[]
                         {
                             new PokojTerminu
                             {
@@ -672,7 +661,7 @@ public class SpravaController : Controller
                 }
             };
         }
-        
+
         ViewBag.Stravy = new[]
         {
             new StravaModel
@@ -691,7 +680,7 @@ public class SpravaController : Controller
                 Nazev = "all"
             }
         };
-        
+
         ViewBag.Dopravy = new[]
         {
             new DopravaModel
@@ -710,13 +699,13 @@ public class SpravaController : Controller
                 Nazev = "auto"
             }
         };
-        
+
         ViewBag.Strana = strana;
         ViewBag.MaxStrana = maxStrana;
-        
+
         return View(model);
     }
-    
+
     [HttpGet]
     [Route("zajezd/{id}")]
     public IActionResult ZajezdEdit(string id)
@@ -766,7 +755,7 @@ public class SpravaController : Controller
                 Nazev = "troj"
             }
         };
-        
+
         ViewBag.Stravy = new[]
         {
             new StravaModel
@@ -785,7 +774,7 @@ public class SpravaController : Controller
                 Nazev = "all"
             }
         };
-        
+
         ViewBag.Dopravy = new[]
         {
             new DopravaModel
@@ -804,12 +793,12 @@ public class SpravaController : Controller
                 Nazev = "auto"
             }
         };
-        
+
         if (id == "0")
         {
             return View(null);
         }
-        
+
         if (_converter.Decode(id) > 0)
         {
             model = new ZajezdModel
@@ -817,14 +806,14 @@ public class SpravaController : Controller
                 ZajezdId = "ixyhc",
                 CenaZaOsobu = 6943,
                 Zobrazit = true,
-                Terminy = new []
+                Terminy = new[]
                 {
                     new TerminModel
                     {
                         TerminId = "pou",
                         Od = default,
                         Do = default,
-                        PokojeTerminu = new []
+                        PokojeTerminu = new[]
                         {
                             new PokojTerminu
                             {
@@ -855,7 +844,7 @@ public class SpravaController : Controller
                         TerminId = "aswvc",
                         Od = default,
                         Do = default,
-                        PokojeTerminu = new []
+                        PokojeTerminu = new[]
                         {
                             new PokojTerminu
                             {
@@ -906,17 +895,17 @@ public class SpravaController : Controller
                 }
             };
         }
-        
+
         return View(model);
     }
-    
+
     [HttpPost]
     [Route("zajezd")]
     public IActionResult ZajezdPost([FromForm] ZajezdModel model)
     {
         return Ok();
     }
-    
+
     // Objednávka
     [HttpGet]
     [Route("objednavka")]
@@ -929,19 +918,19 @@ public class SpravaController : Controller
         int cenaOd = int.MinValue,
         int cenaDo = int.MaxValue,
         int strana = 1
-        )
+    )
     {
         var maxStrana = 3;
-        
+
         if (datumOd < DateOnly.FromDateTime(DateTime.Today))
             datumOd = DateOnly.FromDateTime(DateTime.Today);
         if (datumDo == default)
             datumDo = DateOnly.MaxValue;
         if (strana < 1 || strana > maxStrana)
             strana = 1;
-        
+
         var model = new ObjednavkaModel[20];
-    
+
         for (var i = 0; i < model.Length; i++)
         {
             model[i] = new ObjednavkaModel
@@ -1029,13 +1018,13 @@ public class SpravaController : Controller
                 }
             };
         }
-        
+
         ViewBag.Strana = strana;
         ViewBag.MaxStrana = maxStrana;
-        
+
         return View(model);
     }
-    
+
     [HttpGet]
     [Route("objednavka/{id}")]
     public IActionResult ObjednavkaEdit(string id)
@@ -1137,14 +1126,14 @@ public class SpravaController : Controller
 
         return View(model);
     }
-    
+
     [HttpPost]
     [Route("objednavka")]
     public IActionResult ObjednavkaPost([FromForm] ObjednavkaModel model)
     {
         return Ok();
     }
-    
+
     // Zaměstnanec
     [Authorize(Roles = "Admin")]
     [HttpGet]
@@ -1155,11 +1144,9 @@ public class SpravaController : Controller
         string role = "",
         string nadrizeny = "",
         int strana = 1
-        )
+    )
     {
-        var maxStrana = 3;
-        
-        if (strana < 1 || strana > maxStrana)
+        if (strana < 1)
             strana = 1;
 
         ViewBag.Role = new[]
@@ -1171,146 +1158,58 @@ public class SpravaController : Controller
             },
             new RoleModel
             {
-                RoleId = "1",
+                RoleId = "8TwqJ",
                 Nazev = "Zaměstnanec"
             },
             new RoleModel
             {
-                RoleId = "2",
+                RoleId = "jkMvT",
                 Nazev = "Admin"
             }
         };
-        
-        var model = new ZamestnanecModel[20];
 
-        for (var i = 0; i < model.Length; i++)
-        {
-            model[i] = new ZamestnanecModel
-            {
-                ZamestnanecId = _converter.Encode(i),
-                PrihlasovaciUdaje = new PrihlasovaciUdajeModel
-                {
-                    PrihlasovaciUdajeId = "lyhkxcv",
-                    Jmeno = "pepazdepa",
-                    Heslo = null
-                },
-                Jmeno = "Pepa",
-                Prijmeni = "zdepa",
-                Role = new RoleModel
-                {
-                    RoleId = "ykoh",
-                    Nazev = "zamestnanec"
-                },
-                Nadrizeny = new ZamestnanecModel
-                {
-                    Jmeno = "Pepa",
-                    Prijmeni = "zdepa nad",
-                }
-            };
-        }
-        
+        var start = (strana - 1) * PolozekNaStranku;
+        var roleId = role == "" ? 0 : _converter.Decode(role);
+        var model = _zamestnanecRepository.GetSpravaPreview(out var celkovyPocetRadku, celeJmeno, prihlasovaciJmeno,
+            roleId, nadrizeny, start, PolozekNaStranku);
+
         ViewBag.Strana = strana;
-        ViewBag.MaxStrana = maxStrana;
-        
+        ViewBag.MaxStrana = PocetStran(celkovyPocetRadku);
+
         return View(model);
     }
-    
+
     [Authorize(Roles = "Admin")]
     [HttpGet]
     [Route("zamestnanec/{id}")]
     public IActionResult ZamestnanecEdit(string id)
     {
-        ZamestnanecModel? model = null;
+        var nikdo = new ZamestnanecModel();
+        ViewBag.Role = _roleRepository.GetAll().Reverse();
 
-        ViewBag.Role = new[]
-        {
-            new RoleModel
-            {
-                RoleId = "1",
-                Nazev = "Zaměstnanec"
-            },
-            new RoleModel
-            {
-                RoleId = "2",
-                Nazev = "Admin"
-            }
-        };
-
-        ViewBag.Zamestnanci = new[]
-        {
-            new ZamestnanecModel
-            {
-                Jmeno = "Nemá",
-                Prijmeni = "nadřízeného",
-            },
-            new ZamestnanecModel
-            {
-                ZamestnanecId = "1",
-                Jmeno = "Pepa 1",
-                Prijmeni = "zdepa",
-            },
-            new ZamestnanecModel
-            {
-                ZamestnanecId = "2",
-                Jmeno = "Pepa 2",
-                Prijmeni = "zdepa",
-            },
-            new ZamestnanecModel
-            {
-                ZamestnanecId = "3",
-                Jmeno = "Pepa 3",
-                Prijmeni = "zdepa",
-            },
-            new ZamestnanecModel
-            {
-                ZamestnanecId = "4",
-                Jmeno = "Pepa 4",
-                Prijmeni = "zdepa",
-            }
-        };
-        
         if (id == "0")
         {
+            ViewBag.Zamestnanci = _zamestnanecRepository.GetMozniNadrizeni(0).Prepend(nikdo);
+            
             return View(null);
         }
-        
-        if (_converter.Decode(id) > 0)
-        {
-            model = new ZamestnanecModel
-            {
-                ZamestnanecId = "yuasd",
-                PrihlasovaciUdaje = new PrihlasovaciUdajeModel
-                {
-                    PrihlasovaciUdajeId = "lyhkxcv",
-                    Jmeno = "pepazdepa",
-                    Heslo = null
-                },
-                Jmeno = "Pepa",
-                Prijmeni = "zdepa",
-                Role = new RoleModel
-                {
-                    RoleId = "ykoh",
-                    Nazev = "zamestnanec"
-                },
-                Nadrizeny = new ZamestnanecModel
-                {
-                    Jmeno = "Pepa",
-                    Prijmeni = "zdepa nad",
-                }
-            };
-        }
-        
+
+        ViewBag.Zamestnanci = _zamestnanecRepository.GetMozniNadrizeni(_converter.Decode(id)).Prepend(nikdo);
+        var model = _zamestnanecRepository.Get(_converter.Decode(id));
+
         return View(model);
     }
-    
+
     [Authorize(Roles = "Admin")]
     [HttpPost]
     [Route("zamestnanec")]
     public IActionResult ZamestnanecPost([FromForm] ZamestnanecModel model)
     {
-        // var idDecoded = _converter.Decode(id);
-        // TODO edit/add entity
+        var result = _zamestnanecRepository.AddOrEdit(model);
 
-        return Ok();
+        if (result != 0)
+            return RedirectToAction("ZamestnanecEdit", new { id = _converter.Encode(result) });
+
+        return RedirectToAction("ZamestnanecEdit", new { id = model.ZamestnanecId });
     }
 }

@@ -12,6 +12,7 @@ public class InvalidIdException : Exception
 public interface IIdConverter
 {
     string Encode(int id);
+    string Encode(string id);
     int Decode(string id);
 }
 
@@ -25,6 +26,8 @@ public class IdConverter : IIdConverter
     }
 
     public string Encode(int id) => _encoder.Encode(id);
+    
+    public string Encode(string id) => _encoder.Encode(int.Parse(id));
 
     public int Decode(string id)
     {

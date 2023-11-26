@@ -32,10 +32,6 @@ public class GenericDao<T> where T : IDbModel
         var parameters = MapModelToParams(model);
         
         var res = _unitOfWork.Connection.Execute($"pck_{TableName}.manage_{TableName}", parameters, commandType: CommandType.StoredProcedure);
-        // res.Read();
-        // res.Close();
-        // res.Dispose();
-        // UnitOfWork.Reset();
         
         return parameters.GetResult();
     }

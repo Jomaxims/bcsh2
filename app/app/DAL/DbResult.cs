@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using app.Repositories;
 
 namespace app.DAL;
 
@@ -11,11 +12,11 @@ public class DbResult
     public required string Status { get; set; }
     
     [JsonPropertyName("id")]
-    public int? Id { get; set; }
+    public int Id { get; set; }
 
     public bool IsOk => Status == "OK";
 
-    public DbResult AddId(int? id)
+    public DbResult AddId(int id)
     {
         Id = id;
         
@@ -25,5 +26,11 @@ public class DbResult
     public override string ToString()
     {
         return $"{nameof(Message)}: {Message}, {nameof(Status)}: {Status}, {nameof(Id)}: {Id}";
+    }
+
+    public void IsOkOrThrow()
+    {
+        if (!IsOk)
+            throw new DatabaseException(Message);
     }
 }

@@ -11,6 +11,7 @@
         <PackageReference Include="AspNetCore.SassCompiler" Version="1.69.5" />
         <PackageReference Include="AutoMapper" Version="12.0.1" />
         <PackageReference Include="Dapper" Version="2.1.15" />
+        <PackageReference Include="Dapper.SqlBuilder" Version="2.0.78" />
         <PackageReference Include="Dapper.Transaction" Version="2.0.143" />
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.11" />
         <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="23.3.0-dev" />
