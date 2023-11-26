@@ -3,7 +3,7 @@ CREATE OR REPLACE PACKAGE pck_pojisteni AS
     PROCEDURE manage_pojisteni(
         p_pojisteni_id IN OUT pojisteni.pojisteni_id%TYPE,
         p_cena_za_den IN pojisteni.cena_za_den%TYPE,
-        p_popis       IN pojisteni.nazev%TYPE,
+        p_nazev       IN pojisteni.nazev%TYPE,
         o_result      OUT CLOB
     );
 
@@ -20,7 +20,7 @@ CREATE OR REPLACE PACKAGE BODY pck_pojisteni AS
     PROCEDURE manage_pojisteni(
         p_pojisteni_id IN OUT pojisteni.pojisteni_id%TYPE,
         p_cena_za_den IN pojisteni.cena_za_den%TYPE,
-        p_popis       IN pojisteni.nazev%TYPE,
+        p_nazev       IN pojisteni.nazev%TYPE,
         o_result      OUT CLOB
     ) IS
     BEGIN
@@ -28,7 +28,7 @@ CREATE OR REPLACE PACKAGE BODY pck_pojisteni AS
             INSERT INTO pojisteni
                 (cena_za_den, nazev)
             VALUES
-                (p_cena_za_den, p_popis)
+                (p_cena_za_den, p_nazev)
             RETURNING pojisteni_id INTO p_pojisteni_id;
 
             o_result := '{"status": "OK", "message": "Nové pojistění bylo úspěně vytvořeno."}';
@@ -36,7 +36,7 @@ CREATE OR REPLACE PACKAGE BODY pck_pojisteni AS
             UPDATE pojisteni
             SET
                 cena_za_den = p_cena_za_den,
-                nazev = p_popis
+                nazev = p_nazev
             WHERE
                 pojisteni_id = p_pojisteni_id;
 

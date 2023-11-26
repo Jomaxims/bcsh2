@@ -25,16 +25,6 @@ JOIN STRAVA st ON st.strava_id = z.strava_id
 LEFT JOIN OBRAZKY_UBYTOVANI ou ON ou.ubytovani_id = u.ubytovani_id
 WHERE z.zobrazit = 1;
 
-CREATE OR REPLACE VIEW logy_view AS
-SELECT
-    tabulka,
-    operace,
-    cas_zmeny,
-    uzivatel,
-    pred,
-    po
-FROM LOG_TABEL;
-
 CREATE OR REPLACE VIEW stat_view AS
 SELECT
     s.zkratka,
