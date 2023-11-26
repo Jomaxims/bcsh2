@@ -82,7 +82,7 @@
 <ownDataTypeParameters>,1,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="castka1" id="D4E0ADDB-D24E-4434-F526-66CA217398B2">
+<Column name="castka2" id="D4E0ADDB-D24E-4434-F526-66CA217398B2">
 <createdBy>tomas</createdBy>
 <createdTime>2023-11-24 11:06:26 UTC</createdTime>
 <generatorID>70E1A966-62A2-0F08-9CEF-C3E6DAE6BE29</generatorID>

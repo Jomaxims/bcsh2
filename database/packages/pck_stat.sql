@@ -1,14 +1,14 @@
 CREATE OR REPLACE PACKAGE pck_stat AS
 
     PROCEDURE manage_stat(
-        io_stat_id      IN  OUT stat.stat_id %TYPE,
-        i_zkratka       stat.zkratka %TYPE,
-        i_nazev         stat.nazev %TYPE,
+        p_stat_id      IN  OUT stat.stat_id %TYPE,
+        p_zkratka       stat.zkratka %TYPE,
+        p_nazev         stat.nazev %TYPE,
         o_result        OUT VARCHAR2
     );
     
     PROCEDURE delete_stat(
-        i_stat_id   IN stat.stat_id %TYPE,
+        p_stat_id   IN stat.stat_id %TYPE,
         o_result    OUT VARCHAR2
     );
 
@@ -19,21 +19,21 @@ END pck_stat;
 CREATE OR REPLACE PACKAGE BODY pck_stat AS
 
     PROCEDURE manage_stat(
-        io_stat_id      IN OUT stat.stat_id%TYPE,
-        i_zkratka       stat.zkratka%TYPE,
-        i_nazev         stat.nazev%TYPE,
+        p_stat_id      IN OUT stat.stat_id%TYPE,
+        p_zkratka       stat.zkratka%TYPE,
+        p_nazev         stat.nazev%TYPE,
         o_result        OUT VARCHAR2
     ) IS
     BEGIN
-        IF io_stat_id IS NULL THEN
+        IF p_stat_id IS NULL THEN
             INSERT INTO STAT(ZKRATKA, NAZEV)
-            VALUES(i_zkratka, i_nazev)
-            RETURNING stat_id INTO io_stat_id;
+            VALUES(p_zkratka, p_nazev)
+            RETURNING stat_id INTO p_stat_id;
             o_result := '{ "status": "OK", "message": "Stát přidán úspěně." }';
         ELSE
             UPDATE STAT
-            SET ZKRATKA = i_zkratka, NAZEV = i_nazev
-            WHERE STAT_ID = io_stat_id;
+            SET ZKRATKA = p_zkratka, NAZEV = p_nazev
+            WHERE STAT_ID = p_stat_id;
 
             IF SQL%ROWCOUNT = 0 THEN
                 o_result := '{ "status": "error", "message": "Chyba: ID státu nebylo nalezeno." }';
@@ -47,12 +47,12 @@ CREATE OR REPLACE PACKAGE BODY pck_stat AS
     END manage_stat;
 
     PROCEDURE delete_stat(
-        i_stat_id   IN stat.stat_id %TYPE,
+        p_stat_id   IN stat.stat_id %TYPE,
         o_result    OUT VARCHAR2
     ) IS
     BEGIN
-        IF i_stat_id IS NOT NULL THEN
-            DELETE FROM STAT WHERE STAT_ID = i_stat_id;
+        IF p_stat_id IS NOT NULL THEN
+            DELETE FROM STAT WHERE STAT_ID = p_stat_id;
 
             IF SQL%ROWCOUNT = 0 THEN
                 o_result := '{ "status": "error", "message": "Chyba: ID státu nebylo nalezeno." }';

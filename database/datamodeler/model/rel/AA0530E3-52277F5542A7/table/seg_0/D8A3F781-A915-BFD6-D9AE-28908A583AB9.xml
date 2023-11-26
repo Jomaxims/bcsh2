@@ -43,21 +43,6 @@
 <ownDataTypeParameters>20,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="zakaznik_id" id="32EC5206-6BA8-89C1-7232-D98ECE158155">
-<createdBy>tomas</createdBy>
-<createdTime>2023-11-16 20:04:16 UTC</createdTime>
-<generatorID>1A25356F-67EC-0D2C-7FB4-393EAEAD1E42</generatorID>
-<ownerDesignName>model</ownerDesignName>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<previousColumn>false</previousColumn>
-<autoIncrementCycle>false</autoIncrementCycle>
-<associations>
-<colAssociation fkAssociation="4542BAEA-614B-E318-E206-9CFF3E5AAB45" referredColumn="B730B99C-2FB6-6473-E9F5-41EF60B472E5"/>
-</associations>
-</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="B432C793-7188-F2F6-02FC-64C53D1CB23F" name="KONTAKT_PK">
@@ -79,28 +64,6 @@
 <indexState>Unique Plain Index</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <relationGeneratorID>DFCA4A1B-0015-C75C-A7DC-EEAD356E7CAB</relationGeneratorID>
-</ind_PK_UK>
-<ind_PK_UK id="BDB4163C-EE81-655B-BEF3-353A46AA418E" name="KONTAKT__IDX">
-<createdBy>tomas</createdBy>
-<createdTime>2023-11-16 20:04:16 UTC</createdTime>
-<ownerDesignName>model</ownerDesignName>
-<indexState>Unique Plain Index</indexState>
-<isSurrogateKey>false</isSurrogateKey>
-<relationGeneratorID>088FBBFE-596C-76EF-519E-9D373B0A5475</relationGeneratorID>
-<indexColumnUsage>
-<colUsage columnID="32EC5206-6BA8-89C1-7232-D98ECE158155"/>
-</indexColumnUsage>
-</ind_PK_UK>
-<ind_PK_UK id="F50C1526-8286-EFB7-3ADF-3AECFD175505" name="KONTAKT_ZAKAZNIK_FK">
-<createdBy>tomas</createdBy>
-<createdTime>2023-11-16 20:04:16 UTC</createdTime>
-<generatorID>088FBBFE-596C-76EF-519E-9D373B0A5475</generatorID>
-<ownerDesignName>model</ownerDesignName>
-<indexState>Foreign Key</indexState>
-<isSurrogateKey>false</isSurrogateKey>
-<indexColumnUsage>
-<colUsage columnID="32EC5206-6BA8-89C1-7232-D98ECE158155"/>
-</indexColumnUsage>
 </ind_PK_UK>
 </indexes>
 </Table>
