@@ -21,7 +21,7 @@ BEGIN
         v_before := 'DOPRAVA_ID: ' || :OLD.DOPRAVA_ID || ', NAZEV: ' || :OLD.NAZEV;
         v_after := NULL;
     END IF;
-    INSERT INTO LOG_TABEL (TABULKA, OPERACE, CAS_ZMENY, UZIVATEL, PRED, PO)
+    INSERT INTO LOG_TABLE (TABULKA, OPERACE, CAS_ZMENY, UZIVATEL, PRED, PO)
     VALUES ('DOPRAVA', v_operation, SYSTIMESTAMP, v_user, v_before, v_after);
 END;
 /

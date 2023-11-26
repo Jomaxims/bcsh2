@@ -21,7 +21,7 @@ BEGIN
         v_before := 'KONTAKT_ID: ' || :OLD.KONTAKT_ID || ', EMAIL: ' || :OLD.EMAIL || ', TELEFON: ' || :OLD.TELEFON;
         v_after := NULL;
     END IF;
-    INSERT INTO LOG_TABEL (TABULKA, OPERACE, CAS_ZMENY, UZIVATEL, PRED, PO)
+    INSERT INTO LOG_TABLE (TABULKA, OPERACE, CAS_ZMENY, UZIVATEL, PRED, PO)
     VALUES ('KONTAKT', v_operation, SYSTIMESTAMP, v_user, v_before, v_after);
 END;
 /
