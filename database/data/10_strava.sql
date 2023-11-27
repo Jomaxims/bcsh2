@@ -1,5 +1,5 @@
-insert into strava (nazev) values ('all inclusive');
-insert into strava (nazev) values ('polopenze');
-insert into strava (nazev) values ('plná penze');
-insert into strava (nazev) values ('snídaně');
-insert into strava (nazev) values ('bez stravy');
+insert into strava (nazev) values ('Bez stravy');
+insert into strava (nazev) values ('All inclusive');
+insert into strava (nazev) values ('Polopenze');
+insert into strava (nazev) values ('Plná penze');
+insert into strava (nazev) values ('Snídaně');

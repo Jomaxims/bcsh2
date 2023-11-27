@@ -3,10 +3,10 @@ DECLARE
     v_result VARCHAR2(100);
 BEGIN
 v_role_id := NULL;
-pck_role.manage_role(v_role_id, 'admin', v_result);
+pck_role.manage_role(v_role_id, 'Admin', v_result);
 DBMS_OUTPUT.PUT_LINE(v_result);
 v_role_id := NULL;
-pck_role.manage_role(v_role_id, 'zamestnanec', v_result);
+pck_role.manage_role(v_role_id, 'Zaměstnanec', v_result);
 DBMS_OUTPUT.PUT_LINE(v_result);
 EXCEPTION
     WHEN OTHERS THEN
