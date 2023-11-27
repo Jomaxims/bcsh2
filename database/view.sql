@@ -34,7 +34,7 @@ SELECT
     a.cislo_popisne,
     a.mesto,
     a.psc,
-    s.nazev as Nazev_statu,
+    s.nazev as stat_nazev,
     a.ulice || ', ' || a.cislo_popisne || ', ' || a.mesto || ', ' || a.psc || ', ' || s.nazev AS cela_adresa
 FROM UBYTOVANI u
 JOIN ADRESA a ON u.adresa_id = a.adresa_id
