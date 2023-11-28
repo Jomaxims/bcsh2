@@ -6,6 +6,7 @@ CREATE OR REPLACE PACKAGE pck_zajezd AS
         p_cena_za_osobu IN zajezd.cena_za_osobu%TYPE,
         p_doprava_id  IN zajezd.doprava_id%TYPE,
         p_ubytovani_id IN zajezd.ubytovani_id%TYPE,
+        p_strava_id IN zajezd.strava_id%TYPE,
         p_sleva_procent IN zajezd.sleva_procent%TYPE,
         p_zobrazit    IN zajezd.zobrazit%TYPE,
         o_result      OUT CLOB
@@ -27,14 +28,15 @@ CREATE OR REPLACE PACKAGE BODY pck_zajezd AS
         p_cena_za_osobu IN zajezd.cena_za_osobu%TYPE,
         p_doprava_id  IN zajezd.doprava_id%TYPE,
         p_ubytovani_id IN zajezd.ubytovani_id%TYPE,
+        p_strava_id IN zajezd.strava_id%TYPE,
         p_sleva_procent IN zajezd.sleva_procent%TYPE,
         p_zobrazit    IN zajezd.zobrazit%TYPE,
         o_result      OUT CLOB
     ) IS
     BEGIN
         IF p_zajezd_id IS NULL THEN
-            INSERT INTO zajezd (popis, cena_za_osobu, doprava_id, ubytovani_id, sleva_procent, zobrazit)
-            VALUES (p_popis, p_cena_za_osobu, p_doprava_id, p_ubytovani_id, p_sleva_procent, p_zobrazit)
+            INSERT INTO zajezd (popis, cena_za_osobu, doprava_id, ubytovani_id, sleva_procent, zobrazit, strava_id)
+            VALUES (p_popis, p_cena_za_osobu, p_doprava_id, p_ubytovani_id, p_sleva_procent, p_zobrazit, p_strava_id)
             RETURNING zajezd_id INTO p_zajezd_id;
             
             o_result := '{ "status": "OK", "message": "Zajezd byl uspesne vytvoren." }';
@@ -45,7 +47,8 @@ CREATE OR REPLACE PACKAGE BODY pck_zajezd AS
                 doprava_id = p_doprava_id,
                 ubytovani_id = p_ubytovani_id,
                 sleva_procent = p_sleva_procent,
-                zobrazit = p_zobrazit
+                zobrazit = p_zobrazit,
+                strava_id = p_strava_id
             WHERE zajezd_id = p_zajezd_id;
             
             IF SQL%ROWCOUNT = 0 THEN
