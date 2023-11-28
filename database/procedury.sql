@@ -30,6 +30,42 @@ BEGIN
 END;
 /
 
+DECLARE
+    l_prihlasovaci_udaje_id prihlasovaci_udaje.PRIHLASOVACI_UDAJE_ID%TYPE := NULL; -- NULL for new entry
+    l_jmeno prihlasovaci_udaje.jmeno%TYPE := 'PEPA'; -- Example username
+    l_heslo prihlasovaci_udaje.heslo%TYPE := 'pepa'; -- Example password
+    l_result CLOB;
+BEGIN
+    -- Call the procedure to add new user login data
+    pck_prihlasovaci_udaje.manage_prihlasovaci_udaje(
+        l_prihlasovaci_udaje_id,
+        l_jmeno,
+        l_heslo,
+        l_result
+    );
+
+    -- Output the result of the procedure call
+    DBMS_OUTPUT.PUT_LINE(l_result);
+
+    -- Optionally, output the new user ID if needed
+    DBMS_OUTPUT.PUT_LINE('New User ID: ' || TO_CHAR(l_prihlasovaci_udaje_id));
+END;
+/
+
+DECLARE
+    result CLOB;
+BEGIN
+    result := pck_security.login('PEPA', 'pepa');
+    DBMS_OUTPUT.PUT_LINE(result);
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error occurred: ' || SQLERRM);
+END;
+
+
+
+
+
 
 
 DECLARE
