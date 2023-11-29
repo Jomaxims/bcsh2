@@ -12,18 +12,18 @@ BEGIN
     IF INSERTING THEN 
         v_operation := 'INSERT';
         v_before := NULL;
-        v_after := 'OSOBA_OSOBA_ID: ' || :NEW.OSOBA_OSOBA_ID || ', ' || 
-                   'OBJEDNAVKA_OBJEDNAVKA_ID: ' || :NEW.OBJEDNAVKA_OBJEDNAVKA_ID;
+        v_after := 'OSOBA_ID: ' || :NEW.OSOBA_ID || ', ' || 
+                   'OBJEDNAVKA_ID: ' || :NEW.OBJEDNAVKA_ID;
     ELSIF UPDATING THEN 
         v_operation := 'UPDATE';
-        v_before := 'OSOBA_OSOBA_ID: ' || :OLD.OSOBA_OSOBA_ID || ', ' || 
-                    'OBJEDNAVKA_OBJEDNAVKA_ID: ' || :OLD.OBJEDNAVKA_OBJEDNAVKA_ID;
-        v_after := 'OSOBA_OSOBA_ID: ' || :NEW.OSOBA_OSOBA_ID || ', ' || 
-                   'OBJEDNAVKA_OBJEDNAVKA_ID: ' || :NEW.OBJEDNAVKA_OBJEDNAVKA_ID;
+        v_before := 'OSOBA_ID: ' || :OLD.OSOBA_ID || ', ' || 
+                    'OBJEDNAVKA_ID: ' || :OLD.OBJEDNAVKA_ID;
+        v_after := 'OSOBA_ID: ' || :NEW.OSOBA_ID || ', ' || 
+                   'OBJEDNAVKA_ID: ' || :NEW.OBJEDNAVKA_ID;
     ELSIF DELETING THEN 
         v_operation := 'DELETE';
-        v_before := 'OSOBA_OSOBA_ID: ' || :OLD.OSOBA_OSOBA_ID || ', ' || 
-                    'OBJEDNAVKA_OBJEDNAVKA_ID: ' || :OLD.OBJEDNAVKA_OBJEDNAVKA_ID;
+        v_before := 'OSOBA_ID: ' || :OLD.OSOBA_ID || ', ' || 
+                    'OBJEDNAVKA_ID: ' || :OLD.OBJEDNAVKA_ID;
         v_after := NULL;
     END IF;
 

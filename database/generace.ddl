@@ -93,12 +93,12 @@ CREATE TABLE osoba (
 ALTER TABLE osoba ADD CONSTRAINT osoba_pk PRIMARY KEY ( osoba_id );
 
 CREATE TABLE osoba_objednavka (
-    osoba_osoba_id           INTEGER NOT NULL,
-    objednavka_objednavka_id INTEGER NOT NULL
+    osoba_id           INTEGER NOT NULL,
+    objednavka_id INTEGER NOT NULL
 );
 
-ALTER TABLE osoba_objednavka ADD CONSTRAINT osoba_objednavka_pk PRIMARY KEY ( osoba_osoba_id,
-                                                                              objednavka_objednavka_id );
+ALTER TABLE osoba_objednavka ADD CONSTRAINT osoba_objednavka_pk PRIMARY KEY ( osoba_id,
+                                                                              objednavka_id );
 
 CREATE TABLE platba (
     platba_id        INTEGER
@@ -317,11 +317,11 @@ ALTER TABLE obrazky_ubytovani
         REFERENCES ubytovani ( ubytovani_id );
 
 ALTER TABLE osoba_objednavka
-    ADD CONSTRAINT osoba_objednavka_objednavka_fk FOREIGN KEY ( objednavka_objednavka_id )
+    ADD CONSTRAINT osoba_objednavka_objednavka_fk FOREIGN KEY ( objednavka_id )
         REFERENCES objednavka ( objednavka_id );
 
 ALTER TABLE osoba_objednavka
-    ADD CONSTRAINT osoba_objednavka_osoba_fk FOREIGN KEY ( osoba_osoba_id )
+    ADD CONSTRAINT osoba_objednavka_osoba_fk FOREIGN KEY ( osoba_id )
         REFERENCES osoba ( osoba_id );
 
 ALTER TABLE platba
