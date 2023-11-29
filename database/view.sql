@@ -65,19 +65,19 @@ JOIN PLATBA pl ON pl.objednavka_id = o.objednavka_id;
 CREATE OR REPLACE VIEW zajezd_sprava_view AS
 SELECT
     z.zajezd_id,
-    u.nazev as Nazev_ubytovani,
+    u.nazev as ubytovani_nazev,
     a.ulice,
     a.cislo_popisne,
     a.mesto,
     a.psc,
-    s.nazev as Nazev_statu,
+    s.nazev as stat_nazev,
     a.ulice || ', ' || a.cislo_popisne || ', ' || a.mesto || ', ' || a.psc || ', ' || s.nazev AS cela_adresa,
     z.cena_za_osobu,
     z.sleva_procent,
-    d.nazev as Nazev_dopravy,
-    st.nazev as Nazev_strava,
+    d.nazev as doprava_nazev,
+    st.nazev as strava_nazev,
     d.doprava_id,
-    st.strava_id,
+    st.strava_id
 FROM ZAJEZD z
 JOIN UBYTOVANI u ON u.ubytovani_id = z.ubytovani_id
 JOIN DOPRAVA d ON d.doprava_id = z.doprava_id
@@ -125,3 +125,20 @@ JOIN ROLE r ON r.role_id = z.role_id
 JOIN PRIHLASOVACI_UDAJE pu ON pu.prihlasovaci_udaje_id = z.prihlasovaci_udaje_id
 LEFT JOIN ZAMESTNANEC n ON n.zamestnanec_id = z.nadrizeny_id;
 
+CREATE OR REPLACE VIEW objednavka_view AS
+SELECT
+    o.objednavka_id,
+    t.od, t.do,
+    u.nazev as ubytovani_nazev,
+    p.nazev as pokoj_nazev,
+    os.jmeno, os.prijmeni, os.jmeno || ' ' || os.prijmeni as cele_jmeno,
+    pl.castka, pl.zaplacena
+FROM objednavka o
+join termin t on t.termin_id = o.termin_id
+join zajezd z on z.zajezd_id = t.zajezd_id
+join ubytovani u on u.ubytovani_id = z.ubytovani_id
+join pokoj p on p.pokoj_id = o.pokoj_id
+join zakaznik za on za.zakaznik_id = o.zakaznik_id
+join platba pl on pl.objednavka_id = o.objednavka_id
+join osoba os on os.osoba_id = za.osoba_id
+order by o.objednavka_id;
