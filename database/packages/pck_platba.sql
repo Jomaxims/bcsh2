@@ -8,6 +8,12 @@ CREATE OR REPLACE PACKAGE pck_platba AS
         p_zaplacena        IN platba.zaplacena%TYPE,
         o_result           OUT CLOB
     );
+    
+    PROCEDURE zaplat_platba(
+        p_platba_id        IN platba.platba_id%TYPE,
+        p_cislo_uctu       IN platba.cislo_uctu%TYPE,
+        o_result           OUT CLOB
+    );
 
     PROCEDURE delete_platba(
         p_platba_id        IN platba.platba_id%TYPE,
@@ -56,6 +62,30 @@ CREATE OR REPLACE PACKAGE BODY pck_platba AS
         WHEN OTHERS THEN
             o_result := '{"status": "error", "message": "Došlo k chybě při zpracování: ' || SQLERRM || '"}';
     END manage_platba;
+    
+    PROCEDURE zaplat_platba(
+    p_platba_id        IN platba.platba_id%TYPE,
+    p_cislo_uctu       IN platba.cislo_uctu%TYPE,
+    o_result           OUT CLOB
+    ) IS
+    BEGIN
+    UPDATE platba
+    SET
+        cislo_uctu = p_cislo_uctu,
+        zaplacena = 1
+    WHERE
+        platba_id = p_platba_id;
+
+    IF SQL%ROWCOUNT = 0 THEN
+        o_result := '{"status": "error", "message": "Chyba: Platba s daným ID nebyla nalezena."}';
+    ELSE
+        o_result := '{"status": "OK", "message": "Platba byla úspěšně zaplacena."}';
+    END IF;
+    EXCEPTION
+        WHEN OTHERS THEN
+            o_result := '{"status": "error", "message": "Došlo k chybě při zpracování: ' || SQLERRM || '"}';
+    END zaplat_platba;
+
 
     PROCEDURE delete_platba(
         p_platba_id        IN platba.platba_id%TYPE,
