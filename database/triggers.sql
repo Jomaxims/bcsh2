@@ -185,7 +185,7 @@ END update_pocet_osob;
 /
 
 CREATE OR REPLACE TRIGGER update_castka_after_pocet_osob_change
-AFTER UPDATE OF pocet_osob ON objednavka
+AFTER UPDATE OF pocet_osob, pojisteni_id ON objednavka
 FOR EACH ROW
 DECLARE
   v_castka DECIMAL(10,2);
@@ -196,3 +196,4 @@ BEGIN
   SET castka = v_castka
   WHERE objednavka_id = :NEW.objednavka_id;
 END;
+/
