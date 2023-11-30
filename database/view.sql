@@ -43,13 +43,14 @@ JOIN STAT s ON a.stat_id = s.stat_id;
 CREATE OR REPLACE VIEW objednavka_view AS
 SELECT
     o.objednavka_id,
+    z.zakaznik_id,
     os.jmeno,
     os.prijmeni,
     os.jmeno || ' ' || os.prijmeni AS cele_jmeno,
-    u.nazev as Nazev_ubytovani,
+    u.nazev as ubytovani_NAZEV,
     t.od,
     t.do,
-    p.nazev as Nazev_pokoje,
+    p.nazev as POKOJ_NAZEV,
     pl.castka,
     pl.zaplacena,
     p.pocet_mist
