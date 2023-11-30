@@ -120,7 +120,8 @@ SELECT
     r.role_id,
     n.jmeno AS nadrizeny_jmeno,
     n.prijmeni AS nadrizeny_prijmeni,
-    n.jmeno || ' ' || n.prijmeni AS nadrizeny_cele_jmeno
+    n.jmeno || ' ' || n.prijmeni AS nadrizeny_cele_jmeno,
+    pck_utils.zamestnanci_podrizeny(z.zamestnanec_id) podrizeny_podrizenyho
 FROM ZAMESTNANEC z
 JOIN ROLE r ON r.role_id = z.role_id
 JOIN PRIHLASOVACI_UDAJE pu ON pu.prihlasovaci_udaje_id = z.prihlasovaci_udaje_id
