@@ -55,7 +55,7 @@ END;
 DECLARE
     result CLOB;
 BEGIN
-    result := pck_security.login('PEPA', 'pepa');
+    result := pck_security.login('F', 'pepa');
     DBMS_OUTPUT.PUT_LINE(result);
 EXCEPTION
     WHEN OTHERS THEN
@@ -173,5 +173,37 @@ BEGIN
     );
     DBMS_OUTPUT.PUT_LINE('ID: ' || v_id);
     DBMS_OUTPUT.PUT_LINE(v_result);
+END;
+/
+
+DECLARE
+    login_cursor SYS_REFCURSOR;
+    uzivatel_id NUMBER; -- Assuming the ID is a NUMBER type
+    role VARCHAR2(50);
+BEGIN
+    -- Call the login function from your package
+    login_cursor := pck_security.login('FRANTA', 'pepa');
+
+    -- Fetch from the cursor into local variables
+    FETCH login_cursor INTO uzivatel_id, role;
+
+    -- Check if there was a result
+    IF login_cursor%FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('User ID: ' || uzivatel_id);
+        DBMS_OUTPUT.PUT_LINE('Role: ' || role);
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('No data found or incorrect login details.');
+    END IF;
+
+    -- Close the cursor
+    CLOSE login_cursor;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error occurred: ' || SQLERRM);
+        -- Close the cursor if it's open
+        IF login_cursor%ISOPEN THEN
+            CLOSE login_cursor;
+        END IF;
 END;
 /
