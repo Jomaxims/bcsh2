@@ -33,7 +33,7 @@ CREATE OR REPLACE PACKAGE BODY pck_prihlasovaci_udaje AS
         o_result := '{ "status": "OK", "message": "Údaje byly úspěšně vytvořeny." }';
     ELSE
         IF p_jmeno IS NULL AND p_heslo IS NULL THEN
-            o_result := '{ "status": "error", "message": "Nebyly zadány údaje k vyplnění." }';
+            o_result := '{ "status": "OK", "message": "Nebyly zadány údaje k vyplnění." }';
         ELSE
             IF  p_jmeno IS NOT NULL AND p_heslo IS NULL THEN
                 UPDATE prihlasovaci_udaje
