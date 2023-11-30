@@ -3,7 +3,10 @@ CREATE OR REPLACE PACKAGE pck_utils AS
     RETURN OBRAZKY_UBYTOVANI.OBRAZKY_UBYTOVANI_ID%TYPE;
     
   FUNCTION zamestnanci_podrizeny(p_zamestnanec_id IN zamestnanec.zamestnanec_id%TYPE)
-    RETURN VARCHAR2;  
+    RETURN VARCHAR2;
+    
+  FUNCTION calculate_castka(p_pojisteni_id INTEGER, p_termin_id INTEGER,p_pocet_osob INTEGER) 
+   RETURN DECIMAL;
   
   PROCEDURE DropAllTables;
   PROCEDURE DropAllObjects;
@@ -57,6 +60,28 @@ CREATE OR REPLACE PACKAGE BODY pck_utils AS
     RETURN v_result;
   END zamestnanci_podrizeny;
 
+   FUNCTION calculate_castka(
+    p_pojisteni_id INTEGER,
+    p_termin_id    INTEGER,
+    p_pocet_osob   INTEGER
+  ) RETURN DECIMAL IS
+    v_cena_za_osobu DECIMAL(10,2);
+    v_cena_za_den DECIMAL(10,2);
+    v_od DATE;
+    v_do DATE;
+    v_related_zajezd_id INTEGER;
+    v_castka DECIMAL(10,2);
+  BEGIN
+    SELECT zajezd_id, od, do INTO v_related_zajezd_id, v_od, v_do FROM termin WHERE termin_id = p_termin_id;
+    
+    SELECT cena_za_osobu INTO v_cena_za_osobu FROM zajezd WHERE zajezd_id = v_related_zajezd_id;
+    
+    SELECT cena_za_den INTO v_cena_za_den FROM pojisteni WHERE pojisteni_id = p_pojisteni_id;
+    
+    v_castka := (p_pocet_osob * v_cena_za_osobu) + (p_pocet_osob * v_cena_za_den * (v_do - v_od));
+    RETURN v_castka;
+  END calculate_castka; 
+    
   PROCEDURE DropAllTables IS
   BEGIN
     FOR t IN (SELECT table_name FROM user_tables) LOOP

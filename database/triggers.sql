@@ -89,10 +89,6 @@ BEGIN
 END;
 /
 
-
-
-
-
 CREATE OR REPLACE TRIGGER trg_after_ins_upd_osoba_objednavka
 FOR INSERT OR UPDATE ON osoba_objednavka
 COMPOUND TRIGGER
@@ -167,10 +163,6 @@ COMPOUND TRIGGER
 END trg_after_del_osoba_objednavka;
 /
 
-
-
-
-
 CREATE OR REPLACE PROCEDURE update_pocet_osob(
     p_objednavka_id IN OBJEDNAVKA.OBJEDNAVKA_ID%TYPE
 ) IS
@@ -192,30 +184,15 @@ EXCEPTION
 END update_pocet_osob;
 /
 
-
-CREATE OR REPLACE PACKAGE pkg_osoba_objednavka AS
-  TYPE t_objednavka_ids IS TABLE OF objednavka.objednavka_id%TYPE INDEX BY PLS_INTEGER;
-  v_objednavka_ids t_objednavka_ids;
-  PROCEDURE add_id(p_id objednavka.objednavka_id%TYPE);
-  PROCEDURE update_counts;
-END pkg_osoba_objednavka;
-/
-
-CREATE OR REPLACE PACKAGE BODY pkg_osoba_objednavka AS
-  PROCEDURE add_id(p_id objednavka.objednavka_id%TYPE) IS
-  BEGIN
-    IF NOT v_objednavka_ids.EXISTS(p_id) THEN
-      v_objednavka_ids(p_id) := p_id;
-    END IF;
-  END add_id;
-
-  PROCEDURE update_counts IS
-  BEGIN
-    FOR i IN 1..v_objednavka_ids.COUNT LOOP
-      update_pocet_osob(v_objednavka_ids(i));
-    END LOOP;
-    v_objednavka_ids.DELETE;
-  END update_counts;
-END pkg_osoba_objednavka;
-/
-
+CREATE OR REPLACE TRIGGER update_castka_after_pocet_osob_change
+AFTER UPDATE OF pocet_osob ON objednavka
+FOR EACH ROW
+DECLARE
+  v_castka DECIMAL(10,2);
+BEGIN
+  v_castka := pck_utils.calculate_castka(:NEW.pojisteni_id, :NEW.termin_id, :NEW.pocet_osob);
+  
+  UPDATE platba
+  SET castka = v_castka
+  WHERE objednavka_id = :NEW.objednavka_id;
+END;
