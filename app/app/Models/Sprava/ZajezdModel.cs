@@ -10,6 +10,7 @@ public class ZajezdModel
     
     [Required(ErrorMessage = "Zadejte cenu za osobu")]
     [Display(Name = "Cena za osobu")]
+    [Range(1, int.MaxValue, ErrorMessage = "Zadejte platnou cenu")]
     public double CenaZaOsobu { get; set; }
     
     [Display(Name = "Sleva (%)")]
@@ -22,7 +23,7 @@ public class ZajezdModel
     
     [Required(ErrorMessage = "Zadejte termíny")]
     [Display(Name = "Termíny")]
-    public IEnumerable<TerminModel> Terminy { get; set; }
+    public IEnumerable<TerminModel>? Terminy { get; set; }
     
     [Required(ErrorMessage = "Zadejte ubytování")]
     [Display(Name = "Ubytování")]

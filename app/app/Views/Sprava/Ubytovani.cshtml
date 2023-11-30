@@ -7,7 +7,7 @@
     int maxStrana = ViewBag.MaxStrana;
     var nazev = Context.Request.Query["nazev"].ToString();
     var adresa = Context.Request.Query["adresa"].ToString();
-    var pocetHvezd = Context.Request.Query["pocetHvezd"].FirstOrDefault() ?? "3";
+    var pocetHvezd = Context.Request.Query["pocetHvezd"].FirstOrDefault();
 }
 
 <div class="container-md mt-3">
@@ -49,7 +49,7 @@
             <tr>
                 <td>@item.Nazev</td>
                 <td>@item.PocetHvezd</td>
-                <td>@item.Popis[..300]...</td>
+                <td>@item.Popis</td>
                 <td>@item.Adresa.ToString()</td>
                 <td>
                     <a asp-action="UbytovaniEdit" asp-route-id="@item.UbytovaniId">Upravit</a>

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using Sqids;
 using Role = app.Managers.Role;
 
+SqlMapper.AddTypeHandler(new DapperSqlDateOnlyTypeHandler());
 DefaultTypeMap.MatchNamesWithUnderscores = true;
 
 var builder = WebApplication.CreateBuilder(args);

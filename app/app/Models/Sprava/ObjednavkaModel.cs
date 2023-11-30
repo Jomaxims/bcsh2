@@ -6,11 +6,12 @@ public class ObjednavkaModel
     
     [Required(ErrorMessage = "Zadejte počet osob")]
     [Display(Name = "Počet osob")]
+    [Range(1, int.MaxValue, ErrorMessage = "Objednávka musí mít minimálně 1 osobu")]
     public int PocetOsob { get; set; }
     
     [Required(ErrorMessage = "Zadejte osoby")]
     [Display(Name = "Osoby")]
-    public IEnumerable<OsobaModel> Osoby { get; set; }
+    public OsobaModel[] Osoby { get; set; }
     
     [Required(ErrorMessage = "Zadejte zákazníka")]
     [Display(Name = "Zákazník")]

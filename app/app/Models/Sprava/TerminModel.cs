@@ -16,7 +16,7 @@ public class TerminModel
     
     [Required(ErrorMessage = "Zadejte pokoje termínu")]
     [Display(Name = "Pokoje termínu")]
-    public IEnumerable<PokojTerminu> PokojeTerminu { get; set; }
+    public IEnumerable<PokojTerminu>? PokojeTerminu { get; set; }
 }
 
 public class PokojTerminu

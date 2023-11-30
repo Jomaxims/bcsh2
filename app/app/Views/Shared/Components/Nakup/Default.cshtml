@@ -4,7 +4,6 @@
 <div class="zajezd-nakup-container">
     <form asp-controller="Zajezdy" asp-action="NakupPost" method="post" asp-route-id="@ViewContext.RouteData.Values["id"]" enctype="application/x-www-form-urlencoded">
         <div class="d-flex flex-column gap-2">
-            <div class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Termin" class="control-label"></label>
                 <select class="form-select" onchange="changePokoje(this.value)" asp-for="Termin" asp-items="new SelectList(ViewBag.Terminy, nameof(TerminModel.Id), nameof(TerminModel.OdDo))"></select>

@@ -3,6 +3,7 @@ using app.DAL.Models;
 using app.Utils;
 using Dapper;
 using Humanizer;
+using Oracle.ManagedDataAccess.Client;
 
 namespace app.DAL;
 
@@ -57,11 +58,33 @@ public class GenericDao<T> where T : IDbModel
         foreach (var property in typeof(T).GetProperties())
         {
             var propName = $"{Constants.DbProcedureParamPrefix}{property.Name.Underscore().ToLower()}";
-            
+
             if (propName.EndsWith("_id"))
+            {
                 parameters.Add(propName, property.GetValue(model), dbType: DbType.Int32, direction: ParameterDirection.InputOutput);
+            }
             else
-                parameters.Add(propName, property.GetValue(model));
+            {
+                if (property.PropertyType == typeof(DateOnly))
+                {
+                    var dateOnly = (DateOnly)property.GetValue(model)!;
+                    var dateTime = dateOnly.ToDateTime(new TimeOnly(0, 0));
+                    parameters.Add(propName, dateTime, dbType: OracleDbType.Date as DbType?);
+                }
+                else if (property.PropertyType == typeof(byte[]))
+                {
+                    parameters.Add(propName, property.GetValue(model), dbType: DbType.Binary);
+                }
+                else if (property.PropertyType == typeof(bool))
+                {
+                    var value = (bool)property.GetValue(model) ? 1 : 0;
+                    parameters.Add(propName, value, dbType: DbType.Int32);
+                }
+                else
+                {
+                    parameters.Add(propName, property.GetValue(model));
+                }
+            }
         }
         parameters.AddResult();
 

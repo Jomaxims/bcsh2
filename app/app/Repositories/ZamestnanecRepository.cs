@@ -30,9 +30,6 @@ public class ZamestnanecRepository : BaseRepository
         try
         {
             var prihlasovaciUdajeId = _prihlasovaciUdajeRepository.AddOrEdit(model.PrihlasovaciUdaje);
-            prihlasovaciUdajeId = prihlasovaciUdajeId == 0
-                ? DecodeIdOrDefault(model.PrihlasovaciUdaje.PrihlasovaciUdajeId)
-                : prihlasovaciUdajeId;
             var roleId = DecodeIdOrDefault(model.Role.RoleId);
             var nadrizenyId = DecodeId(model.Nadrizeny?.ZamestnanecId);
             

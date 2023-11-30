@@ -1,10 +1,8 @@
 ﻿using System.Diagnostics;
 using app.DAL;
-using app.DAL.Models;
 using app.Managers;
 using Microsoft.AspNetCore.Mvc;
 using app.Models;
-using app.Repositories;
 
 namespace app.Controllers;
 

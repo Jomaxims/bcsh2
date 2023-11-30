@@ -18,4 +18,9 @@ public class OsobaModel
     [Display(Name = "Datum narození")]
     [DataType(DataType.Date)]
     public DateOnly DatumNarozeni { get; set; }
+
+    public override string ToString()
+    {
+        return $"{Jmeno} {Prijmeni}, {DatumNarozeni.ToString("d")}";
+    }
 }

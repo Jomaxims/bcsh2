@@ -10,7 +10,7 @@ public static class DynamicParametersExtensions
 {
     public static DynamicParameters AddResult(this DynamicParameters parameters)
     {
-        parameters.Add("o_result", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
+        parameters.Add("o_result", dbType: DbType.String, direction: ParameterDirection.Output, size: 10000);
         
         return parameters;
     }

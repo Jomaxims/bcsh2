@@ -25,6 +25,8 @@ public class StatRepository : BaseRepository
     public void Delete(int id) => Delete(_statDao, id);
 
     public StatModel Get(int id) => Get(_statDao, id, MapToModel);
+
+    public int GetCzId() => UnitOfWork.Connection.ExecuteScalar<int>("select stat_id from stat where ZKRATKA = 'CZE'");
     
     public IEnumerable<StatModel> GetAll(out int celkovyPocetRadku, string zkratka = "", string nazev = "", int start = 0, int pocetRadku = 0)
     {
@@ -54,6 +56,7 @@ public class StatRepository : BaseRepository
         }, template.Parameters, splitOn: "pocet_radku");
 
         celkovyPocetRadku = _celkovyPocetRadku;
+        
         return model;
     }
 

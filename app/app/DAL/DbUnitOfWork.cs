@@ -1,5 +1,4 @@
 ﻿using System.Data;
-using Oracle.ManagedDataAccess.Client;
 
 namespace app.DAL;
 
@@ -72,5 +71,8 @@ internal sealed class DbUnitOfWork : IDbUnitOfWork
         _connection?.Close();
         _connection?.Dispose();
         Transaction?.Dispose();
+        
+        _connection = null;
+        Transaction = null;
     }
 }

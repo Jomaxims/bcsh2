@@ -1,6 +1,4 @@
-﻿using app.DAL;
-using app.DAL.Models;
-using app.Models.Sprava;
+﻿using app.Models.Sprava;
 using app.Repositories;
 using app.Utils;
 using Microsoft.AspNetCore.Authorization;
@@ -24,13 +22,22 @@ public class SpravaController : Controller
     private readonly PokojRepository _pokojRepository;
     private readonly StravaRepository _stravaRepository;
     private readonly RoleRepository _roleRepository;
+    private readonly ZakaznikRepository _zakaznikRepository;
+    private readonly UbytovaniRepository _ubytovaniRepository;
+    private readonly ObrazekUbytovaniRepository _obrazekUbytovaniRepository;
+    private readonly ObjednavkaRepository _objednavkaRepository;
+    private readonly ZajezdRepository _zajezdRepository;
 
     private readonly IDictionary<string, string> _typyPolozek = new SortedDictionary<string, string>();
+    private readonly IDictionary<string, string> _typyPolozekAdmin = new SortedDictionary<string, string>();
 
     public SpravaController(ILogger<HomeController> logger, IIdConverter converter,
         ZamestnanecRepository zamestnanecRepository,
         StatRepository statRepository, PojisteniRepository pojisteniRepository, DopravaRepository dopravaRepository,
-        PokojRepository pokojRepository, StravaRepository stravaRepository, RoleRepository roleRepository)
+        PokojRepository pokojRepository, StravaRepository stravaRepository, RoleRepository roleRepository,
+        ZakaznikRepository zakaznikRepository, UbytovaniRepository ubytovaniRepository,
+        ObrazekUbytovaniRepository obrazekUbytovaniRepository, ObjednavkaRepository objednavkaRepository,
+        ZajezdRepository zajezdRepository)
     {
         _logger = logger;
         _converter = converter;
@@ -41,16 +48,23 @@ public class SpravaController : Controller
         _pokojRepository = pokojRepository;
         _stravaRepository = stravaRepository;
         _roleRepository = roleRepository;
+        _zakaznikRepository = zakaznikRepository;
+        _ubytovaniRepository = ubytovaniRepository;
+        _obrazekUbytovaniRepository = obrazekUbytovaniRepository;
+        _objednavkaRepository = objednavkaRepository;
+        _zajezdRepository = zajezdRepository;
 
-        _typyPolozek.Add("Zákazník", "zakaznik");
         _typyPolozek.Add("Stát", "stat");
         _typyPolozek.Add("Ubytování", "ubytovani");
         _typyPolozek.Add("Pojištění", "pojisteni");
         _typyPolozek.Add("Doprava", "doprava");
         _typyPolozek.Add("Strava", "strava");
         _typyPolozek.Add("Pokoj", "pokoj");
-        _typyPolozek.Add("Objednávka", "objednavka");
         _typyPolozek.Add("Zájezd", "zajezd");
+
+        _typyPolozekAdmin.Add("Zaměstnanec", "zamestnanec");
+        _typyPolozekAdmin.Add("Zákazník", "zakaznik");
+        _typyPolozekAdmin.Add("Objednávka", "objednavka");
     }
 
     private int PocetStran(int pocetRadku, int polozekNaStranku = 0)
@@ -61,12 +75,18 @@ public class SpravaController : Controller
         return (int)Math.Ceiling((double)pocetRadku / polozekNaStranku);
     }
 
+    [Route("chyba")]
+    public IActionResult Chyba(string refUrl, IEnumerable<string> chyby)
+    {
+        return View(new { refUrl, chyby });
+    }
+
     [Route("")]
     public IActionResult Polozky()
     {
         if (User.IsInRole(Role.Admin))
         {
-            _typyPolozek.Add("Zaměstnanec", "zamestnanec");
+            return View(_typyPolozek.Union(_typyPolozekAdmin).ToDictionary(k => k.Key, v => v.Value));
         }
 
         return View(_typyPolozek);
@@ -101,6 +121,9 @@ public class SpravaController : Controller
             case "zamestnanec":
                 _zamestnanecRepository.Delete(actualId);
                 break;
+            case "zakaznik":
+                _zakaznikRepository.Delete(actualId);
+                break;
             default:
                 throw new DatabaseException("Typ položky neexistuje");
         }
@@ -109,6 +132,7 @@ public class SpravaController : Controller
     }
 
     // Zákazník
+    [Authorize(Roles = "Admin")]
     [HttpGet]
     [Route("zakaznik")]
     public IActionResult Zakaznik(
@@ -120,55 +144,20 @@ public class SpravaController : Controller
         int strana = 1
     )
     {
-        var maxStrana = 3;
-
-        if (strana < 1 || strana > maxStrana)
+        if (strana < 1)
             strana = 1;
 
-        var model = new ZakaznikModel[20];
-
-        for (var i = 0; i < model.Length; i++)
-        {
-            model[i] = new ZakaznikModel
-            {
-                ZakaznikId = _converter.Encode(i),
-                PrihlasovaciUdaje = new PrihlasovaciUdajeModel
-                {
-                    PrihlasovaciUdajeId = null,
-                    Jmeno = $"pepa123 {i}",
-                    Heslo = null
-                },
-                Osoba = new OsobaModel
-                {
-                    OsobaId = "oiyx",
-                    Jmeno = "Pepa",
-                    Prijmeni = "Zdepa",
-                    DatumNarozeni = default
-                },
-                Kontakt = new KontaktModel
-                {
-                    KontaktId = "oizva",
-                    Email = "pepa@zdepa.pp",
-                    Telefon = "8973541689"
-                },
-                Adresa = new AdresaModel
-                {
-                    AdresaId = "poxaw",
-                    Ulice = "Pepa",
-                    CisloPopisne = "Zdepa",
-                    Mesto = "Pepov",
-                    Psc = "97618",
-                    Poznamka = null,
-                }
-            };
-        }
+        var start = (strana - 1) * PolozekNaStranku;
+        var model = _zakaznikRepository.GetSpravaPreview(out var celkovyPocetRadku, celeJmeno, prihlasovaciJmeno, email,
+            telefon, adresa, start, PolozekNaStranku);
 
         ViewBag.Strana = strana;
-        ViewBag.MaxStrana = maxStrana;
+        ViewBag.MaxStrana = PocetStran(celkovyPocetRadku);
 
         return View(model);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpGet]
     [Route("zakaznik/{id}")]
     public IActionResult ZakaznikEdit(string id)
@@ -178,55 +167,22 @@ public class SpravaController : Controller
             return View(null);
         }
 
-        ZakaznikModel? model = null;
-
-        if (_converter.Decode(id) > 0)
-        {
-            model = new ZakaznikModel
-            {
-                ZakaznikId = id,
-                PrihlasovaciUdaje = new PrihlasovaciUdajeModel
-                {
-                    PrihlasovaciUdajeId = null,
-                    Jmeno = "pepa123",
-                    Heslo = null
-                },
-                Osoba = new OsobaModel
-                {
-                    OsobaId = "oiyx",
-                    Jmeno = "Pepa",
-                    Prijmeni = "Zdepa",
-                    DatumNarozeni = new DateOnly(2000, 1, 1)
-                },
-                Kontakt = new KontaktModel
-                {
-                    KontaktId = "oizva",
-                    Email = "pepa@zdepa.pp",
-                    Telefon = "8973541689"
-                },
-                Adresa = new AdresaModel
-                {
-                    AdresaId = "poxaw",
-                    Ulice = "Pepa",
-                    CisloPopisne = "Zdepa",
-                    Mesto = "Pepov",
-                    Psc = "97618",
-                    Poznamka = null,
-                }
-            };
-        }
+        var model = _zakaznikRepository.Get(_converter.Decode(id));
 
         return View(model);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     [Route("zakaznik")]
     public IActionResult ZakaznikPost([FromForm] ZakaznikModel model)
     {
-        // var idDecoded = _converter.Decode(id);
-        // TODO edit/add entity
+        var result = _zakaznikRepository.AddOrEdit(model);
 
-        return Ok();
+        if (result != 0)
+            return RedirectToAction("ZakaznikEdit", new { id = _converter.Encode(result) });
+
+        return RedirectToAction("ZakaznikEdit", new { id = model.ZakaznikId });
     }
 
     // Stát
@@ -421,41 +377,20 @@ public class SpravaController : Controller
     [Route("ubytovani")]
     public IActionResult Ubytovani(
         string nazev = "",
-        string pocetHvezd = "",
+        int? pocetHvezd = null,
         string adresa = "",
         int strana = 1
     )
     {
-        var maxStrana = 3;
-
-        if (strana < 1 || strana > maxStrana)
+        if (strana < 1)
             strana = 1;
 
-        var model = new UbytovaniModel[20];
-
-        for (var i = 0; i < model.Length; i++)
-        {
-            model[i] = new UbytovaniModel
-            {
-                UbytovaniId = _converter.Encode(i),
-                Nazev = "aohisdnyv",
-                Popis =
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus finibus consequat diam at varius. Maecenas vitae tortor dolor. Ut at finibus velit. Aenean id fringilla eros. Nullam fermentum at turpis eget pellentesque. Duis ut eleifend magna, at interdum nisl. Pellentesque lectus justo, accumsan et rhoncus nec, vehicula tempus turpis. Quisque porttitor, mauris sit amet malesuada mollis, metus felis finibus nulla, at auctor nisl libero at nisl. Nullam efficitur ultrices velit, vitae vestibulum enim vulputate volutpat. Nam condimentum quam nulla, eu blandit leo pretium in. Phasellus iaculis fermentum aliquam. Suspendisse tincidunt molestie enim non sagittis.",
-                PocetHvezd = 5,
-                Adresa = new AdresaModel
-                {
-                    AdresaId = "alsc",
-                    Ulice = "alsc",
-                    CisloPopisne = "alsc",
-                    Mesto = "alsc",
-                    Psc = "alsc"
-                },
-                ObrazkyUbytovani = Array.Empty<ObrazkyUbytovaniModel>()
-            };
-        }
+        var start = (strana - 1) * PolozekNaStranku;
+        var model = _ubytovaniRepository.GetSpravaPreview(out var celkovyPocetRadku, nazev, pocetHvezd, adresa, start,
+            PolozekNaStranku);
 
         ViewBag.Strana = strana;
-        ViewBag.MaxStrana = maxStrana;
+        ViewBag.MaxStrana = PocetStran(celkovyPocetRadku);
 
         return View(model);
     }
@@ -464,81 +399,14 @@ public class SpravaController : Controller
     [Route("ubytovani/{id}")]
     public IActionResult UbytovaniEdit(string id)
     {
-        UbytovaniModel? model = null;
-
-        ViewBag.Staty = new[]
-        {
-            new StatModel
-            {
-                StatId = "asdh",
-                Zkratka = "CZ",
-                Nazev = "Česká republika"
-            },
-            new StatModel
-            {
-                StatId = "1",
-                Zkratka = "CZ1",
-                Nazev = "Česká republika 1"
-            },
-            new StatModel
-            {
-                StatId = "asdh",
-                Zkratka = "CZ2",
-                Nazev = "Česká republika 2"
-            },
-            new StatModel
-            {
-                StatId = "asdh",
-                Zkratka = "CZ3",
-                Nazev = "Česká republika 3"
-            },
-        };
+        ViewBag.Staty = _statRepository.GetAll(out _, pocetRadku: int.MaxValue);
 
         if (id == "0")
         {
             return View(null);
         }
 
-        if (_converter.Decode(id) > 0)
-        {
-            model = new UbytovaniModel
-            {
-                UbytovaniId = "éíýhfgd",
-                Nazev = "aohisdnyv",
-                Popis =
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus finibus consequat diam at varius. Maecenas vitae tortor dolor. Ut at finibus velit. Aenean id fringilla eros. Nullam fermentum at turpis eget pellentesque. Duis ut eleifend magna, at interdum nisl. Pellentesque lectus justo, accumsan et rhoncus nec, vehicula tempus turpis. Quisque porttitor, mauris sit amet malesuada mollis, metus felis finibus nulla, at auctor nisl libero at nisl. Nullam efficitur ultrices velit, vitae vestibulum enim vulputate volutpat. Nam condimentum quam nulla, eu blandit leo pretium in. Phasellus iaculis fermentum aliquam. Suspendisse tincidunt molestie enim non sagittis.",
-                PocetHvezd = 5,
-                Adresa = new AdresaModel
-                {
-                    AdresaId = "alsc",
-                    Ulice = "alsc",
-                    CisloPopisne = "alsc",
-                    Mesto = "alsc",
-                    Psc = "alsc",
-                    Stat = new StatModel
-                    {
-                        StatId = "1",
-                        Zkratka = null,
-                        Nazev = null
-                    }
-                },
-                ObrazkyUbytovani = new[]
-                {
-                    new ObrazkyUbytovaniModel
-                    {
-                        ObrazkyUbytovaniId = "yoxc",
-                        Obrazek = Array.Empty<byte>(),
-                        Nazev = "pepa.jpg"
-                    },
-                    new ObrazkyUbytovaniModel
-                    {
-                        ObrazkyUbytovaniId = "ias",
-                        Obrazek = Array.Empty<byte>(),
-                        Nazev = "pepa2.jpg"
-                    }
-                }
-            };
-        }
+        var model = _ubytovaniRepository.Get(_converter.Decode(id));
 
         return View(model);
     }
@@ -548,19 +416,31 @@ public class SpravaController : Controller
     public IActionResult UbytovaniPost([FromForm] UbytovaniModel model)
     {
         var newPhotos = new List<ObrazkyUbytovaniModel>();
+        var idsToDelete = model.ObrazkyUbytovani?.Select(ou => _converter.Decode(ou.ObrazkyUbytovaniId));
+        using var ms = new MemoryStream();
+
         foreach (var file in Request.Form.Files)
         {
-            var ms = new MemoryStream();
             file.CopyTo(ms);
             newPhotos.Add(new ObrazkyUbytovaniModel
             {
                 ObrazkyUbytovaniId = null,
-                Nazev = file.Name,
+                Nazev = file.FileName,
                 Obrazek = ms.ToArray()
             });
         }
 
-        return Ok();
+        model.ObrazkyUbytovani = newPhotos.ToArray();
+
+        var result = _ubytovaniRepository.AddOrEdit(model);
+
+        if (idsToDelete != null)
+            foreach (var id in idsToDelete)
+            {
+                _obrazekUbytovaniRepository.Delete(id);
+            }
+
+        return RedirectToAction("UbytovaniEdit", new { id = _converter.Encode(result) });
     }
 
     // Zájezd
@@ -569,139 +449,38 @@ public class SpravaController : Controller
     public IActionResult Zajezd(
         string ubytovani = "",
         string adresa = "",
-        int cenaOd = 0,
-        int cenaDo = int.MaxValue,
-        int slevaOd = 0,
-        int slevaDo = 100,
+        int? cenaOd = null,
+        int? cenaDo = null,
+        int? slevaOd = null,
+        int? slevaDo = null,
         string doprava = "",
         string strava = "",
         int strana = 1
     )
     {
-        var maxStrana = 3;
-
-        if (strana < 1 || strana > maxStrana)
+        if (strana < 1)
             strana = 1;
 
-        var model = new ZajezdModel[20];
+        int? dopravaId = doprava == "" ? null : _converter.Decode(doprava);
+        int? stravaId = strava == "" ? null : _converter.Decode(strava);
 
-        for (var i = 0; i < model.Length; i++)
-        {
-            model[i] = new ZajezdModel
-            {
-                ZajezdId = _converter.Encode(i),
-                CenaZaOsobu = 6943,
-                Zobrazit = true,
-                Terminy = new[]
-                {
-                    new TerminModel
-                    {
-                        TerminId = "pou",
-                        Od = default,
-                        Do = default,
-                        PokojeTerminu = new[]
-                        {
-                            new PokojTerminu
-                            {
-                                CelkovyPocetPokoju = 5,
-                                PocetObsazenychPokoju = 3,
-                                Pokoj = new PokojModel
-                                {
-                                    PokojId = "yjhcf",
-                                    PocetMist = 5,
-                                    Nazev = "pepi"
-                                }
-                            },
-                            new PokojTerminu
-                            {
-                                CelkovyPocetPokoju = 15,
-                                PocetObsazenychPokoju = 6,
-                                Pokoj = new PokojModel
-                                {
-                                    PokojId = "zytxcz",
-                                    PocetMist = 3,
-                                    Nazev = "pepi"
-                                }
-                            }
-                        }
-                    }
-                },
-                Ubytovani = new UbytovaniModel
-                {
-                    UbytovaniId = "oizca",
-                    Nazev = "arnošt",
-                    Popis = null,
-                    PocetHvezd = 0,
-                    Adresa = new AdresaModel
-                    {
-                        AdresaId = null,
-                        Ulice = null,
-                        CisloPopisne = null,
-                        Mesto = "Praha",
-                        Psc = null,
-                        Poznamka = null,
-                        Stat = new StatModel
-                        {
-                            StatId = null,
-                            Zkratka = null,
-                            Nazev = "Česká republika"
-                        }
-                    },
-                    ObrazkyUbytovani = Array.Empty<ObrazkyUbytovaniModel>()
-                },
-                Doprava = new DopravaModel
-                {
-                    DopravaId = "myxbc",
-                    Nazev = "letecky"
-                },
-                Strava = new StravaModel
-                {
-                    StravaId = "yxc",
-                    Nazev = "polopenze"
-                }
-            };
-        }
-
-        ViewBag.Stravy = new[]
-        {
-            new StravaModel
-            {
-                StravaId = "1",
-                Nazev = "popl"
-            },
-            new StravaModel
-            {
-                StravaId = "2",
-                Nazev = "plná"
-            },
-            new StravaModel
-            {
-                StravaId = "3",
-                Nazev = "all"
-            }
-        };
-
-        ViewBag.Dopravy = new[]
-        {
-            new DopravaModel
-            {
-                DopravaId = "1",
-                Nazev = "letadlo"
-            },
-            new DopravaModel
-            {
-                DopravaId = "2",
-                Nazev = "bez"
-            },
-            new DopravaModel
-            {
-                DopravaId = "3",
-                Nazev = "auto"
-            }
-        };
+        var start = (strana - 1) * PolozekNaStranku;
+        var model = _zajezdRepository.GetSpravaPreview(out var celkovyPocetRadku, ubytovani, adresa, cenaOd, cenaDo,
+            slevaOd, slevaDo, dopravaId, stravaId, start, PolozekNaStranku);
 
         ViewBag.Strana = strana;
-        ViewBag.MaxStrana = maxStrana;
+        ViewBag.MaxStrana = PocetStran(celkovyPocetRadku);
+
+        ViewBag.Stravy = _stravaRepository.GetAll().Prepend(new StravaModel
+        {
+            StravaId = "",
+            Nazev = ""
+        });
+        ViewBag.Dopravy = _dopravaRepository.GetAll().Prepend(new DopravaModel
+        {
+            DopravaId = "",
+            Nazev = ""
+        });
 
         return View(model);
     }
@@ -710,191 +489,17 @@ public class SpravaController : Controller
     [Route("zajezd/{id}")]
     public IActionResult ZajezdEdit(string id)
     {
-        ZajezdModel? model = null;
-
-        ViewBag.Ubytovani = new[]
-        {
-            new UbytovaniModel
-            {
-                UbytovaniId = "1",
-                Nazev = "Pepa 1",
-                Popis = null,
-                PocetHvezd = 0,
-                Adresa = null,
-                ObrazkyUbytovani = Array.Empty<ObrazkyUbytovaniModel>()
-            },
-            new UbytovaniModel
-            {
-                UbytovaniId = "2",
-                Nazev = "Pepa 2",
-                Popis = null,
-                PocetHvezd = 0,
-                Adresa = null,
-                ObrazkyUbytovani = Array.Empty<ObrazkyUbytovaniModel>()
-            }
-        };
-
-        ViewBag.Pokoje = new[]
-        {
-            new PokojModel
-            {
-                PokojId = "1",
-                PocetMist = 1,
-                Nazev = "solo"
-            },
-            new PokojModel
-            {
-                PokojId = "2",
-                PocetMist = 2,
-                Nazev = "dvoulůžko"
-            },
-            new PokojModel
-            {
-                PokojId = "3",
-                PocetMist = 3,
-                Nazev = "troj"
-            }
-        };
-
-        ViewBag.Stravy = new[]
-        {
-            new StravaModel
-            {
-                StravaId = "1",
-                Nazev = "popl"
-            },
-            new StravaModel
-            {
-                StravaId = "2",
-                Nazev = "plná"
-            },
-            new StravaModel
-            {
-                StravaId = "3",
-                Nazev = "all"
-            }
-        };
-
-        ViewBag.Dopravy = new[]
-        {
-            new DopravaModel
-            {
-                DopravaId = "1",
-                Nazev = "letadlo"
-            },
-            new DopravaModel
-            {
-                DopravaId = "2",
-                Nazev = "bez"
-            },
-            new DopravaModel
-            {
-                DopravaId = "3",
-                Nazev = "auto"
-            }
-        };
+        ViewBag.Ubytovani = _ubytovaniRepository.GetSpravaPreview(out _, pocetRadku: int.MaxValue).ToArray();
+        ViewBag.Pokoje = _pokojRepository.GetAll();
+        ViewBag.Stravy = _stravaRepository.GetAll();
+        ViewBag.Dopravy = _dopravaRepository.GetAll();
 
         if (id == "0")
         {
             return View(null);
         }
 
-        if (_converter.Decode(id) > 0)
-        {
-            model = new ZajezdModel
-            {
-                ZajezdId = "ixyhc",
-                CenaZaOsobu = 6943,
-                Zobrazit = true,
-                Terminy = new[]
-                {
-                    new TerminModel
-                    {
-                        TerminId = "pou",
-                        Od = default,
-                        Do = default,
-                        PokojeTerminu = new[]
-                        {
-                            new PokojTerminu
-                            {
-                                CelkovyPocetPokoju = 5,
-                                PocetObsazenychPokoju = 3,
-                                Pokoj = new PokojModel
-                                {
-                                    PokojId = "2",
-                                    PocetMist = 5,
-                                    Nazev = "pepi"
-                                }
-                            },
-                            new PokojTerminu
-                            {
-                                CelkovyPocetPokoju = 15,
-                                PocetObsazenychPokoju = 6,
-                                Pokoj = new PokojModel
-                                {
-                                    PokojId = "1",
-                                    PocetMist = 3,
-                                    Nazev = "pepi"
-                                }
-                            }
-                        }
-                    },
-                    new TerminModel
-                    {
-                        TerminId = "aswvc",
-                        Od = default,
-                        Do = default,
-                        PokojeTerminu = new[]
-                        {
-                            new PokojTerminu
-                            {
-                                CelkovyPocetPokoju = 5,
-                                PocetObsazenychPokoju = 3,
-                                Pokoj = new PokojModel
-                                {
-                                    PokojId = "2",
-                                    PocetMist = 5,
-                                    Nazev = "pepi"
-                                }
-                            }
-                        }
-                    }
-                },
-                Ubytovani = new UbytovaniModel
-                {
-                    UbytovaniId = "2",
-                    Nazev = "arnošt",
-                    Popis = null,
-                    PocetHvezd = 0,
-                    Adresa = new AdresaModel
-                    {
-                        AdresaId = null,
-                        Ulice = null,
-                        CisloPopisne = null,
-                        Mesto = "Praha",
-                        Psc = null,
-                        Poznamka = null,
-                        Stat = new StatModel
-                        {
-                            StatId = null,
-                            Zkratka = null,
-                            Nazev = "Česká republika"
-                        }
-                    },
-                    ObrazkyUbytovani = Array.Empty<ObrazkyUbytovaniModel>()
-                },
-                Doprava = new DopravaModel
-                {
-                    DopravaId = "2",
-                    Nazev = "letecky"
-                },
-                Strava = new StravaModel
-                {
-                    StravaId = "2",
-                    Nazev = "polopenze"
-                }
-            };
-        }
+        var model = _zajezdRepository.Get(_converter.Decode(id));
 
         return View(model);
     }
@@ -903,235 +508,87 @@ public class SpravaController : Controller
     [Route("zajezd")]
     public IActionResult ZajezdPost([FromForm] ZajezdModel model)
     {
-        return Ok();
+        var chyby = new List<string>();
+
+        foreach (var termin in model.Terminy ?? Array.Empty<TerminModel>())
+        {
+            if (termin.Od > termin.Do)
+            {
+                chyby.Add(
+                    $"Termín od {termin.Od.ToString("o")} musí být menší než termín do {termin.Od.ToString("o")}.");
+            }
+
+            foreach (var pokojTerminu in termin.PokojeTerminu ?? Array.Empty<PokojTerminu>())
+            {
+                if (pokojTerminu.PocetObsazenychPokoju > pokojTerminu.CelkovyPocetPokoju)
+                {
+                    chyby.Add(
+                        $"Počet obsazených pokojů {pokojTerminu.PocetObsazenychPokoju} musí být menší než počet celkových pokojů {pokojTerminu.CelkovyPocetPokoju}.");
+                }
+            }
+        }
+
+        if (chyby.Count > 0)
+            return RedirectToAction("Chyba", new { refUrl = $"/sprava/zajezd/{model.ZajezdId ?? "0"}", chyby });
+
+        var result = _zajezdRepository.AddOrEdit(model);
+
+        return RedirectToAction("ZajezdEdit", new { id = _converter.Encode(result) });
     }
 
     // Objednávka
+    [Authorize(Roles = "Admin")]
     [HttpGet]
     [Route("objednavka")]
     public IActionResult Objednavka(
-        string zakaznik = "",
-        string ubytovani = "",
-        string zaplaceno = "",
         DateOnly datumOd = default,
         DateOnly datumDo = default,
-        int cenaOd = int.MinValue,
-        int cenaDo = int.MaxValue,
+        string zakaznik = "",
+        string ubytovani = "",
+        bool? zaplaceno = null,
+        int? cenaOd = null,
+        int? cenaDo = null,
         int strana = 1
     )
     {
-        var maxStrana = 3;
-
-        if (datumOd < DateOnly.FromDateTime(DateTime.Today))
-            datumOd = DateOnly.FromDateTime(DateTime.Today);
-        if (datumDo == default)
-            datumDo = DateOnly.MaxValue;
-        if (strana < 1 || strana > maxStrana)
+        if (strana < 1)
             strana = 1;
 
-        var model = new ObjednavkaModel[20];
+        if (datumOd == default)
+            datumOd = DateOnly.FromDateTime(DateTime.Today);
 
-        for (var i = 0; i < model.Length; i++)
-        {
-            model[i] = new ObjednavkaModel
-            {
-                ObjednavkaId = _converter.Encode(i),
-                PocetOsob = 3,
-                Osoby = new[]
-                {
-                    new OsobaModel
-                    {
-                        OsobaId = "lyhas",
-                        Jmeno = "pepa",
-                        Prijmeni = "zdepa",
-                        DatumNarozeni = default
-                    },
-                    new OsobaModel
-                    {
-                        OsobaId = "yxv",
-                        Jmeno = "pepa 2",
-                        Prijmeni = "zdepa",
-                        DatumNarozeni = default
-                    }
-                },
-                Zakaznik = new ZakaznikModel
-                {
-                    ZakaznikId = "ylixc",
-                    PrihlasovaciUdaje = new PrihlasovaciUdajeModel
-                    {
-                        PrihlasovaciUdajeId = null,
-                        Jmeno = "pepa123",
-                        Heslo = null
-                    },
-                    Osoba = new OsobaModel
-                    {
-                        OsobaId = "asd",
-                        Jmeno = "Anošt",
-                        Prijmeni = "zdepa",
-                        DatumNarozeni = default
-                    },
-                    Kontakt = null,
-                    Adresa = null
-                },
-                Termin = new TerminModel
-                {
-                    TerminId = "yxkcjv",
-                    Od = default,
-                    Do = default,
-                    PokojeTerminu = null
-                },
-                Pokoj = new PokojModel
-                {
-                    PokojId = "kzyv",
-                    PocetMist = 3,
-                    Nazev = "troj"
-                },
-                Zajezd = new ZajezdModel
-                {
-                    ZajezdId = "yi",
-                    CenaZaOsobu = 9435,
-                    Zobrazit = false,
-                    Terminy = null,
-                    Ubytovani = new UbytovaniModel
-                    {
-                        UbytovaniId = "yhv",
-                        Nazev = "hotel ygor",
-                        PocetHvezd = 3,
-                        Adresa = null,
-                        ObrazkyUbytovani = Array.Empty<ObrazkyUbytovaniModel>()
-                    },
-                    Doprava = null,
-                    Strava = null
-                },
-                Platba = new PlatbaModel
-                {
-                    PlatbaId = "olyihjc",
-                    Castka = 87321,
-                    CisloUctu = "",
-                    Zaplacena = false
-                },
-                Pojisteni = new PojisteniModel
-                {
-                    PojisteniId = "yxiku",
-                    CenaZaDen = 56,
-                    Nazev = "pepa"
-                }
-            };
-        }
+        var start = (strana - 1) * PolozekNaStranku;
+        var model = _objednavkaRepository.GetSpravaPreview(out var celkovyPocetRadku, zakaznik, datumOd, datumDo,
+            ubytovani, cenaOd, cenaDo, zaplaceno, start, PolozekNaStranku);
 
         ViewBag.Strana = strana;
-        ViewBag.MaxStrana = maxStrana;
+        ViewBag.MaxStrana = PocetStran(celkovyPocetRadku);
 
         return View(model);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpGet]
     [Route("objednavka/{id}")]
     public IActionResult ObjednavkaEdit(string id)
     {
-        if (id == "0")
-        {
-            return View(null);
-        }
+        var zajezd = _zajezdRepository.Get(3);
+        ViewBag.Terminy = zajezd.Terminy ?? Array.Empty<TerminModel>();
+        ViewBag.Pojisteni = _pojisteniRepository.GetAll();
 
-        ObjednavkaModel? model = null;
-
-        if (_converter.Decode(id) > 0)
-        {
-            model = new ObjednavkaModel
-            {
-                ObjednavkaId = "kyxuc",
-                PocetOsob = 3,
-                Osoby = new[]
-                {
-                    new OsobaModel
-                    {
-                        OsobaId = "lyhas",
-                        Jmeno = "pepa",
-                        Prijmeni = "zdepa",
-                        DatumNarozeni = default
-                    },
-                    new OsobaModel
-                    {
-                        OsobaId = "yxv",
-                        Jmeno = "pepa 2",
-                        Prijmeni = "zdepa",
-                        DatumNarozeni = default
-                    }
-                },
-                Zakaznik = new ZakaznikModel
-                {
-                    ZakaznikId = "ylixc",
-                    PrihlasovaciUdaje = new PrihlasovaciUdajeModel
-                    {
-                        PrihlasovaciUdajeId = null,
-                        Jmeno = "pepa123",
-                        Heslo = null
-                    },
-                    Osoba = new OsobaModel
-                    {
-                        OsobaId = "asd",
-                        Jmeno = "Anošt",
-                        Prijmeni = "zdepa",
-                        DatumNarozeni = default
-                    },
-                    Kontakt = null,
-                    Adresa = null
-                },
-                Termin = new TerminModel
-                {
-                    TerminId = "yxkcjv",
-                    Od = default,
-                    Do = default,
-                    PokojeTerminu = null
-                },
-                Pokoj = new PokojModel
-                {
-                    PokojId = "kzyv",
-                    PocetMist = 3,
-                    Nazev = "troj"
-                },
-                Zajezd = new ZajezdModel
-                {
-                    ZajezdId = "yi",
-                    CenaZaOsobu = 9435,
-                    Zobrazit = false,
-                    Terminy = null,
-                    Ubytovani = new UbytovaniModel
-                    {
-                        UbytovaniId = "yhv",
-                        Nazev = "hotel ygor",
-                        PocetHvezd = 3,
-                        Adresa = null,
-                        ObrazkyUbytovani = Array.Empty<ObrazkyUbytovaniModel>()
-                    },
-                    Doprava = null,
-                    Strava = null
-                },
-                Platba = new PlatbaModel
-                {
-                    PlatbaId = "olyihjc",
-                    Castka = 87321,
-                    CisloUctu = null,
-                    Zaplacena = false
-                },
-                Pojisteni = new PojisteniModel
-                {
-                    PojisteniId = "yxiku",
-                    CenaZaDen = 56,
-                    Nazev = "pepa"
-                }
-            };
-        }
+        var model = _objednavkaRepository.Get(_converter.Decode(id));
 
         return View(model);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     [Route("objednavka")]
     public IActionResult ObjednavkaPost([FromForm] ObjednavkaModel model)
     {
-        return Ok();
+        var result = _objednavkaRepository.AddOrEdit(model);
+
+        return RedirectToAction("ObjednavkaEdit", new { id = _converter.Encode(result) });
     }
 
     // Zaměstnanec
@@ -1149,24 +606,7 @@ public class SpravaController : Controller
         if (strana < 1)
             strana = 1;
 
-        ViewBag.Role = new[]
-        {
-            new RoleModel
-            {
-                RoleId = "",
-                Nazev = "Všechny"
-            },
-            new RoleModel
-            {
-                RoleId = "8TwqJ",
-                Nazev = "Zaměstnanec"
-            },
-            new RoleModel
-            {
-                RoleId = "jkMvT",
-                Nazev = "Admin"
-            }
-        };
+        ViewBag.Role = _roleRepository.GetAll();
 
         var start = (strana - 1) * PolozekNaStranku;
         var roleId = role == "" ? 0 : _converter.Decode(role);
@@ -1190,7 +630,7 @@ public class SpravaController : Controller
         if (id == "0")
         {
             ViewBag.Zamestnanci = _zamestnanecRepository.GetMozniNadrizeni(0).Prepend(nikdo);
-            
+
             return View(null);
         }
 
