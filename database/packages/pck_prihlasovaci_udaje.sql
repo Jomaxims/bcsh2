@@ -25,17 +25,27 @@ CREATE OR REPLACE PACKAGE BODY pck_prihlasovaci_udaje AS
     ) IS
     BEGIN
         IF p_prihlasovaci_udaje_id IS NULL THEN
-            INSERT INTO prihlasovaci_udaje
-                  (jmeno, heslo)
-            VALUES (p_jmeno, hash_hesla(p_heslo))
-            RETURNING prihlasovaci_udaje_id INTO p_prihlasovaci_udaje_id;
+        INSERT INTO prihlasovaci_udaje
+              (jmeno, heslo)
+        VALUES (p_jmeno, hash_hesla(p_heslo))
+        RETURNING prihlasovaci_udaje_id INTO p_prihlasovaci_udaje_id;
 
-            o_result := '{ "status": "OK", "message": "Údaje byly úspěšně vytvořeny." }';
+        o_result := '{ "status": "OK", "message": "Údaje byly úspěšně vytvořeny." }';
+    ELSE
+        IF p_jmeno IS NULL AND p_heslo IS NULL THEN
+            o_result := '{ "status": "error", "message": "Nebyly zadány údaje k vyplnění." }';
         ELSE
-            UPDATE prihlasovaci_udaje
-            SET    jmeno = p_jmeno,
-                   heslo = hash_hesla(p_heslo)
-            WHERE  prihlasovaci_udaje_id = p_prihlasovaci_udaje_id;
+            IF  p_jmeno IS NOT NULL AND p_heslo IS NULL THEN
+                UPDATE prihlasovaci_udaje
+                SET jmeno = p_jmeno
+                WHERE prihlasovaci_udaje_id = p_prihlasovaci_udaje_id;
+            END IF;
+
+            IF p_jmeno IS NULL AND p_heslo IS NOT NULL THEN
+                UPDATE prihlasovaci_udaje
+                SET heslo = hash_hesla(p_heslo)
+                WHERE prihlasovaci_udaje_id = p_prihlasovaci_udaje_id;
+            END IF;
 
             IF SQL%ROWCOUNT = 0 THEN
                 o_result := '{ "status": "error", "message": "Chyba: ID údaje nebylo nalezeno." }';
@@ -43,9 +53,10 @@ CREATE OR REPLACE PACKAGE BODY pck_prihlasovaci_udaje AS
                 o_result := '{ "status": "OK", "message": "Údaje aktualizovány úspěšně." }';
             END IF;
         END IF;
+    END IF;
     EXCEPTION
-        WHEN OTHERS THEN
-            o_result := '{ "status": "error", "message": "Chyba při operaci: ' || SQLERRM || '" }';
+    WHEN OTHERS THEN
+        o_result := '{ "status": "error", "message": "Chyba při operaci: ' || SQLERRM || '" }';
     END manage_prihlasovaci_udaje;
 
     PROCEDURE delete_prihlasovaci_udaje(
