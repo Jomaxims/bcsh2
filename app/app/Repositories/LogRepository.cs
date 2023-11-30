@@ -34,9 +34,9 @@ public class LogRepository : BaseRepository
         var builder = new SqlBuilder();
         var template = builder.AddTemplate(sql);
         if (tabulka != "")
-            builder.Where("LOWER(tabulka) like :tabulka", new { tabulka });
+            builder.Where("LOWER(tabulka) like :tabulka", new { tabulka = tabulka.ToLower() });
         if (operace != "")
-            builder.Where("LOWER(operace) like :operace", new { operace });
+            builder.Where("LOWER(operace) like :operace", new { operace = operace.ToLower() });
         if (datumOd != default)
             builder.Where("CAS_ZMENY >= TO_DATE(:datumOd, 'YYYY-MM-DD')", new { datumOd = datumOd.ToString("o") });
         if (datumDo != default)

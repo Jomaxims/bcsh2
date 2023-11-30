@@ -1,6 +1,7 @@
 ﻿using System.Dynamic;
 using app.Models;
 using app.Models.Sprava;
+using app.Repositories;
 using app.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,10 +18,16 @@ namespace app.Controllers;
 public class ZajezdyController : Controller
 {
     private readonly IIdConverter _converter;
+    private readonly ZajezdRepository _zajezdRepository;
+    private readonly PojisteniRepository _pojisteniRepository;
+    private readonly PokojRepository _pokojRepository;
 
-    public ZajezdyController(IIdConverter converter)
+    public ZajezdyController(IIdConverter converter, ZajezdRepository zajezdRepository, PojisteniRepository pojisteniRepository, PokojRepository pokojRepository)
     {
         _converter = converter;
+        _zajezdRepository = zajezdRepository;
+        _pojisteniRepository = pojisteniRepository;
+        _pokojRepository = pokojRepository;
     }
 
     [Route("")]
@@ -128,80 +135,22 @@ public class ZajezdyController : Controller
     [Route("{id}")]
     public IActionResult ById(string id)
     {
-        ViewData["id"] = _converter.Decode(id);
+        var model = _zajezdRepository.Get(_converter.Decode(id));
+        ViewBag.Terminy = model.Terminy ?? Array.Empty<app.Models.Sprava.TerminModel>();
+        ViewBag.Pojisteni = _pojisteniRepository.GetAll();
+        ViewBag.Doprava = model.Doprava.Nazev;
+        ViewBag.Strava = model.Strava.Nazev;
 
-        var model = new ZajezdModel
+        if (model.Ubytovani.ObrazkyUbytovani.Length == 0)
         {
-            CenaZaOsobu = 5976,
-            CenaPredSlevou = 6893,
-            Popis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean at ante lobortis, ultrices ligula ac, congue dolor.",
-            Doprava = "Letadlo",
-            Ubytovani = new UbytovaniModel
+            model.Ubytovani.ObrazkyUbytovani = new[]
             {
-                FotoIds = new []{_converter.Encode(1), _converter.Encode(2), _converter.Encode(3)},
-                Nazev = "Hotel pepa",
-                PocetHvezd = 6,
-                Lokalita = "Albánie - Pobřeží",
-                Popis = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean at ante lobortis, ultrices ligula ac, congue dolor. Cras malesuada venenatis nunc, ac sagittis elit pellentesque ut. Phasellus id maximus eros. In ac posuere nibh, ac dignissim risus. Ut ut libero elit. Proin at aliquam nisl, et mollis odio. Integer gravida ante dolor, nec vulputate elit interdum vitae. Etiam nisi lacus, volutpat eu mi quis, iaculis dapibus arcu."
-            },
-            Strava = "Plná penze",
-            Terminy = new []
-            {
-                new TerminModel
+                new ObrazkyUbytovaniModel
                 {
-                    Id = _converter.Encode(3),
-                    Od = new DateOnly(2021,
-                        11,
-                        10),
-                    Do = new DateOnly(2021,
-                        11,
-                        15),
-                    Pokoje = new []
-                    {
-                        new PokojModel
-                        {
-                            Id = _converter.Encode(69),
-                            Nazev = "Dvoulůžko",
-                            PocetMist = 2,
-                        }
-                    }
-                },
-                new TerminModel
-                {
-                    Id = _converter.Encode(5),
-                    Od = new DateOnly(2021,
-                        11,
-                        15),
-                    Do = new DateOnly(2021,
-                        11,
-                        20),
-                    Pokoje = new []
-                    {
-                        new PokojModel
-                        {
-                            Id = _converter.Encode(12),
-                            Nazev = "Trojlůžko",
-                            PocetMist = 3,
-                        }
-                    }
+                    ObrazkyUbytovaniId = "0",
                 }
-            },
-            Pojisteni = new []
-            {
-                new PojisteniModel
-                {
-                    Id = _converter.Encode(1),
-                    CenaZaDen = 80,
-                    Popis = "Klasik"
-                },
-                new PojisteniModel
-                {
-                    Id = _converter.Encode(2),
-                    CenaZaDen = 150,
-                    Popis = "Extra"
-                }
-            }
-        };
+            };
+        }
 
         return View(model);
     }
@@ -223,18 +172,15 @@ public class ZajezdyController : Controller
     [Route("{id}/nakup")]
     public IActionResult Nakup(string id, string termin, int pocetOsob, string pojisteni, string pokoj)
     {
-        // ViewBag.Termin = _converter.Decode(termin);
-        // ViewBag.Pojisteni = _converter.Decode(pojisteni);
-        // ViewBag.Pokoj = _converter.Decode(pokoj);
-        ViewBag.Termin = "10.12.2023 - 15.12.2023";
-        ViewBag.Pojisteni = "Klasik";
-        ViewBag.Pokoj = "Dvoulůžko";
+        ViewBag.Termin = _zajezdRepository.GetTermin(_converter.Decode(termin));
+        ViewBag.Pojisteni = _pojisteniRepository.Get(_converter.Decode(pojisteni));
+        ViewBag.Pokoj = _pokojRepository.Get(_converter.Decode(pokoj));
         ViewBag.CelkovaCena = 13896;
 
-        var osoby = new OsobaModel[pocetOsob - 1];
+        var osoby = new Models.Sprava.OsobaModel[pocetOsob-1];
         for (var i = 0; i < osoby.Length; i++)
         {
-            osoby[i] = new OsobaModel
+            osoby[i] = new Models.Sprava.OsobaModel
             {
                 Jmeno = "",
                 Prijmeni = "",

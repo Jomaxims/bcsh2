@@ -5,14 +5,16 @@ namespace app.ViewComponents;
 
 public class ObjednavkaPlatbaViewComponent : ViewComponent
 {
-    public IViewComponentResult Invoke()
+    public IViewComponentResult Invoke(string platbaId)
     {
         var model = new ObjednavkaPlatbaModel
         {
             CisloKarty = "",
             DatumPlatnosti = "",
-            Cvv = ""
+            Cvv = "",
+            PlatbaId = platbaId
         };
+        
         return View(model);
     }
 }

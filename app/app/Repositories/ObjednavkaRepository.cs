@@ -47,6 +47,19 @@ public class ObjednavkaRepository : BaseRepository
         parameters.GetResult().IsOkOrThrow();
     }
 
+    public void ZaplatObjednavku(int platbaId, string cisloUctu)
+    {
+        const string tableName = "platba";
+        var parameters = new DynamicParameters();
+        parameters.Add($"{Constants.DbProcedureParamPrefix}platba_id", platbaId);
+        parameters.Add($"{Constants.DbProcedureParamPrefix}cislo_uctu", cisloUctu);
+        parameters.AddResult();
+        
+        UnitOfWork.Connection.Query($"pck_{tableName}.zaplat_{tableName}", parameters, commandType: CommandType.StoredProcedure);
+        
+        parameters.GetResult().IsOkOrThrow();
+    }
+
     public int AddOrEdit(ObjednavkaModel model)
     {
         UnitOfWork.BeginTransaction();
@@ -98,7 +111,28 @@ public class ObjednavkaRepository : BaseRepository
         }
     }
 
-    public void Delete(int id) => Delete(_objednavkaDao, id);
+    public void Delete(int id)
+    {
+        UnitOfWork.BeginTransaction();
+
+        try
+        {
+            var platbaId = DecodeIdOrDefault(Get(id).Platba.PlatbaId);
+            
+            Delete(_platbaDao, platbaId);
+            
+            Delete(_objednavkaDao, id);
+
+            UnitOfWork.Commit();
+        }
+        catch (Exception e)
+        {
+            UnitOfWork.Rollback();
+
+            Logger.Log(LogLevel.Error, "{}", e);
+            throw new DatabaseException("Položku se nepodařilo smazat", e);
+        }
+    }
 
     public ObjednavkaModel Get(int id)
     {
@@ -116,7 +150,7 @@ public class ObjednavkaRepository : BaseRepository
                            join pojisteni po on po.pojisteni_id = o.pojisteni_id
                            join pokoj pok on pok.pokoj_id = o.pokoj_id
                            left join osoba_objednavka oo on oo.objednavka_id = o.objednavka_id
-                           join osoba os on os.osoba_id = oo.osoba_id
+                           left join osoba os on os.osoba_id = oo.osoba_id
                            where o.objednavka_id = :id
                            """;
 
@@ -215,6 +249,71 @@ public class ObjednavkaRepository : BaseRepository
         celkovyPocetRadku = Convert.ToInt32(rows.FirstOrDefault()?.POCET_RADKU ?? 0);
         return model;
     }
+    
+        public IEnumerable<ObjednavkaModel> GetObjednavkyZakaznika(int zakaznikId)
+    {
+        var sql = $"""
+                   SELECT
+                       OBJEDNAVKA_ID ,
+                       ZAKAZNIK_ID,
+                       OD ,
+                       DO ,
+                       UBYTOVANI_NAZEV ,
+                       POKOJ_NAZEV ,
+                       JMENO ,
+                       PRIJMENI ,
+                       CELE_JMENO ,
+                       CASTKA ,
+                       ZAPLACENA,
+                       count(*) over () as pocet_radku
+                    FROM objednavka_view
+                    where ZAKAZNIK_ID = :zakaznikId
+                   """;
+        var builder = new SqlBuilder();
+        var template = builder.AddTemplate(sql);
+
+        var rows = UnitOfWork.Connection.Query<dynamic>(template.RawSql, new { zakaznikId });
+        var model = rows.Select(row =>
+        {
+            var objednavka = new ObjednavkaModel
+            {
+                ObjednavkaId = EncodeId((int)row.OBJEDNAVKA_ID),
+                Termin = new TerminModel
+                {
+                    Od = DateOnly.FromDateTime(row.OD),
+                    Do = DateOnly.FromDateTime(row.DO)
+                },
+                Zajezd = new ZajezdModel
+                {
+                    Ubytovani = new UbytovaniModel
+                    {
+                        Nazev = row.UBYTOVANI_NAZEV
+                    }
+                },
+                Pokoj = new PokojModel
+                {
+                    Nazev = row.POKOJ_NAZEV
+                },
+                Zakaznik = new ZakaznikModel
+                {
+                    Osoba = new OsobaModel
+                    {
+                        Jmeno = row.JMENO,
+                        Prijmeni = row.PRIJMENI
+                    }
+                },
+                Platba = new PlatbaModel
+                {
+                    Castka = (double)row.CASTKA,
+                    Zaplacena = (int)row.ZAPLACENA == 1
+                }
+            };
+
+            return objednavka;
+        });
+
+        return model;
+    }
 
     private Objednavka MapToDto(ObjednavkaModel model) => new()
     {
@@ -269,7 +368,7 @@ public class ObjednavkaRepository : BaseRepository
         pokoj.PokojId = EncodeId(pokoj.PokojId);
         objednavka.Pokoj = pokoj;
 
-        if (osoba.OsobaId != null)
+        if (osoba != null)
         {
             osoba.OsobaId = EncodeId(osoba.OsobaId);
             _osoby.Add(osoba);

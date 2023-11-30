@@ -54,7 +54,7 @@ if (builder.Environment.IsDevelopment())
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (false)
 {
     app.UseDeveloperExceptionPage();
 }
@@ -67,15 +67,13 @@ else
         {
             var exceptionHandler = context.Features.Get<IExceptionHandlerPathFeature>();
 
-            switch (exceptionHandler?.Error)
+            var chyba = exceptionHandler?.Error switch
             {
-                case InvalidIdException:
-                    context.Response.Redirect("");
-                    break;
-                default:
-                    context.Response.Redirect("/error");
-                    break;
-            }
+                InvalidIdException => "Položka neexistuje",
+                _ => "Chyba aplikace"
+            };
+
+            context.Response.Redirect($"/error?chyba={chyba}");
         });
     });
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.

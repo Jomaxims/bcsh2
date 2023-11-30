@@ -39,6 +39,13 @@ public class PrihlasovaciUdajeRepository : BaseRepository
         }
     }
 
+    public bool UzivatelExistuje(string prihlasovaciJmeno)
+    {
+        var result = UnitOfWork.Connection.ExecuteScalar<int>("select count(*) from PRIHLASOVACI_UDAJE where JMENO = :prihlasovaciJmeno", new { prihlasovaciJmeno });
+
+        return result != 0;
+    }
+
     public void Delete(int id) => Delete(_prihlasovaciUdajeDao, id);
 
     public PrihlasovaciUdajeModel Get(int id) => Get(_prihlasovaciUdajeDao, id, MapToModel);

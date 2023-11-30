@@ -2,6 +2,7 @@
 
 <form asp-controller="Objednavky" asp-action="PlatbaPost" asp-route-id="@ViewContext.RouteData.Values["id"]" method="post" enctype="application/x-www-form-urlencoded">
     <div class="d-flex flex-column justify-content-center gap-3 flex-fill">
+        <input asp-for="PlatbaId" type="hidden"/>
         <div class="form-group">
             <label asp-for="CisloKarty" class="control-label"></label>
             <input asp-for="CisloKarty" class="form-control"/>

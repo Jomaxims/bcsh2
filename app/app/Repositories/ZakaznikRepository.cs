@@ -9,6 +9,7 @@ namespace app.Repositories;
 public class ZakaznikRepository : BaseRepository
 {
     private readonly GenericDao<Zakaznik> _zakaznikDao;
+    private readonly GenericDao<PrihlasovaciUdaje> _prihlasovaciUdajeDao;
     private readonly PrihlasovaciUdajeRepository _prihlasovaciUdajeRepository;
     private readonly OsobaRepository _osobaRepository;
     private readonly AdresaRepository _adresaRepository;
@@ -20,6 +21,7 @@ public class ZakaznikRepository : BaseRepository
         IDbUnitOfWork unitOfWork,
         IIdConverter idConverter,
         GenericDao<Zakaznik> zakaznikDao,
+        GenericDao<PrihlasovaciUdaje> prihlasovaciUdajeDao,
         PrihlasovaciUdajeRepository prihlasovaciUdajeRepository,
         OsobaRepository osobaRepository,
         AdresaRepository adresaRepository,
@@ -28,6 +30,7 @@ public class ZakaznikRepository : BaseRepository
     ) : base(logger, unitOfWork, idConverter)
     {
         _zakaznikDao = zakaznikDao;
+        _prihlasovaciUdajeDao = prihlasovaciUdajeDao;
         _prihlasovaciUdajeRepository = prihlasovaciUdajeRepository;
         _osobaRepository = osobaRepository;
         _adresaRepository = adresaRepository;
@@ -68,6 +71,20 @@ public class ZakaznikRepository : BaseRepository
             Logger.Log(LogLevel.Error, "{}", e);
             throw new DatabaseException("Položku se nepodařilo přidat/upravit", e);
         }
+    }
+
+    public void ZmenHesloZakaznika(int zakaznikId, string heslo)
+    {
+        var prihlasovaciUdajeId = UnitOfWork.Connection.QuerySingle<int>(
+            "select pu.prihlasovaci_udaje_id from PRIHLASOVACI_UDAJE pu join zakaznik z on z.PRIHLASOVACI_UDAJE_ID = pu.prihlasovaci_udaje_id where z.ZAKAZNIK_ID = :zakaznikId",
+            new { zakaznikId });
+
+        _prihlasovaciUdajeDao.AddOrEdit(new PrihlasovaciUdaje
+        {
+            PrihlasovaciUdajeId = prihlasovaciUdajeId,
+            Heslo = heslo,
+            Jmeno = null
+        }).IsOkOrThrow();
     }
 
     public void Delete(int id) => Delete(_zakaznikDao, id);
@@ -228,7 +245,7 @@ public class ZakaznikRepository : BaseRepository
 
         adresa.AdresaId = EncodeId(adresa.AdresaId);
         zakaznik.Adresa = adresa;
-        
+
         osoba.OsobaId = EncodeId(osoba.OsobaId);
         zakaznik.Osoba = osoba;
 

@@ -3,7 +3,7 @@
 public class NakupModel
 {
     public required ZajezdNakupModel Zajezd { get; set; }
-    public required OsobaModel[] Osoby { get; set; }
+    public required Sprava.OsobaModel[] Osoby { get; set; }
 }
 
 public class OsobaModel

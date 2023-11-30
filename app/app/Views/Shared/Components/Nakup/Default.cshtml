@@ -1,16 +1,34 @@
 ﻿@using app.Managers
+@using PojisteniModel = app.Models.Sprava.PojisteniModel
+@using TerminModel = app.Models.Sprava.TerminModel
 @model ZajezdNakupModel
 
 <div class="zajezd-nakup-container">
     <form asp-controller="Zajezdy" asp-action="NakupPost" method="post" asp-route-id="@ViewContext.RouteData.Values["id"]" enctype="application/x-www-form-urlencoded">
         <div class="d-flex flex-column gap-2">
             <div class="form-group">
+                <p class="mb-0">
+                    <span class="control-label">Doprava: </span>@ViewBag.Doprava <br>
+                    <span class="control-label">Strava: </span>@ViewBag.Strava
+                </p>
+            </div>
+            <div class="form-group">
                 <label asp-for="Termin" class="control-label"></label>
-                <select class="form-select" onchange="changePokoje(this.value)" asp-for="Termin" asp-items="new SelectList(ViewBag.Terminy, nameof(TerminModel.Id), nameof(TerminModel.OdDo))"></select>
+                <select class="form-select" onchange="changePokoje(this.value)" asp-for="Termin">
+                    @{
+                        var first = true;
+                        @foreach (TerminModel item in ViewBag.Terminy)
+                        {
+                            <!option value="@item.TerminId" @(first ? "selected" : "")>@item.Od - @item.Do</!option>
+                            if (first)
+                                first = false;
+                        }
+                    }
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Pokoj" class="control-label"></label>
-                <select class="form-select" id="Pokoj" onchange="changePocetOsob()" asp-for="Pokoj"></select>
+                <select class="form-select" onchange="changePocetOsob()" asp-for="Pokoj"></select>
             </div>
             <div class="form-group">
                 <label asp-for="PocetOsob" class="control-label"></label>
@@ -18,20 +36,31 @@
             </div>
             <div class="form-group">
                 <label asp-for="Pojisteni" class="control-label"></label><span> (osoba/den)</span>
-                <select class="form-select" asp-for="Pojisteni" asp-items="new SelectList(ViewBag.Pojisteni, nameof(PojisteniModel.Id), nameof(PojisteniModel.Nazev))"></select>
+                <select class="form-select" asp-for="Pojisteni">
+                    @{
+                        var first = true;
+                        @foreach (PojisteniModel item in ViewBag.Pojisteni)
+                        {
+                            <!option value="@item.PojisteniId" @(first ? "selected" : "")>@item.Nazev - @item.CenaZaDen Kč</!option>
+                            if (first)
+                                first = false;
+                        }
+                    }
+                </select>
             </div>
             <div class="form-group text-end mt-3">
                 <p class="lh-1 mb-2">
                     @if (ViewBag.CenaPredSlevou != null)
                     {
-                        <span class="text-decoration-line-through text">@ViewBag.CenaPredSlevou Kč</span> <br>
+                        <span class="text-decoration-line-through text">@ViewBag.CenaPredSlevou Kč</span>
+                        <br>
                     }
                     <span class="fs-3 fw-bold">@ViewBag.CenaZaOsobu Kč</span> <br>
                     <span>za osobu</span>
                 </p>
                 @if (User.IsInRole(Role.Zakaznik))
                 {
-                    <input type="submit" value="Koupit" class="btn btn-primary w-100 fs-6"/>
+                    <input id="btn-submit" type="submit" value="Koupit" class="btn btn-primary w-100 fs-6"/>
                 }
                 else
                 {
@@ -46,17 +75,28 @@
     const terminy = @Html.Raw(Json.Serialize(ViewBag.Terminy))
     const pokojSelect = document.querySelector("#Pokoj")
     const pocetOsobInput = document.querySelector("#PocetOsob")
+    const submitBtn = document.querySelector("#btn-submit")
     
-    function changePokoje(value) {
-        for (const el in pokojSelect.options) { pokojSelect.options.remove(0) }
+        function changePokoje(value) {
+            checkSubmitButton();
         
-        terminy.find((el) => el.id === value).pokoje.forEach((el) => {
-            const option = '<option pocetMist=' + el.pocetMist + ' value="' + el.id + '">' + el.nazev + ' - ' + el.pocetMist + ' osoby</option>'
-            pokojSelect.innerHTML += option
-        });
-        
-        changePocetOsob()
-    }
+            for (const el in pokojSelect.options) { pokojSelect.options.remove(0) }
+            
+            let first = true;
+            
+            terminy.find((el) => el.terminId === value).pokojeTerminu.filter(el => el.celkovyPocetPokoju > el.pocetObsazenychPokoju).forEach((el) => {
+                let option = '<option pocetMist=' + el.pokoj.pocetMist + ' value="' + el.pokoj.pokojId + '">' + el.pokoj.nazev + ' - ' + el.pokoj.pocetMist + ' osoby</option>'
+                if (first) {
+                    option = '<option pocetMist=' + el.pokoj.pocetMist + ' value="' + el.pokoj.pokojId + '" selected>' + el.pokoj.nazev + ' - ' + el.pokoj.pocetMist + ' osoby</option>'
+                    first = false
+                }
+                pokojSelect.innerHTML += option
+            });
+            
+            checkSubmitButton()
+            
+            changePocetOsob()
+        }
     
     function changePocetOsob() {
         const pocetMist = pokojSelect.options[pokojSelect.selectedIndex].getAttribute("pocetMist")
@@ -66,7 +106,15 @@
             pocetOsobInput.value = pocetMist
     }
     
-    window.onload = changePokoje(terminy[0].id)
+    function checkSubmitButton() {
+        if (pokojSelect.options[pokojSelect.selectedIndex] == undefined) {
+            submitBtn.setAttribute('disabled', '')
+        } else {
+            submitBtn.removeAttribute('disabled')
+        }
+    }
+    
+    window.onload = changePokoje(terminy[0]?.terminId)
 </script>
 
 @section Scripts {

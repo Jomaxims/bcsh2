@@ -1,31 +1,34 @@
-﻿@model UzivatelUdaje
+﻿@model app.Models.Sprava.ZakaznikModel
 
 @{
     var today = DateTime.Today;
     var maxDate = $"{today.Year-18}-{today.Month}-{today.Day}";
-    var datumNarozeni = $"{Model.DatumNarozeni.Year-18}-{Model.DatumNarozeni.Month}-{Model.DatumNarozeni.Day}";
 }
 
 <div class="d-flex justify-content-center">
     <form asp-controller="Profil" asp-action="UdajePost" method="post" enctype="application/x-www-form-urlencoded" class="w-100">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="Osoba.OsobaId" type="hidden"/>
+        <input asp-for="Adresa.AdresaId" type="hidden"/>
+        <input asp-for="Kontakt.KontaktId" type="hidden"/>
+        <input asp-for="PrihlasovaciUdaje.PrihlasovaciUdajeId" type="hidden"/>
         <div class="d-flex justify-content-center gap-5">
             <div class="d-flex flex-column justify-content-center gap-3 flex-fill">
                 <h4>Kontaktní údaje</h4>
                 <div class="form-group">
-                    <label asp-for="Jmeno" class="control-label"></label>
-                    <input asp-for="Jmeno" class="form-control"/>
-                    <span asp-validation-for="Jmeno" class="text-danger"></span>
+                    <label asp-for="Osoba.Jmeno" class="control-label"></label>
+                    <input asp-for="Osoba.Jmeno" class="form-control"/>
+                    <span asp-validation-for="Osoba.Jmeno" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Prijmeni" class="control-label"></label>
-                    <input asp-for="Prijmeni" class="form-control"/>
-                    <span asp-validation-for="Prijmeni" class="text-danger"></span>
+                    <label asp-for="Osoba.Prijmeni" class="control-label"></label>
+                    <input asp-for="Osoba.Prijmeni" class="form-control"/>
+                    <span asp-validation-for="Osoba.Prijmeni" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="DatumNarozeni" class="control-label"></label>
-                    <input asp-for="DatumNarozeni" value="@datumNarozeni" max="@maxDate" class="form-control"/>
-                    <span asp-validation-for="DatumNarozeni" class="text-danger"></span>
+                    <label asp-for="Osoba.DatumNarozeni" class="control-label"></label>
+                    <input asp-for="Osoba.DatumNarozeni" value="@Model.Osoba.DatumNarozeni.ToString("o")" max="@maxDate" class="form-control"/>
+                    <span asp-validation-for="Osoba.DatumNarozeni" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Kontakt.Email" class="control-label"></label>
@@ -56,9 +59,9 @@
                     <span asp-validation-for="Adresa.Mesto" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Adresa.PSC" class="control-label"></label>
-                    <input asp-for="Adresa.PSC" class="form-control"/>
-                    <span asp-validation-for="Adresa.PSC" class="text-danger"></span>
+                    <label asp-for="Adresa.Psc" class="control-label"></label>
+                    <input asp-for="Adresa.Psc" class="form-control"/>
+                    <span asp-validation-for="Adresa.Psc" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Adresa.Poznamka" class="control-label"></label>

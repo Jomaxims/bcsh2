@@ -3,6 +3,8 @@ using app.DAL;
 using app.Managers;
 using Microsoft.AspNetCore.Mvc;
 using app.Models;
+using app.Models.Sprava;
+using app.Repositories;
 
 namespace app.Controllers;
 
@@ -22,71 +24,21 @@ public class HomeController : Controller
     [Route("")]
     public IActionResult Index()
     {
-        var specilaniNabidky = new List<SpecialniNabidkaModel>();
-        for (var i = 0; i < 5; i++)
-        {
-            specilaniNabidky.Add(new SpecialniNabidkaModel { FotoId = "1", Nazev = $"Nabídka {i}", Id = "jkMvT" });
-        }
-
-        return View(specilaniNabidky);
+        return View();
     }
 
     [Route("kontakt")]
     public IActionResult Kontakt()
     {
+        throw new DatabaseException();
         return BadRequest();
-    }
-
-    [HttpGet]
-    [Route("register")]
-    public IActionResult Register()
-    {
-        return View();
-    }
-
-    [HttpPost]
-    [Route("register")]
-    public IActionResult RegisterPost(RegistraceModel? model)
-    {
-        if (!(ModelState.IsValid && model != null))
-            return BadRequest();
-
-        return View(model);
-    }
-
-    [HttpGet]
-    [Route("login")]
-    public IActionResult Login()
-    {
-        return View();
-    }
-
-    [HttpPost]
-    [Route("login")]
-    public IActionResult LoginPost(LoginModel? model)
-    {
-        if (!(ModelState.IsValid && model != null))
-            return BadRequest();
-
-        var res = _userManager.Login(HttpContext, model.Jmeno, model.Heslo);
-
-        return res ? RedirectToAction("Index") : RedirectToAction("Login");
-    }
-
-    [HttpGet]
-    [Route("logout")]
-    public IActionResult Logout()
-    {
-        _userManager.Logout(HttpContext);
-
-        return RedirectToAction("Index");
     }
 
     [Route("error")]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
+    public IActionResult Error(string chyba = "")
     {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        return View(new ErrorViewModel { Message = chyba});
     }
 
     protected override void Dispose(bool disposing)

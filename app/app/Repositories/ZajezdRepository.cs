@@ -98,6 +98,18 @@ public class ZajezdRepository : BaseRepository
         }
     }
 
+    public TerminModel GetTermin(int terminId)
+    {
+        var dto = UnitOfWork.Connection.QuerySingle<Termin>("select * from TERMIN where TERMIN_ID = :terminId", new { terminId });
+
+        return new TerminModel
+        {
+            TerminId = EncodeId(dto.TerminId),
+            Od = dto.Od,
+            Do = dto.Do,
+        };
+    }
+
     private IEnumerable<int> GetTerminIds(int zajezdId)
     {
         return UnitOfWork.Connection.Query<int>("select termin_id from TERMIN where ZAJEZD_ID = :zajezdId", new { zajezdId });
@@ -356,23 +368,4 @@ public class ZajezdRepository : BaseRepository
         UbytovaniId = DecodeIdOrDefault(model.Ubytovani.UbytovaniId),
         StravaId = DecodeIdOrDefault(model.Strava.StravaId)
     };
-    //
-    // private ZajezdModel MapRowToModel(ZajezdModel zamestnanec, RoleModel role,
-    //     PrihlasovaciUdajeModel prihlasovaciUdaje, ZamestnanecModel? nadrizeny)
-    // {
-    //     zamestnanec.ZamestnanecId = EncodeId(zamestnanec.ZamestnanecId);
-    //
-    //     role.RoleId = EncodeId(role.RoleId);
-    //     zamestnanec.Role = role;
-    //
-    //     prihlasovaciUdaje.PrihlasovaciUdajeId = EncodeId(prihlasovaciUdaje.PrihlasovaciUdajeId);
-    //     prihlasovaciUdaje.Heslo = null;
-    //     zamestnanec.PrihlasovaciUdaje = prihlasovaciUdaje;
-    //
-    //     if (nadrizeny != null)
-    //         nadrizeny.ZamestnanecId = EncodeId(nadrizeny.ZamestnanecId);
-    //     zamestnanec.Nadrizeny = nadrizeny;
-    //
-    //     return zamestnanec;
-    // }
 }

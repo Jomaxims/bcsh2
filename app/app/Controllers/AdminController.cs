@@ -59,10 +59,9 @@ public class AdminController : Controller
         ViewBag.Operace = new[]
         {
             "",
-            "insert",
-            "delete",
-            "update",
-            "create"
+            "INSERT",
+            "DELETE",
+            "UPDATE"
         };
 
         ViewBag.Strana = strana;

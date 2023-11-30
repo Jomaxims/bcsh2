@@ -85,7 +85,7 @@
 </div>
 
 @section Scripts {
-    @{ Html.RenderPartial("_ValidationScriptsPartial"); }
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 
     <script>
         const pokojeList = @Html.Raw(Json.Serialize(ViewBag.Pokoje))
