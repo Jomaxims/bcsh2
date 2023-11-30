@@ -1,4 +1,4 @@
-CREATE OR REPLACE PROCEDURE get_zajezdy_within_dates(
+CREATE OR REPLACE PROCEDURE zajezdy_v_terminu(
     termin_od IN DATE, 
     termin_do IN DATE,
     zajezdy_out OUT SYS_REFCURSOR)
