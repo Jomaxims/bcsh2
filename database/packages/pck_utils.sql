@@ -15,26 +15,27 @@ END pck_utils;
 
 CREATE OR REPLACE PACKAGE BODY pck_utils AS
 
-  FUNCTION prvni_img_zajezdy(p_ubytovani_id UBYTOVANI.UBYTOVANI_ID%TYPE)
-    RETURN OBRAZKY_UBYTOVANI.OBRAZKY_UBYTOVANI_ID%TYPE IS
+FUNCTION prvni_img_zajezdy(p_ubytovani_id UBYTOVANI.UBYTOVANI_ID%TYPE)
+RETURN OBRAZKY_UBYTOVANI.OBRAZKY_UBYTOVANI_ID%TYPE IS
     v_image_id OBRAZKY_UBYTOVANI.OBRAZKY_UBYTOVANI_ID%TYPE;
-  BEGIN
+BEGIN
     SELECT OBRAZKY_UBYTOVANI_ID INTO v_image_id
     FROM (
-      SELECT OBRAZKY_UBYTOVANI_ID
-      FROM OBRAZKY_UBYTOVANI
-      WHERE UBYTOVANI_ID = p_ubytovani_id
-      ORDER BY NAZEV
+        SELECT OBRAZKY_UBYTOVANI_ID
+        FROM OBRAZKY_UBYTOVANI
+        WHERE UBYTOVANI_ID = p_ubytovani_id
+        ORDER BY NAZEV
     )
     WHERE ROWNUM = 1;
 
     RETURN v_image_id;
-  EXCEPTION
+EXCEPTION
     WHEN NO_DATA_FOUND THEN
-      RETURN NULL;
+        RETURN NULL;
     WHEN OTHERS THEN
-      RAISE;
-  END prvni_img_zajezdy;
+        RAISE;
+END prvni_img_zajezdy;
+
   
   FUNCTION zamestnanci_podrizeny(p_zamestnanec_id IN zamestnanec.zamestnanec_id%TYPE)
     RETURN VARCHAR2 IS

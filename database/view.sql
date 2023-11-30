@@ -5,12 +5,12 @@ CREATE OR REPLACE PROCEDURE zajezdy_v_terminu(
 IS
 BEGIN
     OPEN zajezdy_out FOR
-    SELECT DISTINCT
+    SELECT
         z.zajezd_id,
         u.nazev AS Nazev_hotelu,
         u.pocet_hvezd AS Pocet_hvezd,
         SUBSTR(u.popis, 1, 300) as popis,
-        s.nazev AS Nazev_statu,  
+        s.nazev AS Nazev_statu,
         a.mesto,
         a.psc,
         s.stat_id as Stat_id,
@@ -30,11 +30,21 @@ BEGIN
         JOIN ZAJEZD z ON u.ubytovani_id = z.ubytovani_id
         JOIN DOPRAVA d ON d.doprava_id = z.doprava_id
         JOIN STRAVA st ON st.strava_id = z.strava_id
-        JOIN TERMIN t ON z.zajezd_id = t.zajezd_id
+        JOIN (
+            SELECT 
+                termin_id,
+                od,
+                do,
+                zajezd_id,
+                ROW_NUMBER() OVER (PARTITION BY zajezd_id ORDER BY od ASC) AS rn
+            FROM 
+                TERMIN
+            WHERE 
+                do >= termin_od AND 
+                od <= termin_do
+        ) t ON z.zajezd_id = t.zajezd_id AND t.rn = 1
     WHERE
-        z.zobrazit = 1
-        AND t.od >= termin_od
-        AND t.do <= termin_do;
+        z.zobrazit = 1;
 END;
 
 CREATE OR REPLACE VIEW ubytovani_view AS
