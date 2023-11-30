@@ -1,6 +1,6 @@
 CREATE OR REPLACE PACKAGE pck_osoba_objednavka AS
 
-    PROCEDURE manage_objednavka(
+    PROCEDURE manage_osoba_objednavka(
         p_osoba_id IN OSOBA_OBJEDNAVKA.OSOBA_ID%TYPE,
         p_objednavka_id IN OSOBA_OBJEDNAVKA.OBJEDNAVKA_ID%TYPE,
         o_result OUT CLOB
@@ -17,7 +17,7 @@ END pck_osoba_objednavka;
 
 CREATE OR REPLACE PACKAGE BODY pck_osoba_objednavka AS
 
-    PROCEDURE manage_objednavka(
+    PROCEDURE manage_osoba_objednavka(
         p_osoba_id IN OSOBA_OBJEDNAVKA.OSOBA_ID%TYPE,
         p_objednavka_id IN OSOBA_OBJEDNAVKA.OBJEDNAVKA_ID%TYPE,
         o_result OUT CLOB
@@ -30,7 +30,7 @@ CREATE OR REPLACE PACKAGE BODY pck_osoba_objednavka AS
     EXCEPTION
         WHEN OTHERS THEN
             o_result := '{"status": "error", "message": "Chyba při operaci: ' || SQLERRM || '"}';
-    END manage_objednavka;
+    END manage_osoba_objednavka;
 
     PROCEDURE delete_osoba_objednavka(
         p_osoba_id IN OSOBA_OBJEDNAVKA.OSOBA_ID%TYPE,
