@@ -5,7 +5,6 @@ CREATE OR REPLACE PROCEDURE zajezdy_v_terminu(
     p_doprava_id IN NUMBER,
     p_strava_id IN NUMBER,
     pocet_radku IN NUMBER,
-    celkovy_pocet_vysledku OUT NUMBER,
     radkovani_start IN NUMBER,
     zajezdy_out OUT SYS_REFCURSOR)
 IS
@@ -165,7 +164,6 @@ LEFT JOIN ZAMESTNANEC n ON n.zamestnanec_id = z.nadrizeny_id;
 
 CREATE OR REPLACE PROCEDURE uzivatele (
     pocet_radku IN NUMBER,
-    celkovy_pocet_vysledku OUT NUMBER,
     radkovani_start IN NUMBER,
     cur_out OUT SYS_REFCURSOR
 ) IS
