@@ -13,6 +13,11 @@ CREATE OR REPLACE PACKAGE pck_pokoje_terminu AS
         p_pokoj_id IN POKOJE_TERMINU.POKOJ_ID%TYPE,
         o_result OUT CLOB
     );
+    
+    PROCEDURE delete_pokoje_terminu(
+        p_termin_id IN pokoje_terminu.termin_id%TYPE,
+        o_result OUT CLOB
+    );
 
 END pck_pokoje_terminu;
 /
@@ -64,6 +69,24 @@ END manage_pokoje_terminu;
         ELSE
             o_result := '{ "status": "OK", "message": "Záznam byl úspěně smazán." }';
         END IF;
+    EXCEPTION
+        WHEN OTHERS THEN
+            o_result := '{ "status": "error", "message": "Došlo k chybě při zpracování: ' || REPLACE(SQLERRM, '"', '\"') || '" }';
+    END delete_pokoje_terminu;
+    
+    PROCEDURE delete_pokoje_terminu(
+        p_termin_id IN pokoje_terminu.termin_id%TYPE,
+        o_result OUT CLOB
+    ) IS
+    BEGIN
+        DELETE FROM pokoje_terminu WHERE termin_id = p_termin_id;
+        
+        IF SQL%ROWCOUNT = 0 THEN
+            o_result := '{ "status": "error", "message": "Chyba: Záznam s daným ID nebyl nalezen." }';
+        ELSE
+            o_result := '{ "status": "OK", "message": "Záznam byl úspěně smazán." }';
+        END IF;
+        
     EXCEPTION
         WHEN OTHERS THEN
             o_result := '{ "status": "error", "message": "Došlo k chybě při zpracování: ' || REPLACE(SQLERRM, '"', '\"') || '" }';

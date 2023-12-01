@@ -48,7 +48,7 @@ CREATE OR REPLACE PACKAGE BODY pck_zamestnanec AS
             IF SQL%ROWCOUNT = 0 THEN
                 o_result := '{ "status": "error", "message": "Chyba: ZAMESTNANEC ID nebylo nalezeno." }';
             ELSE
-                o_result := '{ "status": "OK", "message": "Zamestnanec aktualizovan úsp?šn?." }';
+                o_result := '{ "status": "OK", "message": "Zamestnanec aktualizovan ï¿½sp?ï¿½n?." }';
             END IF;
         END IF;
     EXCEPTION
@@ -61,6 +61,8 @@ CREATE OR REPLACE PACKAGE BODY pck_zamestnanec AS
         o_result         OUT CLOB
     ) IS
     BEGIN
+        UPDATE zamestnanec SET nadrizeny_id = NULL WHERE nadrizeny_id = p_zamestnanec_id;
+        
         DELETE FROM zamestnanec WHERE zamestnanec_id = p_zamestnanec_id;
         
         IF SQL%ROWCOUNT = 0 THEN

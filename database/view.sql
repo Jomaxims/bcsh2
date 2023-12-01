@@ -198,3 +198,48 @@ BEGIN
     OFFSET radkovani_start ROWS FETCH NEXT pocet_radku ROWS ONLY;
 END;
 /
+
+CREATE VIEW tabulky_view AS
+SELECT 
+    'Table' AS typ_objektu, 
+    table_name AS jmeno_objektu 
+FROM user_tables;
+
+CREATE VIEW pohledy_view AS
+SELECT 
+    'View' AS typ_objektu, 
+    view_name AS jmeno_objektu 
+FROM user_views;
+
+CREATE VIEW indexy_view AS
+SELECT 
+    'Index' AS typ_objektu, 
+    index_name AS jmeno_objektu 
+FROM user_indexes;
+
+CREATE VIEW package_view AS
+SELECT 
+    'Package' AS typ_objektu, 
+    object_name AS jmeno_objektu 
+FROM user_objects
+WHERE object_type = 'PACKAGE';
+
+CREATE VIEW procedury_view AS
+SELECT 
+    'Procedure' AS typ_objektu, 
+    object_name AS jmeno_objektu 
+FROM user_objects
+WHERE object_type = 'PROCEDURE';
+
+CREATE VIEW funkce_view AS
+SELECT 
+    'Function' AS typ_objektu, 
+    object_name AS jmeno_objektu 
+FROM user_objects
+WHERE object_type = 'FUNCTION';
+
+CREATE VIEW triggry_view AS
+SELECT 
+    'Trigger' AS typ_objektu, 
+    trigger_name AS jmeno_objektu 
+FROM user_triggers;
