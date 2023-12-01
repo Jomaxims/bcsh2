@@ -6,6 +6,9 @@ using Dapper;
 
 namespace app.Repositories;
 
+/// <summary>
+/// Repository pro práci s přihlašovacími údaji
+/// </summary>
 public class PrihlasovaciUdajeRepository : BaseRepository
 {
     private readonly GenericDao<PrihlasovaciUdaje> _prihlasovaciUdajeDao;
@@ -20,6 +23,12 @@ public class PrihlasovaciUdajeRepository : BaseRepository
         _prihlasovaciUdajeDao = prihlasovaciUdajeDao;
     }
 
+    /// <summary>
+    /// Přidá nebo upraví (pokud má id) přihlašovací údaje
+    /// </summary>
+    /// <param name="model">Přihlašovací údaje</param>
+    /// <returns>id přihlašovacích údajů</returns>
+    /// <exception cref="DatabaseException">Pokud nastala při přidání chyba</exception>
     public int AddOrEdit(PrihlasovaciUdajeModel model)
     {
         try
@@ -38,6 +47,11 @@ public class PrihlasovaciUdajeRepository : BaseRepository
         }
     }
 
+    /// <summary>
+    /// Zda uživatel s daným přihlaščovacím jménem existuje
+    /// </summary>
+    /// <param name="prihlasovaciJmeno">Přihlašovací jméno</param>
+    /// <returns></returns>
     public bool UzivatelExistuje(string prihlasovaciJmeno)
     {
         var result = UnitOfWork.Connection.ExecuteScalar<int>(
@@ -46,31 +60,20 @@ public class PrihlasovaciUdajeRepository : BaseRepository
         return result != 0;
     }
 
+    /// <summary>
+    /// Smaže přihlašovací údaje
+    /// </summary>
+    /// <param name="id">id přihlašovacích údajů</param>
     public void Delete(int id)
     {
         Delete(_prihlasovaciUdajeDao, id);
     }
 
-    public PrihlasovaciUdajeModel Get(int id)
-    {
-        return Get(_prihlasovaciUdajeDao, id, MapToModel);
-    }
-
-    public IEnumerable<PrihlasovaciUdajeModel> GetAll()
-    {
-        return GetAll(_prihlasovaciUdajeDao, MapToModel);
-    }
-
-    private PrihlasovaciUdajeModel MapToModel(PrihlasovaciUdaje dto)
-    {
-        return new PrihlasovaciUdajeModel
-        {
-            PrihlasovaciUdajeId = EncodeId(dto.PrihlasovaciUdajeId),
-            Jmeno = dto.Jmeno,
-            Heslo = dto.Heslo
-        };
-    }
-
+    /// <summary>
+    /// Mapovací funkce
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns></returns>
     private PrihlasovaciUdaje MapToDto(PrihlasovaciUdajeModel model)
     {
         return new PrihlasovaciUdaje

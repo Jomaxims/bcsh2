@@ -11,6 +11,9 @@ using Oracle.ManagedDataAccess.Types;
 
 namespace app.Repositories;
 
+/// <summary>
+/// Repository pro práci s obrázky ubytování
+/// </summary>
 public class ObrazekUbytovaniRepository : BaseRepository
 {
     private readonly GenericDao<ObrazkyUbytovani> _obrazekUbytovaniDao;
@@ -25,8 +28,18 @@ public class ObrazekUbytovaniRepository : BaseRepository
         _obrazekUbytovaniDao = obrazekUbytovaniDao;
     }
 
+    /// <summary>
+    /// Zda repository spravuje vlastní transakce
+    /// </summary>
     public bool TransactionsManaged { get; set; } = false;
 
+    /// <summary>
+    /// Přidá nebo upraví (pokud mí id) obrázek ubytování
+    /// </summary>
+    /// <param name="model">Obrázek</param>
+    /// <param name="ubytovaniId">id ubytování</param>
+    /// <returns></returns>
+    /// <exception cref="DatabaseException">Pokud nastala chyba při vkládání</exception>
     public int AddOrEdit(ObrazkyUbytovaniModel model, int ubytovaniId)
     {
         if (!TransactionsManaged) UnitOfWork.BeginTransaction();
@@ -76,11 +89,20 @@ public class ObrazekUbytovaniRepository : BaseRepository
         }
     }
 
+    /// <summary>
+    /// Smaže obrázek ubytování
+    /// </summary>
+    /// <param name="id">id obrázku</param>
     public void Delete(int id)
     {
         Delete(_obrazekUbytovaniDao, id);
     }
 
+    /// <summary>
+    /// Získá obrázek ubytování
+    /// </summary>
+    /// <param name="id">id obrázku</param>
+    /// <returns>Obrázek</returns>
     public ObrazkyUbytovaniModel Get(int id)
     {
         const string sql = """
@@ -93,6 +115,11 @@ public class ObrazekUbytovaniRepository : BaseRepository
         return MapToModel(dto);
     }
 
+    /// <summary>
+    /// Získá id obrázků ubytování dle ubytování
+    /// </summary>
+    /// <param name="ubytovaniId">id ubytování</param>
+    /// <returns>id obrázků</returns>
     public IEnumerable<int> GetObrazkyUbytovaniIdsByUbytovani(int ubytovaniId)
     {
         const string sql = """
@@ -105,17 +132,11 @@ public class ObrazekUbytovaniRepository : BaseRepository
         return dto;
     }
 
-    private ObrazkyUbytovani MapToDto(ObrazkyUbytovaniModel model, int ubytovaniId)
-    {
-        return new ObrazkyUbytovani
-        {
-            ObrazkyUbytovaniId = DecodeId(model.ObrazkyUbytovaniId),
-            Obrazek = model.Obrazek,
-            Nazev = model.Nazev,
-            UbytovaniId = ubytovaniId
-        };
-    }
-
+    /// <summary>
+    /// Mapovací funkce
+    /// </summary>
+    /// <param name="dto"></param>
+    /// <returns></returns>
     private ObrazkyUbytovaniModel MapToModel(ObrazkyUbytovani dto)
     {
         return new ObrazkyUbytovaniModel

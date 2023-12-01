@@ -6,6 +6,9 @@ using Dapper;
 
 namespace app.Repositories;
 
+/// <summary>
+/// Repository pro práci se zaměstnanci
+/// </summary>
 public class ZamestnanecRepository : BaseRepository
 {
     private readonly PrihlasovaciUdajeRepository _prihlasovaciUdajeRepository;
@@ -23,6 +26,12 @@ public class ZamestnanecRepository : BaseRepository
         _prihlasovaciUdajeRepository = prihlasovaciUdajeRepository;
     }
 
+    /// <summary>
+    /// Přidá nebo upraví (pokud má id) zaměstnance
+    /// </summary>
+    /// <param name="model">Zaměstnanec</param>
+    /// <returns>id zaměstnance</returns>
+    /// <exception cref="DatabaseException">Pokud nastala při vkládání chyba</exception>
     public int AddOrEdit(ZamestnanecModel model)
     {
         UnitOfWork.BeginTransaction();
@@ -52,11 +61,20 @@ public class ZamestnanecRepository : BaseRepository
         }
     }
 
+    /// <summary>
+    /// Smaže zaměstnance
+    /// </summary>
+    /// <param name="id">id zaměstnance</param>
     public void Delete(int id)
     {
         Delete(_zamestnanecDao, id);
     }
 
+    /// <summary>
+    /// Získá zaměstnance
+    /// </summary>
+    /// <param name="id">id zaměstnance</param>
+    /// <returns></returns>
     public ZamestnanecModel Get(int id)
     {
         const string sql = """
@@ -75,6 +93,11 @@ public class ZamestnanecRepository : BaseRepository
         return model;
     }
 
+    /// <summary>
+    /// Získá možné nadřízené zaměstnance
+    /// </summary>
+    /// <param name="id">id zaměstnance</param>
+    /// <returns></returns>
     public IEnumerable<ZamestnanecModel> GetMozniNadrizeni(int id)
     {
         const string sql = """
@@ -98,7 +121,18 @@ public class ZamestnanecRepository : BaseRepository
         return model;
     }
 
-    public IEnumerable<ZamestnanecModel> GetSpravaPreview(out int celkovyPocetRadku, string celeJmeno = "",
+    /// <summary>
+    /// Získá zaměstnance dle filtrů pro přehled ve správě
+    /// </summary>
+    /// <param name="celkovyPocetRadku">Celkový počet řádků</param>
+    /// <param name="celeJmeno">Celé jméno</param>
+    /// <param name="prihlasovaciJmeno">Přihlašovací jméno</param>
+    /// <param name="roleId">id role</param>
+    /// <param name="nadrizenyJmeno">Jméno nadřízeného</param>
+    /// <param name="start">První řádek stránkování</param>
+    /// <param name="pocetRadku">Počet položek</param>
+    /// <returns></returns>
+    public IEnumerable<ZamestnanecPreviewModel> GetSpravaPreview(out int celkovyPocetRadku, string celeJmeno = "",
         string prihlasovaciJmeno = "", int roleId = 0, string nadrizenyJmeno = "", int start = 0, int pocetRadku = 0)
     {
         var sql = $"""
@@ -113,6 +147,7 @@ public class ZamestnanecRepository : BaseRepository
                        NADRIZENY_JMENO ,
                        NADRIZENY_PRIJMENI ,
                        NADRIZENY_CELE_JMENO,
+                       pck_utils.zamestnanci_podrizeny(zamestnanec_id) as podrizeni,
                        count(*) over () as pocet_radku
                     FROM zamestnanec_view
                    /**where**/
@@ -133,7 +168,7 @@ public class ZamestnanecRepository : BaseRepository
         var rows = UnitOfWork.Connection.Query<dynamic>(template.RawSql, template.Parameters);
         var model = rows.Select(row =>
         {
-            var zamestnanec = new ZamestnanecModel
+            var zamestnanec = new ZamestnanecPreviewModel
             {
                 ZamestnanecId = EncodeId((int)row.ZAMESTNANEC_ID),
                 PrihlasovaciUdaje = new PrihlasovaciUdajeModel
@@ -150,7 +185,8 @@ public class ZamestnanecRepository : BaseRepository
                 {
                     Jmeno = row.NADRIZENY_JMENO,
                     Prijmeni = row.NADRIZENY_PRIJMENI
-                }
+                },
+                Podrizeni = row.PODRIZENI ?? ""
             };
 
             return zamestnanec;
@@ -160,6 +196,14 @@ public class ZamestnanecRepository : BaseRepository
         return model;
     }
 
+    /// <summary>
+    /// Mapovací funkce
+    /// </summary>
+    /// <param name="model"></param>
+    /// <param name="roleId"></param>
+    /// <param name="prihlasovaciUdajeId"></param>
+    /// <param name="nadrizenyId"></param>
+    /// <returns></returns>
     private Zamestnanec MapToDto(ZamestnanecModel model, int roleId, int prihlasovaciUdajeId, int? nadrizenyId = null)
     {
         return new Zamestnanec
@@ -173,6 +217,14 @@ public class ZamestnanecRepository : BaseRepository
         };
     }
 
+    /// <summary>
+    /// Mapovací funkce
+    /// </summary>
+    /// <param name="zamestnanec"></param>
+    /// <param name="role"></param>
+    /// <param name="prihlasovaciUdaje"></param>
+    /// <param name="nadrizeny"></param>
+    /// <returns></returns>
     private ZamestnanecModel MapRowToModel(ZamestnanecModel zamestnanec, RoleModel role,
         PrihlasovaciUdajeModel prihlasovaciUdaje, ZamestnanecModel? nadrizeny)
     {

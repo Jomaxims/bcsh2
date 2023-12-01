@@ -5,6 +5,9 @@ using app.Utils;
 
 namespace app.Repositories;
 
+/// <summary>
+/// Repository pro práci s osobami
+/// </summary>
 public class OsobaRepository : BaseRepository
 {
     private readonly GenericDao<Osoba> _osobaDao;
@@ -19,26 +22,40 @@ public class OsobaRepository : BaseRepository
         _osobaDao = osobaDao;
     }
 
+    /// <summary>
+    /// Přidá nebo upraví (pokud má id) osobu
+    /// </summary>
+    /// <param name="model">Osoba</param>
+    /// <returns>id osoby</returns>
     public int AddOrEdit(OsobaModel model)
     {
         return AddOrEdit(_osobaDao, model, MapToDto);
     }
 
+    /// <summary>
+    /// Smaže osobu
+    /// </summary>
+    /// <param name="id">id osoby</param>
     public void Delete(int id)
     {
         Delete(_osobaDao, id);
     }
 
+    /// <summary>
+    /// Získá osobu
+    /// </summary>
+    /// <param name="id">id osoby</param>
+    /// <returns>Osoby</returns>
     public OsobaModel Get(int id)
     {
         return Get(_osobaDao, id, MapToModel);
     }
 
-    public IEnumerable<OsobaModel> GetAll()
-    {
-        return GetAll(_osobaDao, MapToModel);
-    }
-
+    /// <summary>
+    /// Mapovací funkce
+    /// </summary>
+    /// <param name="dto"></param>
+    /// <returns></returns>
     private OsobaModel MapToModel(Osoba dto)
     {
         return new OsobaModel
@@ -50,6 +67,11 @@ public class OsobaRepository : BaseRepository
         };
     }
 
+    /// <summary>
+    /// Mapovací funkce
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns></returns>
     private Osoba MapToDto(OsobaModel model)
     {
         return new Osoba

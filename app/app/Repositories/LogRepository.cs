@@ -6,6 +6,9 @@ using Dapper;
 
 namespace app.Repositories;
 
+/// <summary>
+/// Repository pro práci s logy
+/// </summary>
 public class LogRepository : BaseRepository
 {
     private readonly GenericDao<Log> _logDao;
@@ -20,6 +23,17 @@ public class LogRepository : BaseRepository
         _logDao = logDao;
     }
 
+    /// <summary>
+    /// Vrátí všechny logy dle filtru
+    /// </summary>
+    /// <param name="celkovyPocetRadku">Celkový počet nalezených řádků</param>
+    /// <param name="tabulka">Název tabulky</param>
+    /// <param name="operace">Název operace</param>
+    /// <param name="datumOd">Datum od</param>
+    /// <param name="datumDo">Datum do</param>
+    /// <param name="start">První řádek stránkování</param>
+    /// <param name="pocetRadku">Počet položek</param>
+    /// <returns></returns>
     public IEnumerable<LogModel> GetAll(out int celkovyPocetRadku, string tabulka = "", string operace = "",
         DateOnly datumOd = default, DateOnly datumDo = default, int start = 0, int pocetRadku = 0)
     {

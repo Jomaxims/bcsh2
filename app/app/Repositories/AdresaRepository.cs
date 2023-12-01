@@ -5,6 +5,9 @@ using app.Utils;
 
 namespace app.Repositories;
 
+/// <summary>
+/// Repository pro práci s adresou
+/// </summary>
 public class AdresaRepository : BaseRepository
 {
     private readonly GenericDao<Adresa> _adresaDao;
@@ -19,16 +22,30 @@ public class AdresaRepository : BaseRepository
         _adresaDao = adresaDao;
     }
 
+    /// <summary>
+    /// Přidá nebo změní (pokud má id) adresu
+    /// </summary>
+    /// <param name="model">Adresa</param>
+    /// <returns>id adresy</returns>
     public int AddOrEdit(AdresaModel model)
     {
         return AddOrEdit(_adresaDao, model, MapToDto);
     }
 
+    /// <summary>
+    /// Smaže adresu
+    /// </summary>
+    /// <param name="id">id adresy</param>
     public void Delete(int id)
     {
         Delete(_adresaDao, id);
     }
 
+    /// <summary>
+    /// Mapovací funkce
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns></returns>
     private Adresa MapToDto(AdresaModel model)
     {
         return new Adresa

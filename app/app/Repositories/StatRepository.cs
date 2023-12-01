@@ -6,6 +6,9 @@ using Dapper;
 
 namespace app.Repositories;
 
+/// <summary>
+/// Repository pro práci se státy
+/// </summary>
 public class StatRepository : BaseRepository
 {
     private readonly GenericDao<Stat> _statDao;
@@ -20,26 +23,53 @@ public class StatRepository : BaseRepository
         _statDao = statDao;
     }
 
+    /// <summary>
+    /// Přidá nebo upraví (pokud má id) stát
+    /// </summary>
+    /// <param name="model">Stát</param>
+    /// <returns>id státu</returns>
     public int AddOrEdit(StatModel model)
     {
         return AddOrEdit(_statDao, model, MapToDto);
     }
 
+    /// <summary>
+    /// Smaže stát
+    /// </summary>
+    /// <param name="id">id státu</param>
     public void Delete(int id)
     {
         Delete(_statDao, id);
     }
 
+    /// <summary>
+    /// Získá stát
+    /// </summary>
+    /// <param name="id">id státu</param>
+    /// <returns></returns>
     public StatModel Get(int id)
     {
         return Get(_statDao, id, MapToModel);
     }
 
+    /// <summary>
+    /// Vrátí id České republiky
+    /// </summary>
+    /// <returns></returns>
     public int GetCzId()
     {
         return UnitOfWork.Connection.ExecuteScalar<int>("select stat_id from stat where ZKRATKA = 'CZE'");
     }
 
+    /// <summary>
+    /// Vrátí všechny státy dle filtrů
+    /// </summary>
+    /// <param name="celkovyPocetRadku">Celkový počet řádků</param>
+    /// <param name="zkratka">Zkratka státu</param>
+    /// <param name="nazev">Název státu</param>
+    /// <param name="start">První řádek stránkování</param>
+    /// <param name="pocetRadku">Počet položek</param>
+    /// <returns></returns>
     public IEnumerable<StatModel> GetAll(out int celkovyPocetRadku, string zkratka = "", string nazev = "",
         int start = 0, int pocetRadku = 0)
     {
@@ -73,6 +103,11 @@ public class StatRepository : BaseRepository
         return model;
     }
 
+    /// <summary>
+    /// Mapovací funkce
+    /// </summary>
+    /// <param name="dto"></param>
+    /// <returns></returns>
     private StatModel MapToModel(Stat dto)
     {
         return new StatModel
@@ -83,6 +118,11 @@ public class StatRepository : BaseRepository
         };
     }
 
+    /// <summary>
+    /// Mapovací funkce
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns></returns>
     private Stat MapToDto(StatModel model)
     {
         return new Stat

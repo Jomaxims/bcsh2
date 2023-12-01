@@ -12,118 +12,81 @@ namespace app.Controllers;
 [Route("zajezdy")]
 public class ZajezdyController : Controller
 {
+    private const int PolozekNaStranku = Constants.ResultPerPage;
+    
     private readonly IIdConverter _converter;
     private readonly PojisteniRepository _pojisteniRepository;
     private readonly PokojRepository _pokojRepository;
+    private readonly DopravaRepository _dopravaRepository;
+    private readonly StravaRepository _stravaRepository;
+    private readonly StatRepository _statRepository;
     private readonly ZajezdRepository _zajezdRepository;
 
     public ZajezdyController(IIdConverter converter, ZajezdRepository zajezdRepository,
-        PojisteniRepository pojisteniRepository, PokojRepository pokojRepository)
+        PojisteniRepository pojisteniRepository, PokojRepository pokojRepository, DopravaRepository dopravaRepository,
+        StravaRepository stravaRepository, StatRepository statRepository)
     {
         _converter = converter;
         _zajezdRepository = zajezdRepository;
         _pojisteniRepository = pojisteniRepository;
         _pokojRepository = pokojRepository;
+        _dopravaRepository = dopravaRepository;
+        _stravaRepository = stravaRepository;
+        _statRepository = statRepository;
+    }
+    
+    private int PocetStran(int pocetRadku, int polozekNaStranku = 0)
+    {
+        if (polozekNaStranku == 0)
+            polozekNaStranku = PolozekNaStranku;
+
+        return (int)Math.Ceiling((double)pocetRadku / polozekNaStranku);
     }
 
     [Route("")]
     public IActionResult Zajezdy(
         DateOnly datumOd = default,
         DateOnly datumDo = default,
-        string zeme = "",
-        string doprava = "",
-        string strava = "",
+        string? stat = null,
+        string? doprava = null,
+        string? strava = null,
         int strana = 1
     )
     {
-        _zajezdRepository.GetZajezdyVTerminu();
-
-        var maxStrana = 3;
-
         if (datumOd < DateOnly.FromDateTime(DateTime.Today))
             datumOd = DateOnly.FromDateTime(DateTime.Today);
         if (datumDo == default)
             datumDo = DateOnly.MaxValue;
-        if (strana < 1 || strana > maxStrana)
+        if (strana < 1)
             strana = 1;
 
-        var zajezdy = new List<ZajezdNahledModel>();
+        int? statId = stat == null ? null : _converter.Decode(stat);
+        int? dopravaId = doprava == null ? null : _converter.Decode(doprava);
+        int? stravaId = strava == null ? null : _converter.Decode(strava);
 
-        for (var i = 1; i <= 5; i++)
-            zajezdy.Add(new ZajezdNahledModel
-            {
-                Id = _converter.Encode(i),
-                Nazev = $"El Pinar Hotel {i}",
-                PocetHvezd = 5,
-                Lokalita = "Španělsko - Ibiza - San Antonio",
-                ZkracenyPopis =
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean at ante lobortis, ultrices ligula ac, congue dolor. Cras malesuada venenatis nunc, ac sagittis elit pellentesque ut. Phasellus id maximus eros. In ac posuere nibh, ac dignissim risus. Ut ut libero elit. Proin at aliquam nisl, et mollis odio. Integer gravida ante dolor, nec vulputate elit interdum vitae. Etiam nisi lacus, volutpat eu mi quis, iaculis dapibus arcu.",
-                Doprava = "Letecky",
-                Strava = "All Inclusive",
-                CenaZaOsobu = 8569,
-                CenaPredSlevou = 10681,
-                FotoId = _converter.Encode(i),
-                Od = "11.12.2023",
-                Do = "15.17.2023"
-            });
+        var start = (strana - 1) * PolozekNaStranku;
+        var zajezdy = _zajezdRepository.GetZajezdyVTerminu(out var celkovyPocetRadku, datumOd, datumDo, statId,
+            dopravaId, stravaId, start, PolozekNaStranku);
 
-        ViewBag.Staty = new[]
+        ViewBag.Staty = _statRepository.GetAll(out _, pocetRadku: int.MaxValue).Prepend(new StatModel
         {
-            new StatModel
-            {
-                StatId = "ykux",
-                Nazev = "ČR"
-            },
-            new StatModel
-            {
-                StatId = "fhg",
-                Nazev = "Slovensko"
-            },
-            new StatModel
-            {
-                StatId = "bnm",
-                Nazev = "Albánie"
-            }
-        };
-        ViewBag.Dopravy = new[]
+            StatId = null,
+            Zkratka = "",
+            Nazev = ""
+        });
+        ViewBag.Dopravy = _dopravaRepository.GetAll().Prepend(new DopravaModel
         {
-            new DopravaModel
-            {
-                DopravaId = "yjc",
-                Nazev = "Bez dopravy"
-            },
-            new DopravaModel
-            {
-                DopravaId = "asedqw",
-                Nazev = "Letecky"
-            },
-            new DopravaModel
-            {
-                DopravaId = "324",
-                Nazev = "Autobus"
-            }
-        };
-        ViewBag.Stravy = new[]
+            DopravaId = null,
+            Nazev = ""
+        });
+        ViewBag.Stravy = _stravaRepository.GetAll().Prepend(new StravaModel
         {
-            new StravaModel
-            {
-                StravaId = "xuctgv",
-                Nazev = "Polopenze"
-            },
-            new StravaModel
-            {
-                StravaId = "yxcvb",
-                Nazev = "Plná penze"
-            },
-            new StravaModel
-            {
-                StravaId = "rtez",
-                Nazev = "Bez stravy"
-            }
-        };
+            StravaId = null,
+            Nazev = ""
+        });
 
         ViewBag.Strana = strana;
-        ViewBag.MaxStrana = maxStrana;
+        ViewBag.MaxStrana = PocetStran(celkovyPocetRadku);
 
         return View(zajezdy);
     }

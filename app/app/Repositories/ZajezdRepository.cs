@@ -1,14 +1,23 @@
 ﻿using System.Data;
 using app.DAL;
 using app.DAL.Models;
+using app.Models;
 using app.Models.Sprava;
 using app.Utils;
 using Dapper;
 using Dapper.Oracle;
 using Oracle.ManagedDataAccess.Client;
+using AdresaModel = app.Models.Sprava.AdresaModel;
+using PokojModel = app.Models.Sprava.PokojModel;
+using TerminModel = app.Models.Sprava.TerminModel;
+using UbytovaniModel = app.Models.Sprava.UbytovaniModel;
+using ZajezdModel = app.Models.Sprava.ZajezdModel;
 
 namespace app.Repositories;
 
+/// <summary>
+/// Repository pro práci se zájezdy
+/// </summary>
 public class ZajezdRepository : BaseRepository
 {
     private readonly GenericDao<PokojeTerminu> _pokojeTerminuDao;
@@ -29,6 +38,12 @@ public class ZajezdRepository : BaseRepository
         _pokojeTerminuDao = pokojeTerminuDao;
     }
 
+    /// <summary>
+    /// Přidá nebo upraví (pokud má id) zájezd
+    /// </summary>
+    /// <param name="model">Zájezd</param>
+    /// <returns>id zájezdu</returns>
+    /// <exception cref="DatabaseException">Pokud nastala při vkládání chyba</exception>
     public int AddOrEdit(ZajezdModel model)
     {
         UnitOfWork.BeginTransaction();
@@ -95,6 +110,11 @@ public class ZajezdRepository : BaseRepository
         }
     }
 
+    /// <summary>
+    /// Vrací termín
+    /// </summary>
+    /// <param name="terminId">id termínu</param>
+    /// <returns></returns>
     public TerminModel GetTermin(int terminId)
     {
         var dto = UnitOfWork.Connection.QuerySingle<Termin>("select * from TERMIN where TERMIN_ID = :terminId",
@@ -108,18 +128,33 @@ public class ZajezdRepository : BaseRepository
         };
     }
 
+    /// <summary>
+    /// Vrací id termínů dle zájezdu
+    /// </summary>
+    /// <param name="zajezdId">id zájezdu</param>
+    /// <returns></returns>
     private IEnumerable<int> GetTerminIds(int zajezdId)
     {
         return UnitOfWork.Connection.Query<int>("select termin_id from TERMIN where ZAJEZD_ID = :zajezdId",
             new { zajezdId });
     }
 
+    /// <summary>
+    /// Vrací pokoje termínů dle termínu
+    /// </summary>
+    /// <param name="terminId">id termínu</param>
+    /// <returns></returns>
     private IEnumerable<int> GetPokojeTerminuIds(int terminId)
     {
         return UnitOfWork.Connection.Query<int>("select pokoj_id from POKOJE_TERMINU where TERMIN_ID = :terminId",
             new { terminId });
     }
 
+    /// <summary>
+    /// Smaže pokoje termínu
+    /// </summary>
+    /// <param name="terminId">id termínu</param>
+    /// <param name="pokojId">id pokoje</param>
     private void DeletePokojeTerminu(int terminId, int pokojId)
     {
         const string tableName = "pokoje_terminu";
@@ -134,6 +169,11 @@ public class ZajezdRepository : BaseRepository
         parameters.GetResult().IsOkOrThrow();
     }
 
+    /// <summary>
+    /// Přidá nebu upraví (pokud má id) pokoj termínu
+    /// </summary>
+    /// <param name="dto">Pokoj termínu</param>
+    /// <returns>id termínu, id pokoje</returns>
     private (int termin_id, int pokoj_id) AddOrEditPokojeTerminu(PokojeTerminu dto)
     {
         const string tableName = "pokoje_terminu";
@@ -159,6 +199,11 @@ public class ZajezdRepository : BaseRepository
             parameters.Get<int>($"{Constants.DbProcedureParamPrefix}pokoj_id"));
     }
 
+    /// <summary>
+    /// Smaže zájezd a veškerá data s ním související (termíny, pokoje termínů, objednávky)
+    /// </summary>
+    /// <param name="id">id zájezdu</param>
+    /// <exception cref="DatabaseException">Pokud nastala při mazání chyba</exception>
     public void Delete(int id)
     {
         UnitOfWork.BeginTransaction();
@@ -178,6 +223,11 @@ public class ZajezdRepository : BaseRepository
         }
     }
 
+    /// <summary>
+    /// Získá zájezd
+    /// </summary>
+    /// <param name="id">zájezd id</param>
+    /// <returns></returns>
     public ZajezdModel Get(int id)
     {
         const string sql = """
@@ -291,33 +341,77 @@ public class ZajezdRepository : BaseRepository
         return model;
     }
 
-    public void GetZajezdyVTerminu()
+    /// <summary>
+    /// Vrátí zájezdy dle filtrů pro zákazníky
+    /// </summary>
+    /// <param name="celkovyPocetRadku">Celkový počet řádků</param>
+    /// <param name="terminOd">Termín od</param>
+    /// <param name="terminDo">Termín do</param>
+    /// <param name="statId">id státu</param>
+    /// <param name="dopravaId">id dopravy</param>
+    /// <param name="stravaId">id stravy</param>
+    /// <param name="start">První řádek stránkování</param>
+    /// <param name="pocetRadku">Počet položek</param>
+    /// <returns></returns>
+    public IEnumerable<ZajezdNahledModel> GetZajezdyVTerminu(out int celkovyPocetRadku, DateOnly terminOd = default,
+        DateOnly terminDo = default,
+        int? statId = null, int? dopravaId = null, int? stravaId = null, int start = 0, int pocetRadku = 0)
     {
-        var terminOd = new DateOnly(2020, 1, 1);
-        var terminDo = new DateOnly(2025, 1, 1);
-        // const string tableName = "pokoje_terminu_f";
         var parameters = new OracleDynamicParameters();
         parameters.Add("termin_od", terminOd.ToDateTime(new TimeOnly(0, 0)));
         parameters.Add("termin_do", terminDo.ToDateTime(new TimeOnly(0, 0)));
-        parameters.Add("ret", null, OracleMappingType.RefCursor, ParameterDirection.ReturnValue);
+        parameters.Add("p_stat_id", statId);
+        parameters.Add("p_doprava_id", dopravaId);
+        parameters.Add("p_strava_id", stravaId);
+        parameters.Add("radkovani_start", start);
+        parameters.Add("pocet_Radku", pocetRadku);
+        
+        parameters.Add("zajezdy_out", null, OracleMappingType.RefCursor, ParameterDirection.Output);
 
-        var res = UnitOfWork.Connection.Query("zajezdy_v_terminu_f", parameters,
+        var rows = UnitOfWork.Connection.Query<dynamic>("zajezdy_v_terminu", parameters,
             commandType: CommandType.StoredProcedure);
+        
+        var model = rows.Select(row =>
+        {
+            var zajezdNahled = new ZajezdNahledModel
+            {
+                Id = EncodeId((int)row.ZAJEZD_ID),
+                FotoId = row.OBRAZEK_UBYTOVANI_ID == null ? "0" : EncodeId((int)row.OBRAZEK_UBYTOVANI_ID),
+                Nazev = row.NAZEV_HOTELU,
+                PocetHvezd = (int)row.POCET_HVEZD,
+                Lokalita = $"{row.MESTO} - {row.NAZEV_STATU}",
+                ZkracenyPopis = row.POPIS,
+                Doprava = row.DOPRAVA,
+                Strava = row.STRAVA,
+                CenaZaOsobu = (double?)row.CENA_ZA_OSOBU_SLEVA ?? (double)row.CENA_ZA_OSOBU_PLNA,
+                CenaPredSlevou = (double?)row.CENA_ZA_OSOBU_SLEVA == null ? null : (double)row.CENA_ZA_OSOBU_PLNA,
+                Od = DateOnly.FromDateTime(row.TERMIN_OD).ToString("d"),
+                Do = DateOnly.FromDateTime(row.TERMIN_DO).ToString("d")
+            };
 
-        var command = new OracleCommand();
-        command.CommandText = "zajezdy_v_terminu";
-        command.Connection = (OracleConnection)UnitOfWork.Connection;
-        command.CommandType = CommandType.StoredProcedure;
+            return zajezdNahled;
+        });
+        
+        celkovyPocetRadku = Convert.ToInt32(rows.FirstOrDefault()?.CELKOVY_POCET_VYSLEDKU ?? 0);
 
-        var param = command.Parameters.Add("termin_od", OracleDbType.Date);
-        param.Value = terminOd.ToDateTime(new TimeOnly(0, 0));
-        param = command.Parameters.Add("termin_do", OracleDbType.Date);
-        param.Value = terminDo.ToDateTime(new TimeOnly(0, 0));
-        param = command.Parameters.Add("zajezdy_out", OracleDbType.RefCursor, ParameterDirection.Output);
-
-        var reader = command.ExecuteReader();
+        return model;
     }
 
+    /// <summary>
+    /// Získá zájezdy dle filtru pro správu
+    /// </summary>
+    /// <param name="celkovyPocetRadku">Celkový počet řádků</param>
+    /// <param name="ubytovani">Název ubytování</param>
+    /// <param name="adresa">Adresa ubytování</param>
+    /// <param name="cenaOd">Cena od</param>
+    /// <param name="cenaDo">Cena do</param>
+    /// <param name="slevaOd">Sleva od</param>
+    /// <param name="slevaDo">Sleva do</param>
+    /// <param name="dopravaId">id dopravy</param>
+    /// <param name="stravaId">id stravy</param>
+    /// <param name="start">První řádek stránkování</param>
+    /// <param name="pocetRadku">Počet položek</param>
+    /// <returns></returns>
     public IEnumerable<ZajezdModel> GetSpravaPreview(out int celkovyPocetRadku, string ubytovani = "",
         string adresa = "", int? cenaOd = null, int? cenaDo = null, int? slevaOd = null, int? slevaDo = null,
         int? dopravaId = null, int? stravaId = null, int start = 0, int pocetRadku = 0)
@@ -402,6 +496,11 @@ public class ZajezdRepository : BaseRepository
         return model;
     }
 
+    /// <summary>
+    /// Mapovací funkce
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns></returns>
     private Zajezd MapToDto(ZajezdModel model)
     {
         return new Zajezd

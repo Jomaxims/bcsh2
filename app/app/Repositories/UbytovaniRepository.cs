@@ -6,6 +6,9 @@ using Dapper;
 
 namespace app.Repositories;
 
+/// <summary>
+/// Repository pro práci se ubytování
+/// </summary>
 public class UbytovaniRepository : BaseRepository
 {
     private readonly AdresaRepository _adresaRepository;
@@ -28,6 +31,12 @@ public class UbytovaniRepository : BaseRepository
         _obrazekUbytovaniRepository.TransactionsManaged = true;
     }
 
+    /// <summary>
+    /// Přidá nebo upraví (pokud má id) ubytování
+    /// </summary>
+    /// <param name="model">Ubytování</param>
+    /// <returns>id ubytování</returns>
+    /// <exception cref="DatabaseException">Pokud nastala při vkládání chyba</exception>
     public int AddOrEdit(UbytovaniModel model)
     {
         UnitOfWork.BeginTransaction();
@@ -58,6 +67,11 @@ public class UbytovaniRepository : BaseRepository
         }
     }
 
+    /// <summary>
+    /// Smaže ubytování a veškerá data s ním související (adresa, obrázky)
+    /// </summary>
+    /// <param name="id">id ubytování</param>
+    /// <exception cref="DatabaseException">Pokud nastala při mazání chyba</exception>
     public void Delete(int id)
     {
         UnitOfWork.BeginTransaction();
@@ -83,6 +97,11 @@ public class UbytovaniRepository : BaseRepository
         }
     }
 
+    /// <summary>
+    /// Získá ubytování
+    /// </summary>
+    /// <param name="id">id ubytování</param>
+    /// <returns></returns>
     public UbytovaniModel Get(int id)
     {
         const string sql = """
@@ -123,6 +142,16 @@ public class UbytovaniRepository : BaseRepository
         return model;
     }
 
+    /// <summary>
+    /// Získá ubytování dle filtrů pro přehled ve správě
+    /// </summary>
+    /// <param name="celkovyPocetRadku">Celkový počet řádků</param>
+    /// <param name="nazev">Název ubytování</param>
+    /// <param name="pocetHvezd">Počet hvězd ubytování</param>
+    /// <param name="adresa">Adresa ubytování</param>
+    /// <param name="start">První řádek stránkování</param>
+    /// <param name="pocetRadku">Počet položek</param>
+    /// <returns></returns>
     public IEnumerable<UbytovaniModel> GetSpravaPreview(out int celkovyPocetRadku, string nazev = "",
         int? pocetHvezd = null, string adresa = "", int start = 0, int pocetRadku = 0)
     {
@@ -182,6 +211,12 @@ public class UbytovaniRepository : BaseRepository
         return model;
     }
 
+    /// <summary>
+    /// Mapovací funkce
+    /// </summary>
+    /// <param name="model"></param>
+    /// <param name="adresaId"></param>
+    /// <returns></returns>
     private Ubytovani MapToDto(UbytovaniModel model, int adresaId)
     {
         return new Ubytovani

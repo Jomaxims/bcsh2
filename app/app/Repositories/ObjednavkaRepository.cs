@@ -7,6 +7,9 @@ using Dapper;
 
 namespace app.Repositories;
 
+/// <summary>
+/// Repository pro práci s objednávkami
+/// </summary>
 public class ObjednavkaRepository : BaseRepository
 {
     private readonly GenericDao<Objednavka> _objednavkaDao;
@@ -29,12 +32,22 @@ public class ObjednavkaRepository : BaseRepository
         _osobaDao = osobaDao;
     }
 
+    /// <summary>
+    /// Získá id osob pro danou objednávku.
+    /// </summary>
+    /// <param name="objednavkaId">id objednávky</param>
+    /// <returns>id osob</returns>
     private IEnumerable<int> GetOsobaObjednavkaIds(int objednavkaId)
     {
         return UnitOfWork.Connection.Query<int>(
             "select osoba_id from OSOBA_OBJEDNAVKA where OBJEDNAVKA_ID = :objednavkaId", new { objednavkaId });
     }
 
+    /// <summary>
+    /// Přidá osobu do bjednávky
+    /// </summary>
+    /// <param name="osobaId">id osoby</param>
+    /// <param name="objednavkaId">id objednávky</param>
     private void AddOsobaObjednavka(int osobaId, int objednavkaId)
     {
         const string tableName = "osoba_objednavka";
@@ -49,6 +62,11 @@ public class ObjednavkaRepository : BaseRepository
         parameters.GetResult().IsOkOrThrow();
     }
 
+    /// <summary>
+    /// Smaže osobu z objednávky
+    /// </summary>
+    /// <param name="osobaId"id osoby></param>
+    /// <param name="objednavkaId">id objednávky</param>
     private void DeleteOsobaObjednavka(int osobaId, int objednavkaId)
     {
         const string tableName = "osoba_objednavka";
@@ -63,6 +81,11 @@ public class ObjednavkaRepository : BaseRepository
         parameters.GetResult().IsOkOrThrow();
     }
 
+    /// <summary>
+    /// Zaplatí objednávku
+    /// </summary>
+    /// <param name="platbaId">id platby</param>
+    /// <param name="cisloUctu">Číslo účtu</param>
     public void ZaplatObjednavku(int platbaId, string cisloUctu)
     {
         const string tableName = "platba";
@@ -77,6 +100,12 @@ public class ObjednavkaRepository : BaseRepository
         parameters.GetResult().IsOkOrThrow();
     }
 
+    /// <summary>
+    /// Přidá nebo upraví (pokud má id) objednávku
+    /// </summary>
+    /// <param name="model">Objednávka</param>
+    /// <returns>id objednávky</returns>
+    /// <exception cref="DatabaseException">Pokud při vlkádání nastala chyba</exception>
     public int AddOrEdit(ObjednavkaModel model)
     {
         UnitOfWork.BeginTransaction();
@@ -87,7 +116,7 @@ public class ObjednavkaRepository : BaseRepository
             var result = _objednavkaDao.AddOrEdit(dto);
             result.IsOkOrThrow();
 
-            var platbaDto = MapToDto(model.Platba, result.Id);
+            var platbaDto = MapPlatbaToDto(model.Platba, result.Id);
             var platbaResult = _platbaDao.AddOrEdit(platbaDto);
             platbaResult.IsOkOrThrow();
 
@@ -124,6 +153,11 @@ public class ObjednavkaRepository : BaseRepository
         }
     }
 
+    /// <summary>
+    /// Smaže objednávku a veškerá data s ní související (osoby, platbu)
+    /// </summary>
+    /// <param name="id">id objednávky</param>
+    /// <exception cref="DatabaseException">Pokud při odebírání nastala chyba</exception>
     public void Delete(int id)
     {
         UnitOfWork.BeginTransaction();
@@ -154,6 +188,11 @@ public class ObjednavkaRepository : BaseRepository
         }
     }
 
+    /// <summary>
+    /// Získá objednávku
+    /// </summary>
+    /// <param name="id">id objednávky</param>
+    /// <returns>Objednávka</returns>
     public ObjednavkaModel Get(int id)
     {
         const string sql = """
@@ -186,10 +225,23 @@ public class ObjednavkaRepository : BaseRepository
         return model;
     }
 
+    /// <summary>
+    /// Získá objednávky pro přehled ve správě
+    /// </summary>
+    /// <param name="celkovyPocetRadku">Celkový počet řádků</param>
+    /// <param name="zakaznik">Jméno zákazníka</param>
+    /// <param name="datumOd">Datum od</param>
+    /// <param name="datumDo">Datum do</param>
+    /// <param name="ubytovani">Název ubytování</param>
+    /// <param name="castkaOd">Částka od</param>
+    /// <param name="castkaDo">Částka do</param>
+    /// <param name="zaplaceno">Zaplaceno</param>
+    /// <param name="start">První řádek stránkování</param>
+    /// <param name="pocetRadku">Počet položek</param>
+    /// <returns></returns>
     public IEnumerable<ObjednavkaModel> GetSpravaPreview(out int celkovyPocetRadku, string zakaznik = "",
-        DateOnly datumOd = default,
-        DateOnly datumDo = default, string ubytovani = "", int? castkaOd = null, int? castkaDo = null,
-        bool? zaplaceno = null, int start = 0,
+        DateOnly datumOd = default, DateOnly datumDo = default, string ubytovani = "", int? castkaOd = null,
+        int? castkaDo = null, bool? zaplaceno = null, int start = 0,
         int pocetRadku = 0)
     {
         var sql = $"""
@@ -270,6 +322,11 @@ public class ObjednavkaRepository : BaseRepository
         return model;
     }
 
+    /// <summary>
+    /// Získá objednávky zákazníka
+    /// </summary>
+    /// <param name="zakaznikId">id zákazníka</param>
+    /// <returns></returns>
     public IEnumerable<ObjednavkaModel> GetObjednavkyZakaznika(int zakaznikId)
     {
         var sql = """
@@ -334,6 +391,11 @@ public class ObjednavkaRepository : BaseRepository
         return model;
     }
 
+    /// <summary>
+    /// Mapovací funkce
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns></returns>
     private Objednavka MapToDto(ObjednavkaModel model)
     {
         return new Objednavka
@@ -347,7 +409,13 @@ public class ObjednavkaRepository : BaseRepository
         };
     }
 
-    private Platba MapToDto(PlatbaModel model, int objednavkaId)
+    /// <summary>
+    /// Mapovací funkce
+    /// </summary>
+    /// <param name="model"></param>
+    /// <param name="objednavkaId">id objednávky</param>
+    /// <returns></returns>
+    private Platba MapPlatbaToDto(PlatbaModel model, int objednavkaId)
     {
         return new Platba
         {
@@ -359,6 +427,16 @@ public class ObjednavkaRepository : BaseRepository
         };
     }
 
+    /// <summary>
+    /// Mapovací funkce
+    /// </summary>
+    /// <param name="objednavkaDto"></param>
+    /// <param name="platba"></param>
+    /// <param name="terminDto"></param>
+    /// <param name="pojisteni"></param>
+    /// <param name="pokoj"></param>
+    /// <param name="osoba"></param>
+    /// <returns></returns>
     private ObjednavkaModel MapRowToModel(Objednavka objednavkaDto, PlatbaModel platba, Termin terminDto,
         PojisteniModel pojisteni, PokojModel pokoj, OsobaModel osoba)
     {

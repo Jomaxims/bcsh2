@@ -6,6 +6,9 @@ using Dapper;
 
 namespace app.Repositories;
 
+/// <summary>
+/// Repository pro práci se ubytování
+/// </summary>
 public class ZakaznikRepository : BaseRepository
 {
     private readonly AdresaRepository _adresaRepository;
@@ -41,6 +44,12 @@ public class ZakaznikRepository : BaseRepository
         _objednavkaRepository = objednavkaRepository;
     }
 
+    /// <summary>
+    /// Přidá nebo upraví (pokud má id) zákazníka
+    /// </summary>
+    /// <param name="model">Zákazník</param>
+    /// <returns>id zákazníka</returns>
+    /// <exception cref="DatabaseException">Pokud nastala při vkládání chyba</exception>
     public int AddOrEdit(ZakaznikModel model)
     {
         UnitOfWork.BeginTransaction();
@@ -76,6 +85,11 @@ public class ZakaznikRepository : BaseRepository
         }
     }
 
+    /// <summary>
+    /// Změní heslo zákazníka
+    /// </summary>
+    /// <param name="zakaznikId">id zákazníka</param>
+    /// <param name="heslo">Nové heslo</param>
     public void ZmenHesloZakaznika(int zakaznikId, string heslo)
     {
         var prihlasovaciUdajeId = UnitOfWork.Connection.QuerySingle<int>(
@@ -90,6 +104,11 @@ public class ZakaznikRepository : BaseRepository
         }).IsOkOrThrow();
     }
 
+    /// <summary>
+    /// Smaže zákazníka a veškerá data s ním související (adresa, kontakt, osoba, objednávky, přihlašovací údaje)
+    /// </summary>
+    /// <param name="id">id zákazníka</param>
+    /// <exception cref="DatabaseException">Pokud nastala při mazání chyba</exception>
     public void Delete(int id)
     {
         UnitOfWork.BeginTransaction();
@@ -120,6 +139,11 @@ public class ZakaznikRepository : BaseRepository
         }
     }
 
+    /// <summary>
+    /// Získá zákazníka
+    /// </summary>
+    /// <param name="id">id zákazníka</param>
+    /// <returns></returns>
     public ZakaznikModel Get(int id)
     {
         const string sql = """
@@ -174,6 +198,18 @@ public class ZakaznikRepository : BaseRepository
         return model;
     }
 
+    /// <summary>
+    /// Získá zákazníky dle filtrů pro přehled ve správě
+    /// </summary>
+    /// <param name="celkovyPocetRadku">Celkový počet řádků</param>
+    /// <param name="celeJmeno">Celé jméno</param>
+    /// <param name="prihlasovaciJmeno">Přihlašovací jméno</param>
+    /// <param name="email">Email</param>
+    /// <param name="telefon">Telefon</param>
+    /// <param name="adresa">Adresa</param>
+    /// <param name="start">První řádek stránkování</param>
+    /// <param name="pocetRadku">Počet položek</param>
+    /// <returns></returns>
     public IEnumerable<ZakaznikModel> GetSpravaPreview(out int celkovyPocetRadku, string celeJmeno = "",
         string prihlasovaciJmeno = "", string email = "", string telefon = "", string adresa = "", int start = 0,
         int pocetRadku = 0)
@@ -252,6 +288,15 @@ public class ZakaznikRepository : BaseRepository
         return model;
     }
 
+    /// <summary>
+    /// Mapovací funkce
+    /// </summary>
+    /// <param name="model"></param>
+    /// <param name="prihlasovaciUdajeId"></param>
+    /// <param name="osobaId"></param>
+    /// <param name="kontaktId"></param>
+    /// <param name="adresaId"></param>
+    /// <returns></returns>
     private Zakaznik MapToDto(ZakaznikModel model, int prihlasovaciUdajeId, int osobaId, int kontaktId, int adresaId)
     {
         return new Zakaznik
@@ -262,26 +307,5 @@ public class ZakaznikRepository : BaseRepository
             KontaktId = kontaktId,
             AdresaId = adresaId
         };
-    }
-
-    private ZakaznikModel MapRowToModel(ZakaznikModel zakaznik, PrihlasovaciUdajeModel prihlasovaciUdaje,
-        KontaktModel kontakt, AdresaModel adresa, OsobaModel osoba)
-    {
-        zakaznik.ZakaznikId = EncodeId(zakaznik.ZakaznikId);
-
-        prihlasovaciUdaje.PrihlasovaciUdajeId = EncodeId(prihlasovaciUdaje.PrihlasovaciUdajeId);
-        prihlasovaciUdaje.Heslo = null;
-        zakaznik.PrihlasovaciUdaje = prihlasovaciUdaje;
-
-        kontakt.KontaktId = EncodeId(kontakt.KontaktId);
-        zakaznik.Kontakt = kontakt;
-
-        adresa.AdresaId = EncodeId(adresa.AdresaId);
-        zakaznik.Adresa = adresa;
-
-        osoba.OsobaId = EncodeId(osoba.OsobaId);
-        zakaznik.Osoba = osoba;
-
-        return zakaznik;
     }
 }

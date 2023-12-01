@@ -5,6 +5,9 @@ using app.Utils;
 
 namespace app.Repositories;
 
+/// <summary>
+/// Repository pro práci s rolemi
+/// </summary>
 public class RoleRepository : BaseRepository
 {
     private readonly GenericDao<Role> _roleDao;
@@ -19,31 +22,26 @@ public class RoleRepository : BaseRepository
         _roleDao = roleDao;
     }
 
-    public RoleModel Get(int id)
-    {
-        return Get(_roleDao, id, MapToModel);
-    }
-
+    /// <summary>
+    /// Získá všechny role zaměstnanců
+    /// </summary>
+    /// <returns></returns>
     public IEnumerable<RoleModel> GetAll()
     {
         return GetAll(_roleDao, MapToModel);
     }
 
+    /// <summary>
+    /// Mapovací funkce
+    /// </summary>
+    /// <param name="dto"></param>
+    /// <returns></returns>
     private RoleModel MapToModel(Role dto)
     {
         return new RoleModel
         {
             RoleId = EncodeId(dto.RoleId),
             Nazev = dto.Nazev
-        };
-    }
-
-    private Role MapToDto(RoleModel model)
-    {
-        return new Role
-        {
-            RoleId = DecodeId(model.RoleId),
-            Nazev = model.Nazev
         };
     }
 }

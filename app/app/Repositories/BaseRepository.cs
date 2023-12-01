@@ -4,10 +4,23 @@ using app.Utils;
 
 namespace app.Repositories;
 
+/// <summary>
+/// Metoda pro převádění doménových modelů do databázových.
+/// </summary>
+/// <typeparam name="TDto">Typ databázového modelu</typeparam>
+/// <typeparam name="TModel">Typ doménového modelu</typeparam>
 public delegate TDto MapModelToDto<out TDto, in TModel>(TModel model) where TDto : IDbModel;
 
+/// <summary>
+/// Metoda pro převádění databázových modelů do doménových.
+/// </summary>
+/// <typeparam name="TDto">Typ databázového modelu</typeparam>
+/// <typeparam name="TModel">Typ doménového modelu</typeparam>
 public delegate TModel MapDtoToModel<out TModel, in TDto>(TDto dto) where TDto : IDbModel;
 
+/// <summary>
+/// Vyjímka pro práci s databází.
+/// </summary>
 public class DatabaseException : Exception
 {
     public DatabaseException()
@@ -23,12 +36,15 @@ public class DatabaseException : Exception
     }
 }
 
+/// <summary>
+/// Základní třída pro všechny repository. Obsahuje základní funkce pro manipulaci s objekty.
+/// </summary>
 public abstract class BaseRepository
 {
     private readonly IIdConverter _idConverter;
     protected readonly ILogger Logger;
     protected readonly IDbUnitOfWork UnitOfWork;
-
+    
     protected BaseRepository(ILogger logger, IDbUnitOfWork unitOfWork, IIdConverter idConverter)
     {
         Logger = logger;
@@ -36,16 +52,31 @@ public abstract class BaseRepository
         _idConverter = idConverter;
     }
 
+    /// <summary>
+    /// Zakóduje dané id pomocí daného IIdConverter
+    /// </summary>
+    /// <param name="id">id</param>
+    /// <returns>Zakódované id nebo null</returns>
     protected string EncodeId(int? id)
     {
         return id == null ? string.Empty : _idConverter.Encode(id.Value);
     }
 
+    /// <summary>
+    /// Zakóduje dané id pomocí daného IIdConverter
+    /// </summary>
+    /// <param name="id">id</param>
+    /// <returns>Zakódované id</returns>
     protected string EncodeId(string id)
     {
         return _idConverter.Encode(id);
     }
 
+    /// <summary>
+    /// Dekóduje dané id pomocí daného IIdConverter
+    /// </summary>
+    /// <param name="id">Zakódované id</param>
+    /// <returns>Dekódované id nebo null</returns>
     protected int? DecodeId(string? id)
     {
         if (string.IsNullOrEmpty(id))
@@ -56,11 +87,24 @@ public abstract class BaseRepository
         return actualId != 0 ? actualId : null;
     }
 
+    /// <summary>
+    /// Dekóduje dané id pomocí daného IIdConverter
+    /// </summary>
+    /// <param name="id">Zakódované id</param>
+    /// <returns>Dekódované id nebo 0</returns>
     protected int DecodeIdOrDefault(string id, int defaultId = 0)
     {
         return DecodeId(id) ?? defaultId;
     }
 
+    /// <summary>
+    /// Uloží model do db pomocí dao
+    /// </summary>
+    /// <param name="dao">DAO pro danou tabulku</param>
+    /// <param name="model">Doménový model</param>
+    /// <param name="mapper">Převodník modelů</param>
+    /// <returns>id položky v databázi</returns>
+    /// <exception cref="DatabaseException">Pokud se nepodaří položku přidat</exception>
     protected int AddOrEdit<TDto, TModel>(GenericDao<TDto> dao, TModel model, MapModelToDto<TDto, TModel> mapper)
         where TDto : IDbModel
     {
@@ -80,6 +124,12 @@ public abstract class BaseRepository
         }
     }
 
+    /// <summary>
+    /// Smaže položku z db pomocí dao
+    /// </summary>
+    /// <param name="dao">DAO pro danou tabulku</param>
+    /// <param name="id">id položky</param>
+    /// <exception cref="DatabaseException">Pokud se nepodaří položku smazat</exception>
     protected void Delete<T>(GenericDao<T> dao, int id) where T : IDbModel
     {
         try
@@ -99,6 +149,14 @@ public abstract class BaseRepository
         }
     }
 
+    /// <summary>
+    /// Dostane položku z databáze pomocí dao
+    /// </summary>
+    /// <param name="dao">DAO pro danou tabulku</param>
+    /// <param name="id">id položky</param>
+    /// <param name="mapper">Převodník modelů</param>
+    /// <returns>Položku jako doménový model</returns>
+    /// <exception cref="DatabaseException">Pokud se nepodaří položku najít</exception>
     protected TModel Get<TModel, TDto>(GenericDao<TDto> dao, int id, MapDtoToModel<TModel, TDto> mapper)
         where TDto : IDbModel
     {
@@ -115,6 +173,12 @@ public abstract class BaseRepository
         }
     }
 
+    /// <summary>
+    /// Dostane všechny položky typu z databáze pomocí dao
+    /// </summary>
+    /// <param name="dao">DAO pro danou tabulku</param>
+    /// <param name="mapper">Převodník modelů</param>
+    /// <returns>Všechny položky v tabulce</returns>
     protected static IEnumerable<TModel> GetAll<TModel, TDto>(GenericDao<TDto> dao, MapDtoToModel<TModel, TDto> mapper)
         where TDto : IDbModel
     {

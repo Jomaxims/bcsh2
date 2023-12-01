@@ -5,6 +5,9 @@ using app.Utils;
 
 namespace app.Repositories;
 
+/// <summary>
+/// Repository pro práci s kontaktem
+/// </summary>
 public class KontaktRepository : BaseRepository
 {
     private readonly GenericDao<Kontakt> _kontaktDao;
@@ -19,36 +22,30 @@ public class KontaktRepository : BaseRepository
         _kontaktDao = kontaktDao;
     }
 
+    /// <summary>
+    /// Přidá nebo změní (pokud má id) kontakt
+    /// </summary>
+    /// <param name="model">Kontakt</param>
+    /// <returns>id kontaktu</returns>
     public int AddOrEdit(KontaktModel model)
     {
         return AddOrEdit(_kontaktDao, model, MapToDto);
     }
 
+    /// <summary>
+    /// Smaže kontakt
+    /// </summary>
+    /// <param name="id">id kontaktu</param>
     public void Delete(int id)
     {
         Delete(_kontaktDao, id);
     }
 
-    public KontaktModel Get(int id)
-    {
-        return Get(_kontaktDao, id, MapToModel);
-    }
-
-    public IEnumerable<KontaktModel> GetAll()
-    {
-        return GetAll(_kontaktDao, MapToModel);
-    }
-
-    private KontaktModel MapToModel(Kontakt dto)
-    {
-        return new KontaktModel
-        {
-            KontaktId = EncodeId(dto.KontaktId),
-            Email = dto.Email,
-            Telefon = dto.Telefon
-        };
-    }
-
+    /// <summary>
+    /// Mapovací funkce
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns></returns>
     private Kontakt MapToDto(KontaktModel model)
     {
         return new Kontakt
