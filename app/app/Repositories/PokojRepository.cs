@@ -19,25 +19,43 @@ public class PokojRepository : BaseRepository
         _pokojDao = pokojDao;
     }
 
-    public int AddOrEdit(PokojModel model) => AddOrEdit(_pokojDao, model, MapToDto);
-
-    public void Delete(int id) => Delete(_pokojDao, id);
-
-    public PokojModel Get(int id) => Get(_pokojDao, id, MapToModel);
-
-    public IEnumerable<PokojModel> GetAll() => GetAll(_pokojDao, MapToModel);
-
-    private PokojModel MapToModel(Pokoj dto) => new()
+    public int AddOrEdit(PokojModel model)
     {
-        PokojId = EncodeId(dto.PokojId),
-        Nazev = dto.Nazev,
-        PocetMist = dto.PocetMist
-    };
-    
-    private Pokoj MapToDto(PokojModel model) => new()
+        return AddOrEdit(_pokojDao, model, MapToDto);
+    }
+
+    public void Delete(int id)
     {
-        PokojId = DecodeId(model.PokojId),
-        Nazev = model.Nazev,
-        PocetMist = model.PocetMist
-    };
+        Delete(_pokojDao, id);
+    }
+
+    public PokojModel Get(int id)
+    {
+        return Get(_pokojDao, id, MapToModel);
+    }
+
+    public IEnumerable<PokojModel> GetAll()
+    {
+        return GetAll(_pokojDao, MapToModel);
+    }
+
+    private PokojModel MapToModel(Pokoj dto)
+    {
+        return new PokojModel
+        {
+            PokojId = EncodeId(dto.PokojId),
+            Nazev = dto.Nazev,
+            PocetMist = dto.PocetMist
+        };
+    }
+
+    private Pokoj MapToDto(PokojModel model)
+    {
+        return new Pokoj
+        {
+            PokojId = DecodeId(model.PokojId),
+            Nazev = model.Nazev,
+            PocetMist = model.PocetMist
+        };
+    }
 }

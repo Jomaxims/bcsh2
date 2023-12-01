@@ -1,5 +1,4 @@
-﻿using app.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace app.ViewComponents;
 

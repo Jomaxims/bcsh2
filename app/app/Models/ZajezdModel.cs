@@ -18,7 +18,7 @@ public class TerminModel
     public required DateOnly Od { get; set; }
     public required DateOnly Do { get; set; }
     public required IEnumerable<PokojModel> Pokoje { get; set; }
-    
+
     public string OdDo => $"{Od.ToShortDateString()} - {Do.ToShortDateString()}";
 }
 
@@ -43,6 +43,6 @@ public class PojisteniModel
     public required string Id { get; set; }
     public required int CenaZaDen { get; set; }
     public required string Popis { get; set; }
-    
+
     public string Nazev => $"{Popis} - {CenaZaDen} Kč";
 }

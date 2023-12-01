@@ -1,18 +1,16 @@
-﻿using System.Diagnostics;
-using app.DAL;
+﻿using app.DAL;
 using app.Managers;
-using Microsoft.AspNetCore.Mvc;
 using app.Models;
-using app.Models.Sprava;
 using app.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
 namespace app.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private readonly UserManager _userManager;
     private readonly IDbUnitOfWork _unitOfWork;
+    private readonly UserManager _userManager;
 
     public HomeController(ILogger<HomeController> logger, UserManager userManager, IDbUnitOfWork unitOfWork)
     {
@@ -38,15 +36,12 @@ public class HomeController : Controller
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error(string chyba = "")
     {
-        return View(new ErrorViewModel { Message = chyba});
+        return View(new ErrorViewModel { Message = chyba });
     }
 
     protected override void Dispose(bool disposing)
     {
-        if (disposing)
-        {
-            _unitOfWork.Dispose();
-        }
+        if (disposing) _unitOfWork.Dispose();
 
         base.Dispose(disposing);
     }

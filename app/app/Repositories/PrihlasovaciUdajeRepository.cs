@@ -1,5 +1,4 @@
-﻿using System.Transactions;
-using app.DAL;
+﻿using app.DAL;
 using app.DAL.Models;
 using app.Models.Sprava;
 using app.Utils;
@@ -41,28 +40,44 @@ public class PrihlasovaciUdajeRepository : BaseRepository
 
     public bool UzivatelExistuje(string prihlasovaciJmeno)
     {
-        var result = UnitOfWork.Connection.ExecuteScalar<int>("select count(*) from PRIHLASOVACI_UDAJE where JMENO = :prihlasovaciJmeno", new { prihlasovaciJmeno });
+        var result = UnitOfWork.Connection.ExecuteScalar<int>(
+            "select count(*) from PRIHLASOVACI_UDAJE where JMENO = :prihlasovaciJmeno", new { prihlasovaciJmeno });
 
         return result != 0;
     }
 
-    public void Delete(int id) => Delete(_prihlasovaciUdajeDao, id);
-
-    public PrihlasovaciUdajeModel Get(int id) => Get(_prihlasovaciUdajeDao, id, MapToModel);
-
-    public IEnumerable<PrihlasovaciUdajeModel> GetAll() => GetAll(_prihlasovaciUdajeDao, MapToModel);
-
-    private PrihlasovaciUdajeModel MapToModel(PrihlasovaciUdaje dto) => new()
+    public void Delete(int id)
     {
-        PrihlasovaciUdajeId = EncodeId(dto.PrihlasovaciUdajeId),
-        Jmeno = dto.Jmeno,
-        Heslo = dto.Heslo
-    };
-    
-    private PrihlasovaciUdaje MapToDto(PrihlasovaciUdajeModel model) => new()
+        Delete(_prihlasovaciUdajeDao, id);
+    }
+
+    public PrihlasovaciUdajeModel Get(int id)
     {
-        PrihlasovaciUdajeId = DecodeId(model.PrihlasovaciUdajeId),
-        Jmeno = model.Jmeno,
-        Heslo = model.Heslo
-    };
+        return Get(_prihlasovaciUdajeDao, id, MapToModel);
+    }
+
+    public IEnumerable<PrihlasovaciUdajeModel> GetAll()
+    {
+        return GetAll(_prihlasovaciUdajeDao, MapToModel);
+    }
+
+    private PrihlasovaciUdajeModel MapToModel(PrihlasovaciUdaje dto)
+    {
+        return new PrihlasovaciUdajeModel
+        {
+            PrihlasovaciUdajeId = EncodeId(dto.PrihlasovaciUdajeId),
+            Jmeno = dto.Jmeno,
+            Heslo = dto.Heslo
+        };
+    }
+
+    private PrihlasovaciUdaje MapToDto(PrihlasovaciUdajeModel model)
+    {
+        return new PrihlasovaciUdaje
+        {
+            PrihlasovaciUdajeId = DecodeId(model.PrihlasovaciUdajeId),
+            Jmeno = model.Jmeno,
+            Heslo = model.Heslo
+        };
+    }
 }

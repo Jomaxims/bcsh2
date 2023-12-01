@@ -10,10 +10,10 @@ namespace app.Repositories;
 public class ObjednavkaRepository : BaseRepository
 {
     private readonly GenericDao<Objednavka> _objednavkaDao;
-    private readonly GenericDao<Platba> _platbaDao;
     private readonly GenericDao<Osoba> _osobaDao;
 
     private readonly ISet<OsobaModel> _osoby = new HashSet<OsobaModel>();
+    private readonly GenericDao<Platba> _platbaDao;
 
     public ObjednavkaRepository(
         ILogger<ObjednavkaRepository> logger,
@@ -22,16 +22,17 @@ public class ObjednavkaRepository : BaseRepository
         GenericDao<Objednavka> objednavkaDao,
         GenericDao<Platba> platbaDao,
         GenericDao<Osoba> osobaDao
-        ) : base(logger, unitOfWork, idConverter)
+    ) : base(logger, unitOfWork, idConverter)
     {
         _objednavkaDao = objednavkaDao;
         _platbaDao = platbaDao;
         _osobaDao = osobaDao;
     }
-    
+
     private IEnumerable<int> GetOsobaObjednavkaIds(int objednavkaId)
     {
-        return UnitOfWork.Connection.Query<int>("select osoba_id from OSOBA_OBJEDNAVKA where OBJEDNAVKA_ID = :objednavkaId", new { objednavkaId });
+        return UnitOfWork.Connection.Query<int>(
+            "select osoba_id from OSOBA_OBJEDNAVKA where OBJEDNAVKA_ID = :objednavkaId", new { objednavkaId });
     }
 
     private void AddOsobaObjednavka(int osobaId, int objednavkaId)
@@ -41,8 +42,23 @@ public class ObjednavkaRepository : BaseRepository
         parameters.Add($"{Constants.DbProcedureParamPrefix}objednavka_id", objednavkaId);
         parameters.Add($"{Constants.DbProcedureParamPrefix}osoba_id", osobaId);
         parameters.AddResult();
-        
-        UnitOfWork.Connection.Query($"pck_{tableName}.manage_{tableName}", parameters, commandType: CommandType.StoredProcedure);
+
+        UnitOfWork.Connection.Query($"pck_{tableName}.manage_{tableName}", parameters,
+            commandType: CommandType.StoredProcedure);
+
+        parameters.GetResult().IsOkOrThrow();
+    }
+
+    private void DeleteOsobaObjednavka(int osobaId, int objednavkaId)
+    {
+        const string tableName = "osoba_objednavka";
+        var parameters = new DynamicParameters();
+        parameters.Add($"{Constants.DbProcedureParamPrefix}objednavka_id", objednavkaId);
+        parameters.Add($"{Constants.DbProcedureParamPrefix}osoba_id", osobaId);
+        parameters.AddResult();
+
+        UnitOfWork.Connection.Query($"pck_{tableName}.delete_{tableName}", parameters,
+            commandType: CommandType.StoredProcedure);
 
         parameters.GetResult().IsOkOrThrow();
     }
@@ -54,9 +70,10 @@ public class ObjednavkaRepository : BaseRepository
         parameters.Add($"{Constants.DbProcedureParamPrefix}platba_id", platbaId);
         parameters.Add($"{Constants.DbProcedureParamPrefix}cislo_uctu", cisloUctu);
         parameters.AddResult();
-        
-        UnitOfWork.Connection.Query($"pck_{tableName}.zaplat_{tableName}", parameters, commandType: CommandType.StoredProcedure);
-        
+
+        UnitOfWork.Connection.Query($"pck_{tableName}.zaplat_{tableName}", parameters,
+            commandType: CommandType.StoredProcedure);
+
         parameters.GetResult().IsOkOrThrow();
     }
 
@@ -85,17 +102,13 @@ public class ObjednavkaRepository : BaseRepository
                     Prijmeni = osoba.Prijmeni,
                     DatumNarozeni = osoba.DatumNarozeni
                 });
-                
+
                 osobaResult.IsOkOrThrow();
 
                 if (oldOsobyIds.Contains(osobaResult.Id))
-                {
                     oldOsobyIds.Remove(osobaResult.Id);
-                }
                 else
-                {
                     AddOsobaObjednavka(osobaResult.Id, result.Id);
-                }
             }
 
             UnitOfWork.Commit();
@@ -118,9 +131,16 @@ public class ObjednavkaRepository : BaseRepository
         try
         {
             var platbaId = DecodeIdOrDefault(Get(id).Platba.PlatbaId);
-            
+            var osobaIds = GetOsobaObjednavkaIds(id);
+
+            foreach (var osobaId in osobaIds)
+            {
+                DeleteOsobaObjednavka(osobaId, id);
+                _osobaDao.Delete(osobaId).IsOkOrThrow();
+            }
+
             Delete(_platbaDao, platbaId);
-            
+
             Delete(_objednavkaDao, id);
 
             UnitOfWork.Commit();
@@ -249,26 +269,25 @@ public class ObjednavkaRepository : BaseRepository
         celkovyPocetRadku = Convert.ToInt32(rows.FirstOrDefault()?.POCET_RADKU ?? 0);
         return model;
     }
-    
-        public IEnumerable<ObjednavkaModel> GetObjednavkyZakaznika(int zakaznikId)
+
+    public IEnumerable<ObjednavkaModel> GetObjednavkyZakaznika(int zakaznikId)
     {
-        var sql = $"""
-                   SELECT
-                       OBJEDNAVKA_ID ,
-                       ZAKAZNIK_ID,
-                       OD ,
-                       DO ,
-                       UBYTOVANI_NAZEV ,
-                       POKOJ_NAZEV ,
-                       JMENO ,
-                       PRIJMENI ,
-                       CELE_JMENO ,
-                       CASTKA ,
-                       ZAPLACENA,
-                       count(*) over () as pocet_radku
-                    FROM objednavka_view
-                    where ZAKAZNIK_ID = :zakaznikId
-                   """;
+        var sql = """
+                  SELECT
+                      OBJEDNAVKA_ID ,
+                      ZAKAZNIK_ID,
+                      OD ,
+                      DO ,
+                      UBYTOVANI_NAZEV ,
+                      POKOJ_NAZEV ,
+                      JMENO ,
+                      PRIJMENI ,
+                      CELE_JMENO ,
+                      CASTKA ,
+                      ZAPLACENA
+                   FROM objednavka_view
+                   where ZAKAZNIK_ID = :zakaznikId
+                  """;
         var builder = new SqlBuilder();
         var template = builder.AddTemplate(sql);
 
@@ -315,24 +334,30 @@ public class ObjednavkaRepository : BaseRepository
         return model;
     }
 
-    private Objednavka MapToDto(ObjednavkaModel model) => new()
+    private Objednavka MapToDto(ObjednavkaModel model)
     {
-        ObjednavkaId = DecodeId(model.ObjednavkaId),
-        PocetOsob = model.PocetOsob,
-        PojisteniId = DecodeIdOrDefault(model.Pojisteni.PojisteniId),
-        PokojId = DecodeIdOrDefault(model.Pokoj.PokojId),
-        TerminId = DecodeIdOrDefault(model.Termin.TerminId),
-        ZakaznikId = DecodeIdOrDefault(model.Zakaznik.ZakaznikId)
-    };
+        return new Objednavka
+        {
+            ObjednavkaId = DecodeId(model.ObjednavkaId),
+            PocetOsob = model.PocetOsob,
+            PojisteniId = DecodeIdOrDefault(model.Pojisteni.PojisteniId),
+            PokojId = DecodeIdOrDefault(model.Pokoj.PokojId),
+            TerminId = DecodeIdOrDefault(model.Termin.TerminId),
+            ZakaznikId = DecodeIdOrDefault(model.Zakaznik.ZakaznikId)
+        };
+    }
 
-    private Platba MapToDto(PlatbaModel model, int objednavkaId) => new()
+    private Platba MapToDto(PlatbaModel model, int objednavkaId)
     {
-        Castka = model.Castka,
-        CisloUctu = model.CisloUctu,
-        ObjednavkaId = objednavkaId,
-        Zaplacena = model.Zaplacena,
-        PlatbaId = DecodeId(model.PlatbaId)
-    };
+        return new Platba
+        {
+            Castka = model.Castka,
+            CisloUctu = model.CisloUctu,
+            ObjednavkaId = objednavkaId,
+            Zaplacena = model.Zaplacena,
+            PlatbaId = DecodeId(model.PlatbaId)
+        };
+    }
 
     private ObjednavkaModel MapRowToModel(Objednavka objednavkaDto, PlatbaModel platba, Termin terminDto,
         PojisteniModel pojisteni, PokojModel pokoj, OsobaModel osoba)

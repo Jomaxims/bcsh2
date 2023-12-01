@@ -4,14 +4,16 @@ using app.DAL.Models;
 using app.Models.Sprava;
 using app.Utils;
 using Dapper;
+using Dapper.Oracle;
+using Oracle.ManagedDataAccess.Client;
 
 namespace app.Repositories;
 
 public class ZajezdRepository : BaseRepository
 {
-    private readonly GenericDao<Zajezd> _zajezdDao;
-    private readonly GenericDao<Termin> _terminDao;
     private readonly GenericDao<PokojeTerminu> _pokojeTerminuDao;
+    private readonly GenericDao<Termin> _terminDao;
+    private readonly GenericDao<Zajezd> _zajezdDao;
 
     public ZajezdRepository(
         ILogger<ZajezdRepository> logger,
@@ -20,7 +22,7 @@ public class ZajezdRepository : BaseRepository
         GenericDao<Zajezd> zajezdDao,
         GenericDao<Termin> terminDao,
         GenericDao<PokojeTerminu> pokojeTerminuDao
-        ) : base(logger, unitOfWork, idConverter)
+    ) : base(logger, unitOfWork, idConverter)
     {
         _zajezdDao = zajezdDao;
         _terminDao = terminDao;
@@ -30,13 +32,13 @@ public class ZajezdRepository : BaseRepository
     public int AddOrEdit(ZajezdModel model)
     {
         UnitOfWork.BeginTransaction();
-    
+
         try
         {
             var dto = MapToDto(model);
-    
+
             var result = _zajezdDao.AddOrEdit(dto);
-    
+
             result.IsOkOrThrow();
 
             var oldTermins = GetTerminIds(result.Id).ToHashSet();
@@ -50,10 +52,10 @@ public class ZajezdRepository : BaseRepository
                     Do = termin.Do,
                     ZajezdId = result.Id
                 });
-                
+
                 terminResult.IsOkOrThrow();
                 oldTermins.Remove(terminResult.Id);
-                
+
                 oldPokojeTerminu.Add(terminResult.Id, GetPokojeTerminuIds(terminResult.Id).ToHashSet());
 
                 foreach (var pokojTerminu in termin.PokojeTerminu ?? Array.Empty<PokojTerminu>())
@@ -70,29 +72,24 @@ public class ZajezdRepository : BaseRepository
                 }
 
                 foreach (var pokojId in oldPokojeTerminu[terminResult.Id])
-                {
                     DeletePokojeTerminu(terminResult.Id, pokojId);
-                }
             }
 
             foreach (var terminId in oldTermins)
             {
-                foreach (var pokojId in GetPokojeTerminuIds(terminId))
-                {
-                    DeletePokojeTerminu(terminId, pokojId);
-                }
-                
+                foreach (var pokojId in GetPokojeTerminuIds(terminId)) DeletePokojeTerminu(terminId, pokojId);
+
                 _terminDao.Delete(terminId).IsOkOrThrow();
             }
-    
+
             UnitOfWork.Commit();
-    
+
             return result.Id;
         }
         catch (Exception e)
         {
             UnitOfWork.Rollback();
-    
+
             Logger.Log(LogLevel.Error, "{}", e);
             throw new DatabaseException("Položku se nepodařilo přidat/upravit", e);
         }
@@ -100,24 +97,27 @@ public class ZajezdRepository : BaseRepository
 
     public TerminModel GetTermin(int terminId)
     {
-        var dto = UnitOfWork.Connection.QuerySingle<Termin>("select * from TERMIN where TERMIN_ID = :terminId", new { terminId });
+        var dto = UnitOfWork.Connection.QuerySingle<Termin>("select * from TERMIN where TERMIN_ID = :terminId",
+            new { terminId });
 
         return new TerminModel
         {
             TerminId = EncodeId(dto.TerminId),
             Od = dto.Od,
-            Do = dto.Do,
+            Do = dto.Do
         };
     }
 
     private IEnumerable<int> GetTerminIds(int zajezdId)
     {
-        return UnitOfWork.Connection.Query<int>("select termin_id from TERMIN where ZAJEZD_ID = :zajezdId", new { zajezdId });
+        return UnitOfWork.Connection.Query<int>("select termin_id from TERMIN where ZAJEZD_ID = :zajezdId",
+            new { zajezdId });
     }
-    
+
     private IEnumerable<int> GetPokojeTerminuIds(int terminId)
     {
-        return UnitOfWork.Connection.Query<int>("select pokoj_id from POKOJE_TERMINU where TERMIN_ID = :terminId", new { terminId });
+        return UnitOfWork.Connection.Query<int>("select pokoj_id from POKOJE_TERMINU where TERMIN_ID = :terminId",
+            new { terminId });
     }
 
     private void DeletePokojeTerminu(int terminId, int pokojId)
@@ -128,31 +128,55 @@ public class ZajezdRepository : BaseRepository
         parameters.Add($"{Constants.DbProcedureParamPrefix}pokoj_id", pokojId);
         parameters.AddResult();
 
-        UnitOfWork.Connection.Query($"pck_{tableName}.delete_{tableName}", parameters, commandType: CommandType.StoredProcedure);
-        
+        UnitOfWork.Connection.Query($"pck_{tableName}.delete_{tableName}", parameters,
+            commandType: CommandType.StoredProcedure);
+
         parameters.GetResult().IsOkOrThrow();
     }
-    
+
     private (int termin_id, int pokoj_id) AddOrEditPokojeTerminu(PokojeTerminu dto)
     {
         const string tableName = "pokoje_terminu";
-        
+
         var parameters = new DynamicParameters();
-        parameters.Add($"{Constants.DbProcedureParamPrefix}termin_id", dto.TerminyId, direction: ParameterDirection.InputOutput);
-        parameters.Add($"{Constants.DbProcedureParamPrefix}pokoj_id", dto.PokojId, direction: ParameterDirection.InputOutput);
-        parameters.Add($"{Constants.DbProcedureParamPrefix}celkovy_pocet_pokoju", dto.CelkovyPocetPokoju, direction: ParameterDirection.InputOutput);
-        parameters.Add($"{Constants.DbProcedureParamPrefix}pocet_obsazenych_pokoju", dto.PocetObsazenychPokoju, direction: ParameterDirection.InputOutput);
+        parameters.Add($"{Constants.DbProcedureParamPrefix}termin_id", dto.TerminyId,
+            direction: ParameterDirection.InputOutput);
+        parameters.Add($"{Constants.DbProcedureParamPrefix}pokoj_id", dto.PokojId,
+            direction: ParameterDirection.InputOutput);
+        parameters.Add($"{Constants.DbProcedureParamPrefix}celkovy_pocet_pokoju", dto.CelkovyPocetPokoju,
+            direction: ParameterDirection.InputOutput);
+        parameters.Add($"{Constants.DbProcedureParamPrefix}pocet_obsazenych_pokoju", dto.PocetObsazenychPokoju,
+            direction: ParameterDirection.InputOutput);
         parameters.AddResult();
 
-        UnitOfWork.Connection.Query($"pck_{tableName}.manage_{tableName}", parameters, commandType: CommandType.StoredProcedure);
+        UnitOfWork.Connection.Query($"pck_{tableName}.manage_{tableName}", parameters,
+            commandType: CommandType.StoredProcedure);
 
         var result = parameters.GetResult();
         result.IsOkOrThrow();
-        
-        return (parameters.Get<int>($"{Constants.DbProcedureParamPrefix}termin_id"), parameters.Get<int>($"{Constants.DbProcedureParamPrefix}pokoj_id"));
+
+        return (parameters.Get<int>($"{Constants.DbProcedureParamPrefix}termin_id"),
+            parameters.Get<int>($"{Constants.DbProcedureParamPrefix}pokoj_id"));
     }
-    
-    public void Delete(int id) => Delete(_zajezdDao, id);
+
+    public void Delete(int id)
+    {
+        UnitOfWork.BeginTransaction();
+
+        try
+        {
+            Delete(_zajezdDao, id);
+
+            UnitOfWork.Commit();
+        }
+        catch (Exception e)
+        {
+            UnitOfWork.Rollback();
+
+            Logger.Log(LogLevel.Error, "{}", e);
+            throw new DatabaseException("Položku se nepodařilo smazat", e);
+        }
+    }
 
     public ZajezdModel Get(int id)
     {
@@ -184,21 +208,18 @@ public class ZajezdRepository : BaseRepository
         var obrazkyUbytovani = new Dictionary<decimal, ObrazkyUbytovaniModel>();
         var terminyZajezdu = new Dictionary<decimal, TerminModel>();
         var rows = UnitOfWork.Connection.Query<dynamic>(sql, new { id });
-        
+
         foreach (var row in rows)
         {
             if (row.OBRAZKY_UBYTOVANI_ID != null)
-            {
                 obrazkyUbytovani.TryAdd(row.OBRAZKY_UBYTOVANI_ID, new ObrazkyUbytovaniModel
                 {
-                    ObrazkyUbytovaniId = EncodeId((int)row.OBRAZKY_UBYTOVANI_ID),
-                    // Obrazek = row.OBRAZEK,
-                    Nazev = row.OBRAZKY_UBYTOVANI_NAZEV
+                    ObrazkyUbytovaniId = EncodeId((int)row.OBRAZKY_UBYTOVANI_ID), Nazev
+                        // Obrazek = row.OBRAZEK,
+                        = row.OBRAZKY_UBYTOVANI_NAZEV
                 });
-            }
 
             if (row.TERMIN_ID != null)
-            {
                 terminyZajezdu.TryAdd(row.TERMIN_ID, new TerminModel
                 {
                     TerminId = EncodeId((int)row.TERMIN_ID),
@@ -206,12 +227,10 @@ public class ZajezdRepository : BaseRepository
                     Do = DateOnly.FromDateTime(row.DO),
                     PokojeTerminu = new List<PokojTerminu>()
                 });
-            }
 
             terminyZajezdu.TryGetValue(row.TERMIN_ID ?? 0, out TerminModel termin);
 
             if (row.POKOJ_ID != null)
-            {
                 ((IList<PokojTerminu>)termin.PokojeTerminu).Add(new PokojTerminu
                 {
                     CelkovyPocetPokoju = (int)row.CELKOVY_POCET_POKOJU,
@@ -223,9 +242,8 @@ public class ZajezdRepository : BaseRepository
                         Nazev = row.POKOJ_NAZEV
                     }
                 });
-            }
         }
-        
+
         var firstRow = rows.First();
         var model = new ZajezdModel
         {
@@ -269,8 +287,35 @@ public class ZajezdRepository : BaseRepository
                 Nazev = firstRow.STRAVA_NAZEV
             }
         };
-        
+
         return model;
+    }
+
+    public void GetZajezdyVTerminu()
+    {
+        var terminOd = new DateOnly(2020, 1, 1);
+        var terminDo = new DateOnly(2025, 1, 1);
+        // const string tableName = "pokoje_terminu_f";
+        var parameters = new OracleDynamicParameters();
+        parameters.Add("termin_od", terminOd.ToDateTime(new TimeOnly(0, 0)));
+        parameters.Add("termin_do", terminDo.ToDateTime(new TimeOnly(0, 0)));
+        parameters.Add("ret", null, OracleMappingType.RefCursor, ParameterDirection.ReturnValue);
+
+        var res = UnitOfWork.Connection.Query("zajezdy_v_terminu_f", parameters,
+            commandType: CommandType.StoredProcedure);
+
+        var command = new OracleCommand();
+        command.CommandText = "zajezdy_v_terminu";
+        command.Connection = (OracleConnection)UnitOfWork.Connection;
+        command.CommandType = CommandType.StoredProcedure;
+
+        var param = command.Parameters.Add("termin_od", OracleDbType.Date);
+        param.Value = terminOd.ToDateTime(new TimeOnly(0, 0));
+        param = command.Parameters.Add("termin_do", OracleDbType.Date);
+        param.Value = terminDo.ToDateTime(new TimeOnly(0, 0));
+        param = command.Parameters.Add("zajezdy_out", OracleDbType.RefCursor, ParameterDirection.Output);
+
+        var reader = command.ExecuteReader();
     }
 
     public IEnumerable<ZajezdModel> GetSpravaPreview(out int celkovyPocetRadku, string ubytovani = "",
@@ -357,15 +402,18 @@ public class ZajezdRepository : BaseRepository
         return model;
     }
 
-    private Zajezd MapToDto(ZajezdModel model) => new()
+    private Zajezd MapToDto(ZajezdModel model)
     {
-        ZajezdId = DecodeId(model.ZajezdId),
-        Popis = model.Popis,
-        CenaZaOsobu = model.CenaZaOsobu,
-        SlevaProcent = model.SlevaProcent,
-        Zobrazit = model.Zobrazit ? 1 : 0,
-        DopravaId = DecodeIdOrDefault(model.Doprava.DopravaId),
-        UbytovaniId = DecodeIdOrDefault(model.Ubytovani.UbytovaniId),
-        StravaId = DecodeIdOrDefault(model.Strava.StravaId)
-    };
+        return new Zajezd
+        {
+            ZajezdId = DecodeId(model.ZajezdId),
+            Popis = model.Popis,
+            CenaZaOsobu = model.CenaZaOsobu,
+            SlevaProcent = model.SlevaProcent,
+            Zobrazit = model.Zobrazit ? 1 : 0,
+            DopravaId = DecodeIdOrDefault(model.Doprava.DopravaId),
+            UbytovaniId = DecodeIdOrDefault(model.Ubytovani.UbytovaniId),
+            StravaId = DecodeIdOrDefault(model.Strava.StravaId)
+        };
+    }
 }

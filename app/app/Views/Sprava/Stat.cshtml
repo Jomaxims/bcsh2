@@ -4,34 +4,36 @@
     ViewBag.Title = "Státy";
     var strana = ViewBag.Strana;
     var maxStrana = ViewBag.MaxStrana;
-    
+
     var zkratka = Context.Request.Query["zkratka"].ToString();
     var nazev = Context.Request.Query["nazev"].ToString();
 }
 
 <div class="container-md mt-3">
-        <form asp-action="Stat" method="get" enctype="application/x-www-form-urlencoded" class="w-100">
-            <div class="d-flex justify-content-center gap-3">
-                <div class="form-group">
-                    <label for="zkratka" class="control-label">Zkratka</label>
-                    <input type="text" value="@zkratka" id="zkratka" name="zkratka" class="form-control"/>
-                </div>
-                <div class="form-group">
-                    <label for="nazev" class="control-label">Název</label>
-                    <input type="text" value="@nazev" id="nazev" name="nazev" class="form-control"/>
-                </div>
-                <div class="form-group mt-auto">
-                    <input type="submit" value="Hledat" class="btn btn-primary d-block mx-auto"/>
-                </div>
+    <form asp-action="Stat" method="get" enctype="application/x-www-form-urlencoded" class="w-100">
+        <div class="d-flex justify-content-center gap-3">
+            <div class="form-group">
+                <label for="zkratka" class="control-label">Zkratka</label>
+                <input type="text" value="@zkratka" id="zkratka" name="zkratka" class="form-control"/>
             </div>
-        </form>
-    
+            <div class="form-group">
+                <label for="nazev" class="control-label">Název</label>
+                <input type="text" value="@nazev" id="nazev" name="nazev" class="form-control"/>
+            </div>
+            <div class="form-group mt-auto">
+                <input type="submit" value="Hledat" class="btn btn-primary d-block mx-auto"/>
+            </div>
+        </div>
+    </form>
+
     <table class="table table-striped">
         <thead>
         <tr>
             <th scope="col">Zkratka</th>
             <th scope="col">Název</th>
-            <th scope="col"><a class="btn btn-primary" asp-action="StatEdit" asp-route-id="0">Přidat</a></th>
+            <th scope="col">
+                <a class="btn btn-primary" asp-action="StatEdit" asp-route-id="0">Přidat</a>
+            </th>
         </tr>
         </thead>
         <tbody>
@@ -47,6 +49,6 @@
         }
         </tbody>
     </table>
-    
+
     <vc:pagination strana="@strana" max-strana="@maxStrana"/>
 </div>

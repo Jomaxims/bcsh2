@@ -19,12 +19,17 @@ internal sealed class DbUnitOfWork : IDbUnitOfWork
     private readonly IDbConnectionFactory _connectionFactory;
     private IDbConnection? _connection;
 
+    public DbUnitOfWork(IDbConnectionFactory connectionFactory)
+    {
+        _connectionFactory = connectionFactory;
+    }
+
     public IDbConnection Connection
     {
         get
         {
             if (_connection != null) return _connection;
-            
+
             _connection = _connectionFactory.NewConnection();
             _connection.Open();
 
@@ -33,11 +38,6 @@ internal sealed class DbUnitOfWork : IDbUnitOfWork
     }
 
     public IDbTransaction? Transaction { get; private set; }
-    
-    public DbUnitOfWork(IDbConnectionFactory connectionFactory)
-    {
-        _connectionFactory = connectionFactory;
-    }
 
     public void BeginTransaction()
     {
@@ -71,7 +71,7 @@ internal sealed class DbUnitOfWork : IDbUnitOfWork
         _connection?.Close();
         _connection?.Dispose();
         Transaction?.Dispose();
-        
+
         _connection = null;
         Transaction = null;
     }

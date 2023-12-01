@@ -17,5 +17,8 @@ public class DbConnectionFactory : IDbConnectionFactory
         _configuration = configuration;
     }
 
-    public IDbConnection NewConnection() => new OracleConnection(_configuration.GetConnectionString("DbConnection"));
+    public IDbConnection NewConnection()
+    {
+        return new OracleConnection(_configuration.GetConnectionString("DbConnection"));
+    }
 }

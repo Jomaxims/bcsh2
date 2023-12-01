@@ -1,5 +1,4 @@
-﻿using app.Models;
-using app.Models.Sprava;
+﻿using app.Models.Sprava;
 using Microsoft.AspNetCore.Mvc;
 
 namespace app.ViewComponents;

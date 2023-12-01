@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Logy";
-    
+
     int strana = ViewBag.Strana;
     int maxStrana = ViewBag.MaxStrana;
     var today = DateOnly.FromDateTime(DateTime.Now);
@@ -87,6 +87,6 @@
         }
         </tbody>
     </table>
-    
-    <vc:pagination strana="@strana" max-strana="@maxStrana" />
+
+    <vc:pagination strana="@strana" max-strana="@maxStrana"/>
 </div>

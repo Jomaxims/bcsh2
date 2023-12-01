@@ -8,8 +8,8 @@ namespace app.Repositories;
 
 public class ZamestnanecRepository : BaseRepository
 {
-    private readonly GenericDao<Zamestnanec> _zamestnanecDao;
     private readonly PrihlasovaciUdajeRepository _prihlasovaciUdajeRepository;
+    private readonly GenericDao<Zamestnanec> _zamestnanecDao;
 
     public ZamestnanecRepository(
         ILogger<ZamestnanecRepository> logger,
@@ -32,13 +32,13 @@ public class ZamestnanecRepository : BaseRepository
             var prihlasovaciUdajeId = _prihlasovaciUdajeRepository.AddOrEdit(model.PrihlasovaciUdaje);
             var roleId = DecodeIdOrDefault(model.Role.RoleId);
             var nadrizenyId = DecodeId(model.Nadrizeny?.ZamestnanecId);
-            
+
             var dto = MapToDto(model, roleId, prihlasovaciUdajeId, nadrizenyId);
 
             var result = _zamestnanecDao.AddOrEdit(dto);
-            
+
             result.IsOkOrThrow();
-            
+
             UnitOfWork.Commit();
 
             return result.Id;
@@ -46,13 +46,16 @@ public class ZamestnanecRepository : BaseRepository
         catch (Exception e)
         {
             UnitOfWork.Rollback();
-            
+
             Logger.Log(LogLevel.Error, "{}", e);
             throw new DatabaseException("Položku se nepodařilo přidat/upravit", e);
         }
     }
 
-    public void Delete(int id) => Delete(_zamestnanecDao, id);
+    public void Delete(int id)
+    {
+        Delete(_zamestnanecDao, id);
+    }
 
     public ZamestnanecModel Get(int id)
     {
@@ -71,7 +74,7 @@ public class ZamestnanecRepository : BaseRepository
 
         return model;
     }
-    
+
     public IEnumerable<ZamestnanecModel> GetMozniNadrizeni(int id)
     {
         const string sql = """
@@ -89,7 +92,7 @@ public class ZamestnanecRepository : BaseRepository
             {
                 ZamestnanecId = EncodeId(dto.ZamestnanecId),
                 Jmeno = dto.Jmeno,
-                Prijmeni = dto.Prijmeni,
+                Prijmeni = dto.Prijmeni
             });
 
         return model;
@@ -146,7 +149,7 @@ public class ZamestnanecRepository : BaseRepository
                 Nadrizeny = new ZamestnanecModel
                 {
                     Jmeno = row.NADRIZENY_JMENO,
-                    Prijmeni = row.NADRIZENY_PRIJMENI,
+                    Prijmeni = row.NADRIZENY_PRIJMENI
                 }
             };
 
@@ -157,15 +160,18 @@ public class ZamestnanecRepository : BaseRepository
         return model;
     }
 
-    private Zamestnanec MapToDto(ZamestnanecModel model, int roleId, int prihlasovaciUdajeId, int? nadrizenyId = null) => new()
+    private Zamestnanec MapToDto(ZamestnanecModel model, int roleId, int prihlasovaciUdajeId, int? nadrizenyId = null)
     {
-        ZamestnanecId = DecodeId(model.ZamestnanecId),
-        Jmeno = model.Jmeno,
-        Prijmeni = model.Prijmeni,
-        RoleId = roleId,
-        NadrizenyId = nadrizenyId,
-        PrihlasovaciUdajeId = prihlasovaciUdajeId
-    };
+        return new Zamestnanec
+        {
+            ZamestnanecId = DecodeId(model.ZamestnanecId),
+            Jmeno = model.Jmeno,
+            Prijmeni = model.Prijmeni,
+            RoleId = roleId,
+            NadrizenyId = nadrizenyId,
+            PrihlasovaciUdajeId = prihlasovaciUdajeId
+        };
+    }
 
     private ZamestnanecModel MapRowToModel(ZamestnanecModel zamestnanec, RoleModel role,
         PrihlasovaciUdajeModel prihlasovaciUdaje, ZamestnanecModel? nadrizeny)

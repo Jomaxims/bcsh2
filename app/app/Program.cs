@@ -7,7 +7,6 @@ using Dapper;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Diagnostics;
 using Sqids;
-using Role = app.Managers.Role;
 
 SqlMapper.AddTypeHandler(new DapperSqlDateOnlyTypeHandler());
 DefaultTypeMap.MatchNamesWithUnderscores = true;
@@ -19,7 +18,7 @@ builder.Services.AddSingleton<IIdConverter>(new IdConverter(
         new SqidsOptions
         {
             Alphabet = "shQpZVOxoN3nv1guIT8RHXwf0eqaWyjzBdkLScbPDMJUt24F7C9m5K6rlEGiYA",
-            MinLength = 5,
+            MinLength = 5
         }
     )));
 builder.Services.AddSingleton<IDbConnectionFactory, DbConnectionFactory>();
@@ -27,10 +26,7 @@ builder.Services.AddSingleton<DatabaseManager, DatabaseManager>();
 builder.Services.AddScoped(typeof(GenericDao<>), typeof(GenericDao<>));
 
 var repos = typeof(BaseRepository).Assembly.GetTypes().Where(t => t.BaseType == typeof(BaseRepository));
-foreach (var repo in repos)
-{
-    builder.Services.AddScoped(repo, repo);
-}
+foreach (var repo in repos) builder.Services.AddScoped(repo, repo);
 
 builder.Services.AddScoped<IDbUnitOfWork, DbUnitOfWork>();
 builder.Services.AddScoped<UserManager, UserManager>();
@@ -46,10 +42,7 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("Zakaznik", policy => policy.RequireRole(Role.Zakaznik));
     options.AddPolicy("Vsichni", policy => policy.RequireRole(Role.Admin, Role.Zamestnanec, Role.Zakaznik));
 });
-if (builder.Environment.IsDevelopment())
-{
-    builder.Services.AddSassCompiler(); // TODO
-}
+if (builder.Environment.IsDevelopment()) builder.Services.AddSassCompiler(); // TODO
 
 var app = builder.Build();
 
@@ -58,27 +51,26 @@ if (false)
 {
     app.UseDeveloperExceptionPage();
 }
-else
+
+// app.UseExceptionHandler("/Home/Error");
+app.UseExceptionHandler(exemptionApp =>
 {
-    // app.UseExceptionHandler("/Home/Error");
-    app.UseExceptionHandler(exemptionApp =>
+    exemptionApp.Run(async context =>
     {
-        exemptionApp.Run(async context =>
+        var exceptionHandler = context.Features.Get<IExceptionHandlerPathFeature>();
+
+        var chyba = exceptionHandler?.Error switch
         {
-            var exceptionHandler = context.Features.Get<IExceptionHandlerPathFeature>();
+            InvalidIdException => "Položka neexistuje",
+            DatabaseException => exceptionHandler.Error.Message,
+            _ => "Chyba aplikace"
+        };
 
-            var chyba = exceptionHandler?.Error switch
-            {
-                InvalidIdException => "Položka neexistuje",
-                _ => "Chyba aplikace"
-            };
-
-            context.Response.Redirect($"/error?chyba={chyba}");
-        });
+        context.Response.Redirect($"/error?chyba={chyba}");
     });
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
+});
+// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+app.UseHsts();
 
 // app.UseHttpsRedirection();
 app.UseStaticFiles();

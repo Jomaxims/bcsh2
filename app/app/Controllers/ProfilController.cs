@@ -12,11 +12,11 @@ namespace app.Controllers;
 [Authorize(Policy = "Zakaznik")]
 public class ProfilController : Controller
 {
-    private readonly ZakaznikRepository _zakaznikRepository;
-    private readonly ObjednavkaRepository _objednavkaRepository;
     private readonly IIdConverter _idConverter;
-    private readonly UserManager _userManager;
+    private readonly ObjednavkaRepository _objednavkaRepository;
     private readonly PrihlasovaciUdajeRepository _prihlasovaciUdajeRepository;
+    private readonly UserManager _userManager;
+    private readonly ZakaznikRepository _zakaznikRepository;
 
     public ProfilController(ZakaznikRepository zakaznikRepository, ObjednavkaRepository objednavkaRepository,
         IIdConverter idConverter, UserManager userManager, PrihlasovaciUdajeRepository prihlasovaciUdajeRepository)
@@ -83,15 +83,13 @@ public class ProfilController : Controller
     public IActionResult RegisterPost(ZakaznikModel model)
     {
         if (_prihlasovaciUdajeRepository.UzivatelExistuje(model.PrihlasovaciUdaje.Jmeno))
-        {
             return RedirectToAction("RegisterChyba");
-        }
-        
+
         _zakaznikRepository.AddOrEdit(model);
 
         return RedirectToAction("Login");
     }
-    
+
     [AllowAnonymous]
     [HttpGet]
     [Route("registrace/chyba")]

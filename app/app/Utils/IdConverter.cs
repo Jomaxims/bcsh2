@@ -25,9 +25,15 @@ public class IdConverter : IIdConverter
         _encoder = encoder;
     }
 
-    public string Encode(int id) => _encoder.Encode(id);
-    
-    public string Encode(string id) => _encoder.Encode(int.Parse(id));
+    public string Encode(int id)
+    {
+        return _encoder.Encode(id);
+    }
+
+    public string Encode(string id)
+    {
+        return _encoder.Encode(int.Parse(id));
+    }
 
     public int Decode(string id)
     {
@@ -36,6 +42,6 @@ public class IdConverter : IIdConverter
         if (res.Count == 0)
             throw new InvalidIdException($"Neplatné ID {id}");
 
-        return  res[0];
+        return res[0];
     }
 }

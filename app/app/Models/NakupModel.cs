@@ -12,12 +12,12 @@ public class OsobaModel
     [Display(Name = "Jméno")]
     [DataType(DataType.Text)]
     public required string Jmeno { get; set; }
-    
+
     [Required(ErrorMessage = "Zadejte příjmení")]
     [Display(Name = "Příjmení")]
     [DataType(DataType.Text)]
     public required string Prijmeni { get; set; }
-    
+
     [Required(ErrorMessage = "Zadejte datum narození")]
     [Display(Name = "Datum narození")]
     [DataType(DataType.Date)]

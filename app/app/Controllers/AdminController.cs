@@ -14,8 +14,8 @@ public class AdminController : Controller
     private const int PolozekNaStranku = Constants.ResultPerPage * 4;
 
     private readonly IIdConverter _converter;
-    private readonly UserManager _userManager;
     private readonly LogRepository _logRepository;
+    private readonly UserManager _userManager;
 
     public AdminController(IIdConverter converter, UserManager userManager, LogRepository logRepository)
     {
@@ -102,7 +102,6 @@ public class AdminController : Controller
 
         var model = new UzivatelModel[100];
         for (var i = 0; i < model.Length; i++)
-        {
             model[i] = new UzivatelModel
             {
                 Id = "iyovc",
@@ -111,7 +110,6 @@ public class AdminController : Controller
                 Prijmeni = "Zdepa",
                 Role = "Zakaznik"
             };
-        }
 
         ViewBag.Role = new[]
         {

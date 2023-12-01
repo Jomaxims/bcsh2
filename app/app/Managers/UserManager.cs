@@ -34,28 +34,28 @@ public class UserManager
 {
     public void SignUp(RegistraceModel user)
     {
-        
     }
 
     public bool Login(HttpContext context, string name, string password)
     {
         if (!(name == "admin" && password == "admin"))
             return false;
-        
+
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.NameIdentifier, "1"),
-            new Claim(ClaimTypes.Name, name),
-            new Claim(ClaimTypes.Role, Role.Admin),
-            new Claim(ClaimTypes.Role, Role.Zamestnanec),
-            new Claim(ClaimTypes.Role, Role.Zakaznik)
+            new(ClaimTypes.NameIdentifier, "1"),
+            new(ClaimTypes.Name, name),
+            new(ClaimTypes.Role, Role.Admin),
+            new(ClaimTypes.Role, Role.Zamestnanec),
+            new(ClaimTypes.Role, Role.Zakaznik)
         };
 
         var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
         var principal = new ClaimsPrincipal(identity);
 
         context.SignInAsync(
-            CookieAuthenticationDefaults.AuthenticationScheme, principal, new AuthenticationProperties { IsPersistent = true }
+            CookieAuthenticationDefaults.AuthenticationScheme, principal,
+            new AuthenticationProperties { IsPersistent = true }
         );
 
         return true;
@@ -75,7 +75,7 @@ public class UserManager
 
         if (claim == null)
             return null;
-        
+
         if (!int.TryParse(claim.Value, out var currentUserId))
             return null;
 
@@ -89,7 +89,7 @@ public class UserManager
         if (currentUserId == null)
             return null;
 
-        return new User { Id = currentUserId.Value, Name = "pepa", Role = "pepa"};
+        return new User { Id = currentUserId.Value, Name = "pepa", Role = "pepa" };
     }
 
     public void ChangeToUser(HttpContext context, int userId)
@@ -97,38 +97,41 @@ public class UserManager
         var name = "arnošt";
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
-            new Claim(ClaimTypes.Name, name),
-            new Claim(ClaimTypes.Role, Role.Zakaznik),
-            new Claim("OriginalUser", GetCurrentUserId(context).ToString() ?? "")
+            new(ClaimTypes.NameIdentifier, userId.ToString()),
+            new(ClaimTypes.Name, name),
+            new(ClaimTypes.Role, Role.Zakaznik),
+            new("OriginalUser", GetCurrentUserId(context).ToString() ?? "")
         };
 
         var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
         var principal = new ClaimsPrincipal(identity);
 
         context.SignInAsync(
-            CookieAuthenticationDefaults.AuthenticationScheme, principal, new AuthenticationProperties { IsPersistent = true }
+            CookieAuthenticationDefaults.AuthenticationScheme, principal,
+            new AuthenticationProperties { IsPersistent = true }
         );
     }
-    
+
     public void ChangeFromUser(HttpContext context)
     {
-        var originalUser = context.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value ?? throw new ArgumentNullException();
+        var originalUser = context.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value ??
+                           throw new ArgumentNullException();
         var name = "pepa";
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.NameIdentifier, originalUser),
-            new Claim(ClaimTypes.Name, name),
-            new Claim(ClaimTypes.Role, Role.Admin),
-            new Claim(ClaimTypes.Role, Role.Zamestnanec),
-            new Claim(ClaimTypes.Role, Role.Zakaznik),
+            new(ClaimTypes.NameIdentifier, originalUser),
+            new(ClaimTypes.Name, name),
+            new(ClaimTypes.Role, Role.Admin),
+            new(ClaimTypes.Role, Role.Zamestnanec),
+            new(ClaimTypes.Role, Role.Zakaznik)
         };
 
         var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
         var principal = new ClaimsPrincipal(identity);
 
         context.SignInAsync(
-            CookieAuthenticationDefaults.AuthenticationScheme, principal, new AuthenticationProperties { IsPersistent = true }
+            CookieAuthenticationDefaults.AuthenticationScheme, principal,
+            new AuthenticationProperties { IsPersistent = true }
         );
     }
 }

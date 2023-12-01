@@ -5,7 +5,6 @@ using app.Repositories;
 using app.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ObjednavkaModel = app.Models.Sprava.ObjednavkaModel;
 using PojisteniModel = app.Models.Sprava.PojisteniModel;
 using PokojModel = app.Models.Sprava.PokojModel;
 using TerminModel = app.Models.Sprava.TerminModel;
@@ -24,15 +23,15 @@ public class ObjednavkyController : Controller
         _converter = converter;
         _objednavkaRepository = objednavkaRepository;
     }
-    
+
     [Route("{id}")]
     public IActionResult ById(string id)
     {
         var model = _objednavkaRepository.Get(_converter.Decode(id));
-        
+
         return View(model);
     }
-    
+
     [HttpPost]
     [Route("")]
     public IActionResult ObjednavkaPost([FromForm] NakupModel nakup)
@@ -69,26 +68,26 @@ public class ObjednavkyController : Controller
 
         var result = _objednavkaRepository.AddOrEdit(model);
 
-        return RedirectToAction("ById", routeValues: new { id = _converter.Encode(result) });
+        return RedirectToAction("ById", new { id = _converter.Encode(result) });
     }
-    
+
     [HttpPost]
     [Route("{id}/platba")]
     public IActionResult PlatbaPost(string id, [FromForm] ObjednavkaPlatbaModel model)
     {
         var platbaId = _converter.Decode(model.PlatbaId);
-        
+
         _objednavkaRepository.ZaplatObjednavku(platbaId, model.CisloKarty);
-        
-        return RedirectToAction("ById", routeValues: new { id });
+
+        return RedirectToAction("ById", new { id });
     }
-    
+
     [HttpPost]
     [Route("{id}/smazat")]
     public IActionResult ObjednavkaDelete(string id)
     {
         _objednavkaRepository.Delete(_converter.Decode(id));
-        
+
         return RedirectToAction("Profil", "Profil");
     }
 }

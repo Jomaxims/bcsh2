@@ -8,9 +8,9 @@ namespace app.Repositories;
 
 public class UbytovaniRepository : BaseRepository
 {
-    private readonly GenericDao<Ubytovani> _ubytovaniDao;
     private readonly AdresaRepository _adresaRepository;
     private readonly ObrazekUbytovaniRepository _obrazekUbytovaniRepository;
+    private readonly GenericDao<Ubytovani> _ubytovaniDao;
 
     public UbytovaniRepository(
         ILogger<UbytovaniRepository> logger,
@@ -41,11 +41,9 @@ public class UbytovaniRepository : BaseRepository
             var result = _ubytovaniDao.AddOrEdit(dto);
 
             result.IsOkOrThrow();
-            
+
             foreach (var obrazekUbytovani in model.ObrazkyUbytovani)
-            {
                 _obrazekUbytovaniRepository.AddOrEdit(obrazekUbytovani, result.Id);
-            }
 
             UnitOfWork.Commit();
 
@@ -60,7 +58,30 @@ public class UbytovaniRepository : BaseRepository
         }
     }
 
-    public void Delete(int id) => Delete(_ubytovaniDao, id);
+    public void Delete(int id)
+    {
+        UnitOfWork.BeginTransaction();
+
+        try
+        {
+            var obrazkyUbytovaniIds = _obrazekUbytovaniRepository.GetObrazkyUbytovaniIdsByUbytovani(id);
+            var adresaId = DecodeId(Get(id).Adresa.AdresaId)!.Value;
+
+            foreach (var obrazkyUbytovaniId in obrazkyUbytovaniIds)
+                _obrazekUbytovaniRepository.Delete(obrazkyUbytovaniId);
+
+            Delete(_ubytovaniDao, id);
+
+            _adresaRepository.Delete(adresaId);
+        }
+        catch (Exception e)
+        {
+            UnitOfWork.Rollback();
+
+            Logger.Log(LogLevel.Error, "{}", e);
+            throw new DatabaseException("Položku se nepodařilo přidat/upravit", e);
+        }
+    }
 
     public UbytovaniModel Get(int id)
     {
@@ -75,33 +96,30 @@ public class UbytovaniRepository : BaseRepository
 
         var obrazkyUbytovani = new List<ObrazkyUbytovaniModel>();
         var model = UnitOfWork.Connection
-            .Query<UbytovaniModel, AdresaModel, StatModel, ObrazkyUbytovaniModel?, UbytovaniModel>(sql,
-                (UbytovaniModel ubytovani, AdresaModel adresa, StatModel stat,
-                    ObrazkyUbytovaniModel? obrazekUbytovani) =>
-        {
-            ubytovani.UbytovaniId = EncodeId(ubytovani.UbytovaniId);
-
-            adresa.AdresaId = EncodeId(adresa.AdresaId);
-            ubytovani.Adresa = adresa;
-
-            stat.StatId = EncodeId(stat.StatId);
-            ubytovani.Adresa.Stat = stat;
-
-            if (obrazekUbytovani != null)
-            {
-                obrazkyUbytovani.Add(new ObrazkyUbytovaniModel
+            .Query<UbytovaniModel, AdresaModel, StatModel, ObrazkyUbytovaniModel, UbytovaniModel>(sql,
+                (ubytovani, adresa, stat, obrazekUbytovani) =>
                 {
-                    ObrazkyUbytovaniId = EncodeId(obrazekUbytovani.ObrazkyUbytovaniId),
-                    Nazev = obrazekUbytovani.Nazev
-                });
-            }
+                    ubytovani.UbytovaniId = EncodeId(ubytovani.UbytovaniId);
 
-            return ubytovani;
-        }, new { id },
+                    adresa.AdresaId = EncodeId(adresa.AdresaId);
+                    ubytovani.Adresa = adresa;
+
+                    stat.StatId = EncodeId(stat.StatId);
+                    ubytovani.Adresa.Stat = stat;
+
+                    if (obrazekUbytovani != null)
+                        obrazkyUbytovani.Add(new ObrazkyUbytovaniModel
+                        {
+                            ObrazkyUbytovaniId = EncodeId(obrazekUbytovani.ObrazkyUbytovaniId),
+                            Nazev = obrazekUbytovani.Nazev
+                        });
+
+                    return ubytovani;
+                }, new { id },
                 splitOn: "adresa_id,stat_id,obrazky_ubytovani_id").First();
 
         model.ObrazkyUbytovani = obrazkyUbytovani.ToArray();
-        
+
         return model;
     }
 
@@ -154,7 +172,7 @@ public class UbytovaniRepository : BaseRepository
                     {
                         Nazev = row.STAT_NAZEV
                     }
-                },
+                }
             };
 
             return ubytovani;
@@ -164,12 +182,15 @@ public class UbytovaniRepository : BaseRepository
         return model;
     }
 
-    private Ubytovani MapToDto(UbytovaniModel model, int adresaId) => new()
+    private Ubytovani MapToDto(UbytovaniModel model, int adresaId)
     {
-        UbytovaniId = DecodeId(model.UbytovaniId),
-        Nazev = model.Nazev,
-        Popis = model.Popis,
-        PocetHvezd = model.PocetHvezd,
-        AdresaId = adresaId
-    };
+        return new Ubytovani
+        {
+            UbytovaniId = DecodeId(model.UbytovaniId),
+            Nazev = model.Nazev,
+            Popis = model.Popis,
+            PocetHvezd = model.PocetHvezd,
+            AdresaId = adresaId
+        };
+    }
 }

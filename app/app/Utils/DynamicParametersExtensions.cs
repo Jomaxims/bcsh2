@@ -11,10 +11,10 @@ public static class DynamicParametersExtensions
     public static DynamicParameters AddResult(this DynamicParameters parameters)
     {
         parameters.Add("o_result", dbType: DbType.String, direction: ParameterDirection.Output, size: 10000);
-        
+
         return parameters;
     }
-    
+
     public static DbResult GetResult(this DynamicParameters parameters)
     {
         var json = parameters.Get<string>("o_result");
@@ -22,11 +22,11 @@ public static class DynamicParametersExtensions
         const string msgName = "\"message\": \"";
         var startOfMessage = json.IndexOf(msgName, StringComparison.Ordinal) + msgName.Length;
         var strBuilder = new StringBuilder();
-        
+
         strBuilder.Append(json[..startOfMessage]);
         strBuilder.Append(json[startOfMessage..^3].Replace("\"", "\\\""));
         strBuilder.Append(json[^3..]);
-        
+
         return JsonSerializer.Deserialize<DbResult>(strBuilder.ToString())!.AddId(id);
     }
 

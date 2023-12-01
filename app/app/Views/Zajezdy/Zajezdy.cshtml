@@ -1,10 +1,10 @@
 ﻿@using app.ViewComponents
-@model IEnumerable<app.Models.ZajezdNahledModel>
+@model IEnumerable<ZajezdNahledModel>
 
 @{
     ViewBag.Title = "Zajezdy";
     var today = DateOnly.FromDateTime(DateTime.Now);
-    
+
     int strana = ViewBag.Strana;
     int maxStrana = ViewBag.MaxStrana;
     var zeme = Context.Request.Query["zeme"].ToString();

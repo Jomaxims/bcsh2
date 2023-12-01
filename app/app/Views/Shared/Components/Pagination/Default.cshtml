@@ -1,6 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Http.Extensions
 @using app.Utils
-
 @model dynamic
 
 @{
@@ -9,7 +8,7 @@
 
 <ul class="pagination justify-content-center flex-wrap">
     <li class="page-item @(Model.Strana == 1 || Model.Strana > Model.MaxStrana ? "disabled" : "")">
-        <a class="page-link fw-bold" href="@uri.SetQueryVal("strana", (int)Model.Strana-1)">Předešlá</a>
+        <a class="page-link fw-bold" href="@uri.SetQueryVal("strana", (int)Model.Strana - 1)">Předešlá</a>
     </li>
     @for (var i = 1; i <= Model.MaxStrana; i++)
     {
@@ -18,6 +17,6 @@
         </li>
     }
     <li class="page-item @(Model.Strana >= Model.MaxStrana ? "disabled" : "")">
-        <a class="page-link fw-bold" href="@uri.SetQueryVal("strana", (int)Model.Strana+1)">Další</a>
+        <a class="page-link fw-bold" href="@uri.SetQueryVal("strana", (int)Model.Strana + 1)">Další</a>
     </li>
 </ul>

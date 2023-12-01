@@ -8,13 +8,14 @@ namespace app.Repositories;
 
 public class ZakaznikRepository : BaseRepository
 {
-    private readonly GenericDao<Zakaznik> _zakaznikDao;
-    private readonly GenericDao<PrihlasovaciUdaje> _prihlasovaciUdajeDao;
-    private readonly PrihlasovaciUdajeRepository _prihlasovaciUdajeRepository;
-    private readonly OsobaRepository _osobaRepository;
     private readonly AdresaRepository _adresaRepository;
     private readonly KontaktRepository _kontaktRepository;
+    private readonly ObjednavkaRepository _objednavkaRepository;
+    private readonly OsobaRepository _osobaRepository;
+    private readonly GenericDao<PrihlasovaciUdaje> _prihlasovaciUdajeDao;
+    private readonly PrihlasovaciUdajeRepository _prihlasovaciUdajeRepository;
     private readonly StatRepository _statRepository;
+    private readonly GenericDao<Zakaznik> _zakaznikDao;
 
     public ZakaznikRepository(
         ILogger<ZakaznikRepository> logger,
@@ -26,7 +27,8 @@ public class ZakaznikRepository : BaseRepository
         OsobaRepository osobaRepository,
         AdresaRepository adresaRepository,
         KontaktRepository kontaktRepository,
-        StatRepository statRepository
+        StatRepository statRepository,
+        ObjednavkaRepository objednavkaRepository
     ) : base(logger, unitOfWork, idConverter)
     {
         _zakaznikDao = zakaznikDao;
@@ -36,6 +38,7 @@ public class ZakaznikRepository : BaseRepository
         _adresaRepository = adresaRepository;
         _kontaktRepository = kontaktRepository;
         _statRepository = statRepository;
+        _objednavkaRepository = objednavkaRepository;
     }
 
     public int AddOrEdit(ZakaznikModel model)
@@ -87,7 +90,35 @@ public class ZakaznikRepository : BaseRepository
         }).IsOkOrThrow();
     }
 
-    public void Delete(int id) => Delete(_zakaznikDao, id);
+    public void Delete(int id)
+    {
+        UnitOfWork.BeginTransaction();
+
+        try
+        {
+            var zakaznik = Get(id);
+            var objednavky = _objednavkaRepository.GetObjednavkyZakaznika(id);
+
+            foreach (var objednavka in objednavky)
+                _objednavkaRepository.Delete(DecodeIdOrDefault(objednavka.ObjednavkaId));
+
+            Delete(_zakaznikDao, id);
+
+            _prihlasovaciUdajeRepository.Delete(DecodeIdOrDefault(zakaznik.PrihlasovaciUdaje.PrihlasovaciUdajeId));
+            _osobaRepository.Delete(DecodeIdOrDefault(zakaznik.Osoba.OsobaId));
+            _adresaRepository.Delete(DecodeIdOrDefault(zakaznik.Adresa.AdresaId));
+            _kontaktRepository.Delete(DecodeIdOrDefault(zakaznik.Kontakt.KontaktId));
+
+            UnitOfWork.Commit();
+        }
+        catch (Exception e)
+        {
+            UnitOfWork.Rollback();
+
+            Logger.Log(LogLevel.Error, "{}", e);
+            throw new DatabaseException("Položku se nepodařilo smazat", e);
+        }
+    }
 
     public ZakaznikModel Get(int id)
     {
@@ -221,8 +252,9 @@ public class ZakaznikRepository : BaseRepository
         return model;
     }
 
-    private Zakaznik MapToDto(ZakaznikModel model, int prihlasovaciUdajeId, int osobaId, int kontaktId, int adresaId) =>
-        new()
+    private Zakaznik MapToDto(ZakaznikModel model, int prihlasovaciUdajeId, int osobaId, int kontaktId, int adresaId)
+    {
+        return new Zakaznik
         {
             ZakaznikId = DecodeId(model.ZakaznikId),
             OsobaId = osobaId,
@@ -230,6 +262,7 @@ public class ZakaznikRepository : BaseRepository
             KontaktId = kontaktId,
             AdresaId = adresaId
         };
+    }
 
     private ZakaznikModel MapRowToModel(ZakaznikModel zakaznik, PrihlasovaciUdajeModel prihlasovaciUdaje,
         KontaktModel kontakt, AdresaModel adresa, OsobaModel osoba)

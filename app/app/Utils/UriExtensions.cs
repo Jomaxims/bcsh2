@@ -9,6 +9,6 @@ public static class UriExtensions
     {
         var nvc = HttpUtility.ParseQueryString(uri.Query);
         nvc[name] = (value ?? "").ToString();
-        return new UriBuilder(uri) {Query = nvc.ToString()}.Uri;
+        return new UriBuilder(uri) { Query = nvc.ToString() }.Uri;
     }
 }

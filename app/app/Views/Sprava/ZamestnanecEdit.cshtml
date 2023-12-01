@@ -22,12 +22,12 @@
                     @if (Model != null)
                     {
                         <label asp-for="PrihlasovaciUdaje.Heslo" class="control-label">Nové heslo</label>
-                        <input asp-for="PrihlasovaciUdaje.Heslo" class="form-control" data-val="false" />
+                        <input asp-for="PrihlasovaciUdaje.Heslo" class="form-control" data-val="false"/>
                     }
                     else
                     {
                         <label asp-for="PrihlasovaciUdaje.Heslo" class="control-label"></label>
-                        <input asp-for="PrihlasovaciUdaje.Heslo" class="form-control" />
+                        <input asp-for="PrihlasovaciUdaje.Heslo" class="form-control"/>
                     }
                     <span asp-validation-for="PrihlasovaciUdaje.Heslo" class="text-danger"></span>
                 </div>

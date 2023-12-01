@@ -20,24 +20,37 @@ public class StatRepository : BaseRepository
         _statDao = statDao;
     }
 
-    public int AddOrEdit(StatModel model) => AddOrEdit(_statDao, model, MapToDto);
+    public int AddOrEdit(StatModel model)
+    {
+        return AddOrEdit(_statDao, model, MapToDto);
+    }
 
-    public void Delete(int id) => Delete(_statDao, id);
+    public void Delete(int id)
+    {
+        Delete(_statDao, id);
+    }
 
-    public StatModel Get(int id) => Get(_statDao, id, MapToModel);
+    public StatModel Get(int id)
+    {
+        return Get(_statDao, id, MapToModel);
+    }
 
-    public int GetCzId() => UnitOfWork.Connection.ExecuteScalar<int>("select stat_id from stat where ZKRATKA = 'CZE'");
-    
-    public IEnumerable<StatModel> GetAll(out int celkovyPocetRadku, string zkratka = "", string nazev = "", int start = 0, int pocetRadku = 0)
+    public int GetCzId()
+    {
+        return UnitOfWork.Connection.ExecuteScalar<int>("select stat_id from stat where ZKRATKA = 'CZE'");
+    }
+
+    public IEnumerable<StatModel> GetAll(out int celkovyPocetRadku, string zkratka = "", string nazev = "",
+        int start = 0, int pocetRadku = 0)
     {
         var _celkovyPocetRadku = -1;
         var sql = $"""
-                            select stat_id, zkratka, nazev, count(*) over () as pocet_radku
-                            from stat
-                            /**where**/
-                            order by zkratka
-                            offset {start} rows fetch next {pocetRadku} rows only
-                        """;
+                       select stat_id, zkratka, nazev, count(*) over () as pocet_radku
+                       from stat
+                       /**where**/
+                       order by zkratka
+                       offset {start} rows fetch next {pocetRadku} rows only
+                   """;
         var builder = new SqlBuilder();
         var template = builder.AddTemplate(sql);
         if (zkratka != "")
@@ -51,26 +64,32 @@ public class StatRepository : BaseRepository
                 _celkovyPocetRadku = Convert.ToInt32(pocet_radku);
 
             stat.StatId = EncodeId(stat.StatId);
-            
+
             return stat;
         }, template.Parameters, splitOn: "pocet_radku");
 
         celkovyPocetRadku = _celkovyPocetRadku;
-        
+
         return model;
     }
 
-    private StatModel MapToModel(Stat dto) => new()
+    private StatModel MapToModel(Stat dto)
     {
-        StatId = EncodeId(dto.StatId),
-        Nazev = dto.Nazev,
-        Zkratka = dto.Zkratka
-    };
-    
-    private Stat MapToDto(StatModel model) => new()
+        return new StatModel
+        {
+            StatId = EncodeId(dto.StatId),
+            Nazev = dto.Nazev,
+            Zkratka = dto.Zkratka
+        };
+    }
+
+    private Stat MapToDto(StatModel model)
     {
-        StatId = DecodeId(model.StatId),
-        Nazev = model.Nazev,
-        Zkratka = model.Zkratka
-    };
+        return new Stat
+        {
+            StatId = DecodeId(model.StatId),
+            Nazev = model.Nazev,
+            Zkratka = model.Zkratka
+        };
+    }
 }

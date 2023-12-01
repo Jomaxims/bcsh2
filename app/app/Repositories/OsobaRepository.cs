@@ -19,27 +19,45 @@ public class OsobaRepository : BaseRepository
         _osobaDao = osobaDao;
     }
 
-    public int AddOrEdit(OsobaModel model) => AddOrEdit(_osobaDao, model, MapToDto);
-
-    public void Delete(int id) => Delete(_osobaDao, id);
-
-    public OsobaModel Get(int id) => Get(_osobaDao, id, MapToModel);
-
-    public IEnumerable<OsobaModel> GetAll() => GetAll(_osobaDao, MapToModel);
-
-    private OsobaModel MapToModel(Osoba dto) => new()
+    public int AddOrEdit(OsobaModel model)
     {
-        OsobaId = EncodeId(dto.OsobaId),
-        Jmeno = dto.Jmeno,
-        Prijmeni = dto.Prijmeni,
-        DatumNarozeni = dto.DatumNarozeni
-    };
-    
-    private Osoba MapToDto(OsobaModel model) => new()
+        return AddOrEdit(_osobaDao, model, MapToDto);
+    }
+
+    public void Delete(int id)
     {
-        OsobaId = DecodeId(model.OsobaId),
-        Jmeno = model.Jmeno,
-        Prijmeni = model.Prijmeni,
-        DatumNarozeni = model.DatumNarozeni
-    };
+        Delete(_osobaDao, id);
+    }
+
+    public OsobaModel Get(int id)
+    {
+        return Get(_osobaDao, id, MapToModel);
+    }
+
+    public IEnumerable<OsobaModel> GetAll()
+    {
+        return GetAll(_osobaDao, MapToModel);
+    }
+
+    private OsobaModel MapToModel(Osoba dto)
+    {
+        return new OsobaModel
+        {
+            OsobaId = EncodeId(dto.OsobaId),
+            Jmeno = dto.Jmeno,
+            Prijmeni = dto.Prijmeni,
+            DatumNarozeni = dto.DatumNarozeni
+        };
+    }
+
+    private Osoba MapToDto(OsobaModel model)
+    {
+        return new Osoba
+        {
+            OsobaId = DecodeId(model.OsobaId),
+            Jmeno = model.Jmeno,
+            Prijmeni = model.Prijmeni,
+            DatumNarozeni = model.DatumNarozeni
+        };
+    }
 }

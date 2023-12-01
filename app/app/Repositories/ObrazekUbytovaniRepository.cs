@@ -14,7 +14,6 @@ namespace app.Repositories;
 public class ObrazekUbytovaniRepository : BaseRepository
 {
     private readonly GenericDao<ObrazkyUbytovani> _obrazekUbytovaniDao;
-    public bool TransactionsManaged { get; set; } = false;
 
     public ObrazekUbytovaniRepository(
         ILogger<ObrazekUbytovaniRepository> logger,
@@ -26,21 +25,21 @@ public class ObrazekUbytovaniRepository : BaseRepository
         _obrazekUbytovaniDao = obrazekUbytovaniDao;
     }
 
+    public bool TransactionsManaged { get; set; } = false;
+
     public int AddOrEdit(ObrazkyUbytovaniModel model, int ubytovaniId)
     {
-        if (!TransactionsManaged)
-        {
-            UnitOfWork.BeginTransaction();
-        }
-        
+        if (!TransactionsManaged) UnitOfWork.BeginTransaction();
+
         try
         {
             var command = new OracleCommand();
             command.CommandText = "pck_obrazky_ubytovani.manage_obrazky_ubytovani";
             command.Connection = (OracleConnection)UnitOfWork.Connection;
             command.CommandType = CommandType.StoredProcedure;
-            
-            var param = command.Parameters.Add("p_obrazky_ubytovani_id", OracleDbType.Int32, ParameterDirection.InputOutput);
+
+            var param = command.Parameters.Add("p_obrazky_ubytovani_id", OracleDbType.Int32,
+                ParameterDirection.InputOutput);
             param = command.Parameters.Add("p_obrazek", OracleDbType.Blob, ParameterDirection.Input);
             param.Value = model.Obrazek;
             param = command.Parameters.Add("p_nazev", OracleDbType.Varchar2, ParameterDirection.Input);
@@ -48,7 +47,7 @@ public class ObrazekUbytovaniRepository : BaseRepository
             param = command.Parameters.Add("p_ubytovani_id", OracleDbType.Int32, ParameterDirection.Input);
             param.Value = ubytovaniId;
             param = command.Parameters.Add("o_result", OracleDbType.Clob, ParameterDirection.Output);
-            
+
             command.ExecuteNonQuery();
 
             var json = ((OracleClob)command.Parameters["o_result"].Value!).Value;
@@ -56,34 +55,31 @@ public class ObrazekUbytovaniRepository : BaseRepository
             const string msgName = "\"message\": \"";
             var startOfMessage = json.IndexOf(msgName, StringComparison.Ordinal) + msgName.Length;
             var strBuilder = new StringBuilder();
-        
+
             strBuilder.Append(json[..startOfMessage]);
             strBuilder.Append(json[startOfMessage..^3].Replace("\"", "\\\""));
             strBuilder.Append(json[^3..]);
-        
+
             var result = JsonSerializer.Deserialize<DbResult>(strBuilder.ToString())!.AddId(id);
-            
+
             result.IsOkOrThrow();
 
-            if (!TransactionsManaged)
-            {
-                UnitOfWork.Commit();
-            }
+            if (!TransactionsManaged) UnitOfWork.Commit();
             return result.Id;
         }
         catch (Exception e)
         {
-            if (!TransactionsManaged)
-            {
-                UnitOfWork.Rollback();
-            }
-            
+            if (!TransactionsManaged) UnitOfWork.Rollback();
+
             Logger.Log(LogLevel.Error, "{}", e);
             throw new DatabaseException("Položku se nepodařilo přidat/upravit", e);
         }
     }
 
-    public void Delete(int id) => Delete(_obrazekUbytovaniDao, id);
+    public void Delete(int id)
+    {
+        Delete(_obrazekUbytovaniDao, id);
+    }
 
     public ObrazkyUbytovaniModel Get(int id)
     {
@@ -97,18 +93,36 @@ public class ObrazekUbytovaniRepository : BaseRepository
         return MapToModel(dto);
     }
 
-    private ObrazkyUbytovani MapToDto(ObrazkyUbytovaniModel model, int ubytovaniId) => new()
+    public IEnumerable<int> GetObrazkyUbytovaniIdsByUbytovani(int ubytovaniId)
     {
-        ObrazkyUbytovaniId = DecodeId(model.ObrazkyUbytovaniId),
-        Obrazek = model.Obrazek,
-        Nazev = model.Nazev,
-        UbytovaniId = ubytovaniId
-    };
+        const string sql = """
+                             select OBRAZKY_UBYTOVANI_ID from OBRAZKY_UBYTOVANI
+                                  where UBYTOVANI_ID = :ubytovaniId
+                           """;
 
-    private ObrazkyUbytovaniModel MapToModel(ObrazkyUbytovani dto) => new()
+        var dto = UnitOfWork.Connection.Query<int>(sql, new { ubytovaniId });
+
+        return dto;
+    }
+
+    private ObrazkyUbytovani MapToDto(ObrazkyUbytovaniModel model, int ubytovaniId)
     {
-        ObrazkyUbytovaniId = EncodeId(dto.ObrazkyUbytovaniId),
-        Nazev = dto.Nazev,
-        Obrazek = dto.Obrazek
-    };
+        return new ObrazkyUbytovani
+        {
+            ObrazkyUbytovaniId = DecodeId(model.ObrazkyUbytovaniId),
+            Obrazek = model.Obrazek,
+            Nazev = model.Nazev,
+            UbytovaniId = ubytovaniId
+        };
+    }
+
+    private ObrazkyUbytovaniModel MapToModel(ObrazkyUbytovani dto)
+    {
+        return new ObrazkyUbytovaniModel
+        {
+            ObrazkyUbytovaniId = EncodeId(dto.ObrazkyUbytovaniId),
+            Nazev = dto.Nazev,
+            Obrazek = dto.Obrazek
+        };
+    }
 }

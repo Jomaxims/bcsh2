@@ -1,9 +1,9 @@
-﻿using app.Models.Sprava;
+﻿using app.Managers;
+using app.Models.Sprava;
 using app.Repositories;
 using app.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Role = app.Managers.Role;
 
 namespace app.Controllers;
 
@@ -12,24 +12,24 @@ namespace app.Controllers;
 public class SpravaController : Controller
 {
     private const int PolozekNaStranku = Constants.ResultPerPage;
+    private readonly IIdConverter _converter;
+    private readonly DopravaRepository _dopravaRepository;
 
     private readonly ILogger<HomeController> _logger;
-    private readonly IIdConverter _converter;
-    private readonly ZamestnanecRepository _zamestnanecRepository;
-    private readonly StatRepository _statRepository;
-    private readonly PojisteniRepository _pojisteniRepository;
-    private readonly DopravaRepository _dopravaRepository;
-    private readonly PokojRepository _pokojRepository;
-    private readonly StravaRepository _stravaRepository;
-    private readonly RoleRepository _roleRepository;
-    private readonly ZakaznikRepository _zakaznikRepository;
-    private readonly UbytovaniRepository _ubytovaniRepository;
-    private readonly ObrazekUbytovaniRepository _obrazekUbytovaniRepository;
     private readonly ObjednavkaRepository _objednavkaRepository;
-    private readonly ZajezdRepository _zajezdRepository;
+    private readonly ObrazekUbytovaniRepository _obrazekUbytovaniRepository;
+    private readonly PojisteniRepository _pojisteniRepository;
+    private readonly PokojRepository _pokojRepository;
+    private readonly RoleRepository _roleRepository;
+    private readonly StatRepository _statRepository;
+    private readonly StravaRepository _stravaRepository;
 
     private readonly IDictionary<string, string> _typyPolozek = new SortedDictionary<string, string>();
     private readonly IDictionary<string, string> _typyPolozekAdmin = new SortedDictionary<string, string>();
+    private readonly UbytovaniRepository _ubytovaniRepository;
+    private readonly ZajezdRepository _zajezdRepository;
+    private readonly ZakaznikRepository _zakaznikRepository;
+    private readonly ZamestnanecRepository _zamestnanecRepository;
 
     public SpravaController(ILogger<HomeController> logger, IIdConverter converter,
         ZamestnanecRepository zamestnanecRepository,
@@ -85,9 +85,7 @@ public class SpravaController : Controller
     public IActionResult Polozky()
     {
         if (User.IsInRole(Role.Admin))
-        {
             return View(_typyPolozek.Union(_typyPolozekAdmin).ToDictionary(k => k.Key, v => v.Value));
-        }
 
         return View(_typyPolozek);
     }
@@ -96,9 +94,6 @@ public class SpravaController : Controller
     [Route("{typPolozky}/{id}/delete")]
     public IActionResult PolozkyDelete(string typPolozky, string id)
     {
-        if (!_typyPolozek.Values.Contains(typPolozky))
-            return new RedirectResult($"~/sprava/{typPolozky}");
-
         var actualId = _converter.Decode(id);
 
         switch (typPolozky)
@@ -106,23 +101,32 @@ public class SpravaController : Controller
             case "stat":
                 _statRepository.Delete(actualId);
                 break;
+            case "ubytovani":
+                _ubytovaniRepository.Delete(actualId);
+                break;
             case "pojisteni":
                 _pojisteniRepository.Delete(actualId);
                 break;
             case "doprava":
                 _dopravaRepository.Delete(actualId);
                 break;
+            case "strava":
+                _stravaRepository.Delete(actualId);
+                break;
             case "pokoj":
                 _pokojRepository.Delete(actualId);
                 break;
-            case "strava":
-                _stravaRepository.Delete(actualId);
+            case "zajezd":
+                _zajezdRepository.Delete(actualId);
                 break;
             case "zamestnanec":
                 _zamestnanecRepository.Delete(actualId);
                 break;
             case "zakaznik":
                 _zakaznikRepository.Delete(actualId);
+                break;
+            case "objednavka":
+                _objednavkaRepository.Delete(actualId);
                 break;
             default:
                 throw new DatabaseException("Typ položky neexistuje");
@@ -162,10 +166,7 @@ public class SpravaController : Controller
     [Route("zakaznik/{id}")]
     public IActionResult ZakaznikEdit(string id)
     {
-        if (id == "0")
-        {
-            return View(null);
-        }
+        if (id == "0") return View(null);
 
         var model = _zakaznikRepository.Get(_converter.Decode(id));
 
@@ -206,10 +207,7 @@ public class SpravaController : Controller
     [Route("stat/{id}")]
     public IActionResult StatEdit(string id)
     {
-        if (id == "0")
-        {
-            return View(null);
-        }
+        if (id == "0") return View(null);
 
         var model = _statRepository.Get(_converter.Decode(id));
 
@@ -242,10 +240,7 @@ public class SpravaController : Controller
     [Route("pojisteni/{id}")]
     public IActionResult PojisteniEdit(string id)
     {
-        if (id == "0")
-        {
-            return View(null);
-        }
+        if (id == "0") return View(null);
 
         var model = _pojisteniRepository.Get(_converter.Decode(id));
 
@@ -278,10 +273,7 @@ public class SpravaController : Controller
     [Route("doprava/{id}")]
     public IActionResult DopravaEdit(string id)
     {
-        if (id == "0")
-        {
-            return View(null);
-        }
+        if (id == "0") return View(null);
 
         var model = _dopravaRepository.Get(_converter.Decode(id));
 
@@ -314,10 +306,7 @@ public class SpravaController : Controller
     [Route("pokoj/{id}")]
     public IActionResult PokojEdit(string id)
     {
-        if (id == "0")
-        {
-            return View(null);
-        }
+        if (id == "0") return View(null);
 
         var model = _pokojRepository.Get(_converter.Decode(id));
 
@@ -350,10 +339,7 @@ public class SpravaController : Controller
     [Route("strava/{id}")]
     public IActionResult StravaEdit(string id)
     {
-        if (id == "0")
-        {
-            return View(null);
-        }
+        if (id == "0") return View(null);
 
         var model = _stravaRepository.Get(_converter.Decode(id));
 
@@ -401,10 +387,7 @@ public class SpravaController : Controller
     {
         ViewBag.Staty = _statRepository.GetAll(out _, pocetRadku: int.MaxValue);
 
-        if (id == "0")
-        {
-            return View(null);
-        }
+        if (id == "0") return View(null);
 
         var model = _ubytovaniRepository.Get(_converter.Decode(id));
 
@@ -436,9 +419,7 @@ public class SpravaController : Controller
 
         if (idsToDelete != null)
             foreach (var id in idsToDelete)
-            {
                 _obrazekUbytovaniRepository.Delete(id);
-            }
 
         return RedirectToAction("UbytovaniEdit", new { id = _converter.Encode(result) });
     }
@@ -494,10 +475,7 @@ public class SpravaController : Controller
         ViewBag.Stravy = _stravaRepository.GetAll();
         ViewBag.Dopravy = _dopravaRepository.GetAll();
 
-        if (id == "0")
-        {
-            return View(null);
-        }
+        if (id == "0") return View(null);
 
         var model = _zajezdRepository.Get(_converter.Decode(id));
 
@@ -513,19 +491,13 @@ public class SpravaController : Controller
         foreach (var termin in model.Terminy ?? Array.Empty<TerminModel>())
         {
             if (termin.Od > termin.Do)
-            {
                 chyby.Add(
                     $"Termín od {termin.Od.ToString("o")} musí být menší než termín do {termin.Od.ToString("o")}.");
-            }
 
             foreach (var pokojTerminu in termin.PokojeTerminu ?? Array.Empty<PokojTerminu>())
-            {
                 if (pokojTerminu.PocetObsazenychPokoju > pokojTerminu.CelkovyPocetPokoju)
-                {
                     chyby.Add(
                         $"Počet obsazených pokojů {pokojTerminu.PocetObsazenychPokoju} musí být menší než počet celkových pokojů {pokojTerminu.CelkovyPocetPokoju}.");
-                }
-            }
         }
 
         if (chyby.Count > 0)

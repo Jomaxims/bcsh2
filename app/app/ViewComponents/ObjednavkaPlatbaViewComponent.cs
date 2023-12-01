@@ -14,7 +14,7 @@ public class ObjednavkaPlatbaViewComponent : ViewComponent
             Cvv = "",
             PlatbaId = platbaId
         };
-        
+
         return View(model);
     }
 }

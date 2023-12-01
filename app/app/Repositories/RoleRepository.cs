@@ -1,10 +1,7 @@
-﻿using System.Transactions;
-using app.DAL;
+﻿using app.DAL;
 using app.DAL.Models;
-using app.Models;
 using app.Models.Sprava;
 using app.Utils;
-using Dapper;
 
 namespace app.Repositories;
 
@@ -22,19 +19,31 @@ public class RoleRepository : BaseRepository
         _roleDao = roleDao;
     }
 
-    public RoleModel Get(int id) => Get(_roleDao, id, MapToModel);
-
-    public IEnumerable<RoleModel> GetAll() => GetAll(_roleDao, MapToModel);
-
-    private RoleModel MapToModel(Role dto) => new()
+    public RoleModel Get(int id)
     {
-        RoleId = EncodeId(dto.RoleId),
-        Nazev = dto.Nazev
-    };
+        return Get(_roleDao, id, MapToModel);
+    }
 
-    private Role MapToDto(RoleModel model) => new()
+    public IEnumerable<RoleModel> GetAll()
     {
-        RoleId = DecodeId(model.RoleId),
-        Nazev = model.Nazev
-    };
+        return GetAll(_roleDao, MapToModel);
+    }
+
+    private RoleModel MapToModel(Role dto)
+    {
+        return new RoleModel
+        {
+            RoleId = EncodeId(dto.RoleId),
+            Nazev = dto.Nazev
+        };
+    }
+
+    private Role MapToDto(RoleModel model)
+    {
+        return new Role
+        {
+            RoleId = DecodeId(model.RoleId),
+            Nazev = model.Nazev
+        };
+    }
 }

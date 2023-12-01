@@ -3,7 +3,7 @@
 
 @{
     var lokalita = $"{Model.Ubytovani.Adresa.Stat?.Nazev} - {Model.Ubytovani.Adresa.Mesto}";
-    
+
     ViewBag.Title = $"{Model.Ubytovani.Nazev} - {lokalita}";
     ViewBag.Terminy = Model.Terminy ?? Array.Empty<TerminModel>();
     ViewBag.CenaZaOsobu = Model.CenaZaOsobu;
@@ -15,7 +15,7 @@
     else
     {
         ViewBag.CenaPredSlevou = ViewBag.CenaZaOsobu;
-        ViewBag.CenaZaOsobu = Math.Floor(Model.CenaZaOsobu*(1-Model.SlevaProcent.Value/100.0));
+        ViewBag.CenaZaOsobu = Math.Floor(Model.CenaZaOsobu * (1 - Model.SlevaProcent.Value / 100.0));
     }
 
     var length = Model.Ubytovani.ObrazkyUbytovani.Length;

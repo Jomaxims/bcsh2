@@ -1,20 +1,16 @@
-﻿using System.Runtime.Serialization;
-using app.DAL;
+﻿using app.DAL;
 using app.DAL.Models;
 using app.Utils;
 
 namespace app.Repositories;
 
 public delegate TDto MapModelToDto<out TDto, in TModel>(TModel model) where TDto : IDbModel;
+
 public delegate TModel MapDtoToModel<out TModel, in TDto>(TDto dto) where TDto : IDbModel;
 
 public class DatabaseException : Exception
 {
     public DatabaseException()
-    {
-    }
-
-    protected DatabaseException(SerializationInfo info, StreamingContext context) : base(info, context)
     {
     }
 
@@ -29,9 +25,9 @@ public class DatabaseException : Exception
 
 public abstract class BaseRepository
 {
+    private readonly IIdConverter _idConverter;
     protected readonly ILogger Logger;
     protected readonly IDbUnitOfWork UnitOfWork;
-    private readonly IIdConverter _idConverter;
 
     protected BaseRepository(ILogger logger, IDbUnitOfWork unitOfWork, IIdConverter idConverter)
     {
@@ -44,28 +40,29 @@ public abstract class BaseRepository
     {
         return id == null ? string.Empty : _idConverter.Encode(id.Value);
     }
-    
+
     protected string EncodeId(string id)
     {
         return _idConverter.Encode(id);
     }
-    
+
     protected int? DecodeId(string? id)
     {
         if (string.IsNullOrEmpty(id))
             return null;
-        
+
         var actualId = _idConverter.Decode(id);
 
         return actualId != 0 ? actualId : null;
     }
-    
+
     protected int DecodeIdOrDefault(string id, int defaultId = 0)
     {
         return DecodeId(id) ?? defaultId;
     }
-    
-    protected int AddOrEdit<TDto, TModel>(GenericDao<TDto> dao, TModel model, MapModelToDto<TDto, TModel> mapper) where TDto : IDbModel
+
+    protected int AddOrEdit<TDto, TModel>(GenericDao<TDto> dao, TModel model, MapModelToDto<TDto, TModel> mapper)
+        where TDto : IDbModel
     {
         try
         {
@@ -73,7 +70,7 @@ public abstract class BaseRepository
             var result = dao.AddOrEdit(dto);
 
             result.IsOkOrThrow();
-                
+
             return result.Id;
         }
         catch (Exception e)
@@ -94,11 +91,16 @@ public abstract class BaseRepository
         catch (Exception e)
         {
             Logger.Log(LogLevel.Error, "{}", e);
+            if (e.Message.Contains("ORA-02292"))
+                throw new DatabaseException("Položka je využívána. Pro smazání položky smažte všechny závislé položky",
+                    e);
+
             throw new DatabaseException("Položku se nepodařilo smazat", e);
         }
     }
-    
-    protected TModel Get<TModel, TDto>(GenericDao<TDto> dao, int id, MapDtoToModel<TModel, TDto> mapper) where TDto : IDbModel
+
+    protected TModel Get<TModel, TDto>(GenericDao<TDto> dao, int id, MapDtoToModel<TModel, TDto> mapper)
+        where TDto : IDbModel
     {
         try
         {
@@ -113,7 +115,8 @@ public abstract class BaseRepository
         }
     }
 
-    protected static IEnumerable<TModel> GetAll<TModel, TDto>(GenericDao<TDto> dao, MapDtoToModel<TModel, TDto> mapper) where TDto : IDbModel
+    protected static IEnumerable<TModel> GetAll<TModel, TDto>(GenericDao<TDto> dao, MapDtoToModel<TModel, TDto> mapper)
+        where TDto : IDbModel
     {
         var result = dao.GetAll();
 
