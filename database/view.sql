@@ -22,7 +22,7 @@ BEGIN
         s.stat_id as Stat_id,
         d.nazev as Doprava,
         d.doprava_id,
-        st.nazev as Strava,
+        st.nazev as Strava, 
         st.strava_id,
         z.cena_za_osobu AS Cena_za_osobu_plna,
         ROUND(z.cena_za_osobu - (z.cena_za_osobu * (z.sleva_procent / 100))) AS Cena_za_osobu_sleva,
@@ -161,21 +161,37 @@ FROM ZAMESTNANEC z
 JOIN ROLE r ON r.role_id = z.role_id
 JOIN PRIHLASOVACI_UDAJE pu ON pu.prihlasovaci_udaje_id = z.prihlasovaci_udaje_id
 LEFT JOIN ZAMESTNANEC n ON n.zamestnanec_id = z.nadrizeny_id;
+/
 
-CREATE OR REPLACE VIEW objednavka_view AS
-SELECT
-    o.objednavka_id,
-    t.od, t.do,
-    u.nazev as ubytovani_nazev,
-    p.nazev as pokoj_nazev,
-    os.jmeno, os.prijmeni, os.jmeno || ' ' || os.prijmeni as cele_jmeno,
-    pl.castka, pl.zaplacena
-FROM objednavka o
-join termin t on t.termin_id = o.termin_id
-join zajezd z on z.zajezd_id = t.zajezd_id
-join ubytovani u on u.ubytovani_id = z.ubytovani_id
-join pokoj p on p.pokoj_id = o.pokoj_id
-join zakaznik za on za.zakaznik_id = o.zakaznik_id
-join platba pl on pl.objednavka_id = o.objednavka_id
-join osoba os on os.osoba_id = za.osoba_id
-order by o.objednavka_id;
+CREATE OR REPLACE PROCEDURE get_user_details (
+    cur_out OUT SYS_REFCURSOR
+) IS
+BEGIN
+    OPEN cur_out FOR
+    SELECT 
+        COALESCE(z.zakaznik_id, e.zamestnanec_id) AS uzivatel_id,
+        CASE 
+            WHEN z.zakaznik_id IS NOT NULL THEN o.jmeno
+            ELSE e.jmeno
+        END AS jmeno,
+        CASE 
+            WHEN z.zakaznik_id IS NOT NULL THEN o.prijmeni
+            ELSE e.prijmeni
+        END AS prijmeni,
+        CASE 
+            WHEN z.zakaznik_id IS NOT NULL THEN o.jmeno || ' ' || o.prijmeni
+            ELSE e.jmeno || ' ' || e.prijmeni
+        END AS cele_jmeno,
+        pu.jmeno AS prihlasovaci_jmeno,
+        pu.heslo AS heslo,
+        CASE 
+            WHEN z.zakaznik_id IS NOT NULL THEN 'zakaznik'
+            ELSE r.nazev
+        END AS role
+    FROM prihlasovaci_udaje pu
+    LEFT JOIN zamestnanec e ON pu.prihlasovaci_udaje_id = e.prihlasovaci_udaje_id
+    LEFT JOIN zakaznik z ON pu.prihlasovaci_udaje_id = z.prihlasovaci_udaje_id
+    LEFT JOIN osoba o ON z.osoba_id = o.osoba_id
+    LEFT JOIN role r ON e.role_id = r.role_id;
+END;
+/
