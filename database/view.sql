@@ -1,6 +1,12 @@
 CREATE OR REPLACE PROCEDURE zajezdy_v_terminu(
     termin_od IN DATE, 
     termin_do IN DATE,
+    p_stat_id IN NUMBER,
+    p_doprava_id IN NUMBER,
+    p_strava_id IN NUMBER,
+    pocet_radku IN NUMBER,
+    celkovy_pocet_vysledku OUT NUMBER,
+    radkovani_start IN NUMBER,
     zajezdy_out OUT SYS_REFCURSOR)
 IS
 BEGIN
@@ -22,7 +28,8 @@ BEGIN
         ROUND(z.cena_za_osobu - (z.cena_za_osobu * (z.sleva_procent / 100))) AS Cena_za_osobu_sleva,
         pck_utils.prvni_img_zajezdy(u.ubytovani_id) AS obrazek_ubytovani_id,
         t.od AS Termin_od,
-        t.do AS Termin_do
+        t.do AS Termin_do,
+        COUNT(*) OVER () AS celkovy_pocet_vysledku
     FROM
         UBYTOVANI u
         JOIN ADRESA a ON u.adresa_id = a.adresa_id
@@ -44,7 +51,12 @@ BEGIN
                 od <= termin_do
         ) t ON z.zajezd_id = t.zajezd_id AND t.rn = 1
     WHERE
-        z.zobrazit = 1;
+        z.zobrazit = 1 AND 
+        (p_stat_id IS NULL OR s.stat_id = p_stat_id) AND
+        (p_doprava_id IS NULL OR d.doprava_id = p_doprava_id) AND
+        (p_strava_id IS NULL OR st.strava_id = p_strava_id)
+    OFFSET radkovani_start ROWS FETCH NEXT pocet_radku ROWS ONLY;
+        
 END;
 
 CREATE OR REPLACE VIEW ubytovani_view AS

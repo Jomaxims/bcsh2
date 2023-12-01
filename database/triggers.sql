@@ -53,36 +53,34 @@ END;
 
 CREATE OR REPLACE TRIGGER trg_update_pocet_osob
 AFTER INSERT ON osoba_objednavka
+FOR EACH ROW
 DECLARE
   v_pocet_osob INTEGER;
 BEGIN
-  FOR objednavka_row IN (SELECT objednavka_id FROM osoba_objednavka GROUP BY objednavka_id) LOOP
-    SELECT COUNT(*)
-    INTO v_pocet_osob
-    FROM osoba_objednavka
-    WHERE objednavka_id = objednavka_row.objednavka_id;
+  SELECT COUNT(*)
+  INTO v_pocet_osob
+  FROM osoba_objednavka
+  WHERE objednavka_id = :NEW.objednavka_id;
 
-    UPDATE objednavka
-    SET pocet_osob = v_pocet_osob
-    WHERE objednavka_id = objednavka_row.objednavka_id;
-  END LOOP;
+  UPDATE objednavka
+  SET pocet_osob = v_pocet_osob + 1
+  WHERE objednavka_id = :NEW.objednavka_id;
 END;
+
 
 CREATE OR REPLACE TRIGGER trg_update_pocet_osob_del
 AFTER DELETE ON osoba_objednavka
 DECLARE
   v_pocet_osob INTEGER;
 BEGIN
-  FOR objednavka_row IN (SELECT objednavka_id FROM osoba_objednavka GROUP BY objednavka_id) LOOP
-    SELECT COUNT(*)
-    INTO v_pocet_osob
-    FROM osoba_objednavka
-    WHERE objednavka_id = objednavka_row.objednavka_id;
+  SELECT COUNT(*)
+  INTO v_pocet_osob
+  FROM osoba_objednavka
+  WHERE objednavka_id = :NEW.objednavka_id;
 
-    UPDATE objednavka
-    SET pocet_osob = v_pocet_osob
-    WHERE objednavka_id = objednavka_row.objednavka_id;
-  END LOOP;
+  UPDATE objednavka
+  SET pocet_osob = v_pocet_osob + 1
+  WHERE objednavka_id = :NEW.objednavka_id;
 END;
 /
 
