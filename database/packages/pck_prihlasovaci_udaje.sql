@@ -27,7 +27,7 @@ CREATE OR REPLACE PACKAGE BODY pck_prihlasovaci_udaje AS
         IF p_prihlasovaci_udaje_id IS NULL THEN
         INSERT INTO prihlasovaci_udaje
               (jmeno, heslo)
-        VALUES (p_jmeno, hash_hesla(p_heslo))
+        VALUES (p_jmeno, pck_security.hash_hesla(p_heslo))
         RETURNING prihlasovaci_udaje_id INTO p_prihlasovaci_udaje_id;
 
         o_result := '{ "status": "OK", "message": "Údaje byly úspěšně vytvořeny." }';
@@ -43,7 +43,7 @@ CREATE OR REPLACE PACKAGE BODY pck_prihlasovaci_udaje AS
 
             IF p_jmeno IS NULL AND p_heslo IS NOT NULL THEN
                 UPDATE prihlasovaci_udaje
-                SET heslo = hash_hesla(p_heslo)
+                SET heslo = pck_security.hash_hesla(p_heslo)
                 WHERE prihlasovaci_udaje_id = p_prihlasovaci_udaje_id;
             END IF;
 
