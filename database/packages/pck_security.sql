@@ -91,4 +91,4 @@ END pck_security;
 
 
 
-GRANT EXECUTE ON hash_hesla TO PUBLIC;
+--GRANT EXECUTE ON pck_security.hash_hesla TO PUBLIC;

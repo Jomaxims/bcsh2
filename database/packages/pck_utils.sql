@@ -58,7 +58,7 @@ END prvni_img_zajezdy;
       v_result := v_result || v_jmeno || ' ' || v_prijmeni || ', ';
     END LOOP;
     CLOSE podrizeny_cursor;
-    RETURN v_result;
+    RETURN RTRIM(v_result, ', ');
   END zamestnanci_podrizeny;
 
    FUNCTION calculate_castka(

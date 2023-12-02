@@ -162,13 +162,7 @@ JOIN PRIHLASOVACI_UDAJE pu ON pu.prihlasovaci_udaje_id = z.prihlasovaci_udaje_id
 LEFT JOIN ZAMESTNANEC n ON n.zamestnanec_id = z.nadrizeny_id;
 /
 
-CREATE OR REPLACE PROCEDURE uzivatele (
-    pocet_radku IN NUMBER,
-    radkovani_start IN NUMBER,
-    cur_out OUT SYS_REFCURSOR
-) IS
-BEGIN
-    OPEN cur_out FOR
+CREATE OR REPLACE VIEW uzivatel_view AS
     SELECT 
         COALESCE(z.zakaznik_id, e.zamestnanec_id) AS uzivatel_id,
         CASE 
@@ -195,9 +189,7 @@ BEGIN
     LEFT JOIN zakaznik z ON pu.prihlasovaci_udaje_id = z.prihlasovaci_udaje_id
     LEFT JOIN osoba o ON z.osoba_id = o.osoba_id
     LEFT JOIN role r ON e.role_id = r.role_id
-    OFFSET radkovani_start ROWS FETCH NEXT pocet_radku ROWS ONLY;
-END;
-/
+WHERE COALESCE(z.zakaznik_id, e.zamestnanec_id) IS NOT NULL;
 
 CREATE VIEW tabulky_view AS
 SELECT 

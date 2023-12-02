@@ -162,38 +162,27 @@ END;
 /
 
 DECLARE
-    v_id  NUMBER;--jenom NUMBER pro insert
-    v_result   VARCHAR2(100);
-BEGIN
-    pck_prihlasovaci_udaje.manage_prihlasovaci_udaje(
-        p_prihlasovaci_udaje_id   => v_id,
-        p_jmeno   => 'ADMIN',
-        p_heslo  =>  'pepa',
-        o_result    => v_result
-    );
-    DBMS_OUTPUT.PUT_LINE('ID: ' || v_id);
-    DBMS_OUTPUT.PUT_LINE(v_result);
-END;
-/
-
-DECLARE
     login_cursor SYS_REFCURSOR;
     uzivatel_id NUMBER; -- Assuming the ID is a NUMBER type
     role VARCHAR2(50);
 BEGIN
-    -- Call the login function from your package
-    login_cursor := pck_security.login('FRANTA', 'pepa');
+    -- Call the login procedure from your package
+    pck_security.login('FRANTA', 'pepa', login_cursor); -- Pass login_cursor as the OUT parameter
 
     -- Fetch from the cursor into local variables
-    FETCH login_cursor INTO uzivatel_id, role;
-
-    -- Check if there was a result
-    IF login_cursor%FOUND THEN
-        DBMS_OUTPUT.PUT_LINE('User ID: ' || uzivatel_id);
-        DBMS_OUTPUT.PUT_LINE('Role: ' || role);
-    ELSE
-        DBMS_OUTPUT.PUT_LINE('No data found or incorrect login details.');
-    END IF;
+    LOOP
+        FETCH login_cursor INTO uzivatel_id, role;
+        EXIT WHEN login_cursor%NOTFOUND;
+        
+        -- Check if there was a result
+        IF login_cursor%FOUND THEN
+            DBMS_OUTPUT.PUT_LINE('User ID: ' || uzivatel_id);
+            DBMS_OUTPUT.PUT_LINE('Role: ' || role);
+        ELSE
+            DBMS_OUTPUT.PUT_LINE('No data found or incorrect login details.');
+            EXIT; -- Exit the loop if no data found
+        END IF;
+    END LOOP;
 
     -- Close the cursor
     CLOSE login_cursor;
@@ -206,4 +195,4 @@ EXCEPTION
             CLOSE login_cursor;
         END IF;
 END;
-/
+
