@@ -180,7 +180,7 @@ CREATE OR REPLACE VIEW uzivatel_view AS
         pu.jmeno AS prihlasovaci_jmeno,
         pu.heslo AS heslo,
         CASE 
-            WHEN z.zakaznik_id IS NOT NULL THEN 'Zakazník'
+            WHEN z.zakaznik_id IS NOT NULL THEN 'Zákazník'
             ELSE r.nazev
         END AS role
     FROM prihlasovaci_udaje pu
