@@ -180,10 +180,9 @@ CREATE OR REPLACE VIEW uzivatel_view AS
         pu.jmeno AS prihlasovaci_jmeno,
         pu.heslo AS heslo,
         CASE 
-            WHEN z.zakaznik_id IS NOT NULL THEN 'zakaznik'
+            WHEN z.zakaznik_id IS NOT NULL THEN 'Zakazník'
             ELSE r.nazev
-        END AS role,
-        COUNT(*) OVER () AS celkovy_pocet_vysledku
+        END AS role
     FROM prihlasovaci_udaje pu
     LEFT JOIN zamestnanec e ON pu.prihlasovaci_udaje_id = e.prihlasovaci_udaje_id
     LEFT JOIN zakaznik z ON pu.prihlasovaci_udaje_id = z.prihlasovaci_udaje_id
@@ -191,46 +190,46 @@ CREATE OR REPLACE VIEW uzivatel_view AS
     LEFT JOIN role r ON e.role_id = r.role_id
 WHERE COALESCE(z.zakaznik_id, e.zamestnanec_id) IS NOT NULL;
 
-CREATE VIEW tabulky_view AS
+CREATE OR REPLACE VIEW tabulky_view AS
 SELECT 
     'Table' AS typ_objektu, 
     table_name AS jmeno_objektu 
 FROM user_tables;
 
-CREATE VIEW pohledy_view AS
+CREATE OR REPLACE VIEW pohledy_view AS
 SELECT 
     'View' AS typ_objektu, 
     view_name AS jmeno_objektu 
 FROM user_views;
 
-CREATE VIEW indexy_view AS
+CREATE OR REPLACE VIEW indexy_view AS
 SELECT 
     'Index' AS typ_objektu, 
     index_name AS jmeno_objektu 
 FROM user_indexes;
 
-CREATE VIEW package_view AS
+CREATE OR REPLACE VIEW package_view AS
 SELECT 
     'Package' AS typ_objektu, 
     object_name AS jmeno_objektu 
 FROM user_objects
 WHERE object_type = 'PACKAGE';
 
-CREATE VIEW procedury_view AS
+CREATE OR REPLACE VIEW procedury_view AS
 SELECT 
     'Procedure' AS typ_objektu, 
     object_name AS jmeno_objektu 
 FROM user_objects
 WHERE object_type = 'PROCEDURE';
 
-CREATE VIEW funkce_view AS
+CREATE OR REPLACE VIEW funkce_view AS
 SELECT 
     'Function' AS typ_objektu, 
     object_name AS jmeno_objektu 
 FROM user_objects
 WHERE object_type = 'FUNCTION';
 
-CREATE VIEW triggry_view AS
+CREATE OR REPLACE VIEW triggry_view AS
 SELECT 
     'Trigger' AS typ_objektu, 
     trigger_name AS jmeno_objektu 
