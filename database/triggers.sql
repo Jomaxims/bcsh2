@@ -97,3 +97,19 @@ BEGIN
   WHERE objednavka_id = :NEW.objednavka_id;
 END;
 /
+
+CREATE OR REPLACE TRIGGER trg_check_pokoj_id
+BEFORE INSERT ON objednavka
+FOR EACH ROW
+DECLARE
+    v_count NUMBER;
+BEGIN
+    SELECT COUNT(*) INTO v_count
+    FROM pokoje_terminu
+    WHERE pokoj_id = :NEW.pokoj_id AND termin_id = :NEW.termin_id;
+
+    IF v_count = 0 THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Pokoj_id se neshoduje.');
+    END IF;
+END;
+/
