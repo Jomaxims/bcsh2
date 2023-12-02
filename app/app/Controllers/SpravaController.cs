@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace app.Controllers;
 
-[Authorize(Roles = "Zamestnanec, Admin")]
+[Authorize(Policy = "Zamestnanec")]
 [Route("sprava")]
 public class SpravaController : Controller
 {

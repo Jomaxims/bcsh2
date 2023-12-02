@@ -6,7 +6,7 @@
     int maxStrana = ViewBag.MaxStrana;
 
     var jmeno = Context.Request.Query["jmeno"].ToString();
-    var uzivatelskeJmeno = Context.Request.Query["uzivatelskeJmeno"].ToString();
+    var prihlasovaciJmeno = Context.Request.Query["prihlasovaciJmeno"].ToString();
     var role = Context.Request.Query["role"].ToString();
 }
 
@@ -18,8 +18,8 @@
                 <input type="text" value="@jmeno" id="jmeno" name="jmeno" class="form-control"/>
             </div>
             <div class="form-group">
-                <label for="uzivatelskeJmeno" class="control-label">Přihlašovací jméno</label>
-                <input type="text" value="@uzivatelskeJmeno" id="uzivatelskeJmeno" name="uzivatelskeJmeno" class="form-control"/>
+                <label for="prihlasovaciJmeno" class="control-label">Přihlašovací jméno</label>
+                <input type="text" value="@prihlasovaciJmeno" id="prihlasovaciJmeno" name="prihlasovaciJmeno" class="form-control"/>
             </div>
             <div class="form-group">
                 <label for="role" class="control-label">Role</label>
@@ -56,11 +56,11 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.Jmeno @item.Prijmeni</td>
+                <td>@item.Jmeno</td>
                 <td>@item.PrihlasovaciJmeno</td>
                 <td>@item.Role</td>
                 <td>
-                    <a asp-controller="Admin" asp-action="PrepnoutUzivatele" asp-route-id="@item.Id">Přepnout</a>
+                    <a asp-controller="Admin" asp-action="PrepnoutUzivatele" asp-route-id="@item.UzivatelId" asp-route-role="@item.Role">Přepnout</a>
                 </td>
             </tr>
         }

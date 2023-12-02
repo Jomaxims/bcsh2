@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace app.ViewComponents;
 
+/// <summary>
+/// ViewComponent pro platbu objednávky
+/// </summary>
 public class ObjednavkaPlatbaViewComponent : ViewComponent
 {
     public IViewComponentResult Invoke(string platbaId)

@@ -4,6 +4,7 @@ using app.DAL.Models;
 using app.Models.Sprava;
 using app.Utils;
 using Dapper;
+using Dapper.Oracle;
 
 namespace app.Repositories;
 
@@ -31,6 +32,11 @@ public class ObjednavkaRepository : BaseRepository
         _platbaDao = platbaDao;
         _osobaDao = osobaDao;
     }
+    
+    /// <summary>
+    /// Zda repository spravuje vlastní transakce
+    /// </summary>
+    public bool TransactionsManaged { get; set; } = false;
 
     /// <summary>
     /// Získá id osob pro danou objednávku.
@@ -160,7 +166,7 @@ public class ObjednavkaRepository : BaseRepository
     /// <exception cref="DatabaseException">Pokud při odebírání nastala chyba</exception>
     public void Delete(int id)
     {
-        UnitOfWork.BeginTransaction();
+        if (!TransactionsManaged) UnitOfWork.BeginTransaction();
 
         try
         {
@@ -177,11 +183,11 @@ public class ObjednavkaRepository : BaseRepository
 
             Delete(_objednavkaDao, id);
 
-            UnitOfWork.Commit();
+            if (!TransactionsManaged) UnitOfWork.Commit();
         }
         catch (Exception e)
         {
-            UnitOfWork.Rollback();
+            if (!TransactionsManaged) UnitOfWork.Rollback();
 
             Logger.Log(LogLevel.Error, "{}", e);
             throw new DatabaseException("Položku se nepodařilo smazat", e);
@@ -320,6 +326,26 @@ public class ObjednavkaRepository : BaseRepository
 
         celkovyPocetRadku = Convert.ToInt32(rows.FirstOrDefault()?.POCET_RADKU ?? 0);
         return model;
+    }
+
+    /// <summary>
+    /// Spočítá výslednou částku objednávky
+    /// </summary>
+    /// <param name="pojisteniId">id pojištění</param>
+    /// <param name="terminId">id termínu</param>
+    /// <param name="pocetOsob">Počet osob</param>
+    /// <returns></returns>
+    public double SpocitejCastkuObjednavky(int pojisteniId, int terminId, int pocetOsob)
+    {
+        var parameters = new OracleDynamicParameters();
+        parameters.Add("p_pojisteni_id", pojisteniId);
+        parameters.Add("p_termin_id", terminId);
+        parameters.Add("p_pocet_osob", pocetOsob);
+        parameters.Add("ret", 0, OracleMappingType.Decimal, ParameterDirection.ReturnValue);
+
+        UnitOfWork.Connection.ExecuteScalar("pck_utils.calculate_castka", parameters);
+
+        return parameters.Get<double>("ret");
     }
 
     /// <summary>

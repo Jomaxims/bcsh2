@@ -1,5 +1,8 @@
 ﻿namespace app;
 
+/// <summary>
+/// Konstanty
+/// </summary>
 public static class Constants
 {
     public const string DbProcedureParamPrefix = "p_";

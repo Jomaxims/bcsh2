@@ -10,12 +10,10 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly IDbUnitOfWork _unitOfWork;
-    private readonly UserManager _userManager;
 
-    public HomeController(ILogger<HomeController> logger, UserManager userManager, IDbUnitOfWork unitOfWork)
+    public HomeController(ILogger<HomeController> logger, IDbUnitOfWork unitOfWork)
     {
         _logger = logger;
-        _userManager = userManager;
         _unitOfWork = unitOfWork;
     }
 

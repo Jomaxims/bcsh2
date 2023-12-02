@@ -7,6 +7,10 @@ using Oracle.ManagedDataAccess.Client;
 
 namespace app.DAL;
 
+/// <summary>
+/// Generické DAO pro práci s tabulkami.
+/// </summary>
+/// <typeparam name="T">Typ dané tabulky</typeparam>
 public class GenericDao<T> where T : IDbModel
 {
     private static readonly string TableName = typeof(T).Name.Underscore().ToLower();
@@ -17,6 +21,11 @@ public class GenericDao<T> where T : IDbModel
         _unitOfWork = unitOfWork;
     }
 
+    /// <summary>
+    /// Smaže záznam z tabulky dle id pomocí příslušné procedury.
+    /// </summary>
+    /// <param name="id">id záznamu</param>
+    /// <returns></returns>
     public DbResult Delete(int id)
     {
         var parameters = new DynamicParameters();
@@ -29,6 +38,11 @@ public class GenericDao<T> where T : IDbModel
         return parameters.GetResult();
     }
 
+    /// <summary>
+    /// Přidá nebo změní (pokud má id) záznam v databázi pomocí příslušné procedury.
+    /// </summary>
+    /// <param name="model">Databázový model záznamu</param>
+    /// <returns></returns>
     public DbResult AddOrEdit(T model)
     {
         var parameters = MapModelToParams(model);
@@ -39,6 +53,11 @@ public class GenericDao<T> where T : IDbModel
         return parameters.GetResult();
     }
 
+    /// <summary>
+    /// Získá záznam z databáze
+    /// </summary>
+    /// <param name="id">id záznamu</param>
+    /// <returns></returns>
     public T Get(int id)
     {
         var sql = $"SELECT * FROM {TableName} WHERE {TableName}_id = :id";
@@ -46,6 +65,10 @@ public class GenericDao<T> where T : IDbModel
         return _unitOfWork.Connection.QuerySingle<T>(sql, new { id });
     }
 
+    /// <summary>
+    /// Získá všechny záznamy z dané tabulky
+    /// </summary>
+    /// <returns></returns>
     public IEnumerable<T> GetAll()
     {
         var sql = $"SELECT * FROM {TableName}";
@@ -53,6 +76,11 @@ public class GenericDao<T> where T : IDbModel
         return _unitOfWork.Connection.Query<T>(sql);
     }
 
+    /// <summary>
+    /// Funkce pro mapování databázového modelu do parametrů pro databázové procedury.
+    /// </summary>
+    /// <param name="model">Databázový model</param>
+    /// <returns></returns>
     private static DynamicParameters MapModelToParams(T model)
     {
         var parameters = new DynamicParameters();

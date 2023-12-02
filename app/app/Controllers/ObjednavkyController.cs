@@ -37,6 +37,7 @@ public class ObjednavkyController : Controller
     public IActionResult ObjednavkaPost([FromForm] NakupModel nakup)
     {
         var zakaznikId = int.Parse(User.Claims.First(claim => claim.Type == ClaimTypes.NameIdentifier).Value);
+        var cenaObjednavky = _objednavkaRepository.SpocitejCastkuObjednavky(_converter.Decode(nakup.Zajezd.Pojisteni), _converter.Decode(nakup.Zajezd.Termin), nakup.Zajezd.PocetOsob);
 
         var model = new ObjednavkaModel
         {
@@ -56,7 +57,7 @@ public class ObjednavkyController : Controller
             },
             Platba = new PlatbaModel
             {
-                Castka = 0,
+                Castka = cenaObjednavky,
                 CisloUctu = null,
                 Zaplacena = false
             },

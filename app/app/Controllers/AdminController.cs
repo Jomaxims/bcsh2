@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace app.Controllers;
 
-[Authorize(Roles = "Admin")]
+[Authorize(Policy = "Admin")]
 [Route("admin")]
 public class AdminController : Controller
 {
@@ -15,13 +15,16 @@ public class AdminController : Controller
 
     private readonly IIdConverter _converter;
     private readonly LogRepository _logRepository;
+    private readonly DatabazoveObjektyRepository _databazoveObjektyRepository;
     private readonly UserManager _userManager;
 
-    public AdminController(IIdConverter converter, UserManager userManager, LogRepository logRepository)
+    public AdminController(IIdConverter converter, UserManager userManager, LogRepository logRepository,
+        DatabazoveObjektyRepository databazoveObjektyRepository)
     {
         _converter = converter;
         _userManager = userManager;
         _logRepository = logRepository;
+        _databazoveObjektyRepository = databazoveObjektyRepository;
     }
 
     private int PocetStran(int pocetRadku, int polozekNaStranku = 0)
@@ -48,13 +51,7 @@ public class AdminController : Controller
         var model = _logRepository.GetAll(out var celkovyPocetRadku, tabulka, operace, datumOd, datumDo, start,
             PolozekNaStranku);
 
-        ViewBag.Tabulky = new[]
-        {
-            "",
-            "zajezd",
-            "objednavka",
-            "strava"
-        };
+        ViewBag.Tabulky = _databazoveObjektyRepository.GetTabulky();
 
         ViewBag.Operace = new[]
         {
@@ -71,9 +68,9 @@ public class AdminController : Controller
     }
 
     [Route("prepnout/{id}")]
-    public IActionResult PrepnoutUzivatele(string id)
+    public IActionResult PrepnoutUzivatele(string id, string role)
     {
-        _userManager.ChangeToUser(HttpContext, _converter.Decode(id));
+        _userManager.ChangeToUser(HttpContext, _converter.Decode(id), role);
 
         return RedirectToAction("Index", "Home");
     }
@@ -90,65 +87,46 @@ public class AdminController : Controller
     [Route("uzivatele")]
     public IActionResult Uzivatele(
         string jmeno = "",
-        string uzivatelskeJmeno = "",
+        string prihlasovaciJmeno = "",
         string role = "",
         int strana = 1
     )
     {
-        var maxStrana = 3;
-
-        if (strana < 1 || strana > maxStrana)
+        if (strana < 1)
             strana = 1;
 
-        var model = new UzivatelModel[100];
-        for (var i = 0; i < model.Length; i++)
-            model[i] = new UzivatelModel
-            {
-                Id = "iyovc",
-                PrihlasovaciJmeno = $"pepa_{i}",
-                Jmeno = "Pepa",
-                Prijmeni = "Zdepa",
-                Role = "Zakaznik"
-            };
+        var start = (strana - 1) * PolozekNaStranku;
+        var model = _userManager.GetAllUsers(out var celkovyPocetRadku, jmeno, prihlasovaciJmeno, role, start,
+            PolozekNaStranku);
 
         ViewBag.Role = new[]
         {
-            "Všechny",
+            "",
             "Zákazník",
             "Zaměstnanec",
             "Admin"
         };
 
         ViewBag.Strana = strana;
-        ViewBag.MaxStrana = maxStrana;
+        ViewBag.MaxStrana = PocetStran(celkovyPocetRadku);
 
         return View(model);
     }
 
-    [HttpGet]
-    [Route("uzivatele/{id}")]
-    public IActionResult UzivatelEdit(string id)
+    [Route("db-objekty")]
+    public IActionResult DbObjekty()
     {
-        ViewData["id"] = _converter.Decode(id);
-
-        return View();
-    }
-
-    [HttpPost]
-    [Route("uzivatele/{id}")]
-    public IActionResult UzivatelEditPost(string id)
-    {
-        ViewData["id"] = _converter.Decode(id);
-
-        return Ok();
-    }
-
-    [HttpDelete]
-    [Route("uzivatele/{id}")]
-    public IActionResult UzivatelDelete(string id)
-    {
-        ViewData["id"] = _converter.Decode(id);
-
-        return Ok();
+        var model = new DbObjektyModel
+        {
+            Tabulky = _databazoveObjektyRepository.GetTabulky(),
+            Pohledy = _databazoveObjektyRepository.GetPohledy(),
+            Indexy = _databazoveObjektyRepository.GetIndexy(),
+            Package = _databazoveObjektyRepository.GetPackage(),
+            Procedury = _databazoveObjektyRepository.GetProcedury(),
+            Funkce = _databazoveObjektyRepository.GetFunkce(),
+            Triggery = _databazoveObjektyRepository.GetTriggry()
+        };
+        
+        return View(model);
     }
 }

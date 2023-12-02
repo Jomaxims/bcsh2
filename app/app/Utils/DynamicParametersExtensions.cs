@@ -6,8 +6,16 @@ using Dapper;
 
 namespace app.Utils;
 
+/// <summary>
+/// Extensions pro Dapper DynamicParameters
+/// </summary>
 public static class DynamicParametersExtensions
 {
+    /// <summary>
+    /// Přidá výstupní parametr o_result do parametrý
+    /// </summary>
+    /// <param name="parameters"></param>
+    /// <returns></returns>
     public static DynamicParameters AddResult(this DynamicParameters parameters)
     {
         parameters.Add("o_result", dbType: DbType.String, direction: ParameterDirection.Output, size: 10000);
@@ -15,6 +23,11 @@ public static class DynamicParametersExtensions
         return parameters;
     }
 
+    /// <summary>
+    /// Získá DbResult z parametru o_result
+    /// </summary>
+    /// <param name="parameters"></param>
+    /// <returns></returns>
     public static DbResult GetResult(this DynamicParameters parameters)
     {
         var json = parameters.Get<string>("o_result");
@@ -30,6 +43,11 @@ public static class DynamicParametersExtensions
         return JsonSerializer.Deserialize<DbResult>(strBuilder.ToString())!.AddId(id);
     }
 
+    /// <summary>
+    /// Získá id z parametrů
+    /// </summary>
+    /// <param name="parameters"></param>
+    /// <returns></returns>
     private static int GetId(DynamicParameters parameters)
     {
         return parameters.Get<int>(parameters.ParameterNames.First(p => p.EndsWith("_id")));

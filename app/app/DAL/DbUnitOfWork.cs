@@ -14,6 +14,9 @@ public interface IDbUnitOfWork : IDisposable
     void Reset();
 }
 
+/// <summary>
+/// Implementace unit of work patternu pro práci s repository. Obstarává spojení a transakce.
+/// </summary>
 internal sealed class DbUnitOfWork : IDbUnitOfWork
 {
     private readonly IDbConnectionFactory _connectionFactory;
@@ -24,6 +27,9 @@ internal sealed class DbUnitOfWork : IDbUnitOfWork
         _connectionFactory = connectionFactory;
     }
 
+    /// <summary>
+    /// Otevře nové spojení, nebo vrátí již otevřené spojení.
+    /// </summary>
     public IDbConnection Connection
     {
         get
@@ -37,25 +43,40 @@ internal sealed class DbUnitOfWork : IDbUnitOfWork
         }
     }
 
+    /// <summary>
+    /// Vrátí současnou transakci nebo null.
+    /// </summary>
     public IDbTransaction? Transaction { get; private set; }
 
+    /// <summary>
+    /// Započne novou transakci.
+    /// </summary>
     public void BeginTransaction()
     {
         Transaction = Connection.BeginTransaction();
     }
 
+    /// <summary>
+    /// Commitne současnou transakci, pokud existuje.
+    /// </summary>
     public void Commit()
     {
         Transaction?.Commit();
         Dispose();
     }
 
+    /// <summary>
+    /// Rollbackne současnou transakci, pokud existuje.
+    /// </summary>
     public void Rollback()
     {
         Transaction?.Rollback();
         Dispose();
     }
 
+    /// <summary>
+    /// Zahodí současné spojení a transakci
+    /// </summary>
     public void Reset()
     {
         _connection?.Close();

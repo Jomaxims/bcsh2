@@ -20,11 +20,12 @@ public class ZajezdyController : Controller
     private readonly DopravaRepository _dopravaRepository;
     private readonly StravaRepository _stravaRepository;
     private readonly StatRepository _statRepository;
+    private readonly ObjednavkaRepository _objednavkaRepository;
     private readonly ZajezdRepository _zajezdRepository;
 
     public ZajezdyController(IIdConverter converter, ZajezdRepository zajezdRepository,
         PojisteniRepository pojisteniRepository, PokojRepository pokojRepository, DopravaRepository dopravaRepository,
-        StravaRepository stravaRepository, StatRepository statRepository)
+        StravaRepository stravaRepository, StatRepository statRepository, ObjednavkaRepository objednavkaRepository)
     {
         _converter = converter;
         _zajezdRepository = zajezdRepository;
@@ -33,6 +34,7 @@ public class ZajezdyController : Controller
         _dopravaRepository = dopravaRepository;
         _stravaRepository = stravaRepository;
         _statRepository = statRepository;
+        _objednavkaRepository = objednavkaRepository;
     }
     
     private int PocetStran(int pocetRadku, int polozekNaStranku = 0)
@@ -132,7 +134,7 @@ public class ZajezdyController : Controller
         ViewBag.Termin = _zajezdRepository.GetTermin(_converter.Decode(termin));
         ViewBag.Pojisteni = _pojisteniRepository.Get(_converter.Decode(pojisteni));
         ViewBag.Pokoj = _pokojRepository.Get(_converter.Decode(pokoj));
-        ViewBag.CelkovaCena = 13896;
+        ViewBag.CelkovaCena = _objednavkaRepository.SpocitejCastkuObjednavky(_converter.Decode(pojisteni), _converter.Decode(termin), pocetOsob);
 
         var osoby = new OsobaModel[pocetOsob - 1];
         for (var i = 0; i < osoby.Length; i++)

@@ -21,6 +21,7 @@ namespace app.Repositories;
 public class ZajezdRepository : BaseRepository
 {
     private readonly GenericDao<PokojeTerminu> _pokojeTerminuDao;
+    private readonly ObjednavkaRepository _objednavkaRepository;
     private readonly GenericDao<Termin> _terminDao;
     private readonly GenericDao<Zajezd> _zajezdDao;
 
@@ -30,12 +31,14 @@ public class ZajezdRepository : BaseRepository
         IIdConverter idConverter,
         GenericDao<Zajezd> zajezdDao,
         GenericDao<Termin> terminDao,
-        GenericDao<PokojeTerminu> pokojeTerminuDao
+        GenericDao<PokojeTerminu> pokojeTerminuDao,
+        ObjednavkaRepository objednavkaRepository
     ) : base(logger, unitOfWork, idConverter)
     {
         _zajezdDao = zajezdDao;
         _terminDao = terminDao;
         _pokojeTerminuDao = pokojeTerminuDao;
+        _objednavkaRepository = objednavkaRepository;
     }
 
     /// <summary>
@@ -155,6 +158,24 @@ public class ZajezdRepository : BaseRepository
     /// </summary>
     /// <param name="terminId">id termínu</param>
     /// <param name="pokojId">id pokoje</param>
+    private void DeletePokojeTerminu(int terminId)
+    {
+        const string tableName = "pokoje_terminu";
+        var parameters = new DynamicParameters();
+        parameters.Add($"{Constants.DbProcedureParamPrefix}termin_id", terminId);
+        parameters.AddResult();
+
+        UnitOfWork.Connection.Query($"pck_{tableName}.delete_{tableName}", parameters,
+            commandType: CommandType.StoredProcedure);
+
+        parameters.GetResult().IsOkOrThrow();
+    }
+
+    /// <summary>
+    /// Smaže pokoj termínu
+    /// </summary>
+    /// <param name="terminId">id termínu</param>
+    /// <param name="pokojId">id pokoje</param>
     private void DeletePokojeTerminu(int terminId, int pokojId)
     {
         const string tableName = "pokoje_terminu";
@@ -207,9 +228,27 @@ public class ZajezdRepository : BaseRepository
     public void Delete(int id)
     {
         UnitOfWork.BeginTransaction();
+        _objednavkaRepository.TransactionsManaged = true;
 
         try
         {
+            var terminIds = GetTerminIds(id);
+
+            foreach (var terminId in terminIds)
+            {
+                var objednavkaIds =
+                    UnitOfWork.Connection.Query<int>("select objednavka_id from OBJEDNAVKA where TERMIN_ID = :terminId",
+                        new { terminId });
+
+                foreach (var objednavkaId in objednavkaIds)
+                {
+                    _objednavkaRepository.Delete(objednavkaId);
+                }
+
+                DeletePokojeTerminu(terminId);
+                _terminDao.Delete(terminId).IsOkOrThrow();
+            }
+
             Delete(_zajezdDao, id);
 
             UnitOfWork.Commit();
@@ -220,6 +259,10 @@ public class ZajezdRepository : BaseRepository
 
             Logger.Log(LogLevel.Error, "{}", e);
             throw new DatabaseException("Položku se nepodařilo smazat", e);
+        }
+        finally
+        {
+            _objednavkaRepository.TransactionsManaged = false;
         }
     }
 
@@ -354,8 +397,8 @@ public class ZajezdRepository : BaseRepository
     /// <param name="pocetRadku">Počet položek</param>
     /// <returns></returns>
     public IEnumerable<ZajezdNahledModel> GetZajezdyVTerminu(out int celkovyPocetRadku, DateOnly terminOd = default,
-        DateOnly terminDo = default,
-        int? statId = null, int? dopravaId = null, int? stravaId = null, int start = 0, int pocetRadku = 0)
+        DateOnly terminDo = default, int? statId = null, int? dopravaId = null, int? stravaId = null, int start = 0,
+        int pocetRadku = 0)
     {
         var parameters = new OracleDynamicParameters();
         parameters.Add("termin_od", terminOd.ToDateTime(new TimeOnly(0, 0)));
@@ -365,12 +408,12 @@ public class ZajezdRepository : BaseRepository
         parameters.Add("p_strava_id", stravaId);
         parameters.Add("radkovani_start", start);
         parameters.Add("pocet_Radku", pocetRadku);
-        
+
         parameters.Add("zajezdy_out", null, OracleMappingType.RefCursor, ParameterDirection.Output);
 
         var rows = UnitOfWork.Connection.Query<dynamic>("zajezdy_v_terminu", parameters,
             commandType: CommandType.StoredProcedure);
-        
+
         var model = rows.Select(row =>
         {
             var zajezdNahled = new ZajezdNahledModel
@@ -391,7 +434,7 @@ public class ZajezdRepository : BaseRepository
 
             return zajezdNahled;
         });
-        
+
         celkovyPocetRadku = Convert.ToInt32(rows.FirstOrDefault()?.CELKOVY_POCET_VYSLEDKU ?? 0);
 
         return model;

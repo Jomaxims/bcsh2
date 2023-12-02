@@ -16,6 +16,9 @@ public interface IIdConverter
     int Decode(string id);
 }
 
+/// <summary>
+/// Třída pro kódování a dekódování id
+/// </summary>
 public class IdConverter : IIdConverter
 {
     private readonly SqidsEncoder<int> _encoder;

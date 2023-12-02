@@ -8,6 +8,9 @@ public interface IDbConnectionFactory
     public IDbConnection NewConnection();
 }
 
+/// <summary>
+/// Factory, které vytváří databázová spojení dle DbConnection v konfiguraci
+/// </summary>
 public class DbConnectionFactory : IDbConnectionFactory
 {
     private readonly IConfiguration _configuration;
