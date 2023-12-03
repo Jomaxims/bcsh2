@@ -5,6 +5,8 @@
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
 <item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
+<item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
+<item key="8EA48AC4-C9D1-A310-35D7-263CFB1B1CEE" value="true"/>
 </engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
@@ -20,7 +22,9 @@
 <createdTime>2023-10-26 16:34:59 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
+<item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
 <item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
+<item key="8EA48AC4-C9D1-A310-35D7-263CFB1B1CEE" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -32,13 +36,15 @@
 <createdTime>2023-10-26 16:35:28 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
 <engineerTo>
+<item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
 <item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="true"/>
+<item key="8EA48AC4-C9D1-A310-35D7-263CFB1B1CEE" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>11</dataTypeSize>
-<ownDataTypeParameters>11,,</ownDataTypeParameters>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>30,,</ownDataTypeParameters>
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
@@ -46,9 +52,10 @@
 <createdBy>tomas</createdBy>
 <createdTime>2023-10-26 16:35:13 UTC</createdTime>
 <ownerDesignName>model</ownerDesignName>
-<shouldEngineer>false</shouldEngineer>
 <engineerTo>
+<item key="AA0530E3-FE1A-4EEF-DA2A-52277F5542A7" value="true"/>
 <item key="A7964F77-7B6A-E606-F19B-34188A25455D" value="false"/>
+<item key="8EA48AC4-C9D1-A310-35D7-263CFB1B1CEE" value="true"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>

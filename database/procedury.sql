@@ -55,7 +55,7 @@ END;
 DECLARE
     result CLOB;
 BEGIN
-    result := pck_security.login('F', 'pepa');
+    result := pck_security.login('FRANTA', 'pepa');
     DBMS_OUTPUT.PUT_LINE(result);
 EXCEPTION
     WHEN OTHERS THEN
@@ -167,7 +167,7 @@ DECLARE
     role VARCHAR2(50);
 BEGIN
     -- Call the login procedure from your package
-    pck_security.login('djustun0', '187', login_cursor); -- Pass login_cursor as the OUT parameter
+    pck_security.login('FRANTA', 123, login_cursor); -- Pass login_cursor as the OUT parameter
 
     -- Fetch from the cursor into local variables
     LOOP

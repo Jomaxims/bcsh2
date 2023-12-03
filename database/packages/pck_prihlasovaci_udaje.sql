@@ -46,7 +46,14 @@ CREATE OR REPLACE PACKAGE BODY pck_prihlasovaci_udaje AS
                 SET heslo = pck_security.hash_hesla(p_heslo)
                 WHERE prihlasovaci_udaje_id = p_prihlasovaci_udaje_id;
             END IF;
-
+                
+            IF p_jmeno IS NOT NULL AND p_heslo IS NOT NULL THEN
+                UPDATE prihlasovaci_udaje
+                SET jmeno = p_jmeno,
+                    heslo = pck_security.hash_hesla(p_heslo)
+                WHERE prihlasovaci_udaje_id = p_prihlasovaci_udaje_id;
+            END IF;
+            
             IF SQL%ROWCOUNT = 0 THEN
                 o_result := '{ "status": "error", "message": "Chyba: ID údaje nebylo nalezeno." }';
             ELSE
