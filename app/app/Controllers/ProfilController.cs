@@ -119,6 +119,7 @@ public class ProfilController : Controller
         return res ? RedirectToAction("Index", "Home") : RedirectToAction("Login");
     }
 
+    [AllowAnonymous]
     [HttpGet]
     [Route("logout")]
     public IActionResult Logout()

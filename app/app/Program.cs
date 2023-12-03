@@ -35,6 +35,8 @@ builder.Services.AddScoped<UserManager, UserManager>();
 
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
+
+// přidání autentizace a autorizace
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options => { options.ExpireTimeSpan = TimeSpan.FromDays(7); }
     );
@@ -45,6 +47,8 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("Zakaznik", policy => policy.RequireRole(Role.Zakaznik));
     options.AddPolicy("Vsichni", policy => policy.RequireRole(Role.Admin, Role.Zamestnanec, Role.Zakaznik));
 });
+
+// SASS compiler pro vývoj
 if (builder.Environment.IsDevelopment()) builder.Services.AddSassCompiler(); // TODO
 
 var app = builder.Build();
