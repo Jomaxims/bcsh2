@@ -101,8 +101,9 @@ public class ProfilController : Controller
     [AllowAnonymous]
     [HttpGet]
     [Route("login")]
-    public IActionResult Login()
+    public IActionResult Login(string chyba)
     {
+        ViewBag.Chyba = chyba;
         return View();
     }
 
@@ -116,7 +117,7 @@ public class ProfilController : Controller
 
         var res = _userManager.Login(HttpContext, model.Jmeno, model.Heslo);
 
-        return res ? RedirectToAction("Index", "Home") : RedirectToAction("Login");
+        return res ? RedirectToAction("Index", "Home") : RedirectToAction("Login", new { chyba = "Nepodařilo se přihlásit" });
     }
 
     [AllowAnonymous]

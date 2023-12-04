@@ -23,13 +23,6 @@ public class HomeController : Controller
         return View();
     }
 
-    [Route("kontakt")]
-    public IActionResult Kontakt()
-    {
-        throw new DatabaseException();
-        return BadRequest();
-    }
-
     [Route("error")]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error(string chyba = "")
