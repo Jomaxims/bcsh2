@@ -93,3 +93,8 @@ insert into kontakt (email, telefon) values ('rpargeter2j@cnet.com', '492-282-30
 insert into kontakt (email, telefon) values ('odeporte2k@booking.com', '535-497-5460');
 insert into kontakt (email, telefon) values ('nperris2l@hibu.com', '299-779-1892');
 insert into kontakt (email, telefon) values ('msonger2m@multiply.com', '113-232-2734');
+insert into kontakt (email, telefon) values ('lhiofdro@demo.edu', '660-691-1910');
+insert into kontakt (email, telefon) values ('qafkttgk@demo.edu', '176-192-8184');
+insert into kontakt (email, telefon) values ('wttushad@test.net', '700-599-4079');
+insert into kontakt (email, telefon) values ('rzctfqdd@placeholder.co', '795-732-8437');
+insert into kontakt (email, telefon) values ('qgjrwwsm@placeholder.co', '760-131-2215');

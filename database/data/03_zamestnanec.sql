@@ -1,5 +1,10 @@
-insert into zamestnanec (role_id, prihlasovaci_udaje_id, nadrizeny_id, jmeno, prijmeni) values (2, 96, null, 'Jan', 'Svoboda');
-insert into zamestnanec (role_id, prihlasovaci_udaje_id, nadrizeny_id, jmeno, prijmeni) values (2, 97, null, 'Jan', 'Novák');
-insert into zamestnanec (role_id, prihlasovaci_udaje_id, nadrizeny_id, jmeno, prijmeni) values (2, 98, null, 'Jan', 'Černý');
-insert into zamestnanec (role_id, prihlasovaci_udaje_id, nadrizeny_id, jmeno, prijmeni) values (2, 99, 3, 'Marie', 'Dvořáková');
-insert into zamestnanec (role_id, prihlasovaci_udaje_id, nadrizeny_id, jmeno, prijmeni) values (2, 100, 4, 'Jana', 'Svobodavá');
+insert into zamestnanec (role_id, prihlasovaci_udaje_id, nadrizeny_id, jmeno, prijmeni) values (2, 101, null, 'Jan', 'Svoboda');
+insert into zamestnanec (role_id, prihlasovaci_udaje_id, nadrizeny_id, jmeno, prijmeni) values (2, 102, null, 'Jan', 'Novák');
+insert into zamestnanec (role_id, prihlasovaci_udaje_id, nadrizeny_id, jmeno, prijmeni) values (2, 103, null, 'Jan', 'Černý');
+insert into zamestnanec (role_id, prihlasovaci_udaje_id, nadrizeny_id, jmeno, prijmeni) values (2, 104, 3, 'Marie', 'Dvořáková');
+insert into zamestnanec (role_id, prihlasovaci_udaje_id, nadrizeny_id, jmeno, prijmeni) values (2, 105, 4, 'Jana', 'Svobodavá');
+insert into zamestnanec (role_id, prihlasovaci_udaje_id, nadrizeny_id, jmeno, prijmeni) values (2, 106, null, 'Martin', 'Macháček');
+insert into zamestnanec (role_id, prihlasovaci_udaje_id, nadrizeny_id, jmeno, prijmeni) values (2, 107, null, 'Barbora', 'Němcová');
+insert into zamestnanec (role_id, prihlasovaci_udaje_id, nadrizeny_id, jmeno, prijmeni) values (2, 108, 2, 'Michaela', 'Veselá');
+insert into zamestnanec (role_id, prihlasovaci_udaje_id, nadrizeny_id, jmeno, prijmeni) values (2, 109, 1, 'Jakub', 'Polák');
+insert into zamestnanec (role_id, prihlasovaci_udaje_id, nadrizeny_id, jmeno, prijmeni) values (1, 110, null, 'David', 'Pospíšil');

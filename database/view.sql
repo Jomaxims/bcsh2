@@ -57,6 +57,7 @@ BEGIN
     OFFSET radkovani_start ROWS FETCH NEXT pocet_radku ROWS ONLY;
         
 END;
+/
 
 CREATE OR REPLACE VIEW ubytovani_view AS
 SELECT
@@ -73,6 +74,7 @@ SELECT
 FROM UBYTOVANI u
 JOIN ADRESA a ON u.adresa_id = a.adresa_id
 JOIN STAT s ON a.stat_id = s.stat_id;
+/
 
 CREATE OR REPLACE VIEW objednavka_view AS
 SELECT
@@ -96,6 +98,7 @@ JOIN ZAJEZD zaj ON zaj.zajezd_id = t.zajezd_id
 JOIN UBYTOVANI u ON u.ubytovani_id = zaj.ubytovani_id
 JOIN POKOJ p ON p.pokoj_id = o.pokoj_id
 JOIN PLATBA pl ON pl.objednavka_id = o.objednavka_id;
+/
 
 CREATE OR REPLACE VIEW zajezd_sprava_view AS
 SELECT
@@ -119,6 +122,7 @@ JOIN DOPRAVA d ON d.doprava_id = z.doprava_id
 JOIN STRAVA st ON st.strava_id = z.strava_id
 JOIN ADRESA a ON u.adresa_id = a.adresa_id
 JOIN STAT s ON a.stat_id = s.stat_id;
+/
 
 CREATE OR REPLACE VIEW zakaznik_view AS
 SELECT
@@ -142,6 +146,7 @@ JOIN KONTAKT k ON k.kontakt_id = z.kontakt_id
 JOIN OSOBA o ON o.osoba_id = z.osoba_id
 JOIN ADRESA a ON z.adresa_id = a.adresa_id
 JOIN STAT s ON a.stat_id = s.stat_id;
+/
 
 CREATE OR REPLACE VIEW zamestnanec_view AS
 SELECT
@@ -189,6 +194,7 @@ CREATE OR REPLACE VIEW uzivatel_view AS
     LEFT JOIN osoba o ON z.osoba_id = o.osoba_id
     LEFT JOIN role r ON e.role_id = r.role_id
 WHERE COALESCE(z.zakaznik_id, e.zamestnanec_id) IS NOT NULL;
+/
 
 CREATE OR REPLACE VIEW tabulky_view AS
 SELECT 

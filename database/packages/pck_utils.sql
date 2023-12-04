@@ -7,6 +7,8 @@ CREATE OR REPLACE PACKAGE pck_utils AS
     
   FUNCTION calculate_castka(p_pojisteni_id INTEGER, p_termin_id INTEGER,p_pocet_osob INTEGER) 
    RETURN DECIMAL;
+   
+   PROCEDURE zlevni_zajezdy(rc_out OUT SYS_REFCURSOR);
   
   PROCEDURE DropAllTables;
   PROCEDURE DropAllObjects;
@@ -82,6 +84,27 @@ END prvni_img_zajezdy;
     v_castka := (p_pocet_osob * v_cena_za_osobu) + (p_pocet_osob * v_cena_za_den * (v_do - v_od));
     RETURN v_castka;
   END calculate_castka; 
+  
+  PROCEDURE zlevni_zajezdy(rc_out OUT SYS_REFCURSOR) IS
+   BEGIN
+  FOR rec IN (SELECT zajezd_id, cena_za_osobu FROM zajezd WHERE zobrazit = 1) LOOP
+    IF rec.cena_za_osobu >= 10000 THEN
+      -- Zaokrouhlíme cenu dolů na desetitisíce a vypočítáme slevu
+      UPDATE zajezd
+      SET cena_za_osobu = TRUNC(rec.cena_za_osobu, -4),
+          sleva_procent = ROUND((1 - (TRUNC(rec.cena_za_osobu, -4) / rec.cena_za_osobu)) * 100, 2)
+      WHERE zajezd_id = rec.zajezd_id;
+    ELSIF rec.cena_za_osobu < 10000 THEN
+      UPDATE zajezd
+      SET cena_za_osobu = ROUND(rec.cena_za_osobu * 0.7, -4), -- Zaokrouhluje cenu po slevě na celé tisíce dolů
+          sleva_procent = 30
+      WHERE zajezd_id = rec.zajezd_id;
+    END IF;
+  END LOOP;
+EXCEPTION
+  WHEN OTHERS THEN
+    DBMS_OUTPUT.PUT_LINE('Error occurred: ' || SQLERRM);
+  END zlevni_zajezdy;
     
   PROCEDURE DropAllTables IS
   BEGIN

@@ -302,6 +302,37 @@ DBMS_OUTPUT.PUT_LINE(v_result);
 v_prihlasovaci_udaje_id := NULL;
 pck_prihlasovaci_udaje.manage_prihlasovaci_udaje(v_prihlasovaci_udaje_id, 'swheadon2r', '227', v_result);
 DBMS_OUTPUT.PUT_LINE(v_result);
+v_prihlasovaci_udaje_id := NULL;
+pck_prihlasovaci_udaje.manage_prihlasovaci_udaje(v_prihlasovaci_udaje_id, 'jnovak7', '123', v_result);
+DBMS_OUTPUT.PUT_LINE(v_result);
+v_prihlasovaci_udaje_id := NULL;
+pck_prihlasovaci_udaje.manage_prihlasovaci_udaje(v_prihlasovaci_udaje_id, 'ksvoboda8', '456', v_result);
+DBMS_OUTPUT.PUT_LINE(v_result);
+v_prihlasovaci_udaje_id := NULL;
+pck_prihlasovaci_udaje.manage_prihlasovaci_udaje(v_prihlasovaci_udaje_id, 'lnovotna9', '789', v_result);
+DBMS_OUTPUT.PUT_LINE(v_result);
+v_prihlasovaci_udaje_id := NULL;
+pck_prihlasovaci_udaje.manage_prihlasovaci_udaje(v_prihlasovaci_udaje_id, 'mdvorak10', '234', v_result);
+DBMS_OUTPUT.PUT_LINE(v_result);
+v_prihlasovaci_udaje_id := NULL;
+pck_prihlasovaci_udaje.manage_prihlasovaci_udaje(v_prihlasovaci_udaje_id, 'pcerny11', '567', v_result);
+DBMS_OUTPUT.PUT_LINE(v_result);
+v_prihlasovaci_udaje_id := NULL;
+pck_prihlasovaci_udaje.manage_prihlasovaci_udaje(v_prihlasovaci_udaje_id, 'rhorak12', '890', v_result);
+DBMS_OUTPUT.PUT_LINE(v_result);
+v_prihlasovaci_udaje_id := NULL;
+pck_prihlasovaci_udaje.manage_prihlasovaci_udaje(v_prihlasovaci_udaje_id, 'snemec13', '135', v_result);
+DBMS_OUTPUT.PUT_LINE(v_result);
+v_prihlasovaci_udaje_id := NULL;
+pck_prihlasovaci_udaje.manage_prihlasovaci_udaje(v_prihlasovaci_udaje_id, 'tprochazka14', '246', v_result);
+DBMS_OUTPUT.PUT_LINE(v_result);
+v_prihlasovaci_udaje_id := NULL;
+pck_prihlasovaci_udaje.manage_prihlasovaci_udaje(v_prihlasovaci_udaje_id, 'ukucera15', '357', v_result);
+DBMS_OUTPUT.PUT_LINE(v_result);
+v_prihlasovaci_udaje_id := NULL;
+pck_prihlasovaci_udaje.manage_prihlasovaci_udaje(v_prihlasovaci_udaje_id, 'vvesely16', '468', v_result);
+DBMS_OUTPUT.PUT_LINE(v_result);
+
 EXCEPTION
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('Error occurred: ' || SQLERRM);
