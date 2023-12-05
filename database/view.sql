@@ -240,3 +240,10 @@ SELECT
     'Trigger' AS typ_objektu, 
     trigger_name AS jmeno_objektu 
 FROM user_triggers;
+
+CREATE OR REPLACE VIEW sekvence_view AS
+SELECT 
+    'Sequence' AS typ_objektu, 
+    sequence_name AS jmeno_objektu 
+FROM user_sequences;
+
