@@ -50,7 +50,7 @@ CREATE OR REPLACE PACKAGE BODY pck_security AS
         WHERE PRIHLASOVACI_UDAJE_ID = v_id;
 
         OPEN p_cursor FOR
-        SELECT ZAKAZNIK_ID AS uzivatel_id, 'zakaznik' AS role
+        SELECT ZAKAZNIK_ID AS uzivatel_id, 'Zákazník' AS role
         FROM ZAKAZNIK
         WHERE ZAKAZNIK_ID = v_id;
         RETURN;
