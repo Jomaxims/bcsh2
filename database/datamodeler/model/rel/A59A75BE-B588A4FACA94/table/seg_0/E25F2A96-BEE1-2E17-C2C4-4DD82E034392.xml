@@ -1,0 +1,110 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="E25F2A96-BEE1-2E17-C2C4-4DD82E034392" name="UBYTOVANI">
+<createdBy>tomas</createdBy>
+<createdTime>2023-12-05 15:46:46 UTC</createdTime>
+<generatorID>9C519B93-531C-E386-66BC-A19839E07C8E</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ubytovani_id" id="49F48FC4-9409-3ED6-4CFB-7B154B31EFDA">
+<createdBy>tomas</createdBy>
+<createdTime>2023-12-05 15:46:46 UTC</createdTime>
+<generatorID>6C1D4A59-FB85-17B3-FC58-98B2649ACC6E</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nazev" id="2EFC908D-BC53-654D-7323-12A40F5CF18A">
+<createdBy>tomas</createdBy>
+<createdTime>2023-12-05 15:46:46 UTC</createdTime>
+<generatorID>C060D552-6D9D-D595-D98F-D9309452D119</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="popis" id="F7A2E876-B377-530A-A633-CE34DF94B736">
+<createdBy>tomas</createdBy>
+<createdTime>2023-12-05 15:46:46 UTC</createdTime>
+<generatorID>7551CACA-B689-CDFD-4551-47025FB32870</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000</dataTypeSize>
+<ownDataTypeParameters>1000,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="adresa_id" id="AB486B1D-8C9D-C006-C78A-5705DC8D4DF3">
+<createdBy>tomas</createdBy>
+<createdTime>2023-12-05 15:46:46 UTC</createdTime>
+<generatorID>4D337F77-416C-5680-F9B2-D89088413029</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="7BD7AC6F-EDB7-2DEA-DF72-C9F35558AEDF" referredColumn="4FD97C15-70B3-6F04-007E-F4C6CF53B50F"/>
+</associations>
+</Column>
+<Column name="pocet_hvezd" id="20B313D9-22D6-BC42-F7EE-2DAD13AB3F9A">
+<createdBy>tomas</createdBy>
+<createdTime>2023-12-05 15:46:46 UTC</createdTime>
+<generatorID>9A1FF23A-B51C-915F-F99D-C42DD1964645</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypeScale>1</dataTypeScale>
+<ownDataTypeParameters>,,1</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="0587E254-FF00-6F19-AB29-F74B75554A61" name="UBYTOVANI_PK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-12-05 15:46:46 UTC</createdTime>
+<generatorID>3DF4C3D6-DC07-A372-0DBD-CAC27A572054</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="49F48FC4-9409-3ED6-4CFB-7B154B31EFDA"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="9A9080ED-A652-3FF1-0AED-63C47B8D05BA" name="UBYTOVANI__IDX">
+<createdBy>tomas</createdBy>
+<createdTime>2023-12-05 15:46:46 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<relationGeneratorID>58FE62D3-0273-3942-EBD1-233BA7BBFD67</relationGeneratorID>
+<indexColumnUsage>
+<colUsage columnID="AB486B1D-8C9D-C006-C78A-5705DC8D4DF3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="1C782053-2B3E-ECC2-E8C3-ED7B60A74787" name="UBYTOVANI_ADRESA_FK">
+<createdBy>tomas</createdBy>
+<createdTime>2023-12-05 15:46:46 UTC</createdTime>
+<generatorID>58FE62D3-0273-3942-EBD1-233BA7BBFD67</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="AB486B1D-8C9D-C006-C78A-5705DC8D4DF3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

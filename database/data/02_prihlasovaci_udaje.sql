@@ -6,7 +6,7 @@ v_prihlasovaci_udaje_id := NULL;
 pck_prihlasovaci_udaje.manage_prihlasovaci_udaje(v_prihlasovaci_udaje_id, 'djustun0', '187', v_result);
 DBMS_OUTPUT.PUT_LINE(v_result);
 v_prihlasovaci_udaje_id := NULL;
-pck_prihlasovaci_udaje.manage_prihlasovaci_udaje(v_prihlasovaci_udaje_id, 'eogles1', '673', v_result);
+pck_prihlasovaci_udaje.manage_prihlasovaci_udaje(v_prihlasovaci_udaje_id, 'zakaznik', 'zakaznik', v_result);
 DBMS_OUTPUT.PUT_LINE(v_result);
 v_prihlasovaci_udaje_id := NULL;
 pck_prihlasovaci_udaje.manage_prihlasovaci_udaje(v_prihlasovaci_udaje_id, 'cbarukh2', '720', v_result);
@@ -327,10 +327,10 @@ v_prihlasovaci_udaje_id := NULL;
 pck_prihlasovaci_udaje.manage_prihlasovaci_udaje(v_prihlasovaci_udaje_id, 'tprochazka14', '246', v_result);
 DBMS_OUTPUT.PUT_LINE(v_result);
 v_prihlasovaci_udaje_id := NULL;
-pck_prihlasovaci_udaje.manage_prihlasovaci_udaje(v_prihlasovaci_udaje_id, 'ukucera15', '357', v_result);
+pck_prihlasovaci_udaje.manage_prihlasovaci_udaje(v_prihlasovaci_udaje_id, 'zamestnanec', 'zamestnanec', v_result);
 DBMS_OUTPUT.PUT_LINE(v_result);
 v_prihlasovaci_udaje_id := NULL;
-pck_prihlasovaci_udaje.manage_prihlasovaci_udaje(v_prihlasovaci_udaje_id, 'vvesely16', '468', v_result);
+pck_prihlasovaci_udaje.manage_prihlasovaci_udaje(v_prihlasovaci_udaje_id, 'admin', 'admin', v_result);
 DBMS_OUTPUT.PUT_LINE(v_result);
 
 EXCEPTION

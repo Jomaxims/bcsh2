@@ -97,10 +97,10 @@ CREATE OR REPLACE PACKAGE pck_utils AS
   FUNCTION calculate_castka(p_pojisteni_id INTEGER, p_termin_id INTEGER,p_pocet_osob INTEGER) 
    RETURN DECIMAL;
    
-   PROCEDURE zlevni_zajezdy(rc_out OUT SYS_REFCURSOR);
+   PROCEDURE zlevni_zajezdy;
   
-  PROCEDURE DropAllTables;
-  PROCEDURE DropAllObjects;
+  PROCEDURE drop_all_tables;
+  PROCEDURE drop_all_objects;
 END pck_utils;
 /
 
@@ -174,28 +174,40 @@ END prvni_img_zajezdy;
     RETURN v_castka;
   END calculate_castka; 
   
-  PROCEDURE zlevni_zajezdy(rc_out OUT SYS_REFCURSOR) IS
-   BEGIN
-  FOR rec IN (SELECT zajezd_id, cena_za_osobu FROM zajezd WHERE zobrazit = 1) LOOP
-    IF rec.cena_za_osobu >= 10000 THEN
-      -- Zaokrouhlíme cenu dolů na desetitisíce a vypočítáme slevu
-      UPDATE zajezd
-      SET cena_za_osobu = TRUNC(rec.cena_za_osobu, -4),
-          sleva_procent = ROUND((1 - (TRUNC(rec.cena_za_osobu, -4) / rec.cena_za_osobu)) * 100, 2)
-      WHERE zajezd_id = rec.zajezd_id;
-    ELSIF rec.cena_za_osobu < 10000 THEN
-      UPDATE zajezd
-      SET cena_za_osobu = ROUND(rec.cena_za_osobu * 0.7, -4), -- Zaokrouhluje cenu po slevě na celé tisíce dolů
-          sleva_procent = 30
-      WHERE zajezd_id = rec.zajezd_id;
-    END IF;
-  END LOOP;
-EXCEPTION
-  WHEN OTHERS THEN
-    DBMS_OUTPUT.PUT_LINE('Error occurred: ' || SQLERRM);
-  END zlevni_zajezdy;
+    PROCEDURE zlevni_zajezdy IS
+      CURSOR zajezdy_cur IS
+        SELECT zajezd_id, cena_za_osobu
+        FROM zajezd
+        WHERE zobrazit = 1;
+      
+      v_sleva_procent NUMBER;
+    BEGIN
+      FOR rec IN zajezdy_cur LOOP
+        IF rec.cena_za_osobu >= 10000 THEN
+          -- zaokrouhlení ceny dolů na desetitisíce
+          v_sleva_procent := ROUND((1 - (TRUNC(rec.cena_za_osobu, -4) / rec.cena_za_osobu)) * 100, 2);
+        ELSE
+          -- Cena je pod 10 000, sleva se nepočítá a je nastavena na 0%
+          v_sleva_procent := 0;
+        END IF;
     
-  PROCEDURE DropAllTables IS
+        -- Aktualizujeme slevu pro daný zájezd
+        UPDATE zajezd
+        SET sleva_procent = v_sleva_procent
+        WHERE zajezd_id = rec.zajezd_id;
+      END LOOP;
+      
+      -- Ujistíme se, že změny jsou trvale uloženy
+      COMMIT;
+    EXCEPTION
+      WHEN OTHERS THEN
+        -- V případě chyby se transakce vrátí zpět a vypíše se chybová zpráva
+        ROLLBACK;
+        DBMS_OUTPUT.PUT_LINE('Error occurred: ' || SQLERRM);
+    END zlevni_zajezdy;
+
+    
+  PROCEDURE drop_all_tables IS
   BEGIN
     FOR t IN (SELECT table_name FROM user_tables) LOOP
       EXECUTE IMMEDIATE 'DROP TABLE ' || t.table_name || ' CASCADE CONSTRAINTS PURGE';
@@ -203,9 +215,9 @@ EXCEPTION
   EXCEPTION
     WHEN OTHERS THEN
       DBMS_OUTPUT.PUT_LINE('Failed to drop and purge one or more tables: ' || SQLERRM);
-  END DropAllTables;
+  END drop_all_tables;
 
-PROCEDURE DropAllObjects IS
+PROCEDURE drop_all_objects IS
 BEGIN
     -- Odstranění všech view
     FOR rec IN (SELECT view_name FROM user_views) LOOP
@@ -250,7 +262,7 @@ BEGIN
 EXCEPTION
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('Došlo k chybě: ' || SQLERRM);
-END DropAllObjects;
+END drop_all_objects;
 
 END pck_utils;
 /
