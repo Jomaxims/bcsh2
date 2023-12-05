@@ -176,7 +176,7 @@ public class ZajezdRepository : BaseRepository
         UnitOfWork.Connection.Query($"pck_{tableName}.delete_{tableName}", parameters,
             commandType: CommandType.StoredProcedure);
 
-        parameters.GetResult().IsOkOrThrow();
+        parameters.GetResult();
     }
 
     /// <summary>
@@ -254,7 +254,7 @@ public class ZajezdRepository : BaseRepository
                 }
 
                 DeletePokojeTerminu(terminId);
-                _terminDao.Delete(terminId).IsOkOrThrow();
+                _terminDao.Delete(terminId);
             }
 
             Delete(_zajezdDao, id);

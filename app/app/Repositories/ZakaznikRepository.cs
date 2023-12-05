@@ -1,4 +1,5 @@
-﻿using app.DAL;
+﻿using System.Globalization;
+using app.DAL;
 using app.DAL.Models;
 using app.Models.Sprava;
 using app.Utils;
@@ -147,7 +148,7 @@ public class ZakaznikRepository : BaseRepository
     public ZakaznikModel Get(int id)
     {
         const string sql = """
-                             select z.*, pu.*, k.*, a.*, o.OSOBA_ID, o.JMENO as osoba_jmeno, o.PRIJMENI, TO_CHAR(o.DATUM_NAROZENI, 'DD.MM.YYYY') as datum_narozeni from ZAKAZNIK z
+                             select z.*, pu.*, k.*, a.*, o.OSOBA_ID, o.JMENO as osoba_jmeno, o.PRIJMENI, TO_CHAR(o.DATUM_NAROZENI, 'MM/DD/YYYY') as datum_narozeni from ZAKAZNIK z
                                  join PRIHLASOVACI_UDAJE pu on pu.PRIHLASOVACI_UDAJE_ID = z.PRIHLASOVACI_UDAJE_ID
                                  join KONTAKT k on k.KONTAKT_ID = z.KONTAKT_ID
                                  join ADRESA a on a.ADRESA_ID = z.ADRESA_ID
@@ -170,7 +171,7 @@ public class ZakaznikRepository : BaseRepository
                 OsobaId = EncodeId((int)row.OSOBA_ID),
                 Jmeno = row.OSOBA_JMENO,
                 Prijmeni = row.PRIJMENI,
-                DatumNarozeni = DateOnly.Parse(row.DATUM_NAROZENI)
+                DatumNarozeni = DateOnly.Parse((string)row.DATUM_NAROZENI, CultureInfo.InvariantCulture)
             },
             Kontakt = new KontaktModel
             {

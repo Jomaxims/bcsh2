@@ -49,7 +49,7 @@ public class UserManager
         var row = _unitOfWork.Connection.QuerySingleOrDefault<dynamic?>("pck_Security.login", parameters,
             commandType: CommandType.StoredProcedure);
 
-        if (row == null)
+        if (row == null || row.UZIVATEL_ID == null)
             return false;
 
         var uzivatelId = row.UZIVATEL_ID.ToString();

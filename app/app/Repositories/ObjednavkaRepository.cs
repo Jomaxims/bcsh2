@@ -176,7 +176,7 @@ public class ObjednavkaRepository : BaseRepository
             foreach (var osobaId in osobaIds)
             {
                 DeleteOsobaObjednavka(osobaId, id);
-                _osobaDao.Delete(osobaId).IsOkOrThrow();
+                _osobaDao.Delete(osobaId);
             }
 
             Delete(_platbaDao, platbaId);

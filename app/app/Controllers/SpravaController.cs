@@ -467,7 +467,7 @@ public class SpravaController : Controller
     }
     
     [HttpPost]
-    [Route("zajezd")]
+    [Route("zajezd/zlevni")]
     public IActionResult ZajezdSleva()
     {
         _zajezdRepository.ZlevniZajezdy();
@@ -553,11 +553,11 @@ public class SpravaController : Controller
     [Route("objednavka/{id}")]
     public IActionResult ObjednavkaEdit(string id)
     {
-        var zajezd = _zajezdRepository.Get(3);
+        var model = _objednavkaRepository.Get(_converter.Decode(id));
+        
+        var zajezd = _zajezdRepository.Get(_converter.Decode(model.Zajezd.ZajezdId));
         ViewBag.Terminy = zajezd.Terminy ?? Array.Empty<TerminModel>();
         ViewBag.Pojisteni = _pojisteniRepository.GetAll();
-
-        var model = _objednavkaRepository.Get(_converter.Decode(id));
 
         return View(model);
     }

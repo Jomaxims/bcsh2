@@ -16,7 +16,7 @@ public class UbytovaniModel
 
     [Required(ErrorMessage = "Zadejte počet hvězd")]
     [Display(Name = "Počet hvězd")]
-    [Range(3, 5, ErrorMessage = "Poče hvězd musí být mezi 3 a 5")]
+    [Range(0, 5, ErrorMessage = "Poče hvězd musí být mezi 0 a 5")]
     public int PocetHvezd { get; set; }
 
     [Required(ErrorMessage = "Zadejte adresu")]

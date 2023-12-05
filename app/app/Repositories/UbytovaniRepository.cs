@@ -87,6 +87,8 @@ public class UbytovaniRepository : BaseRepository
             Delete(_ubytovaniDao, id);
 
             _adresaRepository.Delete(adresaId);
+            
+            UnitOfWork.Commit();
         }
         catch (Exception e)
         {
