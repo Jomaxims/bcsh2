@@ -4,7 +4,7 @@
     ViewBag.Title = "Databázové objekty";
 }
 
-<div class="container-fluid mt-3 overflow-auto">
+<div class="container-fluid mt-3 overflow-x-scroll p-5">
     <div class="d-flex gap-5">
         <div class="d-flex flex-column">
             <h3>Tabulky</h3>
@@ -70,6 +70,16 @@
             <h3>Triggery</h3>
             <p>
                 @foreach (var item in Model.Triggery)
+                {
+                    @item
+                    <br>
+                }
+            </p>
+        </div>
+        <div class="d-flex flex-column">
+            <h3>Sekvence</h3>
+            <p>
+                @foreach (var item in Model.Sekvence)
                 {
                     @item
                     <br>

@@ -9,4 +9,5 @@ public class DbObjektyModel
     public required IEnumerable<string> Procedury { get; set; }
     public required IEnumerable<string> Funkce { get; set; }
     public required IEnumerable<string> Triggery { get; set; }
+    public required IEnumerable<string> Sekvence { get; set; }
 }

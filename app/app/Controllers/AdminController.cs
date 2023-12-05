@@ -124,7 +124,8 @@ public class AdminController : Controller
             Package = _databazoveObjektyRepository.GetPackage(),
             Procedury = _databazoveObjektyRepository.GetProcedury(),
             Funkce = _databazoveObjektyRepository.GetFunkce(),
-            Triggery = _databazoveObjektyRepository.GetTriggry()
+            Triggery = _databazoveObjektyRepository.GetTriggry(),
+            Sekvence = _databazoveObjektyRepository.GetSekvence()
         };
         
         return View(model);

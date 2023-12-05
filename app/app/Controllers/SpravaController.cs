@@ -465,6 +465,15 @@ public class SpravaController : Controller
 
         return View(model);
     }
+    
+    [HttpPost]
+    [Route("zajezd")]
+    public IActionResult ZajezdSleva()
+    {
+        _zajezdRepository.ZlevniZajezdy();
+
+        return RedirectToAction("Zajezd");
+    }
 
     [HttpGet]
     [Route("zajezd/{id}")]

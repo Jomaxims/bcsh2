@@ -16,6 +16,14 @@
 }
 
 <div class="container-md mt-3">
+    <form asp-action="Zajezd" method="post" enctype="application/x-www-form-urlencoded" class="w-100">
+        <div class="d-flex justify-content-center gap-3">
+            <div class="form-group mt-auto d-flex gap-3">
+                <input type="submit" value="Zlevnit" class="btn btn-danger d-block mx-auto"/>
+                <p class="my-auto">Zlevní již nezlevněné zájezdy, které se mají zobrazovat, zaokrouhlením dolu na jebližších 10 000 Kč</p>
+            </div>
+        </div>
+    </form>
     <form asp-action="Zajezd" method="get" enctype="application/x-www-form-urlencoded" class="w-100">
         <div class="d-flex justify-content-center gap-3">
             <div class="form-group">

@@ -76,4 +76,13 @@ public class DatabazoveObjektyRepository : BaseRepository
     {
         return UnitOfWork.Connection.Query<string>("select JMENO_OBJEKTU from triggry_view");
     }
+    
+    /// <summary>
+    /// Získá všechny sekvence
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerable<string> GetSekvence()
+    {
+        return UnitOfWork.Connection.Query<string>("select JMENO_OBJEKTU from sekvence_view");
+    }
 }

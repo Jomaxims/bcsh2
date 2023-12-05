@@ -40,6 +40,14 @@ public class ZajezdRepository : BaseRepository
         _pokojeTerminuDao = pokojeTerminuDao;
         _objednavkaRepository = objednavkaRepository;
     }
+    
+    /// <summary>
+    /// Zlevní již nezlevněné zájezdy, které se mají zobrazovat, zaokrouhlením dolu na jebližších 10 000 Kč
+    /// </summary>
+    public void ZlevniZajezdy()
+    {
+        UnitOfWork.Connection.Query($"pck_utils.zlevni_zajezdy", commandType: CommandType.StoredProcedure);
+    }
 
     /// <summary>
     /// Přidá nebo upraví (pokud má id) zájezd
