@@ -2,35 +2,69 @@
 
 @{
     ViewBag.Title = "Objednávka";
+    var today = DateTime.Today;
+    var maxDate = $"{today.Year - 18}-{today.Month}-{today.Day}";
+
+    var i = 0;
 }
 
 <div class="container d-flex flex-column justify-content-center pt-5">
-    <form id="form" asp-action="ObjednavkaPost" method="post" enctype="application/x-www-form-urlencoded" class="w-100">
+    <form id="form" asp-action="ObjednavkaPost" method="post" enctype="multipart/form-data" class="w-100">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input asp-for="ObjednavkaId" type="hidden"/>
-        <div class="d-flex justify-content-center gap-5">
-            <div class="d-flex flex-column">
+        <input asp-for="Zakaznik.ZakaznikId" type="hidden"/>
+        <input asp-for="Platba.PlatbaId" type="hidden"/>
+        <div class="d-flex justify-content-center flex-wrap gap-5">
+            <div class="d-flex flex-column justify-content-center gap-3 flex-fill">
                 <h4>@ViewBag.Title</h4>
                 <p>
-                    <a class="nav-link text-primary fw-bold" target="_blank" asp-controller="Zajezdy" asp-action="ById" asp-route-id="@Model.Zajezd.ZajezdId">Zobrazit zájezd</a>
+                    <a class="nav-link text-primary fw-bold" target="_blank" asp-controller="Sprava" asp-action="ZajezdEdit" asp-route-id="@Model.Zajezd.ZajezdId">Zobrazit zájezd</a>
                     <a class="nav-link text-primary fw-bold" target="_blank" asp-controller="Sprava" asp-action="ZakaznikEdit" asp-route-id="@Model.Zakaznik.ZakaznikId">Zobrazit zákazníka</a>
-                    <span class="fw-bold">Zákazník:</span> @Model.Zakaznik.Osoba.Jmeno @Model.Zakaznik.Osoba.Prijmeni <br>
-                    <span class="fw-bold">Ubytování:</span> @Model.Zajezd.Ubytovani.Nazev <br>
-                    <span class="fw-bold">Termín:</span> @Model.Termin.Od - @Model.Termin.Do <br>
-                    <span class="fw-bold">Počet osob:</span> @Model.PocetOsob <br>
-                    <span class="fw-bold">Pojištění:</span> @Model.Pojisteni.Nazev (@Model.Pojisteni.CenaZaDen Kč/den) <br>
-                    <span class="fw-bold">Počet osob:</span> @Model.PocetOsob <br>
-                    <span class="fw-bold">Pokoj:</span> @Model.Pokoj.Nazev - @Model.Pokoj.PocetMist <br>
-                    <span class="fw-bold">Částka:</span> @Model.Platba.Castka Kč<br>
-                    <span class="fw-bold">Číslo účtu:</span> @(Model.Platba.CisloUctu ?? "Účet nezadán")<br>
                 </p>
+                <div class="form-group">
+                    <label asp-for="PocetOsob" class="control-label"></label>
+                    <input type="number" min="1" asp-for="PocetOsob" class="form-control"/>
+                    <span asp-validation-for="PocetOsob" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Platba.Castka" class="control-label"></label>
+                    <input type="number" asp-for="Platba.Castka" class="form-control"/>
+                    <span asp-validation-for="Platba.Castka" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Platba.CisloUctu" class="control-label"></label>
+                    <input asp-for="Platba.CisloUctu" class="form-control">
+                    <span asp-validation-for="Platba.CisloUctu" class="text-danger"></span>
+                </div>
                 <div class="form-group">
                     <label asp-for="Platba.Zaplacena" class="control-label"></label>
                     <input type="checkbox" asp-for="Platba.Zaplacena" checked="@Model.Platba.Zaplacena" class="form-check-input"/>
                     <span asp-validation-for="Platba.Zaplacena" class="text-danger"></span>
                 </div>
+                <div class="form-group">
+                    <label asp-for="Pojisteni" class="control-label"></label>
+                    <select class="form-select" asp-for="Pojisteni.PojisteniId">
+                        @foreach (app.Models.Sprava.PojisteniModel item in ViewBag.Pojisteni)
+                        {
+                            <!option value="@item.PojisteniId" @(item.PojisteniId == Model.Pojisteni.PojisteniId ? "selected" : "")>@item.Nazev - @item.CenaZaDen Kč/den</!option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Termin" class="control-label"></label>
+                    <select class="form-select" onchange="changePokoje(this.value)" asp-for="Termin.TerminId">
+                        @foreach (app.Models.Sprava.TerminModel item in ViewBag.Terminy)
+                        {
+                            <!option value="@item.TerminId" @(item.TerminId == Model.Termin.TerminId ? "selected" : "")>@item.Od - @item.Do</!option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Pokoj" class="control-label"></label>
+                    <select class="form-select" onchange="changePocetOsob()" asp-for="Pokoj.PokojId"></select>
+                </div>
             </div>
-            <div class="d-flex flex-column">
+            <div class="d-flex flex-column justify-content-center gap-3 flex-fill">
                 <h4>Další účastníci</h4>
                 @if (!Model.Osoby.Any())
                 {
@@ -38,12 +72,25 @@
                         Na zájezd jede pouze zákazník 😊
                     </p>
                 }
-                @foreach (var item in Model.Osoby)
+                @for (i = 0; i < Model.Osoby.Length; i++)
                 {
-                    <p>
-                        <span class="fw-bold">Jméno:</span> @item.Jmeno @item.Prijmeni <br>
-                        <span class="fw-bold">Datum narození:</span> @item.DatumNarozeni <br>
-                    </p>
+                    <h5 class="mb-0 mt-3">Osoba @(i + 1)</h5>
+                    <input asp-for="Osoby[i].OsobaId" type="hidden">
+                    <div class="form-group">
+                        <label asp-for="Osoby[i].Jmeno" class="control-label"></label>
+                        <input asp-for="Osoby[i].Jmeno" class="form-control">
+                        <span asp-validation-for="Osoby[i].Jmeno" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Osoby[i].Prijmeni" class="control-label"></label>
+                        <input asp-for="Osoby[i].Prijmeni" class="form-control">
+                        <span asp-validation-for="Osoby[i].Prijmeni" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Osoby[i].DatumNarozeni" class="control-label"></label>
+                        <input asp-for="Osoby[i].DatumNarozeni" max="@maxDate" value="@Model.Osoby[i].DatumNarozeni.ToString("o")" class="form-control"/>
+                        <span asp-validation-for="Osoby[i].DatumNarozeni" class="text-danger"></span>
+                    </div>
                 }
             </div>
         </div>
@@ -51,15 +98,51 @@
             <input type="submit" value="Potvrdit" class="btn btn-primary d-block mx-auto"/>
         </div>
     </form>
-    <form id="delete-form" asp-action="PolozkyDelete" asp-route-typPolozky="objednavka" asp-route-id="@Model.ObjednavkaId" method="post" enctype="application/x-www-form-urlencoded" class="w-100">
-        <div class="form-group mt-3">
-            <input type="submit" value="Smazat" class="btn btn-danger d-block mx-auto"/>
-        </div>
-    </form>
+    @if (Model != null)
+    {
+        <form id="delete-form" asp-action="PolozkyDelete" asp-route-typPolozky="objednavka" asp-route-id="@Model.ObjednavkaId" method="post" enctype="application/x-www-form-urlencoded" class="w-100">
+            <div class="form-group mt-3">
+                <input type="submit" value="Smazat" class="btn btn-danger d-block mx-auto"/>
+            </div>
+        </form>
+    }
 </div>
 
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+
+    <script>
+        const terminy = @Html.Raw(Json.Serialize(ViewBag.Terminy))
+        const pokojSelect = document.querySelector("#Pokoj_PokojId")
+        const pocetOsobInput = document.querySelector("#PocetOsob")
+        
+        function changePokoje(value) {
+            for (const el in pokojSelect.options) { pokojSelect.options.remove(0) }
+            
+            let first = true;
+            
+            terminy.find((el) => el.terminId === value).pokojeTerminu.filter(el => el.celkovyPocetPokoju > el.pocetObsazenychPokoju).forEach((el) => {
+                let option = '<option pocetMist=' + el.pokoj.pocetMist + ' value="' + el.pokoj.pokojId + '">' + el.pokoj.nazev + ' - ' + el.pokoj.pocetMist + ' osoby</option>'
+                if (first) {
+                    option = '<option pocetMist=' + el.pokoj.pocetMist + ' value="' + el.pokoj.pokojId + '" selected>' + el.pokoj.nazev + ' - ' + el.pokoj.pocetMist + ' osoby</option>'
+                    first = false
+                }
+                pokojSelect.innerHTML += option
+            });
+            
+            changePocetOsob()
+        }
+        
+        function changePocetOsob() {
+            const pocetMist = pokojSelect.options[pokojSelect.selectedIndex].getAttribute("pocetMist")
+            pocetOsobInput.setAttribute("max", pocetMist)
+            
+            if (pocetOsobInput.value > pocetMist)
+                pocetOsobInput.value = pocetMist
+        }
+        
+        window.onload = changePokoje('@(Model.Termin.TerminId)')
+    </script>
 }

@@ -2,18 +2,18 @@
 
 @{
     ViewBag.Title = "Logy";
-    
+
     int strana = ViewBag.Strana;
     int maxStrana = ViewBag.MaxStrana;
     var today = DateOnly.FromDateTime(DateTime.Now);
 
     var tabulka = Context.Request.Query["tabulka"].ToString();
     var operace = Context.Request.Query["operace"].ToString();
-    var datumOd = Context.Request.Query["datumOd"].FirstOrDefault() ?? today.ToString("o");
+    var datumOd = Context.Request.Query["datumOd"].FirstOrDefault();
     var datumDo = Context.Request.Query["datumDo"].ToString();
 }
 
-<div class="container-md mt-3">
+<div class="container-fluid mt-3" style="width: 90vw;">
     <form asp-action="Logy" method="get" enctype="application/x-www-form-urlencoded" class="w-100">
         <div class="d-flex justify-content-center gap-3">
             <div class="form-group">
@@ -87,6 +87,6 @@
         }
         </tbody>
     </table>
-    
-    <vc:pagination strana="@strana" max-strana="@maxStrana" />
+
+    <vc:pagination strana="@strana" max-strana="@maxStrana"/>
 </div>

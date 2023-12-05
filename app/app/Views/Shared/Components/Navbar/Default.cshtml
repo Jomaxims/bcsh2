@@ -12,7 +12,7 @@
                     <a class="nav-link" asp-controller="Home" asp-action="Index">Domů</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-controller="Zajezdy" asp-action="Zajezdy">Zajezdy</a>
+                    <a class="nav-link" asp-controller="Zajezdy" asp-action="Zajezdy">Zájezdy</a>
                 </li>
                 @if (User.IsInRole(Role.Zamestnanec))
                 {
@@ -27,6 +27,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Admin" asp-action="Uzivatele">Uživatelé</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Admin" asp-action="DbObjekty">Databázové objekty</a>
                     </li>
                 }
             </ul>
@@ -43,7 +46,7 @@
                         <li class="nav-item">
                             @if (!User.HasClaim(claim => claim.Type == "OriginalUser"))
                             {
-                                <a class="nav-link" asp-controller="Home" asp-action="Logout">Odhlásit</a>
+                                <a class="nav-link" asp-controller="Profil" asp-action="Logout">Odhlásit</a>
                             }
                             else
                             {
@@ -54,10 +57,10 @@
                     else
                     {
                         <li class="nav-item btn btn-primary p-0 text-light">
-                            <a class="nav-link" asp-controller="Home" asp-action="Login">Přihlásit</a>
+                            <a class="nav-link" asp-controller="Profil" asp-action="Login">Přihlásit</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Home" asp-action="Register">Registrace</a>
+                            <a class="nav-link" asp-controller="Profil" asp-action="Register">Registrace</a>
                         </li>
                     }
                 </ul>

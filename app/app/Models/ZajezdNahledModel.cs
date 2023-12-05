@@ -10,8 +10,8 @@ public class ZajezdNahledModel
     public required string ZkracenyPopis { get; set; }
     public required string Doprava { get; set; }
     public required string Strava { get; set; }
-    public required int CenaZaOsobu { get; set; }
-    public int? CenaPredSlevou { get; set; }
+    public required double CenaZaOsobu { get; set; }
+    public double? CenaPredSlevou { get; set; }
     public required string Od { get; set; }
     public required string Do { get; set; }
 }

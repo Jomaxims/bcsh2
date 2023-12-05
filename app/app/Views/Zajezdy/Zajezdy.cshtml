@@ -1,13 +1,13 @@
 ﻿@using app.ViewComponents
-@model IEnumerable<app.Models.ZajezdNahledModel>
+@model IEnumerable<ZajezdNahledModel>
 
 @{
     ViewBag.Title = "Zajezdy";
     var today = DateOnly.FromDateTime(DateTime.Now);
-    
+
     int strana = ViewBag.Strana;
     int maxStrana = ViewBag.MaxStrana;
-    var zeme = Context.Request.Query["zeme"].ToString();
+    var stat = Context.Request.Query["stat"].ToString();
     var doprava = Context.Request.Query["doprava"].ToString();
     var strava = Context.Request.Query["strava"].ToString();
     var datumOd = Context.Request.Query["datumOd"].FirstOrDefault() ?? today.ToString("o");
@@ -26,11 +26,11 @@
                 <input type="date" min="@today.ToString("o")" value="@datumDo" id="datumDo" name="datumDo" class="form-control"/>
             </div>
             <div class="form-group">
-                <label for="zeme" class="control-label">Země</label>
-                <select id="zeme" name="zeme" class="form-select">
+                <label for="stat" class="control-label">Země</label>
+                <select id="stat" name="stat" class="form-select">
                     @foreach (var item in ViewBag.Staty)
                     {
-                        if (item.StatId == zeme)
+                        if (item.StatId == stat)
                         {
                             <option value="@item.StatId" selected>@item.Nazev</option>
                         }
@@ -79,9 +79,42 @@
         </div>
     </form>
 
-    @foreach (var item in Model)
+    @foreach (var zajezd in Model)
     {
-        <vc:zajezd-nahled model="@item"/>
+        <div class="d-flex rounded-5 w-100 justify-content-between bg-body-tertiary">
+            <img src="/images/@zajezd.FotoId" alt="Fotka ubytování" width="450" height="300" class="rounded-5">
+            <div class="d-flex flex-column m-4 flex-grow-1">
+                <h4 class="fw-bold mb-0">
+                    @zajezd.Nazev
+                    @for (var i = 0; i < zajezd.PocetHvezd; i++)
+                    {
+                        @("*")
+                    }
+                </h4>
+                <p class="fw-bold">@zajezd.Lokalita</p>
+                <p class="text-break text-wrap">@zajezd.ZkracenyPopis</p>
+            </div>
+            <div class="d-flex flex-column m-4 text-end justify-content-between" style="width: 10em;">
+                <p class="fw-bold">
+                    <span class="fw-normal">Od:</span> @zajezd.Od <br>
+                    <span class="fw-normal">Do:</span> @zajezd.Do <br>
+                    @zajezd.Doprava <br>
+                    @zajezd.Strava <br>
+                </p>
+                <div>
+                    <p class="lh-1">
+                        @if (zajezd.CenaPredSlevou != null)
+                        {
+                            <span class="text-decoration-line-through text">@zajezd.CenaPredSlevou Kč</span>
+                            <br>
+                        }
+                        <span class="fs-5 fw-bold">@zajezd.CenaZaOsobu Kč</span> <br>
+                        <span>za osobu</span>
+                    </p>
+                    <a class="nav-link text-primary fw-bold fs-5" asp-controller="Zajezdy" asp-action="ById" asp-route-id="@zajezd.Id">ZOBRAZIT</a>
+                </div>
+            </div>
+        </div>
     }
 </div>
 

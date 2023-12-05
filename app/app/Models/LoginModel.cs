@@ -6,7 +6,7 @@ public class LoginModel
     [Display(Name = "Jméno")]
     [DataType(DataType.Text)]
     public required string Jmeno { get; set; }
-    
+
     [Required(ErrorMessage = "Zadejte heslo")]
     [Display(Name = "Heslo")]
     [DataType(DataType.Password)]

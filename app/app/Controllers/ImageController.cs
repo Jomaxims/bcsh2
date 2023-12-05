@@ -1,28 +1,38 @@
-﻿using System.Drawing;
-using System.Net;
-using System.Net.Http.Headers;
+﻿using app.Repositories;
 using app.Utils;
 using Microsoft.AspNetCore.Mvc;
-using Sqids;
 
 namespace app.Controllers;
 
 public class ImageController : Controller
 {
     private readonly IIdConverter _converter;
+    private readonly ILogger<ImageController> _logger;
+    private readonly ObrazekUbytovaniRepository _obrazekUbytovaniRepository;
 
-    public ImageController(IIdConverter converter)
+    public ImageController(ILogger<ImageController> logger, IIdConverter converter,
+        ObrazekUbytovaniRepository obrazekUbytovaniRepository)
     {
+        _logger = logger;
         _converter = converter;
+        _obrazekUbytovaniRepository = obrazekUbytovaniRepository;
     }
-    
+
     [Route("images/{id}")]
     [ResponseCache(VaryByHeader = "User-Agent", Duration = 30)]
     public IActionResult Index(string id)
     {
-        using var img = Image.FromFile("./sample.jpg");
-        var imgByteArr = new ImageConverter().ConvertTo(img, typeof(byte[])) as byte[];
-        
-        return File(imgByteArr!, "image/jpeg");
+        try
+        {
+            var img = _obrazekUbytovaniRepository.Get(_converter.Decode(id));
+
+            return File(img.Obrazek, "image/jpeg");
+        }
+        catch (Exception e)
+        {
+            _logger.Log(LogLevel.Warning, "{}", e);
+
+            return Redirect("~/image/empty.jpg");
+        }
     }
 }

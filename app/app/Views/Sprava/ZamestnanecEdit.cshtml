@@ -12,6 +12,7 @@
         <div class="d-flex justify-content-center gap-5">
             <div class="d-flex flex-column justify-content-center gap-3 flex-fill">
                 <h4>Přihlašovací ůdaje</h4>
+                <input asp-for="PrihlasovaciUdaje.PrihlasovaciUdajeId" type="hidden"/>
                 <div class="form-group">
                     <label asp-for="PrihlasovaciUdaje.Jmeno" class="control-label"></label>
                     <input asp-for="PrihlasovaciUdaje.Jmeno" class="form-control"/>
@@ -21,12 +22,12 @@
                     @if (Model != null)
                     {
                         <label asp-for="PrihlasovaciUdaje.Heslo" class="control-label">Nové heslo</label>
-                        <input asp-for="PrihlasovaciUdaje.Heslo" class="form-control" data-val="false" />
+                        <input asp-for="PrihlasovaciUdaje.Heslo" class="form-control" data-val="false"/>
                     }
                     else
                     {
                         <label asp-for="PrihlasovaciUdaje.Heslo" class="control-label"></label>
-                        <input asp-for="PrihlasovaciUdaje.Heslo" class="form-control" />
+                        <input asp-for="PrihlasovaciUdaje.Heslo" class="form-control"/>
                     }
                     <span asp-validation-for="PrihlasovaciUdaje.Heslo" class="text-danger"></span>
                 </div>
@@ -53,7 +54,7 @@
                     <select asp-for="Nadrizeny.ZamestnanecId" class="form-select" data-val="false">
                         @foreach (var item in ViewBag.Zamestnanci)
                         {
-                            <option value="@item.ZamestnanecId">@item.Jmeno @item.Prijmeni</option>
+                            <!option value="@item.ZamestnanecId" @(Model?.Nadrizeny?.ZamestnanecId == item.ZamestnanecId ? "selected" : "")>@item.Jmeno @item.Prijmeni</!option>
                         }
                     </select>
                 </div>

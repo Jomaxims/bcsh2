@@ -1,0 +1,19 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Chyba při úpravě";
+}
+
+<div class="container d-flex flex-column justify-content-center pt-5">
+    <p class="text-center">
+        <span class="fw-bold fs-3">Chyba při úpravě položky</span> <br>
+        @foreach (var chyba in Model.chyby)
+        {
+            @(chyba)
+            <br>
+        }
+    </p>
+    <div class="d-flex justify-content-center">
+        <a href="@Model.refUrl" class="btn btn-danger">Zpět</a>
+    </div>
+</div>

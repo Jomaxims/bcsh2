@@ -27,9 +27,9 @@
                         }
                     }
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="obrazkyGroup">
                     <label for="uploadObrazky" class="control-label">Nahrát obrázky <span class="fw-normal">(formát JPG)</span></label>
-                    <input type="file" multiple id="uploadObrazky" class="form-control"/>
+                    <input type="file" id="uploadObrazky" class="form-control"/>
                 </div>
             </div>
             <div class="d-flex flex-column justify-content-center gap-3 flex-fill">
@@ -100,7 +100,7 @@
 </div>
 
 @section Scripts {
-    @{ Html.RenderPartial("_ValidationScriptsPartial"); }
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
     <script src="~/lib/jquery.MultiFile.js"></script>
     <script>
         let i = 0
@@ -109,6 +109,17 @@
             document.querySelector('#form').innerHTML += '<input type="hidden" data-val="true" id="ObrazkyUbytovani_'+i+'__ObrazkyUbytovaniId" name="ObrazkyUbytovani['+i+'].ObrazkyUbytovaniId" value="'+index+'">'
             
             i++
+            
+            document.querySelector('#uploadObrazky').remove()
+            document.querySelector('#obrazkyGroup').innerHTML += '<input type="file" id="uploadObrazky" class="form-control"/>'
+            
+            $('#uploadObrazky').MultiFile({
+                accept: 'jpg',
+                STRING: {
+                    denied:'Povolen pouze formát jpg.',
+                    file: '<span title="Click to remove" onclick="$(this).parent().prev().click()">$file</span>'
+                }
+            });
         }
         
         $(function(){

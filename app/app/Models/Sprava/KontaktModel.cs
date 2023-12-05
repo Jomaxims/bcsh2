@@ -2,15 +2,15 @@
 
 public class KontaktModel
 {
-    public required string KontaktId { get; set; }
-    
+    public string KontaktId { get; set; }
+
     [Required(ErrorMessage = "Zadejte email")]
     [Display(Name = "Email")]
     [DataType(DataType.EmailAddress, ErrorMessage = "Zadejte platný email")]
-    public required string Email { get; set; }
-    
+    public string Email { get; set; }
+
     [Required(ErrorMessage = "Zadejte telefon")]
     [Display(Name = "Telefon")]
     [DataType(DataType.PhoneNumber)]
-    public required string Telefon { get; set; }
+    public string Telefon { get; set; }
 }

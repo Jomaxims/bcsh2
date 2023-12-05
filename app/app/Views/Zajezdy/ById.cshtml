@@ -1,13 +1,24 @@
-﻿@model ZajezdModel
+﻿@using TerminModel = app.Models.Sprava.TerminModel
+@model app.Models.Sprava.ZajezdModel
 
 @{
-    ViewBag.Title = $"{Model.Ubytovani.Nazev} - {Model.Ubytovani.Lokalita}";
-    ViewBag.Terminy = Model.Terminy;
-    ViewBag.Pojisteni = Model.Pojisteni;
-    ViewBag.CenaZaOsobu = Model.CenaZaOsobu;
-    ViewBag.CenaPredSlevou = Model.CenaPredSlevou!;
+    var lokalita = $"{Model.Ubytovani.Adresa.Stat?.Nazev} - {Model.Ubytovani.Adresa.Mesto}";
 
-    var length = Model.Ubytovani.FotoIds.ToArray().Length;
+    ViewBag.Title = $"{Model.Ubytovani.Nazev} - {lokalita}";
+    ViewBag.Terminy = Model.Terminy ?? Array.Empty<TerminModel>();
+    ViewBag.CenaZaOsobu = Model.CenaZaOsobu;
+
+    if (Model.SlevaProcent == null)
+    {
+        ViewBag.CenaPredSlevou = null;
+    }
+    else
+    {
+        ViewBag.CenaPredSlevou = ViewBag.CenaZaOsobu;
+        ViewBag.CenaZaOsobu = Math.Floor(Model.CenaZaOsobu * (1 - Model.SlevaProcent.Value / 100.0));
+    }
+
+    var length = Model.Ubytovani.ObrazkyUbytovani.Length;
     var first = true;
 
     const string star = "*";
@@ -30,13 +41,13 @@
                 }
             </div>
             <div class="carousel-inner">
-                @foreach (var item in Model.Ubytovani.FotoIds)
+                @foreach (var item in Model.Ubytovani.ObrazkyUbytovani)
                 {
                     if (first)
                     {
                         <div class="carousel-item active">
-                            <a asp-controller="Image" asp-action="Index" asp-route-id="@item">
-                                <img src="/images/@item" alt="Obrázek zájezdu">
+                            <a asp-controller="Image" asp-action="Index" asp-route-id="@item.ObrazkyUbytovaniId">
+                                <img src="/images/@item.ObrazkyUbytovaniId" alt="Obrázek zájezdu">
                             </a>
                         </div>
                         first = false;
@@ -44,8 +55,8 @@
                     else
                     {
                         <div class="carousel-item">
-                            <a asp-controller="Image" asp-action="Index" asp-route-id="@item">
-                                <img src="/images/@item" alt="Obrázek zájezdu">
+                            <a asp-controller="Image" asp-action="Index" asp-route-id="@item.ObrazkyUbytovaniId">
+                                <img src="/images/@item.ObrazkyUbytovaniId" alt="Obrázek zájezdu">
                             </a>
                         </div>
                     }
@@ -68,7 +79,7 @@
                     @star
                 }
             </h3>
-            <p class="fw-bold">@Model.Ubytovani.Lokalita</p>
+            <p class="fw-bold">@lokalita</p>
             <p>@Model.Ubytovani.Popis</p>
             @if (Model.Popis != null)
             {

@@ -1,9 +1,9 @@
-﻿@model app.Models.RegistraceModel
+﻿@model app.Models.Sprava.ZakaznikModel
 
 @{
     ViewBag.Title = "Register";
     var today = DateTime.Today;
-    var maxDate = $"{today.Year-18}-{today.Month}-{today.Day}";
+    var maxDate = $"{today.Year - 18}-{today.Month}-{today.Day}";
 }
 
 <div class="container d-flex justify-content-center pt-5">
@@ -13,32 +13,32 @@
             <div class="d-flex flex-column justify-content-center gap-3 flex-fill">
                 <h4>Přihlašovací ůdaje</h4>
                 <div class="form-group">
-                    <label asp-for="PrihlasovaciJmeno" class="control-label"></label>
-                    <input asp-for="PrihlasovaciJmeno" class="form-control"/>
-                    <span asp-validation-for="PrihlasovaciJmeno" class="text-danger"></span>
+                    <label asp-for="PrihlasovaciUdaje.Jmeno" class="control-label"></label>
+                    <input asp-for="PrihlasovaciUdaje.Jmeno" class="form-control"/>
+                    <span asp-validation-for="PrihlasovaciUdaje.Jmeno" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Heslo" class="control-label"></label>
-                    <input asp-for="Heslo" class="form-control"/>
-                    <span asp-validation-for="Heslo" class="text-danger"></span>
+                    <label asp-for="PrihlasovaciUdaje.Heslo" class="control-label"></label>
+                    <input asp-for="PrihlasovaciUdaje.Heslo" class="form-control"/>
+                    <span asp-validation-for="PrihlasovaciUdaje.Heslo" class="text-danger"></span>
                 </div>
             </div>
             <div class="d-flex flex-column justify-content-center gap-3 flex-fill">
                 <h4>Kontaktní údaje</h4>
                 <div class="form-group">
-                    <label asp-for="Jmeno" class="control-label"></label>
-                    <input asp-for="Jmeno" class="form-control"/>
-                    <span asp-validation-for="Jmeno" class="text-danger"></span>
+                    <label asp-for="Osoba.Jmeno" class="control-label"></label>
+                    <input asp-for="Osoba.Jmeno" class="form-control"/>
+                    <span asp-validation-for="Osoba.Jmeno" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Prijmeni" class="control-label"></label>
-                    <input asp-for="Prijmeni" class="form-control"/>
-                    <span asp-validation-for="Prijmeni" class="text-danger"></span>
+                    <label asp-for="Osoba.Prijmeni" class="control-label"></label>
+                    <input asp-for="Osoba.Prijmeni" class="form-control"/>
+                    <span asp-validation-for="Osoba.Prijmeni" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="DatumNarozeni" class="control-label"></label>
-                    <input asp-for="DatumNarozeni" max="@maxDate" class="form-control"/>
-                    <span asp-validation-for="DatumNarozeni" class="text-danger"></span>
+                    <label asp-for="Osoba.DatumNarozeni" class="control-label"></label>
+                    <input asp-for="Osoba.DatumNarozeni" max="@maxDate" class="form-control"/>
+                    <span asp-validation-for="Osoba.DatumNarozeni" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Kontakt.Email" class="control-label"></label>
@@ -69,9 +69,9 @@
                     <span asp-validation-for="Adresa.Mesto" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Adresa.PSC" class="control-label"></label>
-                    <input asp-for="Adresa.PSC" class="form-control"/>
-                    <span asp-validation-for="Adresa.PSC" class="text-danger"></span>
+                    <label asp-for="Adresa.Psc" class="control-label"></label>
+                    <input asp-for="Adresa.Psc" class="form-control"/>
+                    <span asp-validation-for="Adresa.Psc" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Adresa.Poznamka" class="control-label"></label>

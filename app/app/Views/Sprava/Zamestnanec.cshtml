@@ -1,4 +1,4 @@
-﻿@model IEnumerable<app.Models.Sprava.ZamestnanecModel>
+﻿@model IEnumerable<app.Models.Sprava.ZamestnanecPreviewModel>
 
 @{
     ViewBag.Title = "Zaměstnanci";
@@ -56,6 +56,7 @@
             <th scope="col">Přihlašovací jméno</th>
             <th scope="col">Role</th>
             <th scope="col">Nadřízený</th>
+            <th scope="col">Všichni podřízení</th>
             <th scope="col">
                 <a class="btn btn-primary" asp-action="ZamestnanecEdit" asp-route-id="0">Přidat</a>
             </th>
@@ -70,6 +71,7 @@
                 <td>@item.PrihlasovaciUdaje.Jmeno</td>
                 <td>@item.Role.Nazev</td>
                 <td>@(item.Nadrizeny != null ? $"{item.Nadrizeny.Jmeno} {item.Nadrizeny.Prijmeni}" : "")</td>
+                <td>@item.Podrizeni</td>
                 <td>
                     <a asp-action="ZamestnanecEdit" asp-route-id="@item.ZamestnanecId">Upravit</a>
                 </td>

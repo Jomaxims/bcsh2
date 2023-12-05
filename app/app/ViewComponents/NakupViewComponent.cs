@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace app.ViewComponents;
 
+/// <summary>
+/// ViewComponent pro nákup zájezdu
+/// </summary>
 public class NakupViewComponent : ViewComponent
 {
     public IViewComponentResult Invoke()
